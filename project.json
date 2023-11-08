@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "build": {
+      "command": "tsc"
+    },
+    "test": {
+      "command": "jest",
+      "dependsOn": ["build"]
+    }
+  }
+}
