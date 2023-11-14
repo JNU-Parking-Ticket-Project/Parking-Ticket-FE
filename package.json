@@ -5,7 +5,9 @@
   "scripts": {
     "analyze": "cd service-apply && pnpx vite-bundle-visualizer",
     "build:apply": "nx build service-apply",
-    "start:apply": "nx serve service-apply"
+    "start:apply": "nx serve service-apply",
+    "build:manager": "nx build service-manager",
+    "start:manager": "nx serve service-manager"
   },
   "private": true,
   "devDependencies": {
