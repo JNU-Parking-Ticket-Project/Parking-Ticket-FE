@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
 import { InputHTMLAttributes } from 'react';
 
+type IsChecked = boolean;
 export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'checkbox' | 'Radio';
-  checked?: boolean;
-  checkState?: boolean;
+  checked?: IsChecked;
+  checkState?: IsChecked;
   className?: string;
   color?: keyof typeof colorType;
 }
