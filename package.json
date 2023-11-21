@@ -1,5 +1,5 @@
 {
-  "name": "Parking-Ticket-FE",
+  "name": "parking-ticket-fe",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -48,10 +48,11 @@
   ],
   "dependencies": {
     "@swc/helpers": "~0.5.2",
+    "@tanstack/react-query": "^5.8.4",
+    "@tanstack/react-query-devtools": "^5.8.4",
     "clsx": "^2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-query": "^3.39.3",
     "react-router-dom": "6.11.2"
   }
 }
