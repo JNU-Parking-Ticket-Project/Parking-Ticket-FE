@@ -1,3 +1,4 @@
+export * from './lib/container/container';
 export * from './lib/option-button/option-button';
 export * from './lib/input-text/input-text';
 export * from './lib/button/button';
