@@ -1,3 +1,4 @@
+import Footer from '../components/common/Footer';
 import HomeInforamtion from '../components/home/Information';
 import HomeLogin from '../components/home/Login';
 import HomeNotice from '../components/home/Notice';
@@ -16,6 +17,7 @@ export const HomePage = () => {
           <HomeLogin />
         </div>
       </div>
+      <Footer />
     </main>
   );
 };
