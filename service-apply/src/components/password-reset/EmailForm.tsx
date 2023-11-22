@@ -6,8 +6,8 @@ const EmailForm = () => {
   const { email, isError, requestPasswordReset, changeEmail } =
     useRequestPasswordForm();
   return (
-    <form onSubmit={requestPasswordReset}>
-      <Container className="flex flex-col rounded-2xl" size="large">
+    <Container className="flex flex-col rounded-2xl" size="large">
+      <form onSubmit={requestPasswordReset}>
         <h2 className="text-[#0255D5] text-2xl font-bold pb-8">
           본인인증 이메일 보내기
         </h2>
@@ -27,8 +27,8 @@ const EmailForm = () => {
         <Button className="mt-8" color="primary">
           email 인증하기
         </Button>
-      </Container>
-    </form>
+      </form>
+    </Container>
   );
 };
 
