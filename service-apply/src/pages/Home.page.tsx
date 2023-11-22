@@ -1,3 +1,11 @@
+import HomeNotice from '../components/home/Notice';
+
 export const HomePage = () => {
-  return <></>;
+  return (
+    <>
+      <HomeNotice />
+    </>
+  );
 };
+
+export default HomePage;
