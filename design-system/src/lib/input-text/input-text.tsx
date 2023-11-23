@@ -3,14 +3,34 @@ import { InputHTMLAttributes, useId } from 'react';
 
 export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   type: 'text' | 'password' | 'email' | 'search';
+  designType?: 'box' | 'underline';
   className?: string;
   labelClassName?: string;
   error?: boolean;
   label?: string;
 }
 
+const getBorderClassName = (
+  designType: InputTextProps['designType'],
+  error: boolean,
+) => {
+  if (error) {
+    return 'border-[#DC0000] rounded-lg';
+  }
+
+  switch (designType) {
+    case 'box':
+      return 'border border-[#D9D9D9] rounded-lg';
+    case 'underline':
+      return 'border-b border-[#0B0B0B]';
+    default:
+      return '';
+  }
+};
+
 export function InputText({
   type,
+  designType = 'underline',
   className,
   labelClassName,
   error = false,
@@ -18,11 +38,6 @@ export function InputText({
   ...props
 }: InputTextProps) {
   const id = useId();
-
-  const inputStatusClassName = error
-    ? 'outline-[#DC0000] border-[#DC0000]'
-    : 'border-[#1F1F1F]';
-
   return (
     <>
       <label className={clsx(labelClassName)} htmlFor={id}>
@@ -32,7 +47,11 @@ export function InputText({
       <input
         {...props}
         id={id}
-        className={clsx('border-b py-2', inputStatusClassName, className)}
+        className={clsx(
+          'p-3 text-[#0B0B0B]',
+          getBorderClassName(designType, error),
+          className,
+        )}
       />
     </>
   );
