@@ -4,10 +4,8 @@ import { clsx } from 'clsx';
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     PropsWithChildren {
-  className?: string;
   color?: keyof typeof colorType;
   size?: keyof typeof sizeType;
-  disabled?: boolean;
 }
 
 const colorType = {
