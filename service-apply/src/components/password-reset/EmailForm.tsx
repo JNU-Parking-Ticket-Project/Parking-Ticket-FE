@@ -2,6 +2,7 @@ import { Button, Container, InputText } from '@quokka/design-system';
 import EmailError from './EmailError';
 import useRequestPasswordForm from '../../hooks/password-reset/useRequestPasswordForm';
 import CenterFormContainer from './CenterFormContainer';
+import { InputFlexWrapper } from './InputFlexWrapper';
 
 const EmailForm = () => {
   const { email, isError, requestPasswordReset, changeEmail } =
@@ -11,7 +12,7 @@ const EmailForm = () => {
       title={'본인인증 이메일 보내기'}
       onSubmit={requestPasswordReset}
     >
-      <div className="flex items-center gap-13 w-96 gap-2">
+      <InputFlexWrapper>
         <InputText
           type="text"
           placeholder="asdf1234@jnu.ac.kr"
@@ -22,9 +23,9 @@ const EmailForm = () => {
           error={isError}
           onChange={changeEmail}
         />
-      </div>
+      </InputFlexWrapper>
       {isError && <EmailError isError={isError} />}
-      <Button className="mt-8" color="primary">
+      <Button size="small" className="mt-8 w-full" color="primary">
         email 인증하기
       </Button>
     </CenterFormContainer>
