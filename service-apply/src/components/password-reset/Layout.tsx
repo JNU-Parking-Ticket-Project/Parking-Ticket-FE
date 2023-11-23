@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-const Layout = ({ children }: PropsWithChildren) => {
+// TODO: main-page merge시 footer 교체
+export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="w-screen h-screen flex flex-col">
       <header>
@@ -23,5 +24,3 @@ const Layout = ({ children }: PropsWithChildren) => {
     </div>
   );
 };
-
-export default Layout;

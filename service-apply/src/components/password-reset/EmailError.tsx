@@ -2,7 +2,7 @@ interface EmailErrorProps {
   isError: boolean;
 }
 
-const EmailError = ({ isError }: EmailErrorProps) => {
+export const EmailError = ({ isError }: EmailErrorProps) => {
   return (
     <div>
       <span className="flex flex-row-reverse text-sm w-full">
@@ -13,5 +13,3 @@ const EmailError = ({ isError }: EmailErrorProps) => {
     </div>
   );
 };
-
-export default EmailError;

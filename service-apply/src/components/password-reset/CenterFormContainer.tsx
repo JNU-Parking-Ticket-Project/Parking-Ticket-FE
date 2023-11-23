@@ -7,7 +7,7 @@ interface CenterFormContainerProps
   title: string;
 }
 
-const CenterFormContainer = ({
+export const CenterFormContainer = ({
   title,
   children,
   onSubmit,
@@ -21,5 +21,3 @@ const CenterFormContainer = ({
     </Container>
   );
 };
-
-export default CenterFormContainer;

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { isValidEmailFormat } from '../../utils/regex';
 
-const useRequestPasswordForm = () => {
+export const useRequestPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
 
@@ -25,5 +25,3 @@ const useRequestPasswordForm = () => {
 
   return { email, isError, changeEmail, requestPasswordReset };
 };
-
-export default useRequestPasswordForm;

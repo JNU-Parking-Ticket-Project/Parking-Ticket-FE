@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom';
-import Layout from '../components/password-reset/Layout';
-import { Button, Container, InputText } from '@quokka/design-system';
-import CenterFormContainer from '../components/password-reset/CenterFormContainer';
+import { Layout } from '../components/password-reset/Layout';
+import { Button, InputText } from '@quokka/design-system';
 import { InputFlexWrapper } from '../components/password-reset/InputFlexWrapper';
+import { useState } from 'react';
+import { CenterFormContainer } from '../components/password-reset/CenterFormContainer';
 
-const PasswordResetPage = () => {
+export const PasswordResetPage = () => {
   const { resetId } = useParams();
 
   return (
@@ -26,10 +27,10 @@ const PasswordResetPage = () => {
             labelClassName="w-28"
           />
         </InputFlexWrapper>
-        <Button size="small">변경하기</Button>
+        <Button size="small" className="mt-8 w-full">
+          변경하기
+        </Button>
       </CenterFormContainer>
     </Layout>
   );
 };
-
-export default PasswordResetPage;

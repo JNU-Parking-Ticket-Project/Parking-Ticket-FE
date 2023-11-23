@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import RequestPasswordResetPage from '../pages/RequestPasswordReset.page';
-import PasswordResetPage from '../pages/PasswordReset.page';
+import { PasswordResetPage } from '../pages/PasswordReset.page';
+import { RequestPasswordResetPage } from '../pages/RequestPasswordReset.page';
 
 export default function Router() {
   return (

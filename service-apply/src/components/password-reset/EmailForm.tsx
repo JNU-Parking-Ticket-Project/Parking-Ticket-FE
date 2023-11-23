@@ -1,10 +1,10 @@
-import { Button, Container, InputText } from '@quokka/design-system';
-import EmailError from './EmailError';
-import useRequestPasswordForm from '../../hooks/password-reset/useRequestPasswordForm';
-import CenterFormContainer from './CenterFormContainer';
+import { Button, InputText } from '@quokka/design-system';
 import { InputFlexWrapper } from './InputFlexWrapper';
+import { CenterFormContainer } from './CenterFormContainer';
+import { EmailError } from './EmailError';
+import { useRequestPasswordForm } from '../../hooks/password-reset/useRequestPasswordForm';
 
-const EmailForm = () => {
+export const EmailForm = () => {
   const { email, isError, requestPasswordReset, changeEmail } =
     useRequestPasswordForm();
   return (
@@ -31,5 +31,3 @@ const EmailForm = () => {
     </CenterFormContainer>
   );
 };
-
-export default EmailForm;
