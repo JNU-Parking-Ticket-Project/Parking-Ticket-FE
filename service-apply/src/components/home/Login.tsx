@@ -36,5 +36,3 @@ export const HomeLogin = () => {
     </div>
   );
 };
-
-export default HomeLogin;

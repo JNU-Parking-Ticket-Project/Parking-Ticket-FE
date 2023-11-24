@@ -1,8 +1,8 @@
-import Footer from '../components/common/Footer';
-import HomeInforamtion from '../components/home/Information';
-import HomeLogin from '../components/home/Login';
-import HomeNotice from '../components/home/Notice';
-import HomeTitle from '../components/home/Title';
+import { Footer } from '../components/common/Footer';
+import { HomeInforamtion } from '../components/home/Information';
+import { HomeLogin } from '../components/home/Login';
+import { HomeNotice } from '../components/home/Notice';
+import { HomeTitle } from '../components/home/Title';
 
 export const HomePage = () => {
   return (
@@ -23,5 +23,3 @@ export const HomePage = () => {
     </main>
   );
 };
-
-export default HomePage;

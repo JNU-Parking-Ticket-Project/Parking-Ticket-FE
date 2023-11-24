@@ -10,5 +10,3 @@ export const HomeTitle = () => {
     </header>
   );
 };
-
-export default HomeTitle;

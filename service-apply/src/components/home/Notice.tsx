@@ -11,5 +11,3 @@ export const HomeNotice = () => {
     </div>
   );
 };
-
-export default HomeNotice;
