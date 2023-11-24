@@ -7,9 +7,9 @@ export interface ContainerProps extends PropsWithChildren {
 }
 
 const sizeType = {
-  small: 'px-4 py-2',
-  medium: 'px-6 py-4',
-  large: 'px-8 py-6',
+  small: 'p-4',
+  medium: 'p-6',
+  large: 'p-8',
 };
 
 export function Container({
@@ -20,7 +20,7 @@ export function Container({
   return (
     <div
       className={clsx(
-        'shadow-[0_0_4px_4px_rgba(17,12,34,0.20)] bg-white round-lg',
+        'rounded-lg border border-[#D9D9D9]',
         sizeType[size],
         className,
       )}
