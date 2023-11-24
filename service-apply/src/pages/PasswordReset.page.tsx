@@ -2,47 +2,14 @@ import { useParams } from 'react-router-dom';
 import { Layout } from '../components/password-reset/Layout';
 import { Button, InputText } from '@quokka/design-system';
 import { InputFlexWrapper } from '../components/password-reset/InputFlexWrapper';
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEvent,
-  FormEventHandler,
-  useState,
-} from 'react';
 import { CenterFormContainer } from '../components/password-reset/CenterFormContainer';
-
-interface PasswordResetForm {
-  password: string;
-  confirmPassword: string;
-}
+import { usePasswordResetForm } from '../hooks/password-reset/usePasswordResetForm';
 
 export const PasswordResetPage = () => {
-  // TODO: resetId를
+  // TODO: resetId를 이용해 백엔드에 유효한 resetId인지 검증한 후, 페이지를 보여주어야 함.
   const { resetId } = useParams();
-
-  const [passwordResetForm, setPasswordResetForm] = useState<PasswordResetForm>(
-    {
-      password: '',
-      confirmPassword: '',
-    },
-  );
-
-  const handleInput: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPasswordResetForm({
-      ...passwordResetForm,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const submitChangePassword: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    if (passwordResetForm.password !== passwordResetForm.confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-    alert('비밀번호 재설정이 완료 되었습니다.');
-    // TODO: navigate homepage
-  };
+  const { passwordResetForm, submitChangePassword, handleInput } =
+    usePasswordResetForm();
 
   return (
     <Layout>
