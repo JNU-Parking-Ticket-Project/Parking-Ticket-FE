@@ -24,7 +24,7 @@ export const EmailForm = () => {
           onChange={changeEmail}
         />
       </InputFlexWrapper>
-      {isError && <EmailError isError={isError} />}
+      {isError && <EmailError />}
       <Button size="small" className="mt-8 w-full" color="primary">
         email 인증하기
       </Button>

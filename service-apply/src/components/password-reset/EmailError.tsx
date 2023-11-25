@@ -1,14 +1,8 @@
-interface EmailErrorProps {
-  isError: boolean;
-}
-
-export const EmailError = ({ isError }: EmailErrorProps) => {
+export const EmailError = () => {
   return (
     <div>
       <span className="flex flex-row-reverse text-sm w-full">
-        {isError && (
-          <p className="text-[#DC0000]">이메일이 올바르지 않습니다.</p>
-        )}
+        <p className="text-[#DC0000]">이메일이 올바르지 않습니다.</p>
       </span>
     </div>
   );
