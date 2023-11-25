@@ -1,7 +1,7 @@
 import { InputText, Button } from '@quokka/design-system';
-import { CenterFormContainer } from './CenterFormContainer';
+import { CenterFormContainer } from '../common/CenterFormContainer';
 import { InputFlexWrapper } from './InputFlexWrapper';
-import { usePasswordResetForm } from 'service-apply/src/hooks/password-reset/usePasswordResetForm';
+import { usePasswordResetForm } from '../../hooks/password-reset/usePasswordResetForm';
 
 export const PasswordResetForm = () => {
   const { passwordResetForm, submitChangePassword, handleInput } =

@@ -1,6 +1,6 @@
 import { Button, InputText } from '@quokka/design-system';
 import { InputFlexWrapper } from './InputFlexWrapper';
-import { CenterFormContainer } from './CenterFormContainer';
+import { CenterFormContainer } from '../common/CenterFormContainer';
 import { EmailError } from './EmailError';
 import { useRequestPasswordForm } from '../../hooks/password-reset/useRequestPasswordForm';
 
