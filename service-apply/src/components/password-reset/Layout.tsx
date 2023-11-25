@@ -4,7 +4,7 @@ import Footer from '../common/Footer';
 // TODO: header 교체
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="absolute w-full h-full left-0 top-0 flex flex-col">
       <header>
         <h1 className="text-4xl">전남대학교 주차권 신청 시스템</h1>
       </header>
