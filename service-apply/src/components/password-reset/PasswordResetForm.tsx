@@ -15,7 +15,7 @@ export const PasswordResetForm = () => {
       <InputFlexWrapper>
         <InputText
           type="text"
-          className="flex-1"
+          className="flex-[1_0_7rem]"
           label="비밀번호"
           labelClassName="w-28"
           placeholder="새로운 비밀번호 입력"
@@ -27,7 +27,7 @@ export const PasswordResetForm = () => {
       <InputFlexWrapper>
         <InputText
           type="password"
-          className="flex-1"
+          className="flex-[1_0_7rem]"
           label="비밀번호 재설정"
           labelClassName="w-28"
           placeholder="새로운 비밀번호 확인"
