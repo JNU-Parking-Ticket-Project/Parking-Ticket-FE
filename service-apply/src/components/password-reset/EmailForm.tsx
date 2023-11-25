@@ -9,7 +9,7 @@ export const EmailForm = () => {
     useRequestPasswordForm();
   return (
     <FormContainer
-      title={'본인인증 이메일 보내기'}
+      title="본인인증 이메일 보내기"
       onSubmit={requestPasswordReset}
     >
       <InputFlexWrapper>
