@@ -1,6 +1,6 @@
 import { Button, InputText } from '@quokka/design-system';
 import { InputFlexWrapper } from './InputFlexWrapper';
-import { CenterFormContainer } from '../common/CenterFormContainer';
+import { FormContainer } from '../common/FormContainer';
 import { EmailError } from './EmailError';
 import { useRequestPasswordForm } from '../../hooks/password-reset/useRequestPasswordForm';
 
@@ -8,7 +8,7 @@ export const EmailForm = () => {
   const { email, isError, requestPasswordReset, changeEmail } =
     useRequestPasswordForm();
   return (
-    <CenterFormContainer
+    <FormContainer
       title={'본인인증 이메일 보내기'}
       onSubmit={requestPasswordReset}
     >
@@ -28,6 +28,6 @@ export const EmailForm = () => {
       <Button size="small" className="mt-8 w-full" color="primary">
         email 인증하기
       </Button>
-    </CenterFormContainer>
+    </FormContainer>
   );
 };

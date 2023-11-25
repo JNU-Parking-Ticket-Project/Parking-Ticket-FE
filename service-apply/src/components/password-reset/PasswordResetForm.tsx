@@ -1,5 +1,5 @@
 import { InputText, Button } from '@quokka/design-system';
-import { CenterFormContainer } from '../common/CenterFormContainer';
+import { FormContainer } from '../common/FormContainer';
 import { InputFlexWrapper } from './InputFlexWrapper';
 import { usePasswordResetForm } from '../../hooks/password-reset/usePasswordResetForm';
 
@@ -8,10 +8,7 @@ export const PasswordResetForm = () => {
     usePasswordResetForm();
 
   return (
-    <CenterFormContainer
-      title="비밀번호 재설정"
-      onSubmit={submitChangePassword}
-    >
+    <FormContainer title="비밀번호 재설정" onSubmit={submitChangePassword}>
       <InputFlexWrapper>
         <InputText
           type="text"
@@ -38,6 +35,6 @@ export const PasswordResetForm = () => {
       <Button size="small" className="mt-8 w-full">
         변경하기
       </Button>
-    </CenterFormContainer>
+    </FormContainer>
   );
 };

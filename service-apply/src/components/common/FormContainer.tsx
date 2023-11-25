@@ -1,17 +1,17 @@
 import { Container } from '@quokka/design-system';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 
-interface CenterFormContainerProps
+interface FormContainerProps
   extends PropsWithChildren,
     Pick<HTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   title: string;
 }
 
-export const CenterFormContainer = ({
+export const FormContainer = ({
   title,
   children,
   onSubmit,
-}: CenterFormContainerProps) => {
+}: FormContainerProps) => {
   return (
     <Container className="flex flex-col rounded-2xl" size="large">
       <form onSubmit={onSubmit}>
