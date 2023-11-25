@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import Footer from '../common/Footer';
 
 // TODO: main-page merge시 footer 교체
 export const Layout = ({ children }: PropsWithChildren) => {
@@ -10,17 +11,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <main className="flex items-center justify-center h-full">
         {children}
       </main>
-      <footer className="w-full border-t flex flex-row-reverse py-4">
-        <div className="pr-8">
-          <h3 className="font-bold text-xl pb-4">Contact Us</h3>
-          <p className="color-[#2B2B39] font-light text-sm pb-2">
-            전남대학교 총학생회 : 062-530-xxxx
-          </p>
-          <p className="color-[#2B2B39] font-light text-sm pb-2">
-            JNU-student council
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
