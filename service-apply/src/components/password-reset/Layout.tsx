@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import Footer from '../common/Footer';
 
-// TODO: main-page merge시 footer 교체
+// TODO: header 교체
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="w-screen h-screen flex flex-col">
