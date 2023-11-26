@@ -12,5 +12,5 @@ export const parkingSection: ParkingSection[] = [
     sectionNumber: 2,
     sectionMajor: ['경영대학', '본부직할'],
   },
-  //TODO section 추가
+  //TODO: section 추가
 ];
