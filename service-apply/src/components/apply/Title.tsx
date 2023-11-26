@@ -14,5 +14,3 @@ export const ApplyTitle = () => {
     </header>
   );
 };
-
-export default ApplyTitle;
