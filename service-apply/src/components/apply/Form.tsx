@@ -34,6 +34,13 @@ export function ApplyForm() {
           required
         />
         <ApplyInputText
+          label="이메일"
+          placeholder=""
+          type="text"
+          className="w-[30rem]"
+          required
+        />
+        <ApplyInputText
           label="학번"
           placeholder=""
           type="text"
