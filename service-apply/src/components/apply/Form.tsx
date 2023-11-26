@@ -7,13 +7,13 @@ import {
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
 
-export function ApplyInputText(props: InputTextProps) {
+export const ApplyInputText = (props: InputTextProps) => {
   return (
     <div className="gap-3 flex flex-row justify-between items-center mb-2">
       <InputText {...props} className={`${props.className}`} />
     </div>
   );
-}
+};
 
 export function ApplyForm() {
   return (
@@ -85,6 +85,4 @@ export function ApplyForm() {
       </form>
     </div>
   );
-}
-
-export default ApplyForm;
+};
