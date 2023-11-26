@@ -15,10 +15,10 @@ export const ApplyInputText = (props: InputTextProps) => {
   );
 };
 
-export function ApplyForm() {
+export const ApplyForm = () => {
   return (
     <div className="flex justify-center">
-      <form className="grid gap-4 w-35rem] mb-[3.6rem]">
+      <form className="grid gap-4 w-[35rem] mb-[3.6rem]">
         <ApplyInputText
           label="전화번호"
           placeholder="010-0000-0000"
@@ -27,14 +27,14 @@ export function ApplyForm() {
           required
         />
         <ApplyInputText
-          label="이름"
+          label="이메일"
           placeholder=""
           type="text"
           className="w-[30rem]"
           required
         />
         <ApplyInputText
-          label="이메일"
+          label="이름"
           placeholder=""
           type="text"
           className="w-[30rem]"
