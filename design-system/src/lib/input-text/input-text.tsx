@@ -39,7 +39,7 @@ export function InputText({
   const id = useId();
   return (
     <>
-      <label className={clsx(labelClassName)} htmlFor={id}>
+      <label className={clsx(`${labelClassName} flex flex-row`)} htmlFor={id}>
         {label}
         {!props.required ? null : <span className="text-[#DC0000]">*</span>}
       </label>
