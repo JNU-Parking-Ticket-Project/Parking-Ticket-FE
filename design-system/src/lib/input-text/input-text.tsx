@@ -29,7 +29,6 @@ const getBorderClassName = (
 };
 
 export function InputText({
-  type,
   designType = 'underline',
   className,
   labelClassName,
