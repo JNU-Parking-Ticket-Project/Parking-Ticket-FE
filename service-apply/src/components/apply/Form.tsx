@@ -18,63 +18,33 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 
 export const ApplyForm = () => {
   return (
-    <form className="flex flex-col gap-4 w-[480px] m-auto">
+    <form className="flex flex-col gap-4 max-w-[520px] m-auto">
       <ApplyInputText
         label="전화번호"
         placeholder="010-0000-0000"
         type="text"
-        className=""
         required
       />
-      <ApplyInputText
-        label="이메일"
-        placeholder=""
-        type="text"
-        className=""
-        required
-      />
-      <ApplyInputText
-        label="이름"
-        placeholder=""
-        type="text"
-        className=""
-        required
-      />
-      <ApplyInputText
-        label="학번"
-        placeholder=""
-        type="text"
-        className=""
-        required
-      />
-      <ApplyInputText
-        label="소속 대학"
-        placeholder=""
-        type="text"
-        className=""
-        required
-      />
+      <ApplyInputText label="이메일" type="text" required />
+      <ApplyInputText label="이름" type="text" required />
+      <ApplyInputText label="학번" type="text" required />
+      <ApplyInputText label="소속 대학" type="text" required />
       <Selector
         label="구간"
-        placeholder=""
         type="text"
         options={parkingSection}
         className=""
         required
       />
-      <ApplyInputText
-        label="차량 번호"
-        placeholder=""
-        type="text"
-        className=""
-        required
-      />
-      <div className="flex flex-row justify-between mb-[3.5rem]">
-        <div>경차 여부</div>
-        <CheckBox label="예" name="compactCar" value="yes" required />
-        <CheckBox label="아니오" name="compactCar" value="no" required />
-      </div>
+      <ApplyInputText label="차량 번호" type="text" required />
       <div className="flex flex-row justify-between">
+        <div>경차 여부</div>
+        <div className="flex m-auto gap-8">
+          <CheckBox label="예" name="compactCar" value="yes" required />
+          <CheckBox label="아니오" name="compactCar" value="no" required />
+        </div>
+      </div>
+      <div className="flex flex-row justify-between my-12">
         <Button className="" color="secondary">
           임시 저장
         </Button>
