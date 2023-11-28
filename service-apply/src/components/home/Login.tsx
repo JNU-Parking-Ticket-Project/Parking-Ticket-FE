@@ -5,7 +5,7 @@ export const HomeLogin = () => {
   return (
     <div className="flex justify-end">
       <form className="flex-1 max-w-lg" action="">
-        <Txt size="h3" color="primay" className="my-4">
+        <Txt size="h3" color="primary" className="my-4">
           신청 폼 작성하기
         </Txt>
         <div className="flex flex-col gap-3 items-end">
