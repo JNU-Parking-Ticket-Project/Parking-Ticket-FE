@@ -7,11 +7,9 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/announcement" element={<AnnouncementListPage />}>
-        <Route
-          path="/announcement:announcementId"
-          element={<AnnouncementPage />}
-        />
+      <Route path="/announcement" element={<AnnouncementListPage />} />
+      <Route path="/announce">
+        <Route path=":announcementId" element={<AnnouncementPage />} />
       </Route>
     </Routes>
   );
