@@ -12,6 +12,7 @@ const colorType = {
 
 const sizeType = {
   base: 'text-base',
+  sm: 'text-sm',
   h6: 'text-xl',
   h5: 'text-xl font-semibold',
   h4: 'text-2xl font-semibold',
