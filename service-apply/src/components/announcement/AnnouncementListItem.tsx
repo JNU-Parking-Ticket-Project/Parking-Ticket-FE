@@ -2,6 +2,8 @@ interface AnnouncementItemProps {
   title: string;
   date: string;
 }
+
+// TODO: 아이템 데이터 스키마에 따라 변경해야함.
 export const AnnouncementListItem = ({
   title,
   date,

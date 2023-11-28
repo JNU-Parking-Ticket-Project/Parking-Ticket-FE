@@ -1,6 +1,7 @@
 import { AnnouncementListItem } from './AnnouncementListItem';
 
 export const AnnouncementList = () => {
+  // TODO: 공지사항 목록 map으로 처리하는데, query를 가급적 이 부분에서 사용하면 좋다고 생각합니다.
   return (
     <table className="w-[50rem] mx-auto mt-12">
       <thead>
