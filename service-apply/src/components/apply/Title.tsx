@@ -1,14 +1,18 @@
+import { Txt } from '@quokka/design-system';
+
 export const ApplyTitle = () => {
   return (
     <header className="mt-20 mb-12">
-      <div className="mb-12 text-[3.5rem] font-semibold text-[#0B0B0B] my-4">
-        전남대학교 주차권 신청 시스템
-      </div>
-      <div className="flex flex-row items-center">
-        <h1 className="mr-[45rem] text-5xl font-semibold text-[#0B0B0B]">
-          주차권 신청
-        </h1>
-        <div className="text-xl text-[#0B0B0B]">신청기간: 2023년 12월 31일</div>
+      <h1 className="mb-12">
+        <Txt size="h2">전남대학교 주차권 신청 시스템</Txt>
+      </h1>
+      <div>
+        <h2 className="inline mr-5">
+          <Txt size="h3" color="primay">
+            주차권 신청
+          </Txt>
+        </h2>
+        <Txt>신청 기간 : 2023년 12월 15일 14:00</Txt>
       </div>
       <hr className="mt-3 border-solid bg-black h-1" />
     </header>
