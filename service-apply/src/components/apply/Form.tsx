@@ -1,10 +1,10 @@
 import {
   InputText,
   Button,
-  CheckBox,
   InputTextProps,
   Radio,
 } from '@quokka/design-system';
+import { onInputPhoneNumber } from '../../functions/formInputValidator';
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
@@ -24,6 +24,8 @@ export const ApplyForm = () => {
         label="전화번호"
         placeholder="010-0000-0000"
         type="text"
+        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+        onInput={onInputPhoneNumber}
         required
       />
       <ApplyInputText label="이메일" type="text" required />
