@@ -1,9 +1,4 @@
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEventHandler,
-  useState,
-} from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { formInputValidator } from '../functions/formValidator';
 
 interface ApplyForm {
@@ -36,6 +31,14 @@ export const useApplyForm = () => {
     });
   };
 
+  const handleSelect: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    //section의 경우 input이 아닌 select로 받아야 하므로 따로 처리
+    setApplyForm({
+      ...applyForm,
+      section: parseInt(e.target.value),
+    });
+  };
+
   const submitApplyForm: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (
@@ -56,5 +59,5 @@ export const useApplyForm = () => {
     alert('신청이 완료되었습니다.');
     //TODO: 로딩컴포넌트 -> 신청완료 페이지
   };
-  return { applyForm, handleInput, submitApplyForm };
+  return { applyForm, handleInput, handleSelect, submitApplyForm };
 };
