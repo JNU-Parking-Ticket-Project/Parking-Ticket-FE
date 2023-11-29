@@ -3,6 +3,7 @@ import {
   Button,
   InputTextProps,
   Radio,
+  Txt,
 } from '@quokka/design-system';
 import {
   onInputPhoneNumber,
@@ -49,7 +50,9 @@ export const ApplyForm = () => {
       />
       <ApplyInputText label="차량 번호" type="text" required />
       <div className="flex flex-row justify-between">
-        <div>경차 여부</div>
+        <div>
+          경차 여부 <Txt color="error">*</Txt>
+        </div>
         <div className="flex m-auto gap-8">
           <Radio label="예" name="compactCar" value="yes" required />
           <Radio label="아니오" name="compactCar" value="no" required />

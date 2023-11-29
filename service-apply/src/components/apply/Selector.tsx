@@ -1,6 +1,6 @@
 import { SelectHTMLAttributes, useId } from 'react';
 import { parkingSection } from '../constants/parkingSection';
-
+import { Txt } from '@quokka/design-system';
 interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   type: string;
@@ -12,7 +12,10 @@ export const Selector = ({ label, type, options, ...props }: SelectorProps) => {
 
   return (
     <div className="grid grid-cols-5 items-center">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {!props.required ? null : <Txt color="error">*</Txt>}
+      </label>
       <select
         {...props}
         id={id}
