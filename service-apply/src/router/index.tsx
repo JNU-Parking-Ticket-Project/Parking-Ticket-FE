@@ -10,6 +10,11 @@ import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.
 export function Router() {
   return (
     <Routes>
+      <Route
+        path="/request-password-reset"
+        element={<RequestPasswordResetPage />}
+      />
+      <Route path="/password-reset/:resetId" element={<PasswordResetPage />} />
       <Route path="/" element={<HomePage />} />
       <Route path="/announcement" element={<AnnouncementLayoutPage />}>
         <Route index element={<AnnouncementListPage />} />
