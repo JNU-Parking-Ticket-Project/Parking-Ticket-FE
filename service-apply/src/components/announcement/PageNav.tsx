@@ -12,10 +12,10 @@ const PrevNavLinkGroup = ({ currentIdx }: { currentIdx: number }) => {
   if (currentIdx > 1) {
     return (
       <>
-        <Link className="p-1" to={`/announce?pages=${1}`}>
+        <Link className="p-1" to={`/announcement?pages=${1}`}>
           <Icon type="rightDoubleArrow" className="rotate-180" />
         </Link>
-        <Link to={`/announce?pages=${currentIdx - 1}`} className="px-1">
+        <Link to={`/announcement?pages=${currentIdx - 1}`} className="px-1">
           <Icon type="rightArrow" className="rotate-180" />
         </Link>
       </>
@@ -43,10 +43,10 @@ const NextNavLinkGroup = ({
   if (currentIdx < lastIdx) {
     return (
       <>
-        <Link to={`/announce?pages=${currentIdx + 1}`} className="px-1">
+        <Link to={`/announcement?pages=${currentIdx + 1}`} className="px-1">
           <Icon type="rightArrow" />
         </Link>
-        <Link className="px-1" to={`/announce?pages=${lastIdx}`}>
+        <Link className="px-1" to={`/announcement?pages=${lastIdx}`}>
           <Icon type="rightDoubleArrow" />
         </Link>
       </>
@@ -72,7 +72,7 @@ export const PageNav = ({ lastIdx, currentIdx }: PageNavProps) => {
         {generatePaginationIndexs(currentIdx, lastIdx).map((page) => (
           <Link
             key={page}
-            to={`/announce?pages=${page}`}
+            to={`/announcement?pages=${page}`}
             className="w-6 text-center"
           >
             <Txt

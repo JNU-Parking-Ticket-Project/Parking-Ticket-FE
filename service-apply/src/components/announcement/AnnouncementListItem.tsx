@@ -14,7 +14,7 @@ export const AnnouncementListItem = ({
   date,
 }: AnnouncementItemProps) => {
   return (
-    <Link to={`/announce/${id}`}>
+    <Link to={`/announcement/${id}`}>
       <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">
         <Txt>{title}</Txt>
         <Txt className="w-24 text-center">{date}</Txt>

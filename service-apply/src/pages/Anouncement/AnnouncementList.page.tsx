@@ -1,7 +1,7 @@
-import { AnnouncementList } from '../components/announcement/AnnouncementList';
+import { AnnouncementList } from '../../components/announcement/AnnouncementList';
 import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
-import { PageNav } from '../components/announcement/PageNav';
+import { PageNav } from '../../components/announcement/PageNav';
 
 const useQueryParameter = () => {
   const { search } = useLocation();

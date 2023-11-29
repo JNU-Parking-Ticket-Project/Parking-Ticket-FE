@@ -1,8 +1,8 @@
 import { Txt } from '@quokka/design-system';
-import Footer from '../components/common/Footer';
+import Footer from '../../components/common/Footer';
 import { Outlet } from 'react-router-dom';
-import { CommonTitle } from '../components/common/CommonTitle';
-import { MainContainer } from '../components/common/MainConatiner';
+import { CommonTitle } from '../../components/common/CommonTitle';
+import { MainContainer } from '../../components/common/MainConatiner';
 
 export const AnnouncementLayoutPage = () => {
   return (

@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { HomePage } from '../pages/Home.page';
-import { AnnouncementListPage } from '../pages/AnnouncementList.page';
-import { AnnouncementPage } from '../pages/Announcement.page';
-import { AnnouncementLayoutPage } from '../pages/AnounceLayout.page';
+import { AnnouncementListPage } from '../pages/Anouncement/AnnouncementList.page';
+import { AnnouncementPage } from '../pages/Anouncement/Announcement.page';
+import { AnnouncementLayoutPage } from '../pages/Anouncement/AnounceLayout.page';
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/announce" element={<AnnouncementLayoutPage />}>
+      <Route path="/announcement" element={<AnnouncementLayoutPage />}>
         <Route index element={<AnnouncementListPage />} />
         <Route path=":announcementId" element={<AnnouncementPage />} />
       </Route>
