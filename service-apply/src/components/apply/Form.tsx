@@ -4,7 +4,10 @@ import {
   InputTextProps,
   Radio,
 } from '@quokka/design-system';
-import { onInputPhoneNumber } from '../../functions/formInputValidator';
+import {
+  onInputPhoneNumber,
+  onInputStudentNumber,
+} from '../../functions/formInputValidator';
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
@@ -30,7 +33,12 @@ export const ApplyForm = () => {
       />
       <ApplyInputText label="이메일" type="text" required />
       <ApplyInputText label="이름" type="text" required />
-      <ApplyInputText label="학번" type="text" required />
+      <ApplyInputText
+        label="학번"
+        type="text"
+        onInput={onInputStudentNumber}
+        required
+      />
       <ApplyInputText label="소속 대학" type="text" required />
       <Selector
         label="구간"
