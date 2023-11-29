@@ -8,7 +8,7 @@ import {
 import {
   onInputPhoneNumber,
   onInputStudentNumber,
-} from '../../functions/formInputValidator';
+} from '../../functions/formValidator';
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
