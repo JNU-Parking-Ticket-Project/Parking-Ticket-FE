@@ -6,7 +6,7 @@ const information =
 export const HomeInforamtion = () => {
   return (
     <article>
-      <Txt size="h4" color="primay" className="my-4">
+      <Txt size="h4" color="primary" className="my-4">
         안내사항
       </Txt>
       <div className="flex flex-col gap-2">
