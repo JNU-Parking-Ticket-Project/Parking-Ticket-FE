@@ -9,6 +9,7 @@ import {
   onInputPhoneNumber,
   onInputStudentNumber,
 } from '../../functions/formValidator';
+import { useApplyForm } from '../../hooks/useApplyForm';
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
@@ -22,33 +23,59 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 };
 
 export const ApplyForm = () => {
+  const { applyForm, submitApplyForm, handleInput, handleSelect } =
+    useApplyForm();
   return (
-    <form className="flex flex-col gap-4 max-w-[520px] m-auto">
+    <form
+      className="flex flex-col gap-4 max-w-[520px] m-auto"
+      onSubmit={submitApplyForm}
+    >
       <ApplyInputText
         label="전화번호"
         placeholder="010-0000-0000"
         type="text"
-        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
         onInput={onInputPhoneNumber}
+        onChange={handleInput}
         required
       />
-      <ApplyInputText label="이메일" type="text" required />
-      <ApplyInputText label="이름" type="text" required />
+      <ApplyInputText
+        label="이메일"
+        type="text"
+        onChange={handleInput}
+        required
+      />
+      <ApplyInputText
+        label="이름"
+        type="text"
+        onChange={handleInput}
+        required
+      />
       <ApplyInputText
         label="학번"
         type="text"
         onInput={onInputStudentNumber}
+        onChange={handleInput}
         required
       />
-      <ApplyInputText label="소속 대학" type="text" required />
+      <ApplyInputText
+        label="소속 대학"
+        type="text"
+        onChange={handleInput}
+        required
+      />
       <Selector
         label="구간"
         type="text"
         options={parkingSection}
-        className=""
+        onChange={handleSelect}
         required
       />
-      <ApplyInputText label="차량 번호" type="text" required />
+      <ApplyInputText
+        label="차량 번호"
+        type="text"
+        onChange={handleInput}
+        required
+      />
       <div className="flex flex-row justify-between">
         <div>
           경차 여부 <Txt color="error">*</Txt>
