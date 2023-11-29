@@ -3,6 +3,7 @@ import {
   Button,
   CheckBox,
   InputTextProps,
+  Radio,
 } from '@quokka/design-system';
 import { Selector } from './Selector';
 import { parkingSection } from '../constants/parkingSection';
@@ -40,8 +41,8 @@ export const ApplyForm = () => {
       <div className="flex flex-row justify-between">
         <div>경차 여부</div>
         <div className="flex m-auto gap-8">
-          <CheckBox label="예" name="compactCar" value="yes" required />
-          <CheckBox label="아니오" name="compactCar" value="no" required />
+          <Radio label="예" name="compactCar" value="yes" required />
+          <Radio label="아니오" name="compactCar" value="no" required />
         </div>
       </div>
       <div className="flex flex-row justify-between my-12">
