@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { generatePaginationIndexs } from '../../constants/announcement';
 import clsx from 'clsx';
 
@@ -8,53 +8,32 @@ interface PageNavProps {
 }
 
 export const PageNav = ({ lastIdx, currentIdx }: PageNavProps) => {
-  const navigate = useNavigate();
-
-  const goLast = () => {
-    navigate(`/announcement?pages=${lastIdx}`);
-  };
-  const goPrev = () => {
-    if (currentIdx === 1) return;
-    navigate(`/announcement?pages=${currentIdx - 1}`);
-  };
-
-  const goNext = () => {
-    if (currentIdx === lastIdx) return;
-    navigate(`/announcement?pages=${currentIdx + 1}`);
-  };
-
-  const goFirst = () => {
-    navigate('/announcement?pages=1');
-  };
-
   return (
-    <div className="w-[50rem] mx-auto mt-8">
+    <div className="max-w-[768px] w-full mx-auto my-8">
       <div className="text-right">
-        <button className="px-1" onClick={goFirst}>
+        <Link to="/announce?pages=1" className="px-1">
           처음
-        </button>
-        <button className="px-1" onClick={goPrev}>
+        </Link>
+        <Link to={`/announce?pages=${currentIdx - 1}`} className="px-1">
           이전
-        </button>
+        </Link>
         {generatePaginationIndexs(currentIdx, lastIdx).map((page) => (
-          <button
+          <Link
+            to={`/announce?pages=${page}`}
             className={clsx(
               page === currentIdx ? 'font-bold' : 'font-light',
               'px-1',
             )}
-            onClick={() => {
-              navigate(`/announcement?pages=${page}`);
-            }}
           >
             {page}
-          </button>
+          </Link>
         ))}
-        <button className="px-1" onClick={goNext}>
+        <Link to={`/announce?pages=${currentIdx + 1}`} className="px-1">
           다음
-        </button>
-        <button className="px-1" onClick={goLast}>
+        </Link>
+        <Link className="px-1" to={`/announce?pages=${lastIdx}`}>
           끝으로
-        </button>
+        </Link>
       </div>
     </div>
   );

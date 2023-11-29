@@ -15,7 +15,7 @@ export const AnnouncementListPage = () => {
   return (
     <>
       <AnnouncementList page={+currentPage} />
-      <PageNav lastIdx={10} currentIdx={+currentPage} />
+      <PageNav lastIdx={8} currentIdx={+currentPage} />
     </>
   );
 };
