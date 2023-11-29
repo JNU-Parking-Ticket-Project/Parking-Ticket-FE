@@ -20,10 +20,11 @@ export const AnnouncementListPage = () => {
     <>
       <MainContainer>
         <CommonTitle />
-        <Txt size="h4" color="primay">
-          공지사항
-        </Txt>
-        <hr className="mt-3 border-solid bg-black h-1" />
+        <h2 className="border-b-4 border-black mt-3 pb-2">
+          <Txt size="h3" color="primay">
+            공지사항
+          </Txt>
+        </h2>
         <AnnouncementList />
         <PageNav lastIdx={10} currentIdx={+pages} />
       </MainContainer>
