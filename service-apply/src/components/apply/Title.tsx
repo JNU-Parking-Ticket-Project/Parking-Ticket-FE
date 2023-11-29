@@ -1,10 +1,13 @@
 import { Txt } from '@quokka/design-system';
+import { Link } from 'react-router-dom';
 
 export const ApplyTitle = () => {
   return (
     <header className="mt-20 mb-12">
       <h1 className="mb-12">
-        <Txt size="h2">전남대학교 주차권 신청 시스템</Txt>
+        <Link to="/">
+          <Txt size="h2">전남대학교 주차권 신청 시스템</Txt>
+        </Link>
       </h1>
       <div>
         <h2 className="inline mr-5">
