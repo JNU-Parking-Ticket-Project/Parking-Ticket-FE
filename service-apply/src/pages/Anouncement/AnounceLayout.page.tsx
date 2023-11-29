@@ -10,7 +10,7 @@ export const AnnouncementLayoutPage = () => {
       <MainContainer>
         <CommonTitle />
         <h2 className="border-b-4 border-black mt-3 pb-2">
-          <Txt size="h3" color="primay">
+          <Txt size="h3" color="primary">
             공지사항
           </Txt>
         </h2>
