@@ -8,8 +8,8 @@ export const onInputPhoneNumber = (e: React.FormEvent<HTMLInputElement>) => {
   }
 
   input.value = value
-    .replace(/[^0-9-]/g, '')
-    .replace(/([0-9]{3})([0-9]{4})/, '$1-$2-');
+    .replace(/[^0-9]/g, '')
+    .replace(/([0-9]{3})([0-9]{4})([0-9]{4})/, '$1-$2-$3');
 };
 
 export const onInputStudentNumber = (e: React.FormEvent<HTMLInputElement>) => {
