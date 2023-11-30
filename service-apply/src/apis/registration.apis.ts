@@ -10,7 +10,7 @@ export const postRegistration = async (
   isRegistration = false,
 ) => {
   const { data: resData } = await https.post(
-    `/api/v1/registration${isRegistration ? 'true' : 'false'}`,
+    `/api/v1/registration/${isRegistration}`,
     registration,
   );
   return new RegistrationResponse(resData);
