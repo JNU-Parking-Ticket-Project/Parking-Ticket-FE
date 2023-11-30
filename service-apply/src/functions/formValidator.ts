@@ -29,7 +29,6 @@ export const formInputValidator = (
   studentNumber: number,
   email: string,
   studentName: string,
-  studentMajor: string,
   section: number,
   carNumber: string,
   isCompact: boolean,
@@ -54,19 +53,14 @@ export const formInputValidator = (
 };
 
 const isPhoneNumber = (phoneNumber: string) => {
-  const phoneNumberRegex = /^\d{3}-\d{4}-\d{4}$/;
-  if (!phoneNumberRegex.test(phoneNumber)) {
-    return false;
-  }
-  return true;
+  const phoneNumberRegex = /^01[016789]-[0-9]{4}-[0-9]{4}$/;
+  return phoneNumberRegex.test(phoneNumber);
 };
 
 const isEmail = (email: string) => {
-  const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-  if (!emailRegex.test(email)) {
-    return false;
-  }
-  return true;
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(email);
 };
 
 const isStudentNumber = (studentNumber: number) => {
@@ -82,14 +76,7 @@ const isStudentNumber = (studentNumber: number) => {
 
 const isStudentName = (studentName: string) => {
   const studentNameRegex = /^[가-힣]{3,5}$/;
-  if (!studentNameRegex.test(studentName)) {
-    return false;
-  }
-  return true;
-};
-
-const isStudentMajor = (studentMajor: string) => {
-  //TODO: 학과 검증
+  return studentNameRegex.test(studentName);
 };
 
 const isSection = (section: number) => {
