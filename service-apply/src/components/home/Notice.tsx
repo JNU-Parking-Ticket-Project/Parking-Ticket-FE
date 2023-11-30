@@ -1,4 +1,5 @@
 import { Txt } from '@quokka/design-system';
+import { Link } from 'react-router-dom';
 
 const notices = ['11월 오픈은 10월 25일 10:00 시 입니다.'];
 
@@ -11,9 +12,12 @@ export const HomeNotice = () => {
       <Txt size="h6" className="flex-1">
         {notices[0]}
       </Txt>
-      <button className="text-[#0B0B0B] font-semibold pr-10 py-8">
+      <Link
+        to="/announcement"
+        className="text-[#0B0B0B] font-semibold pr-10 py-8"
+      >
         더보기
-      </button>
+      </Link>
     </div>
   );
 };
