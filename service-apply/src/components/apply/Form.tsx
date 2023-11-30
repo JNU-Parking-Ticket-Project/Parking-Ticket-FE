@@ -34,6 +34,7 @@ export const ApplyForm = () => {
         label="전화번호"
         placeholder="010-0000-0000"
         type="text"
+        value="phoneNumber"
         onInput={onInputPhoneNumber}
         onChange={handleInput}
         required
@@ -41,31 +42,29 @@ export const ApplyForm = () => {
       <ApplyInputText
         label="이메일"
         type="text"
+        value="email"
         onChange={handleInput}
         required
       />
       <ApplyInputText
         label="이름"
         type="text"
+        value="studentName"
         onChange={handleInput}
         required
       />
       <ApplyInputText
         label="학번"
         type="text"
+        value="studentNumber"
         onInput={onInputStudentNumber}
-        onChange={handleInput}
-        required
-      />
-      <ApplyInputText
-        label="소속 대학"
-        type="text"
         onChange={handleInput}
         required
       />
       <Selector
         label="구간"
         type="text"
+        value="section"
         options={parkingSection}
         onChange={handleSelect}
         required
@@ -73,6 +72,7 @@ export const ApplyForm = () => {
       <ApplyInputText
         label="차량 번호"
         type="text"
+        value="carNumber"
         onChange={handleInput}
         required
       />
@@ -81,8 +81,13 @@ export const ApplyForm = () => {
           경차 여부 <Txt color="error">*</Txt>
         </div>
         <div className="flex m-auto gap-8">
-          <Radio label="예" name="compactCar" value="yes" required />
-          <Radio label="아니오" name="compactCar" value="no" required />
+          <Radio label="예" name="compactCar" value="isCompact" required />
+          <Radio
+            label="아니오"
+            name="compactCar"
+            value="isNotCompact"
+            required
+          />
         </div>
       </div>
       <div className="flex flex-row justify-between my-12">
