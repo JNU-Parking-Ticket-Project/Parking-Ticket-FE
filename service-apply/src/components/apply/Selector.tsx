@@ -14,7 +14,7 @@ export const Selector = ({ label, type, options, ...props }: SelectorProps) => {
     <div className="grid grid-cols-5 items-center">
       <label htmlFor={id}>
         {label}
-        {!props.required ? null : <Txt color="error">*</Txt>}
+        {props.required && <Txt color="error">*</Txt>}
       </label>
       <select
         {...props}
