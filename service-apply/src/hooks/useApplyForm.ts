@@ -6,7 +6,6 @@ interface ApplyForm {
   studentNumber: number;
   email: string;
   studentName: string;
-  studentMajor: string;
   section: number;
   carNumber: string;
   isCompact: boolean;
@@ -18,7 +17,6 @@ export const useApplyForm = () => {
     studentNumber: 0,
     email: '',
     studentName: '',
-    studentMajor: '',
     section: 0,
     carNumber: '',
     isCompact: false,
@@ -32,7 +30,6 @@ export const useApplyForm = () => {
   };
 
   const handleSelect: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    //section의 경우 input이 아닌 select로 받아야 하므로 따로 처리
     setApplyForm({
       ...applyForm,
       section: parseInt(e.target.value),
@@ -47,7 +44,6 @@ export const useApplyForm = () => {
         applyForm.studentNumber,
         applyForm.email,
         applyForm.studentName,
-        applyForm.studentMajor,
         applyForm.section,
         applyForm.carNumber,
         applyForm.isCompact,
