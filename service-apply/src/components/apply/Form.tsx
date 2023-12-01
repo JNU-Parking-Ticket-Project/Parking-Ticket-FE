@@ -32,48 +32,53 @@ export const ApplyForm = () => {
     >
       <ApplyInputText
         label="전화번호"
+        name="phoneNumber"
         placeholder="010-0000-0000"
         type="text"
-        value="phoneNumber"
         onInput={onInputPhoneNumber}
         onChange={handleInput}
+        value={applyForm.phoneNumber}
         required
       />
       <ApplyInputText
         label="이메일"
+        name="email"
         type="text"
-        value="email"
         onChange={handleInput}
+        value={applyForm.email}
         required
       />
       <ApplyInputText
         label="이름"
+        name="studentName"
         type="text"
-        value="studentName"
         onChange={handleInput}
+        value={applyForm.studentName}
         required
       />
       <ApplyInputText
         label="학번"
+        name="studentNumber"
         type="text"
-        value="studentNumber"
         onInput={onInputStudentNumber}
         onChange={handleInput}
+        value={applyForm.studentNumber}
         required
       />
       <Selector
         label="구간"
         type="text"
-        value="section"
         options={parkingSection}
         onChange={handleSelect}
+        value={applyForm.section}
         required
       />
       <ApplyInputText
         label="차량 번호"
+        name="carNumber"
         type="text"
-        value="carNumber"
         onChange={handleInput}
+        value={applyForm.carNumber}
         required
       />
       <div className="flex flex-row justify-between">
@@ -81,13 +86,8 @@ export const ApplyForm = () => {
           경차 여부 <Txt color="error">*</Txt>
         </div>
         <div className="flex m-auto gap-8">
-          <Radio label="예" name="compactCar" value="isCompact" required />
-          <Radio
-            label="아니오"
-            name="compactCar"
-            value="isNotCompact"
-            required
-          />
+          <Radio label="예" name="compactCar" required />
+          <Radio label="아니오" name="compactCar" required />
         </div>
       </div>
       <div className="flex flex-row justify-between my-12">

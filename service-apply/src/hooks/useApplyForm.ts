@@ -1,5 +1,9 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { formInputValidator } from '../functions/formValidator';
+import {
+  formInputValidator,
+  submitFailure,
+  printSubmitResult,
+} from '../functions/formValidator';
 
 interface ApplyForm {
   phoneNumber: string;
@@ -22,10 +26,10 @@ export const useApplyForm = () => {
     isCompact: false,
   });
 
-  const handleInput: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setApplyForm({
       ...applyForm,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -38,22 +42,25 @@ export const useApplyForm = () => {
 
   const submitApplyForm: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (
-      !formInputValidator(
-        applyForm.phoneNumber,
-        applyForm.studentNumber,
-        applyForm.email,
-        applyForm.studentName,
-        applyForm.section,
-        applyForm.carNumber,
-        applyForm.isCompact,
-      )
-    ) {
-      alert('입력하신 정보를 다시 확인해주세요.');
-      return;
-    }
-    alert('신청이 완료되었습니다.');
-    //TODO: 로딩컴포넌트 -> 신청완료 페이지
+    const {
+      phoneNumber,
+      studentNumber,
+      email,
+      studentName,
+      section,
+      carNumber,
+      isCompact,
+    } = applyForm;
+    const result = formInputValidator(
+      phoneNumber,
+      studentNumber,
+      email,
+      studentName,
+      section,
+      carNumber,
+      isCompact,
+    );
+    printSubmitResult(result);
   };
   return { applyForm, handleInput, handleSelect, submitApplyForm };
 };

@@ -24,6 +24,40 @@ export const onInputStudentNumber = (e: React.FormEvent<HTMLInputElement>) => {
   input.value = value.replace(/[^0-9]/g, '');
 };
 
+interface SubmitSuccess<T> {
+  success: true;
+  value: T;
+}
+
+interface SubmitFailure {
+  success: false;
+  message: string;
+}
+
+type SubmitResult<T> = SubmitSuccess<T> | SubmitFailure;
+
+export const submitSucccess = <T>(value: T): SubmitSuccess<T> => {
+  return {
+    success: true,
+    value,
+  };
+};
+
+export const submitFailure = (message: string): SubmitFailure => {
+  return {
+    success: false,
+    message,
+  };
+};
+
+export const printSubmitResult = <T>(result: SubmitResult<T>) => {
+  if (result.success) {
+    alert('신청완료');
+  } else {
+    alert(result.message);
+  }
+};
+
 export const formInputValidator = (
   phoneNumber: string,
   studentNumber: number,
@@ -34,26 +68,33 @@ export const formInputValidator = (
   isCompact: boolean,
 ) => {
   if (!isPhoneNumber(phoneNumber)) {
-    alert('올바른 전화번호가 아닙니다.');
-    return false;
-  }
-  if (!isStudentNumber(studentNumber)) {
-    alert('올바른 학번이 아닙니다.');
-    return false;
+    return submitFailure('올바른 전화번호가 아닙니다.');
   }
   if (!isEmail(email)) {
-    alert('올바른 이메일이 아닙니다.');
-    return false;
+    return submitFailure('올바른 이메일이 아닙니다.');
   }
   if (!isStudentName(studentName)) {
-    alert('올바른 이름이 아닙니다.');
-    return false;
+    return submitFailure('올바른 이름이 아닙니다.');
   }
-  return true;
+  if (!isStudentNumber(studentNumber)) {
+    return submitFailure('올바른 학번이 아닙니다.');
+  }
+  if (!isSection(section)) {
+    return submitFailure('올바른 구역이 아닙니다.');
+  }
+  return submitSucccess({
+    phoneNumber,
+    studentNumber,
+    email,
+    studentName,
+    section,
+    carNumber,
+    isCompact,
+  });
 };
 
 const isPhoneNumber = (phoneNumber: string) => {
-  const phoneNumberRegex = /^01[016789]-[0-9]{4}-[0-9]{4}$/;
+  const phoneNumberRegex = /^01[0-9]{1}-[0-9]{4}-[0-9]{4}$/;
   return phoneNumberRegex.test(phoneNumber);
 };
 
@@ -65,13 +106,7 @@ const isEmail = (email: string) => {
 
 const isStudentNumber = (studentNumber: number) => {
   const studentNumberRegex = /^[0-9]{6}$/;
-  if (typeof studentNumber !== 'number' || isNaN(studentNumber)) {
-    return false;
-  }
-  if (!studentNumberRegex.test(studentNumber.toString())) {
-    return false;
-  }
-  return true;
+  return studentNumberRegex.test(studentNumber.toString());
 };
 
 const isStudentName = (studentName: string) => {
@@ -81,6 +116,7 @@ const isStudentName = (studentName: string) => {
 
 const isSection = (section: number) => {
   //TODO: section 검증
+  if (section !== 0) return true;
 };
 
 const isCarNumber = (carNumber: string) => {
