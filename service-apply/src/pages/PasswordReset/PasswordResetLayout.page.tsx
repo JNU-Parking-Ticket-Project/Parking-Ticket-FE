@@ -1,4 +1,4 @@
-import { Footer } from '../../components/common/FooterContainer';
+import { Footer } from '../../components/common/Footer';
 import { MainContainer } from '../../components/common/MainContainer';
 import { CommonTitle } from '../../components/common/CommonTitle';
 import { Outlet } from 'react-router-dom';

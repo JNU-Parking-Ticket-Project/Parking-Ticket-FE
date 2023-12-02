@@ -27,7 +27,7 @@ export const ApplyForm = () => {
     useApplyForm();
   return (
     <form
-      className="flex flex-col gap-4 max-w-[520px] m-auto"
+      className="flex flex-col gap-4 max-w-[520px] m-auto my-12"
       onSubmit={submitApplyForm}
     >
       <ApplyInputText

@@ -2,7 +2,7 @@ import { Txt } from '@quokka/design-system';
 import { Outlet } from 'react-router-dom';
 import { CommonTitle } from '../../components/common/CommonTitle';
 import { MainContainer } from '../../components/common/MainContainer';
-import { Footer } from '../../components/common/FooterContainer';
+import { Footer } from '../../components/common/Footer';
 
 export const AnnouncementLayoutPage = () => {
   return (
