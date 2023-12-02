@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { InputHTMLAttributes, useId } from 'react';
+import Txt from '../txt/txt';
 
 export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   type: 'text' | 'password' | 'email' | 'search';
@@ -39,9 +40,9 @@ export function InputText({
   const id = useId();
   return (
     <>
-      <label className={clsx(labelClassName)} htmlFor={id}>
+      <label htmlFor={id}>
         {label}
-        {!props.required ? null : <span className="text-[#DC0000]">*</span>}
+        {!props.required ? null : <Txt color="error">*</Txt>}
       </label>
       <input
         {...props}
