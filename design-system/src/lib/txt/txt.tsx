@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 const colorType = {
-  primay: 'text-[#0255D5]',
+  primary: 'text-[#0255D5]',
   secondary: 'text-[#777777]',
   error: 'text-[#DC0000]',
   white: 'text-[#FFFFFF]',
@@ -12,6 +12,7 @@ const colorType = {
 
 const sizeType = {
   base: 'text-base',
+  sm: 'text-sm',
   h6: 'text-xl',
   h5: 'text-xl font-semibold',
   h4: 'text-2xl font-semibold',

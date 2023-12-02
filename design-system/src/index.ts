@@ -1,3 +1,4 @@
+export * from './lib/modal/modal';
 export * from './lib/txt/txt';
 export * from './lib/container/container';
 export * from './lib/option-button/option-button';
