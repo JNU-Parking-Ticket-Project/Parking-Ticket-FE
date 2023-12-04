@@ -5,13 +5,11 @@ import {
   RegistrationResponse,
 } from './dtos/registration.dtos';
 
-export const postRegistration = async (
-  registration: RegistrationRequest,
-  isRegistration = false,
-) => {
+export const postRegistration = async (registration: RegistrationRequest) => {
+  const { isRegistration, ...rest } = registration;
   const { data: resData } = await https.post(
-    `/v1/registration/${isRegistration}`,
-    registration,
+    `/v1/registration/${registration.isRegistration}`,
+    rest,
   );
   return new RegistrationResponse(resData);
 };

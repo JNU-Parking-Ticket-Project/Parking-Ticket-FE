@@ -7,7 +7,12 @@ interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: typeof parkingSection;
 }
 
-export const Selector = ({ label, type, options, ...props }: SelectorProps) => {
+export const ApplySelector = ({
+  label,
+  type,
+  options,
+  ...props
+}: SelectorProps) => {
   const id = useId();
 
   return (

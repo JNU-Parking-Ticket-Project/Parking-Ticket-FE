@@ -2,40 +2,40 @@ export interface RegistrationRequestProps {
   email: string;
   name: string;
   studentNumber: string;
-  affiliation: string;
   carNumber: string;
   isLightCar: boolean;
   phoneNumber: string;
   selectSectoId: number;
+  isRegistration: boolean;
 }
 
 export class RegistrationRequest {
   email: string;
   name: string;
   studentNum: string;
-  affiliation: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
   selectSectoId: number;
+  isRegistration: boolean;
   constructor({
     email,
     name,
     studentNumber,
-    affiliation,
     carNumber,
     isLightCar,
     phoneNumber,
     selectSectoId,
+    isRegistration,
   }: RegistrationRequestProps) {
     this.email = email;
     this.name = name;
     this.studentNum = studentNumber;
-    this.affiliation = affiliation;
     this.carNum = carNumber;
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
     this.selectSectoId = selectSectoId;
+    this.isRegistration = isRegistration;
   }
 }
 

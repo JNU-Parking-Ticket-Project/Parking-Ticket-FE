@@ -1,9 +1,9 @@
 import { Footer } from '../components/common/Footer';
 import { MainContainer } from '../components/common/MainContainer';
-import { HomeInforamtion } from '../components/home/Information';
-import { HomeLogin } from '../components/home/Login';
-import { HomeNotice } from '../components/home/Notice';
-import { HomeTitle } from '../components/home/Title';
+import { HomeInforamtion } from '../components/home/HomeInformation';
+import { HomeLogin } from '../components/home/HomeLogin';
+import { HomeNotice } from '../components/home/HomeNotice';
+import { HomeTitle } from '../components/home/HomeTitle';
 
 export const HomePage = () => {
   return (

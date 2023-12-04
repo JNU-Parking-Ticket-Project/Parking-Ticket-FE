@@ -5,12 +5,8 @@ import {
   Radio,
   Txt,
 } from '@quokka/design-system';
-import {
-  onInputPhoneNumber,
-  onInputStudentNumber,
-} from '../../functions/formValidator';
 import { useApplyForm } from '../../hooks/useApplyForm';
-import { Selector } from './Selector';
+import { ApplySelector } from './ApplySelector';
 import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
 
@@ -23,62 +19,65 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 };
 
 export const ApplyForm = () => {
-  const { applyForm, submitApplyForm, handleInput, handleSelect } =
-    useApplyForm();
+  const { state, dispatch, onSave } = useApplyForm();
+
   return (
-    <form
-      className="flex flex-col gap-4 max-w-[520px] m-auto my-12"
-      onSubmit={submitApplyForm}
-    >
+    <div className="flex flex-col gap-4 max-w-[520px] m-auto my-12">
       <ApplyInputText
         label="전화번호"
         name="phoneNumber"
         placeholder="010-0000-0000"
         type="text"
-        onInput={onInputPhoneNumber}
-        onChange={handleInput}
-        value={applyForm.phoneNumber}
+        onChange={(e) =>
+          dispatch({ type: 'phoneNumber', payload: e.target.value })
+        }
+        value={state.phoneNumber}
         required
       />
       <ApplyInputText
         label="이메일"
         name="email"
         type="text"
-        onChange={handleInput}
-        value={applyForm.email}
+        onChange={(e) => dispatch({ type: 'email', payload: e.target.value })}
+        value={state.email}
         required
       />
       <ApplyInputText
         label="이름"
         name="studentName"
         type="text"
-        onChange={handleInput}
-        value={applyForm.studentName}
+        onChange={(e) =>
+          dispatch({ type: 'studentName', payload: e.target.value })
+        }
+        value={state.studentName}
         required
       />
       <ApplyInputText
         label="학번"
         name="studentNumber"
         type="text"
-        onInput={onInputStudentNumber}
-        onChange={handleInput}
-        value={applyForm.studentNumber}
+        onChange={(e) =>
+          dispatch({ type: 'studentNumber', payload: e.target.value })
+        }
+        value={state.studentNumber}
         required
       />
-      <Selector
+      <ApplySelector
         label="구간"
         type="text"
         options={parkingSection}
-        onChange={handleSelect}
-        value={applyForm.section}
+        onChange={(e) => dispatch({ type: 'section', payload: e.target.value })}
+        value={state.section}
         required
       />
       <ApplyInputText
         label="차량 번호"
         name="carNumber"
         type="text"
-        onChange={handleInput}
-        value={applyForm.carNumber}
+        onChange={(e) =>
+          dispatch({ type: 'carNumber', payload: e.target.value })
+        }
+        value={state.carNumber}
         required
       />
       <div className="flex flex-row justify-between">
@@ -86,18 +85,36 @@ export const ApplyForm = () => {
           경차 여부 <Txt color="error">*</Txt>
         </div>
         <div className="flex m-auto gap-8">
-          <Radio label="예" name="compactCar" required />
-          <Radio label="아니오" name="compactCar" required />
+          <Radio
+            label="예"
+            name="compactCar"
+            onChange={(e) => {
+              dispatch({ type: 'isCompact', payload: true });
+            }}
+          />
+          <Radio
+            label="아니오"
+            name="compactCar"
+            onChange={(e) => {
+              dispatch({ type: 'isCompact', payload: false });
+            }}
+          />
         </div>
       </div>
       <div className="flex flex-row justify-between my-12">
-        <Button className="" color="secondary">
+        <Button
+          color="secondary"
+          onClick={() => onSave({ isRegistration: false })}
+        >
           임시 저장
         </Button>
-        <Button className="" color="primary" type="submit">
+        <Button
+          color="primary"
+          onClick={() => onSave({ isRegistration: true })}
+        >
           신청하기
         </Button>
       </div>
-    </form>
+    </div>
   );
 };
