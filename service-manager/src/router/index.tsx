@@ -6,6 +6,7 @@ export default function Router() {
       <Route path="/" element={<MainPage />} />
       <Route path="/user" element={<MainUserPage />} />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/announce" element={<AnnouncePage />} />
     </Routes>
   );
 }
