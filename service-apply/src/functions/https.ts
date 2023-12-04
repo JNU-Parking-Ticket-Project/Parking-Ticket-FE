@@ -1,21 +1,20 @@
 import { Response } from '../apis/dtos/response.dtos';
+import { getAccessToken } from './jwt';
 
-const token = '';
-const BASE_URL = process.env.PUBLIC_API_URL || 'http://localhost:3000';
+const BASE_URL = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8080';
 
-console.log('BASE_URL', BASE_URL);
+const fetcher = (url: string, req: RequestInit) => {
+  const token = getAccessToken();
+  const headers: HeadersInit = token
+    ? {
+        'Content-Type': 'application/json;charset=UTF-8',
+        Authorization: `Bearer ${token}`,
+      }
+    : {
+        'Content-Type': 'application/json;charset=UTF-8',
+      };
 
-const headers: HeadersInit = token
-  ? {
-      'Content-Type': 'application/json;charset=UTF-8',
-      Authorization: `Bearer ${token}`,
-    }
-  : {
-      'Content-Type': 'application/json;charset=UTF-8',
-    };
-
-const fetcher = (url: string, headers: HeadersInit) =>
-  fetch(BASE_URL + '/api' + url, { headers })
+  return fetch(BASE_URL + '/api' + url, { ...req, headers })
     .catch((error) => {
       console.error(error);
     })
@@ -25,28 +24,25 @@ const fetcher = (url: string, headers: HeadersInit) =>
       }
       throw new Error('Network response was not ok.');
     });
+};
 
 export const https = {
   get: (url: string) =>
     fetcher(url, {
       method: 'GET',
-      ...headers,
     }),
   post: (url: string, data: any) =>
     fetcher(url, {
       method: 'POST',
-      ...headers,
       body: JSON.stringify(data),
     }),
   put: (url: string, data: any) =>
     fetcher(url, {
       method: 'PUT',
-      ...headers,
       body: JSON.stringify(data),
     }),
   delete: (url: string) =>
     fetcher(url, {
       method: 'DELETE',
-      ...headers,
     }),
 };

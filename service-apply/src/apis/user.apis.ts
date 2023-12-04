@@ -1,7 +1,7 @@
 import { https } from '../functions/https';
 import { LogoutMessage, UserToken } from './dtos/user.dtos';
 
-interface UserLoginRequest {
+export interface UserLoginRequest {
   email: string;
   password: string;
 }
