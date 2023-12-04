@@ -4,6 +4,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
     </Routes>
   );
 }
