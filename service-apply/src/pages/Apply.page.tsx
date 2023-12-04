@@ -1,6 +1,6 @@
 import { ApplyForm } from '../components/apply/Form';
 import { ApplyTitle } from '../components/apply/Title';
-import { Footer } from '../components/common/Footer';
+import { Footer } from '../components/common/FooterContainer';
 
 export const ApplyPage = () => {
   return (
