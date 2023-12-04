@@ -8,10 +8,10 @@ export const getAllAnnounce = async () => {
 
 export const getAnnounceLast = async () => {
   const { data: resData } = await https.get('/v1/announce/last');
-  return new Announce(resData);
+  return new LastAnnounce(resData);
 };
 
 export const getAnnounceById = async (announceId: number) => {
   const { data: resData } = await https.get(`/v1/announce/${announceId}`);
-  return new LastAnnounce(resData);
+  return new Announce(resData);
 };
