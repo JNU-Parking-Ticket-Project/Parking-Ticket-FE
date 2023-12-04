@@ -1,7 +1,9 @@
 import { Response } from '../apis/dtos/response.dtos';
 
 const token = '';
-const BASE_URL = 'http://localhost:8100';
+const BASE_URL = process.env.PUBLIC_API_URL || 'http://localhost:3000';
+
+console.log('BASE_URL', BASE_URL);
 
 const headers: HeadersInit = token
   ? {
@@ -13,7 +15,7 @@ const headers: HeadersInit = token
     };
 
 const fetcher = (url: string, headers: HeadersInit) =>
-  fetch(BASE_URL + url, { headers })
+  fetch(BASE_URL + '/api' + url, { headers })
     .catch((error) => {
       console.error(error);
     })
