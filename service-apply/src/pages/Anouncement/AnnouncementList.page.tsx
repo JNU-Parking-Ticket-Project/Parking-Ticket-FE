@@ -1,7 +1,8 @@
 import { AnnouncementList } from '../../components/announcement/AnnouncementList';
 import { useLocation } from 'react-router-dom';
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import { PageNav } from '../../components/announcement/PageNav';
+import ErrorBoundary from '../../components/common/ErrorBoundray';
 
 const useQueryParameter = () => {
   const { search } = useLocation();

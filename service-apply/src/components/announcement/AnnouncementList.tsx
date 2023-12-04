@@ -1,5 +1,6 @@
 import { Txt } from '@quokka/design-system';
 import { AnnouncementListItem } from './AnnouncementListItem';
+import { useAnounceListQuery } from '../../hooks/react-query/useAnnounce';
 
 const datas = Array.from({ length: 9 }, (_, i) => ({
   id: i + 1,
@@ -12,7 +13,8 @@ interface AnnouncementListProps {
 }
 
 export const AnnouncementList = ({ page }: AnnouncementListProps) => {
-  // TODO: 공지사항 목록 map으로 처리하는데, query를 가급적 이 부분에서 사용하면 좋다고 생각합니다.
+  const { announceListData } = useAnounceListQuery(page);
+
   return (
     <div className="max-w-[786px] mx-auto mt-12 w-full">
       <div className="border-b-4 flex justify-between p-3">
@@ -21,8 +23,8 @@ export const AnnouncementList = ({ page }: AnnouncementListProps) => {
           등록날짜
         </Txt>
       </div>
-      {datas.map(({ ...props }) => (
-        <AnnouncementListItem key={props.id} {...props} />
+      {announceListData.announces.map(({ ...props }) => (
+        <AnnouncementListItem key={props.announceId} {...props} />
       ))}
     </div>
   );

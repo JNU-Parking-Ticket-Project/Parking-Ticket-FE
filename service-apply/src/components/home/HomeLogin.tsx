@@ -15,10 +15,9 @@ export const HomeLogin = () => {
       { email, password },
       {
         onError: (error) => {
-          console.error(error);
+          alert(error);
         },
         onSuccess: (data) => {
-          console.log(data);
           navigate('/apply');
         },
       },

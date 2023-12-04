@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { CommonTitle } from '../../components/common/CommonTitle';
 import { MainContainer } from '../../components/common/MainContainer';
 import { Footer } from '../../components/common/Footer';
+import ErrorBoundary from '../../components/common/ErrorBoundray';
+import { Suspense } from 'react';
 
 export const AnnouncementLayoutPage = () => {
   return (
@@ -14,7 +16,11 @@ export const AnnouncementLayoutPage = () => {
             공지사항
           </Txt>
         </h2>
-        <Outlet />
+        <ErrorBoundary>
+          <Suspense>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </MainContainer>
       <Footer />
     </>

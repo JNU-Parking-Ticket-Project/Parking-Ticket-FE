@@ -1,8 +1,8 @@
 import { https } from '../functions/https';
 import { AllAnnounce, Announce, LastAnnounce } from './dtos/announce.dtos';
 
-export const getAllAnnounce = async () => {
-  const { data: resData } = await https.get('/v1/announce');
+export const getAllAnnounce = async (page: number) => {
+  const { data: resData } = await https.get(`/v1/announce?page=${page}`);
   return new AllAnnounce(resData);
 };
 
