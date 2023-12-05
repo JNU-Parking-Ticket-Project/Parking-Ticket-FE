@@ -25,3 +25,11 @@ export const getRefreshToken = () => {
     return '';
   }
 };
+
+export const removeToken = () => {
+  if (!window) return { error: 'window is not defined' };
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+
+  return { error: null };
+};

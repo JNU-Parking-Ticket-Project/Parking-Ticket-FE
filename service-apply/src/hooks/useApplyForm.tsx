@@ -6,6 +6,7 @@ import {
 } from '../functions/replacer';
 import { useApplyMutate } from './react-query/useApply';
 import { useNavigate } from 'react-router-dom';
+import { removeToken } from '../functions/jwt';
 
 type AppFormInputAction =
   | {
@@ -88,6 +89,7 @@ export const useApplyForm = (init?: ApplyFormInput) => {
           if (!data) throw new Error('data is undefined');
           dispatch({ type: 'reset', payload: null });
           alert(data.message);
+          removeToken();
           navigate('/');
         },
       },
