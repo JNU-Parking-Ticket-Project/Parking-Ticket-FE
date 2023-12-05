@@ -15,7 +15,7 @@ export const NoticeCreate = () => {
       <MainContainer>
         <div className="flex flex-col">
           <Txt size="h3">안내사항 작성</Txt>
-          <NoticeForm content="" lastContent="" />
+          <NoticeForm />
         </div>
       </MainContainer>
       <Footer />
