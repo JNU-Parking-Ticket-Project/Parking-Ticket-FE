@@ -4,17 +4,33 @@ import {
   RegistrationRequest,
   RegistrationResponse,
 } from './dtos/registration.dtos';
+import { isErrorResponse } from './dtos/response.dtos';
 
 export const postRegistration = async (registration: RegistrationRequest) => {
   const { isRegistration, ...rest } = registration;
-  const { data: resData } = await https.post(
+  const response = await https.post(
     `/v1/registration/${registration.isRegistration}`,
     rest,
   );
-  return new RegistrationResponse(resData);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new RegistrationResponse(response.data);
 };
 
 export const getRegistration = async () => {
-  const { data: resData } = await https.get('/v1/registration');
-  return new RegistrationOptionsResponse(resData);
+  const response = await https.get('/v1/registration');
+  if (isErrorResponse(response)) {
+    return new RegistrationOptionsResponse({
+      carNum: '',
+      email: '',
+      isLight: false,
+      phoneNum: '',
+      sector: [],
+      studentNum: '',
+      name: '',
+      selectSectoId: -1,
+    });
+  }
+  return new RegistrationOptionsResponse(response.data);
 };

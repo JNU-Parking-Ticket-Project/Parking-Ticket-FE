@@ -12,12 +12,13 @@ export const HomeLogin = () => {
   const formAction = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postLogin(
-      { email, password },
+      { email, pwd: password },
       {
         onError: (error) => {
+          console.error(error);
           alert(error);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
           navigate('/apply');
         },
       },

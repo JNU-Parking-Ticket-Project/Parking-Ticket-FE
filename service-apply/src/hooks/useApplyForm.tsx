@@ -76,12 +76,13 @@ export const useApplyForm = (init?: ApplyFormInput) => {
         email: state.email,
         name: state.studentName,
         phoneNum: state.phoneNumber,
-        selectSectoId: state.section,
+        selectSectoId: +state.section,
         studentNum: state.studentNumber,
         isLight: state.isCompact,
       },
       {
         onError: (error) => {
+          console.error(error);
           alert(error.message);
           throw new Error(error.message);
         },

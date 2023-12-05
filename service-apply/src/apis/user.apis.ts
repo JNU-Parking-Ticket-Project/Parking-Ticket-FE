@@ -1,22 +1,24 @@
 import { https } from '../functions/https';
-import { LogoutMessage, UserToken } from './dtos/user.dtos';
+import { isErrorResponse } from './dtos/response.dtos';
+import { UserToken } from './dtos/user.dtos';
 
 export interface UserLoginRequest {
   email: string;
-  password: string;
+  pwd: string;
 }
 
 export const postLogin = async (data: UserLoginRequest) => {
-  const { data: resData } = await https.post(`/v1/auth/login`, data);
-  return new UserToken(resData);
+  const response = await https.post(`/v1/auth/login`, data);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new UserToken(response.data);
 };
 
 export const postReissue = async (data: { refreshtoken: string }) => {
-  const { data: resData } = await https.post(`/v1/auth/login`, data);
-  return new UserToken(resData);
-};
-
-export const postLogout = async () => {
-  const { data: resData } = await https.post(`/v1/auth/logout`, null);
-  return new LogoutMessage(resData);
+  const response = await https.post(`/v1/auth/login`, data);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new UserToken(response.data);
 };

@@ -1,6 +1,7 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import { useAnounceQuery } from '../../hooks/react-query/useAnnounce';
+import clsx from 'clsx';
 
 export const HomeAnnounce = () => {
   const { announceData } = useAnounceQuery();
@@ -12,7 +13,10 @@ export const HomeAnnounce = () => {
       </Txt>
       <Link
         to={`/announcement/${announceData.announceId}`}
-        className="text-left flex-1 truncate"
+        className={clsx('text-left flex-1 truncate', {
+          'cursor-not-allowed pointer-events-none':
+            announceData.announceId <= 0,
+        })}
       >
         <Txt size="h6">{announceData.announceTitle}</Txt>
       </Link>

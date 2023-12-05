@@ -49,7 +49,7 @@ export const ApplyForm = () => {
         label="이메일"
         name="email"
         type="text"
-        onChange={(e) => dispatch({ type: 'email', payload: e.target.value })}
+        disabled
         value={state.email}
         required
       />
