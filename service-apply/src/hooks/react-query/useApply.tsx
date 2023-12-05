@@ -1,9 +1,16 @@
-import { MutateOptions, useMutation } from '@tanstack/react-query';
+import {
+  MutateOptions,
+  useMutation,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import {
   RegistrationRequest,
   RegistrationResponse,
 } from '../../apis/dtos/registration.dtos';
-import { postRegistration } from '../../apis/registration.apis';
+import {
+  getRegistration,
+  postRegistration,
+} from '../../apis/registration.apis';
 
 export const useApplyMutate = () => {
   const { mutate } = useMutation({
@@ -31,5 +38,19 @@ export const useApplyMutate = () => {
         },
       });
     },
+  };
+};
+
+export const useApplyQuery = () => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['apply'],
+    queryFn: getRegistration,
+    gcTime: Infinity,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    registrationData: data,
   };
 };

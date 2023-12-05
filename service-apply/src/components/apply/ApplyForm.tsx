@@ -7,8 +7,8 @@ import {
 } from '@quokka/design-system';
 import { useApplyForm } from '../../hooks/useApplyForm';
 import { ApplySelector } from './ApplySelector';
-import { parkingSection } from '../constants/parkingSection';
 import { clsx } from 'clsx';
+import { useApplyQuery } from '../../hooks/react-query/useApply';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
   return (
@@ -19,7 +19,18 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 };
 
 export const ApplyForm = () => {
-  const { state, dispatch, onSave } = useApplyForm();
+  const { registrationData } = useApplyQuery();
+  const { sector, selectSectoId, ...rest } = registrationData;
+  const { state, dispatch, onSave } = useApplyForm({
+    section: selectSectoId ?? 0,
+    ...rest,
+  });
+
+  const parkingSection = sector.map((item) => ({
+    sectionNumber: item.sectorId,
+    sectionMajor: `${item.sectorName}-${item.sectorColleges}`,
+  }));
+  parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
 
   return (
     <div className="flex flex-col gap-4 max-w-[520px] m-auto my-12">
@@ -88,14 +99,16 @@ export const ApplyForm = () => {
           <Radio
             label="예"
             name="compactCar"
-            onChange={(e) => {
+            checked={state.isCompact}
+            onChange={() => {
               dispatch({ type: 'isCompact', payload: true });
             }}
           />
           <Radio
             label="아니오"
             name="compactCar"
-            onChange={(e) => {
+            checked={!state.isCompact}
+            onChange={() => {
               dispatch({ type: 'isCompact', payload: false });
             }}
           />

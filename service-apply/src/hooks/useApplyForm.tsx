@@ -61,8 +61,9 @@ const initValue = {
   isCompact: false,
 };
 
-export const useApplyForm = () => {
-  const [state, dispatch] = useReducer(applyFormReducer, initValue);
+export const useApplyForm = (init?: ApplyFormInput) => {
+  init ||= initValue;
+  const [state, dispatch] = useReducer(applyFormReducer, init);
   const { postRegistration } = useApplyMutate();
   const navigate = useNavigate();
 

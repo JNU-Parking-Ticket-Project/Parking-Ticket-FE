@@ -50,7 +50,6 @@ interface RegistrationResponseProps {
   email: string;
   name: string;
   studentNum: string;
-  affiliation: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
@@ -63,13 +62,12 @@ interface RegistrationResponseProps {
 }
 
 export class RegistrationOptionsResponse {
-  affiliation: string;
-  carNumer: string;
+  carNumber: string;
   email: string;
-  isLightCar: boolean;
-  name: string;
-  phoneNumer: string;
-  studentNumer: string;
+  isCompact: boolean;
+  studentName: string;
+  phoneNumber: string;
+  studentNumber: string;
   sector: {
     sectorId: number;
     sectorName: string;
@@ -77,7 +75,6 @@ export class RegistrationOptionsResponse {
   }[];
   selectSectoId?: number;
   constructor({
-    affiliation,
     carNum,
     email,
     isLight,
@@ -87,14 +84,13 @@ export class RegistrationOptionsResponse {
     studentNum,
     selectSectoId,
   }: RegistrationResponseProps) {
-    this.affiliation = affiliation;
-    this.carNumer = carNum;
+    this.carNumber = carNum;
     this.email = email;
-    this.isLightCar = isLight;
-    this.name = name;
-    this.phoneNumer = phoneNum;
+    this.isCompact = isLight;
+    this.studentName = name;
+    this.phoneNumber = phoneNum;
     this.sector = sector;
-    this.studentNumer = studentNum;
+    this.studentNumber = studentNum;
     this.selectSectoId = selectSectoId;
   }
 }
