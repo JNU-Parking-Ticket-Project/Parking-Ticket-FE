@@ -16,7 +16,7 @@ export const EmailForm = () => {
         <InputText
           type="text"
           placeholder="asdf1234@jnu.ac.kr"
-          label="email"
+          label="Email"
           required={false}
           className="w-full"
           value={email}

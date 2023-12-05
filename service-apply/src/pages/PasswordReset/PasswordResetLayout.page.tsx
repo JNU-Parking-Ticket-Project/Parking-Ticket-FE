@@ -9,7 +9,7 @@ export const PasswordResetLayout = () => {
     <>
       <MainContainer>
         <CommonTitle />
-        <div className="flex items-center justify-center h-full">
+        <div className="flex justify-center items-center min-h-[calc(100dvh-30rem)]">
           <Outlet />
         </div>
       </MainContainer>

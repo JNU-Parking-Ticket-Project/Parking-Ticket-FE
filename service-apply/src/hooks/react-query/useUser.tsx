@@ -1,4 +1,4 @@
-import { UserLoginRequest, postLogin, postLogout } from '../../apis/user.apis';
+import { UserLoginRequest, postLogin } from '../../apis/user.apis';
 import { setToken } from '../..//functions/jwt';
 import { MutateOptions, useMutation } from '@tanstack/react-query';
 import { UserToken } from 'service-apply/src/apis/dtos/user.dtos';
