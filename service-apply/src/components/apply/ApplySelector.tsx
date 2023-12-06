@@ -1,13 +1,23 @@
 import { SelectHTMLAttributes, useId } from 'react';
-import { parkingSection } from '../constants/parkingSection';
 import { Txt } from '@quokka/design-system';
+
+interface ParkingSection {
+  sectionNumber: number;
+  sectionMajor: string;
+}
+
 interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   type: string;
-  options: typeof parkingSection;
+  options: ParkingSection[];
 }
 
-export const Selector = ({ label, type, options, ...props }: SelectorProps) => {
+export const ApplySelector = ({
+  label,
+  type,
+  options,
+  ...props
+}: SelectorProps) => {
   const id = useId();
 
   return (

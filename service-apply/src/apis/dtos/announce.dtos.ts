@@ -1,4 +1,4 @@
-interface announce {
+export interface announce {
   announceId: number;
   announceTitle: string;
   announceCreatedAt: string;

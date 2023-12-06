@@ -1,23 +1,22 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
+import { Announce } from '../../apis/dtos/announce.dtos';
 
-interface AnnouncementItemProps {
-  id: number;
-  title: string;
-  date: string;
-}
-
-// TODO: 아이템 데이터 스키마에 따라 변경해야함.
 export const AnnouncementListItem = ({
-  id,
-  title,
-  date,
-}: AnnouncementItemProps) => {
+  announceId,
+  announceCreatedAt,
+  announceTitle,
+}: Omit<Announce, 'announceContent'>) => {
+  const date = new Date(announceCreatedAt);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
   return (
-    <Link to={`/announcement/${id}`}>
+    <Link to={`/announcement/${announceId}`}>
       <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">
-        <Txt>{title}</Txt>
-        <Txt className="w-24 text-center">{date}</Txt>
+        <Txt>{announceTitle}</Txt>
+        <Txt className="w-24 text-center">{`${year}-${month}-${day}`}</Txt>
       </div>
     </Link>
   );

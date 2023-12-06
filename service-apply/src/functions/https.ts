@@ -1,50 +1,57 @@
-import { Response } from '../apis/dtos/response.dtos';
+import { ErrorResponse, Response } from '../apis/dtos/response.dtos';
+import { getAccessToken } from './jwt';
 
-const token = '';
-const BASE_URL = 'http://localhost:8100';
+const BASE_URL = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8080';
 
-const headers: HeadersInit = token
-  ? {
-      'Content-Type': 'application/json;charset=UTF-8',
-      Authorization: `Bearer ${token}`,
-    }
-  : {
-      'Content-Type': 'application/json;charset=UTF-8',
-    };
-
-const fetcher = (url: string, headers: HeadersInit) =>
-  fetch(BASE_URL + url, { headers })
-    .catch((error) => {
-      console.error(error);
-    })
-    .then((response) => {
-      if (response) {
-        return response.json().then((data) => new Response(data));
+const fetcher = async (url: string, req: RequestInit) => {
+  const token = getAccessToken();
+  const headers: HeadersInit = token
+    ? {
+        'Content-Type': 'application/json;charset=UTF-8',
+        Authorization: `Bearer ${token}`,
       }
-      throw new Error('Network response was not ok.');
-    });
+    : {
+        'Content-Type': 'application/json;charset=UTF-8',
+      };
+
+  const response = await fetch(BASE_URL + '/api' + url, {
+    ...req,
+    headers,
+  });
+  if (response.status >= 400) {
+    return await errorStatusResult(response);
+  }
+  return await response.json().then((data) => new Response(data));
+};
+
+const errorStatusResult = async (response: globalThis.Response) => {
+  const errorResponse = await response
+    .json()
+    .then((data) => new ErrorResponse(data));
+  if (errorResponse.status === 401 || errorResponse.status === 403) {
+    alert('로그인이 필요합니다.');
+    window.location.href = '/';
+  }
+  return errorResponse;
+};
 
 export const https = {
   get: (url: string) =>
     fetcher(url, {
       method: 'GET',
-      ...headers,
     }),
   post: (url: string, data: any) =>
     fetcher(url, {
       method: 'POST',
-      ...headers,
       body: JSON.stringify(data),
     }),
   put: (url: string, data: any) =>
     fetcher(url, {
       method: 'PUT',
-      ...headers,
       body: JSON.stringify(data),
     }),
   delete: (url: string) =>
     fetcher(url, {
       method: 'DELETE',
-      ...headers,
     }),
 };
