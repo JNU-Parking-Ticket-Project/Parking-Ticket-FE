@@ -19,6 +19,7 @@ export default function Router() {
       <Route path="/password-reset" element={<PasswordResetPage />} />
       <Route path="/notice" element={<NoticeView />} />
       <Route path="/notice-create" element={<NoticeCreate />} />
+      <Route path="/notice-view" element={<NoticeView />} />
     </Routes>
   );
 }
