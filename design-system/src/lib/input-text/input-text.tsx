@@ -16,7 +16,12 @@ const getBorderClassName = (
   error: boolean,
 ) => {
   if (error) {
-    return 'border-[#DC0000] rounded-lg';
+    switch (designType) {
+      case 'box':
+        return 'border border-[#DC0000] rounded-lg';
+      default:
+        return 'border-b border-[#DC0000]';
+    }
   }
 
   switch (designType) {

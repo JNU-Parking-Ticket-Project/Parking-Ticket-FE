@@ -2,10 +2,15 @@ import { InputText, Button } from '@quokka/design-system';
 import { FormContainer } from '../common/FormContainer';
 import { InputFlexWrapper } from './InputFlexWrapper';
 import { usePasswordResetForm } from '../../hooks/password-reset/usePasswordResetForm';
+import { useEffect } from 'react';
 
-export const PasswordResetForm = () => {
-  const { passwordResetForm, submitChangePassword, handleInput } =
+export const PasswordResetForm = ({ code }: { code: string }) => {
+  const { passwordResetForm, submitChangePassword, handleInput, setCode } =
     usePasswordResetForm();
+
+  useEffect(() => {
+    setCode(code);
+  }, [code]);
 
   return (
     <FormContainer title="비밀번호 재설정" onSubmit={submitChangePassword}>

@@ -1,7 +1,7 @@
 import { https } from '../functions/https';
 import { removeToken, setToken } from '../functions/jwt';
 import { isErrorResponse } from './dtos/response.dtos';
-import { UserToken } from './dtos/user.dtos';
+import { UserToken, PasswordFind, PasswordReset } from './dtos/user.dtos';
 
 export interface UserLoginRequest {
   email: string;
@@ -14,6 +14,36 @@ export const postLogin = async (data: UserLoginRequest) => {
     throw new Error(response.reason);
   }
   return new UserToken(response.data);
+};
+
+export interface PasswordFindRequest {
+  email: string;
+}
+
+export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
+  const response = await https.post(`/v1/user/password/find`, { email });
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new PasswordFind(response.data);
+};
+
+export interface PasswordResetRequest {
+  code: string;
+  password: string;
+}
+
+export const postPasswordReset = async ({
+  code,
+  password,
+}: PasswordResetRequest) => {
+  const response = await https.post(`/v1/user/update/passowrd/${code}`, {
+    password,
+  });
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new PasswordReset(response.data);
 };
 
 export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
