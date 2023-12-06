@@ -28,3 +28,7 @@ export const useLoginMutate = () => {
     },
   };
 };
+
+export const usePasswordResetMutate = () => {};
+
+export const usePasswordResetRequestMutate = () => {};
