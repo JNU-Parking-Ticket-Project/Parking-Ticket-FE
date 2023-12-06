@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { isValidEmailFormat } from '../../utils/regex';
+import { isEmail } from '../../functions/validator';
 
 export const useRequestPasswordForm = () => {
   const [email, setEmail] = useState('');
@@ -7,7 +7,7 @@ export const useRequestPasswordForm = () => {
 
   const changeEmail: ChangeEventHandler<HTMLInputElement> = (e) => {
     setEmail(e.target.value);
-    setIsError(!isValidEmailFormat(e.target.value));
+    setIsError(!isEmail(e.target.value));
   };
 
   const requestPasswordReset: FormEventHandler<HTMLFormElement> = (e) => {
