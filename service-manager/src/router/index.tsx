@@ -13,7 +13,7 @@ export default function Router() {
       <Route path="/" element={<MainPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/announce" element={<AnnouncePage />} />
-      <Route path="/applyList" element={<ApplyListPage />} />
+      <Route path="/apply-list" element={<ApplyListPage />} />
       <Route path="/password-reset" element={<PasswordResetPage />} />
       <Route path="/notice" element={<NoticeView />} />
       <Route path="/notice-create" element={<NoticeCreate />} />
