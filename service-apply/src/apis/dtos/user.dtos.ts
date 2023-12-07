@@ -12,10 +12,3 @@ export class UserToken {
     this.refreshToken = refreshToken;
   }
 }
-
-export class LogoutMessage {
-  message: string;
-  constructor({ message }: { message: string }) {
-    this.message = message;
-  }
-}

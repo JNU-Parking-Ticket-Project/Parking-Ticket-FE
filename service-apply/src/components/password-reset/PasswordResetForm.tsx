@@ -20,8 +20,6 @@ export const PasswordResetForm = () => {
           name="password"
           onChange={handleInput}
         />
-      </InputFlexWrapper>
-      <InputFlexWrapper>
         <InputText
           type="password"
           className="flex-[1_0_7rem]"
