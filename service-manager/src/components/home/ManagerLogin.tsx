@@ -1,33 +1,9 @@
 import { Button, InputText, Txt } from '@quokka/design-system';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutate } from '../../hooks/react-query/useUser';
-import { useState } from 'react';
-import { isEmail } from '../../functions/validator';
+import { Link } from 'react-router-dom';
+import { useLoginForm } from '../../hooks/useLogin';
 
 export const ManagerLogin = () => {
-  const { postLogin } = useLoginMutate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-
-  const onLogin = () => {
-    if (!email) return alert('이메일을 입력해주세요.');
-    if (!password) return alert('비밀번호를 입력해주세요.');
-    if (!isEmail(email)) return alert('이메일 형식이 올바르지 않습니다.');
-
-    postLogin(
-      { email, pwd: password },
-      {
-        onError: (error) => {
-          alert(error.message);
-        },
-        onSuccess: () => {
-          alert('로그인에 성공하였습니다.');
-          navigate('/apply-list');
-        },
-      },
-    );
-  };
+  const { email, onLogin, password, setEmail, setPassword } = useLoginForm();
 
   return (
     <div className="max-w-lg">
