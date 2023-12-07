@@ -37,7 +37,7 @@ export const postPasswordReset = async ({
   code,
   password,
 }: PasswordResetRequest) => {
-  const response = await https.post(`/v1/user/update/passowrd/${code}`, {
+  const response = await https.post(`/v1/user/update/password/${code}`, {
     password,
   });
   if (isErrorResponse(response)) {

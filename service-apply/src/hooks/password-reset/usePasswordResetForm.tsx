@@ -40,7 +40,7 @@ export const usePasswordResetForm = () => {
       {
         onSuccess: () => {
           alert('비밀번호 재설정이 완료 되었습니다.');
-          navigate('/login');
+          navigate('/');
         },
       },
     );
