@@ -2,21 +2,41 @@ import { Button, InputText, Txt } from '@quokka/design-system';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutate } from '../../hooks/react-query/useUser';
+import { isEmail } from '../../functions/validator';
 
 export const HomeLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const { postLogin } = useLoginMutate();
   const navigate = useNavigate();
 
   const formAction = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      return;
+    }
+    if (!password) {
+      alert('비밀번호를 입력해주세요.');
+      return;
+    }
+    if (isEmail(email) === false) {
+      alert('이메일을 확인해주세요.');
+      setIsError(true);
+      setErrorMessage('이메일을 확인해주세요.');
+      return;
+    }
     postLogin(
       { email, pwd: password },
       {
         onError: (error) => {
           console.error(error);
-          alert(error);
+          alert(error.message);
+          setIsError(true);
+          setErrorMessage(error.message);
         },
         onSuccess: () => {
           navigate('/apply');
@@ -40,7 +60,10 @@ export const HomeLogin = () => {
               name="email"
               className="w-full p-4"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setIsError(false);
+              }}
             />
           </div>
           <div className="w-full">
@@ -51,9 +74,13 @@ export const HomeLogin = () => {
               name="password"
               className="w-full p-4"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setIsError(false);
+              }}
             />
           </div>
+          {isError && <Txt color="error">{errorMessage}</Txt>}
           <Link to={'/password-reset'}>
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>

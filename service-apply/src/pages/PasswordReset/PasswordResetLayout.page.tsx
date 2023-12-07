@@ -2,9 +2,13 @@ import { Footer } from '../../components/common/Footer';
 import { MainContainer } from '../../components/common/MainContainer';
 import { CommonTitle } from '../../components/common/CommonTitle';
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { removeToken } from '../../functions/jwt';
 
-// TODO: header 교체
 export const PasswordResetLayout = () => {
+  useEffect(() => {
+    removeToken();
+  }, []);
   return (
     <>
       <MainContainer>

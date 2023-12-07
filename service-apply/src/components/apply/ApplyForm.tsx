@@ -20,9 +20,9 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 
 export const ApplyForm = () => {
   const { registrationData } = useApplyQuery();
-  const { sector, selectSectoId, ...rest } = registrationData;
+  const { sector, selectSectorId, ...rest } = registrationData;
   const { state, dispatch, onSave } = useApplyForm({
-    section: selectSectoId ?? 0,
+    section: selectSectorId ?? 0,
     ...rest,
   });
 

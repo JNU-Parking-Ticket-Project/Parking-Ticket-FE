@@ -1,13 +1,17 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { isValidEmailFormat } from '../../utils/regex';
+import { isEmail } from '../../functions/validator';
+import { usePasswordFindMutate } from '../react-query/useUser';
+import { useNavigate } from 'react-router-dom';
 
 export const useRequestPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
+  const { postPasswordResetRequest } = usePasswordFindMutate();
+  const navigate = useNavigate();
 
   const changeEmail: ChangeEventHandler<HTMLInputElement> = (e) => {
     setEmail(e.target.value);
-    setIsError(!isValidEmailFormat(e.target.value));
+    setIsError(false);
   };
 
   const requestPasswordReset: FormEventHandler<HTMLFormElement> = (e) => {
@@ -16,11 +20,20 @@ export const useRequestPasswordForm = () => {
       alert('이메일을 입력해주세요.');
       return;
     }
-    if (isError) {
+    if (!isEmail(email)) {
       alert('이메일을 확인해주세요.');
+      setIsError(true);
       return;
     }
-    // TODO: MUTATE LOGIC
+    postPasswordResetRequest(
+      { email },
+      {
+        onSuccess: () => {
+          alert('이메일을 확인해주세요.');
+          navigate('/');
+        },
+      },
+    );
   };
 
   return { email, isError, changeEmail, requestPasswordReset };
