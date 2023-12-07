@@ -27,11 +27,11 @@ export const ManagerLogin = () => {
               className="w-full p-4"
             />
           </div>
-          <div className="flex fle-row">
+          <div className="flex flex-row">
             <Link to={'/signup'} className="mr-4">
               <Txt color="secondary">회원 가입</Txt>
             </Link>
-            <Link to={'/'}>
+            <Link to={'/password-reset'}>
               <Txt color="secondary">비밀번호 찾기</Txt>
             </Link>
           </div>

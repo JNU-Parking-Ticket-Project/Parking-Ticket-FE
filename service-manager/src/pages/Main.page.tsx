@@ -14,9 +14,7 @@ export const MainPage = () => {
           </div>
         </div>
       </MainContainer>
-      <div className="mt-14">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 };

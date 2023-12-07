@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const NavContainer = () => {
   return (
-    <div className="flex flex-row max-w-[1280px]">
-      <NavTitle />
+    <div className="max-w-[1280px]">
       <nav className="py-9 px-8">
         <Link to="/user" className="mr-12">
           <Txt size="h4">신청 목록</Txt>
