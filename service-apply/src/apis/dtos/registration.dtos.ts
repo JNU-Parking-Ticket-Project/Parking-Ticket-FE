@@ -5,36 +5,33 @@ export interface RegistrationRequestProps {
   carNumber: string;
   isLightCar: boolean;
   phoneNumber: string;
-  selectSectoId: number;
+  selectSectorId: number;
   isRegistration: boolean;
 }
 
 export class RegistrationRequest {
-  email: string;
   name: string;
   studentNum: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
-  selectSectoId: number;
+  selectSectorId: number;
   isRegistration: boolean;
   constructor({
-    email,
     name,
     studentNumber,
     carNumber,
     isLightCar,
     phoneNumber,
-    selectSectoId,
+    selectSectorId,
     isRegistration,
   }: RegistrationRequestProps) {
-    this.email = email;
     this.name = name;
     this.studentNum = studentNumber;
     this.carNum = carNumber;
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
-    this.selectSectoId = selectSectoId;
+    this.selectSectorId = selectSectorId;
     this.isRegistration = isRegistration;
   }
 }
@@ -58,7 +55,8 @@ interface RegistrationResponseProps {
     sectorName: string;
     sectorColleges: string;
   }[];
-  selectSectoId?: number;
+  affiliation: string;
+  selectSectorId?: number;
 }
 
 export class RegistrationOptionsResponse {
@@ -68,12 +66,13 @@ export class RegistrationOptionsResponse {
   studentName: string;
   phoneNumber: string;
   studentNumber: string;
+  affiliation: string;
   sector: {
     sectorId: number;
     sectorName: string;
     sectorColleges: string;
   }[];
-  selectSectoId?: number;
+  selectSectorId?: number;
   constructor({
     carNum,
     email,
@@ -82,7 +81,8 @@ export class RegistrationOptionsResponse {
     phoneNum,
     sector,
     studentNum,
-    selectSectoId,
+    selectSectorId,
+    affiliation,
   }: RegistrationResponseProps) {
     this.carNumber = carNum;
     this.email = email;
@@ -91,6 +91,7 @@ export class RegistrationOptionsResponse {
     this.phoneNumber = phoneNum;
     this.sector = sector;
     this.studentNumber = studentNum;
-    this.selectSectoId = selectSectoId;
+    this.selectSectorId = selectSectorId;
+    this.affiliation = affiliation;
   }
 }

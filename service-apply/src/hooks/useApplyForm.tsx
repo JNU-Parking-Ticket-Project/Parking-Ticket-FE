@@ -73,10 +73,9 @@ export const useApplyForm = (init?: ApplyFormInput) => {
       {
         isRegistration: isRegistration,
         carNum: state.carNumber,
-        email: state.email,
         name: state.studentName,
         phoneNum: state.phoneNumber,
-        selectSectoId: +state.section,
+        selectSectorId: +state.section,
         studentNum: state.studentNumber,
         isLight: state.isCompact,
       },

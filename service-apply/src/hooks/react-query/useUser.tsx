@@ -11,7 +11,8 @@ import {
   PasswordFind,
   PasswordReset,
   UserToken,
-} from 'service-apply/src/apis/dtos/user.dtos';
+} from '../../apis/dtos/user.dtos';
+import { setToken } from '../../functions/jwt';
 
 export const useLoginMutate = () => {
   const { mutate } = useMutation({
@@ -31,6 +32,8 @@ export const useLoginMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
+          const error = setToken(data);
+          if (error) throw error.error;
         },
       });
     },

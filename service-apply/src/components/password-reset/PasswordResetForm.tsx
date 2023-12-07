@@ -16,7 +16,7 @@ export const PasswordResetForm = ({ code }: { code: string }) => {
     <FormContainer title="비밀번호 재설정" onSubmit={submitChangePassword}>
       <InputFlexWrapper>
         <InputText
-          type="text"
+          type="password"
           className="flex-[1_0_7rem]"
           label="비밀번호"
           labelClassName="w-28"
@@ -33,6 +33,7 @@ export const PasswordResetForm = ({ code }: { code: string }) => {
           placeholder="새로운 비밀번호 확인"
           name="confirmPassword"
           value={passwordResetForm.confirmPassword}
+          onChange={handleInput}
         />
       </InputFlexWrapper>
       <Button size="small" className="mt-8 w-full">

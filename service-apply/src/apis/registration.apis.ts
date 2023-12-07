@@ -39,7 +39,8 @@ export const getRegistration =
         sector: [],
         studentNum: '',
         name: '',
-        selectSectoId: -1,
+        selectSectorId: -1,
+        affiliation: '',
       });
     }
     return new RegistrationOptionsResponse(response.data);
