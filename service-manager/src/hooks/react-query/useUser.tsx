@@ -1,9 +1,18 @@
 import { MutateOptions, useMutation } from '@tanstack/react-query';
-import { UserSignUpResponse, UserToken } from '../../apis/dtos/user.dtos';
 import {
+  PasswordFind,
+  PasswordReset,
+  UserSignUpResponse,
+  UserToken,
+} from '../../apis/dtos/user.dtos';
+import {
+  PasswordFindRequest,
+  PasswordResetRequest,
   UserLoginRequest,
   UserSignUpRequest,
   postLogin,
+  postPasswordFind,
+  postPasswordReset,
   postSignup,
 } from '../../apis/user.apis';
 import { setToken } from '../../functions/jwt';
@@ -49,6 +58,54 @@ export const useSignUpMutate = () => {
       >,
     ) => {
       mutate(signUpRequest, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+        },
+      });
+    },
+  };
+};
+
+export const usePasswordResetMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['password-reset'],
+    mutationFn: postPasswordReset,
+  });
+
+  return {
+    postPasswordReset: (
+      passwordReset: PasswordResetRequest,
+      mutateOption?: Omit<
+        MutateOptions<PasswordReset, Error, PasswordResetRequest, unknown>,
+        'onSettled'
+      >,
+    ) => {
+      mutate(passwordReset, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+        },
+      });
+    },
+  };
+};
+
+export const usePasswordFindMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['password-reset-request'],
+    mutationFn: postPasswordFind,
+  });
+
+  return {
+    postPasswordResetRequest: (
+      passwordFind: PasswordFindRequest,
+      mutateOption?: Omit<
+        MutateOptions<PasswordFind, Error, PasswordFindRequest, unknown>,
+        'onSettled'
+      >,
+    ) => {
+      mutate(passwordFind, {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
