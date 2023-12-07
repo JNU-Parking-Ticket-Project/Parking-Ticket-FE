@@ -2,9 +2,9 @@ import { NavContainer } from '../../components/common/NavContainer';
 import { NavTitle } from '../../components/common/NavTitle';
 import { Footer } from '../../components/common/FooterContainer';
 import { MainContainer } from '../../components/common/MainContainer';
-import { NoticeRead } from '../../components/notice/NoticeRead';
+import { NoticeView } from '../../components/notice/NoticeView';
 
-export const NoticeView = () => {
+export const NoticeViewPage = () => {
   return (
     <>
       <nav className="flex flex-row">
@@ -12,7 +12,7 @@ export const NoticeView = () => {
         <NavContainer />
       </nav>
       <MainContainer>
-        <NoticeRead />
+        <NoticeView content="" />
       </MainContainer>
       <Footer />
     </>

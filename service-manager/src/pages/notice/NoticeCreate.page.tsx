@@ -5,7 +5,7 @@ import { MainContainer } from '../../components/common/MainContainer';
 import { Txt } from '@quokka/design-system';
 import { NoticeForm } from '../../components/notice/NoticeForm';
 
-export const NoticeCreate = () => {
+export const NoticeCreatePage = () => {
   return (
     <>
       <nav className="flex flex-row">
@@ -13,9 +13,9 @@ export const NoticeCreate = () => {
         <NavContainer />
       </nav>
       <MainContainer>
-        <div className="flex flex-col">
+        <div className="flex flex-col my-48 ml-20">
           <Txt size="h3">안내사항 작성</Txt>
-          <NoticeForm />
+          <NoticeForm content="" />
         </div>
       </MainContainer>
       <Footer />
