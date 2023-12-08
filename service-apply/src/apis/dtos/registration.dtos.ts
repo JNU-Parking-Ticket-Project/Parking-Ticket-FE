@@ -2,40 +2,37 @@ export interface RegistrationRequestProps {
   email: string;
   name: string;
   studentNumber: string;
-  affiliation: string;
   carNumber: string;
   isLightCar: boolean;
   phoneNumber: string;
-  selectSectoId: number;
+  selectSectorId: number;
+  isRegistration: boolean;
 }
 
 export class RegistrationRequest {
-  email: string;
   name: string;
   studentNum: string;
-  affiliation: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
-  selectSectoId: number;
+  selectSectorId: number;
+  isRegistration: boolean;
   constructor({
-    email,
     name,
     studentNumber,
-    affiliation,
     carNumber,
     isLightCar,
     phoneNumber,
-    selectSectoId,
+    selectSectorId,
+    isRegistration,
   }: RegistrationRequestProps) {
-    this.email = email;
     this.name = name;
     this.studentNum = studentNumber;
-    this.affiliation = affiliation;
     this.carNum = carNumber;
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
-    this.selectSectoId = selectSectoId;
+    this.selectSectorId = selectSectorId;
+    this.isRegistration = isRegistration;
   }
 }
 
@@ -50,34 +47,33 @@ interface RegistrationResponseProps {
   email: string;
   name: string;
   studentNum: string;
-  affiliation: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
   sector: {
     sectorId: number;
+    sectorNum: string;
     sectorName: string;
-    sectorColleges: string;
   }[];
-  selectSectoId?: number;
+  affiliation: string;
+  selectSectorId?: number;
 }
 
 export class RegistrationOptionsResponse {
-  affiliation: string;
-  carNumer: string;
+  carNumber: string;
   email: string;
-  isLightCar: boolean;
-  name: string;
-  phoneNumer: string;
-  studentNumer: string;
+  isCompact: boolean;
+  studentName: string;
+  phoneNumber: string;
+  studentNumber: string;
+  affiliation: string;
   sector: {
     sectorId: number;
+    sectorNum: string;
     sectorName: string;
-    sectorColleges: string;
   }[];
-  selectSectoId?: number;
+  selectSectorId?: number;
   constructor({
-    affiliation,
     carNum,
     email,
     isLight,
@@ -85,16 +81,17 @@ export class RegistrationOptionsResponse {
     phoneNum,
     sector,
     studentNum,
-    selectSectoId,
+    selectSectorId,
+    affiliation,
   }: RegistrationResponseProps) {
-    this.affiliation = affiliation;
-    this.carNumer = carNum;
+    this.carNumber = carNum;
     this.email = email;
-    this.isLightCar = isLight;
-    this.name = name;
-    this.phoneNumer = phoneNum;
+    this.isCompact = isLight;
+    this.studentName = name;
+    this.phoneNumber = phoneNum;
     this.sector = sector;
-    this.studentNumer = studentNum;
-    this.selectSectoId = selectSectoId;
+    this.studentNumber = studentNum;
+    this.selectSectorId = selectSectorId;
+    this.affiliation = affiliation;
   }
 }

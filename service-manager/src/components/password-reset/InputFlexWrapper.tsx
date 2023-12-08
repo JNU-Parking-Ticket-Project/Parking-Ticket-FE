@@ -1,9 +1,5 @@
 import { PropsWithChildren } from 'react';
 
 export const InputFlexWrapper = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="flex items-center justify-between gap-13 w-96 gap-2">
-      {children}
-    </div>
-  );
+  return <div className="grid gap-2 min-w-[24rem]">{children}</div>;
 };

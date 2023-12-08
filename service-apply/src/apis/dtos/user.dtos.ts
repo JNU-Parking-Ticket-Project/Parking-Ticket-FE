@@ -13,9 +13,16 @@ export class UserToken {
   }
 }
 
-export class LogoutMessage {
+export class PasswordFind {
   message: string;
   constructor({ message }: { message: string }) {
     this.message = message;
+  }
+}
+
+export class PasswordReset {
+  email: string;
+  constructor({ email }: { email: string }) {
+    this.email = email;
   }
 }

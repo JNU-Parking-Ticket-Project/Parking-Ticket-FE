@@ -13,7 +13,7 @@ export const FormContainer = ({
   onSubmit,
 }: FormContainerProps) => {
   return (
-    <Container className="flex flex-col rounded-2xl" size="large">
+    <Container className="max-w-[30rem] min-w-[25rem] my-12" size="large">
       <form onSubmit={onSubmit}>
         <h2 className="text-[#0255D5] text-2xl font-bold pb-8">{title}</h2>
         {children}

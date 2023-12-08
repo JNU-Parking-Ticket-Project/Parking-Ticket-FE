@@ -2,6 +2,7 @@ import { Footer } from '../components/common/FooterContainer';
 import { MainContainer } from '../components/common/MainContainer';
 import { SignUpForm } from '../components/sign-up/SignUpForm';
 import { SignUpTitle } from '../components/sign-up/SignUpTitle';
+
 export const SignUpPage = () => {
   return (
     <>
@@ -13,9 +14,7 @@ export const SignUpPage = () => {
           </div>
         </div>
       </MainContainer>
-      <div className="mt-14">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 };

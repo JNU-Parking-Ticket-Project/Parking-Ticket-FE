@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
 import { Txt } from '@quokka/design-system';
-import { generatePaginationIndexs } from '../../functions/anouncement';
+import { generatePaginationIndexs } from '../../functions/generator';
 
 interface PageNavProps {
   lastIdx: number;

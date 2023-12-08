@@ -1,22 +1,63 @@
 import { https } from '../functions/https';
-import { LogoutMessage, UserToken } from './dtos/user.dtos';
+import { removeToken, setToken } from '../functions/jwt';
+import { isErrorResponse } from './dtos/response.dtos';
+import { UserToken, PasswordFind, PasswordReset } from './dtos/user.dtos';
 
-interface UserLoginRequest {
+export interface UserLoginRequest {
   email: string;
-  password: string;
+  pwd: string;
 }
 
 export const postLogin = async (data: UserLoginRequest) => {
-  const { data: resData } = await https.post(`/api/v1/auth/login`, data);
-  return new UserToken(resData);
+  const response = await https.post(`/v1/auth/login`, data);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new UserToken(response.data);
 };
 
-export const postReissue = async (data: { refreshtoken: string }) => {
-  const { data: resData } = await https.post(`/api/v1/auth/login`, data);
-  return new UserToken(resData);
+export interface PasswordFindRequest {
+  email: string;
+}
+
+export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
+  const response = await https.post(`/v1/user/password/find`, { email });
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new PasswordFind(response.data);
 };
 
-export const postLogout = async () => {
-  const { data: resData } = await https.post(`/api/v1/auth/logout`, null);
-  return new LogoutMessage(resData);
+export interface PasswordResetRequest {
+  code: string;
+  password: string;
+}
+
+export const postPasswordReset = async ({
+  code,
+  password,
+}: PasswordResetRequest) => {
+  const response = await https.post(`/v1/user/update/password/${code}`, {
+    password,
+  });
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new PasswordReset(response.data);
+};
+
+export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
+  const token = localStorage.getItem('refreshToken');
+
+  if (!token) {
+    throw new Error('Refresh token not found');
+  }
+  const response = await https.post(`/v1/auth/login`, { refreshtoken: token });
+  if (isErrorResponse(response)) {
+    removeToken();
+    throw new Error(response.reason);
+  }
+
+  setToken(new UserToken(response.data));
+  return retryCallback();
 };

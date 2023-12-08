@@ -15,8 +15,8 @@ export const EmailForm = () => {
       <InputFlexWrapper>
         <InputText
           type="text"
-          placeholder="asdf1234@jnu.ac.kr"
-          label="email"
+          placeholder="example@jnu.ac.kr"
+          label="Email"
           required={false}
           className="w-full"
           value={email}

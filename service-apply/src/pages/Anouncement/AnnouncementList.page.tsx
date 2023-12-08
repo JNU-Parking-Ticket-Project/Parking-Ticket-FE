@@ -2,6 +2,7 @@ import { AnnouncementList } from '../../components/announcement/AnnouncementList
 import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 import { PageNav } from '../../components/announcement/PageNav';
+import { useAnounceListQuery } from '../../hooks/react-query/useAnnounce';
 
 const useQueryParameter = () => {
   const { search } = useLocation();
@@ -11,11 +12,14 @@ const useQueryParameter = () => {
 export const AnnouncementListPage = () => {
   const query = useQueryParameter();
   const currentPage = query.get('pages') ?? '1';
+  const {
+    announceListData: { announces, lastPage },
+  } = useAnounceListQuery(+currentPage);
 
   return (
     <>
-      <AnnouncementList page={+currentPage} />
-      <PageNav lastIdx={8} currentIdx={+currentPage} />
+      <AnnouncementList data={announces} />
+      <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
     </>
   );
 };
