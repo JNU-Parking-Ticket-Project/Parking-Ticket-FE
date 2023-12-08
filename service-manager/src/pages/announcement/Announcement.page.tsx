@@ -1,10 +1,10 @@
-import { NavContainer } from '../../components/common/NavContainer';
+import { AnnouncementList } from '../../components/announcement/AnnouncementList';
 import { NavTitle } from '../../components/common/NavTitle';
-import { Footer } from '../../components/common/FooterContainer';
+import { NavContainer } from '../../components/common/NavContainer';
 import { MainContainer } from '../../components/common/MainContainer';
-import { NoticeRead } from '../../components/notice/NoticeRead';
+import { Footer } from '../../components/common/FooterContainer';
 
-export const NoticeView = () => {
+export const AnnouncementPage = () => {
   return (
     <>
       <nav className="flex flex-row">
@@ -12,7 +12,7 @@ export const NoticeView = () => {
         <NavContainer />
       </nav>
       <MainContainer>
-        <NoticeRead />
+        <AnnouncementList page={1} />
       </MainContainer>
       <Footer />
     </>
