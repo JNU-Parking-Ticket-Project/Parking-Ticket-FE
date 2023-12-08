@@ -1,16 +1,16 @@
 interface Registration {
-  id: number;
-  name: string;
-  email: string;
-  phoneNum: string;
-  studentNum: string;
-  isLigth: boolean;
-  carNum: string;
   affiliation: string;
   sectorName: string;
+  carNum: string;
+  email: string;
+  isLight: boolean;
+  name: string;
+  phoneNum: string;
+  registrationId: number;
+  studentNum: string;
 }
 
-export class RegistrationRequest {
+export class RegistrationResponse {
   id: number;
   name: string;
   email: string;
@@ -22,12 +22,12 @@ export class RegistrationRequest {
   sectorName: string;
 
   constructor(data: Registration) {
-    this.id = data.id;
+    this.id = data.registrationId;
     this.name = data.name;
     this.email = data.email;
     this.phoneNumber = data.phoneNum;
     this.studentNumber = data.studentNum;
-    this.isCompact = data.isLigth;
+    this.isCompact = data.isLight;
     this.carNumber = data.carNum;
     this.affiliation = data.affiliation;
     this.sectorName = data.sectorName;
