@@ -10,7 +10,7 @@ export const ApplyList = () => {
         순서: registration.id,
         이름: registration.name,
         차량번호: registration.carNumber,
-        sector이름: registration.sectorName,
+        sector이름: registration.sectorNum,
         학생번호: registration.studentNumber,
         경차여부: registration.isCompact ? '경차' : '경차 아님',
         휴대폰번호: registration.phoneNumber,
@@ -46,7 +46,7 @@ export const ApplyList = () => {
                 <td>{registration.id}</td>
                 <td>{registration.name}</td>
                 <td>{registration.carNumber}</td>
-                <td>{registration.sectorName}</td>
+                <td>{registration.sectorNum}</td>
                 <td>{registration.studentNumber}</td>
                 <td>{registration.isCompact ? '경차' : '경차 아님'}</td>
                 <td>{registration.phoneNumber}</td>

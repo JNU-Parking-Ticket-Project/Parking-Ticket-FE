@@ -11,6 +11,7 @@ import { RequestPasswordResetPage } from '../pages/PasswordReset/RequestPassword
 import { PasswordResetPage } from '../pages/PasswordReset/PasswordReset.page';
 import { CommonLayout } from '../pages/CommonLayout.page';
 import { AnnouncementListPage } from '../pages/announcement/AnnouncementList.page';
+import { SettingLayout } from '../pages/setting/SettingLayout.page';
 
 export default function Router() {
   return (
@@ -38,6 +39,7 @@ export default function Router() {
         <Route path="notice" element={<NoticeView />} />
         <Route path="notice-create" element={<NoticeCreate />} />
         <Route path="notice-view" element={<NoticeView />} />
+        <Route path="setting" element={<SettingLayout />}></Route>
       </Route>
     </Routes>
   );
