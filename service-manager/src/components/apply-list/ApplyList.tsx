@@ -1,6 +1,6 @@
-import { Button, Txt } from '@quokka/design-system';
+import { Button } from '@quokka/design-system';
 import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const ApplyList = () => {
   const { registrations } = useAllRegistrationQuery();
