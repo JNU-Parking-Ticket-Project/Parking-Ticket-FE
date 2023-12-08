@@ -7,6 +7,7 @@ import {
   PasswordReset,
   UserSignUpResponse,
   Council,
+  CheckEmailResponse,
 } from './dtos/user.dtos';
 
 export interface UserLoginRequest {
@@ -98,4 +99,12 @@ export const getAllCouncil = async () => {
     throw new Error(response.reason);
   }
   return response.data.users.map((data: any) => new Council(data));
+};
+
+export const postCheckEmail = async (email: string) => {
+  const response = await https.post(`/v1/auth/check/email`, { email });
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new CheckEmailResponse(response.data);
 };

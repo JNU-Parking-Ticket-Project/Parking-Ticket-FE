@@ -53,3 +53,4 @@ export class PasswordReset {
 }
 
 export class UserSignUpResponse extends JustMessage {}
+export class CheckEmailResponse extends JustMessage {}

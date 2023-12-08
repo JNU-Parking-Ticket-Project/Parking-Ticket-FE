@@ -50,6 +50,7 @@ export const SignUpForm = () => {
     studentNumber,
     emailValid,
     onEmailValid,
+    errorMessage,
   } = useSignUpForm();
 
   return (
@@ -66,7 +67,7 @@ export const SignUpForm = () => {
       />
       {!emailValid && (
         <Txt size="sm" color="error" className="w-full text-right">
-          이메일 형식이 올바르지 않습니다.
+          {errorMessage}
         </Txt>
       )}
       <SignUpInputText

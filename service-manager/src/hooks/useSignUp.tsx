@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSignUpMutate } from './react-query/useUser';
+import { useEamilCheckMutate, useSignUpMutate } from './react-query/useUser';
 import {
   phoneNumberReplace,
   studentNumberReplace,
@@ -14,18 +14,22 @@ export const useSignUpForm = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [studentNumber, setStudentNumber] = useState('');
   const [isFirstValid, setIsFirstValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { postSignup } = useSignUpMutate();
+  const { postEmailCheck } = useEamilCheckMutate();
   const navigate = useNavigate();
 
   const onSignUp = () => {
     console.log(isFirstValid, emailValid);
     if (!isFirstValid) {
       alert('중복확인을 해주세요.');
+      setErrorMessage('중복확인을 해주세요.');
       return;
     }
     if (!emailValid) {
       alert('올바르지 않는 이메일입니다.');
+      setErrorMessage('올바르지 않는 이메일입니다.');
       return;
     }
 
@@ -43,6 +47,7 @@ export const useSignUpForm = () => {
         },
         onSuccess: () => {
           alert('회원가입에 성공하였습니다.');
+          // TODO: 회원가입 완료 페이지 이동;
           navigate('/');
         },
       },
@@ -51,8 +56,13 @@ export const useSignUpForm = () => {
 
   const onEmailValid = () => {
     setIsFirstValid(true);
-    // TODO: 이메일 검사를 하는 API 호출
-    setEmailValid(false);
+    postEmailCheck(email, {
+      onError: (error) => {
+        setEmailValid(false);
+        setErrorMessage(error.message);
+      },
+      onSuccess: () => setEmailValid(true),
+    });
   };
 
   return {
@@ -71,5 +81,6 @@ export const useSignUpForm = () => {
     setStudentNumber: (studentNumber: string) =>
       setStudentNumber(studentNumberReplace(studentNumber)),
     onSignUp,
+    errorMessage,
   };
 };

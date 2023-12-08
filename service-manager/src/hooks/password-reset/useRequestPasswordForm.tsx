@@ -28,6 +28,10 @@ export const useRequestPasswordForm = () => {
     postPasswordResetRequest(
       { email },
       {
+        onError: (error) => {
+          alert('알 수 없는 오류가 발생했습니다.: ' + error);
+        },
+        // TODO: 회원가입 완료 페이지 보이기
         onSuccess: () => {
           alert('이메일을 확인해주세요.');
           navigate('/');

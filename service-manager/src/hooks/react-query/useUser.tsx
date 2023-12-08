@@ -1,5 +1,6 @@
 import { MutateOptions, useMutation } from '@tanstack/react-query';
 import {
+  CheckEmailResponse,
   PasswordFind,
   PasswordReset,
   UserSignUpResponse,
@@ -10,6 +11,7 @@ import {
   PasswordResetRequest,
   UserLoginRequest,
   UserSignUpRequest,
+  postCheckEmail,
   postLogin,
   postPasswordFind,
   postPasswordReset,
@@ -106,6 +108,30 @@ export const usePasswordFindMutate = () => {
       >,
     ) => {
       mutate(passwordFind, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+        },
+      });
+    },
+  };
+};
+
+export const useEamilCheckMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['email-check'],
+    mutationFn: postCheckEmail,
+  });
+
+  return {
+    postEmailCheck: (
+      emailCheck: string,
+      mutateOption?: Omit<
+        MutateOptions<CheckEmailResponse, Error, string, unknown>,
+        'onSettled'
+      >,
+    ) => {
+      mutate(emailCheck, {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
