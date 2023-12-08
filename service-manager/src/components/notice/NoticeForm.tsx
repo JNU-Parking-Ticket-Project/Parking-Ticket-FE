@@ -2,6 +2,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Button } from '@quokka/design-system';
 import { useState } from 'react';
+import { FormEventHandler } from 'react';
 
 interface NoticeFormProps {
   content: string;
@@ -12,7 +13,7 @@ export const NoticeForm = () => {
   const [noticeForm, setNoticeForm] = useState<NoticeFormProps['content']>('');
   const [createdAt, setCreatedAt] = useState<NoticeFormProps['createdAt']>('');
 
-  const onSubmitNoticeForm = (e) => {
+  const onSubmitNoticeForm: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const currentTime = new Date().toISOString();
     setCreatedAt(currentTime);
