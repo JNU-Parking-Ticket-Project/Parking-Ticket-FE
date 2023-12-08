@@ -9,13 +9,14 @@ import { NoticeCreate } from '../pages/notice/NoticeCreate.page';
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { RequestPasswordResetPage } from '../pages/PasswordReset/RequestPasswordReset.page';
 import { PasswordResetPage } from '../pages/PasswordReset/PasswordReset.page';
+import { CommonLayout } from '../pages/CommonLayout.page';
+import { AnnouncementListPage } from '../pages/announcement/AnnouncementList.page';
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/apply-list" element={<ApplyListPage />} />
       <Route path="/password-reset" element={<PasswordResetLayout />}>
         <Route index element={<RequestPasswordResetPage />} />
         <Route
@@ -23,12 +24,21 @@ export default function Router() {
           element={<PasswordResetPage />}
         />
       </Route>
-      <Route path="/announcement" element={<AnnouncementPage />} />
-      <Route path="/announcement-create" element={<AnnouncementCreatePage />} />
-      <Route path="/applyList" element={<ApplyListPage />} />
-      <Route path="/notice" element={<NoticeView />} />
-      <Route path="/notice-create" element={<NoticeCreate />} />
-      <Route path="/notice-view" element={<NoticeView />} />
+      <Route path="/" element={<CommonLayout />}>
+        <Route path="announcement" element={<AnnouncementListPage />} />
+        <Route
+          path="announcement/:announcementId"
+          element={<AnnouncementPage />}
+        />
+        <Route
+          path="announcement-create"
+          element={<AnnouncementCreatePage />}
+        />
+        <Route path="apply-list" element={<ApplyListPage />} />
+        <Route path="notice" element={<NoticeView />} />
+        <Route path="notice-create" element={<NoticeCreate />} />
+        <Route path="notice-view" element={<NoticeView />} />
+      </Route>
     </Routes>
   );
 }
