@@ -18,7 +18,7 @@ export const getAnnounceLast = async () => {
       announceTitle: '게시글이 없습니다',
     });
   }
-  return new LastAnnounce(response.data);
+  return new LastAnnounce(response);
 };
 
 export const getAnnounceById = async (announceId: number) => {
