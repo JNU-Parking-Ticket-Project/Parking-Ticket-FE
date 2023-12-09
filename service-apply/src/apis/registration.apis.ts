@@ -12,16 +12,18 @@ export const postRegistration = async (
 ): Promise<RegistrationResponse> => {
   const { isRegistration, ...rest } = registration;
   const response = await https.post(
-    `/v1/registration/${registration.isRegistration}`,
+    `/v1/registration${registration.isRegistration || '/temporary'}`,
     rest,
   );
   if (isErrorResponse(response)) {
-    if (response.status === 401 || response.status === 403) {
-      return reissueToken(() => postRegistration(registration));
-    }
-    throw new Error(response.reason);
+    // TODO: response 값에 status와 reason이 없기 때문에 토큰 재발행 로직 불가능
+    // if (response.status === 401 || response.status === 403) {
+    //   return reissueToken(() => postRegistration(registration));
+    // }
+    // throw new Error(response.reason);
+    throw new Error('주차권 임시저장에 실패했습니다');
   }
-  return new RegistrationResponse(response.data);
+  return new RegistrationResponse(response);
 };
 
 export const getRegistration =
