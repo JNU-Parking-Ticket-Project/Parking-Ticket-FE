@@ -16,7 +16,7 @@ export const useAnnounceQuery = () => {
 export const useAnnounceListQuery = (page: number) => {
   const { data: announceListData } = useSuspenseQuery({
     queryKey: ['anounceList', page],
-    queryFn: () => getAllAnnounce(page),
+    queryFn: () => getAllAnnounce(page - 1),
   });
   return { announceListData };
 };
