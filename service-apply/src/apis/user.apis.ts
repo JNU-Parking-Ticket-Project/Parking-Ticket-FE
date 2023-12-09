@@ -23,9 +23,11 @@ export interface PasswordFindRequest {
 export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
   const response = await https.post(`/v1/user/password/find`, { email });
   if (isErrorResponse(response)) {
-    throw new Error(response.reason);
+    throw new Error('이메일 전송에 실패했습니다');
+    // TODO: error response에 따른 에러 발생
+    // throw new Error(response.reason);
   }
-  return new PasswordFind(response.data);
+  return new PasswordFind(response);
 };
 
 export interface PasswordResetRequest {
