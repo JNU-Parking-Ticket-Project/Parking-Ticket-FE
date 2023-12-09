@@ -1,4 +1,4 @@
-import { Button, Txt } from '@quokka/design-system';
+import { Button } from '@quokka/design-system';
 import { Link, useLocation } from 'react-router-dom';
 
 const NAVBAR_LIST = [

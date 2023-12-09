@@ -19,14 +19,34 @@ export const SettingTable = () => {
     })),
   );
 
-  const onEditValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setData((prev) => {
+  const onEditValue =
+    (sectorNumber: string, type?: 'numeric') =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+
+      if (type === 'numeric' && isNaN(+value)) return;
+      if (type === 'numeric' && +value < 0) return;
+
+      setData((prev) => {
+        return prev.map((data) => {
+          if (data.sectorNumber === sectorNumber) {
+            return {
+              ...data,
+              [name]: value,
+            };
+          }
+          return data;
+        });
+      });
+    };
+
+  const toggleEdit = (sectorNumber: string) => {
+    setIsEdit((prev) => {
       return prev.map((data) => {
-        if (data.name === name) {
+        if (data.sectorNumber === sectorNumber) {
           return {
             ...data,
-            [name]: value,
+            isEdit: !data.isEdit,
           };
         }
         return data;
@@ -34,18 +54,9 @@ export const SettingTable = () => {
     });
   };
 
-  const onEdit = (sectorNumber: string) => {
-    setIsEdit((prev) => {
-      return prev.map((data) => {
-        if (data.sectorNumber === sectorNumber) {
-          return {
-            ...data,
-            isEdit: true,
-          };
-        }
-        return data;
-      });
-    });
+  const getIsEdit = (sectorNumber: string) => {
+    const result = isEdit.find((data) => data.sectorNumber === sectorNumber);
+    return result?.isEdit ?? false;
   };
 
   return (
@@ -63,22 +74,42 @@ export const SettingTable = () => {
         <tr className="flex w-full  hover:bg-[#F9FAFC]">
           <td>
             <SettingInput
-              isEdit={
-                isEdit.find((data) => data.sectorNumber === data.sectorNumber)
-                  ?.isEdit ?? false
-              }
+              name="sectorNumber"
               value={data.sectorNumber}
-              onChange={onEditValue}
+              isEdit={getIsEdit(data.sectorNumber)}
+              onChange={onEditValue(data.sectorNumber)}
             />
           </td>
-          <td>{data.sectorCapacity}</td>
-          <td>{data.reserve}</td>
+          <td>
+            <SettingInput
+              name="sectorCapacity"
+              value={data.sectorCapacity}
+              isEdit={getIsEdit(data.sectorNumber)}
+              onChange={onEditValue(data.sectorNumber, 'numeric')}
+            />
+          </td>
+          <td>
+            <SettingInput
+              name="reserve"
+              value={data.reserve}
+              isEdit={getIsEdit(data.sectorNumber)}
+              onChange={onEditValue(data.sectorNumber)}
+            />
+          </td>
           <td>{+data.sectorCapacity + +data.reserve}</td>
-          <td className="!flex-[5_0_12rem] !justify-start pl-6">{data.name}</td>
+          <td className="!flex-[5_0_12rem] !justify-start px-6">
+            <SettingInput
+              className="w-full bg-transparent"
+              name="name"
+              value={data.name}
+              isEdit={getIsEdit(data.sectorNumber)}
+              onChange={onEditValue(data.sectorNumber, 'numeric')}
+            />
+          </td>
           <td className="!flex-[1_0_1rem]">
             <button
               className="w-8 h-9"
-              onClick={() => onEdit(data.sectorNumber)}
+              onClick={() => toggleEdit(data.sectorNumber)}
             >
               <img src={Edit} alt="edit" />
             </button>

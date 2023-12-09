@@ -1,4 +1,5 @@
-import { InputText, InputTextProps } from '@quokka/design-system';
+import { InputText, InputTextProps, Txt } from '@quokka/design-system';
+import { clsx } from 'clsx';
 
 interface SettingInputProps extends Omit<InputTextProps, 'type'> {
   isEdit: boolean;
@@ -11,7 +12,13 @@ export const SettingInput = ({
   ...props
 }: SettingInputProps) => {
   return isEdit ? (
-    <InputText value={value} {...props} type="text" designType="underline" />
+    <InputText
+      className={clsx('text-center bg-transparent', props.className)}
+      value={value}
+      {...props}
+      type="text"
+      designType="underline"
+    />
   ) : (
     value
   );
