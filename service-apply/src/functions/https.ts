@@ -21,7 +21,8 @@ const fetcher = async (url: string, req: RequestInit) => {
   if (response.status >= 400) {
     return await errorStatusResult(response);
   }
-  return await response.json().then((data) => new Response(data));
+
+  return await response.json();
 };
 
 const errorStatusResult = async (response: globalThis.Response) => {
