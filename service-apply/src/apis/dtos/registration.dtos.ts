@@ -50,7 +50,7 @@ interface RegistrationResponseProps {
   carNum: string;
   isLight: boolean;
   phoneNum: string;
-  sector: {
+  sectors: {
     sectorId: number;
     sectorNum: string;
     sectorName: string;
@@ -79,7 +79,7 @@ export class RegistrationOptionsResponse {
     isLight,
     name,
     phoneNum,
-    sector,
+    sectors,
     studentNum,
     selectSectorId,
     affiliation,
@@ -89,7 +89,7 @@ export class RegistrationOptionsResponse {
     this.isCompact = isLight;
     this.studentName = name;
     this.phoneNumber = phoneNum;
-    this.sector = sector;
+    this.sector = sectors;
     this.studentNumber = studentNum;
     this.selectSectorId = selectSectorId;
     this.affiliation = affiliation;

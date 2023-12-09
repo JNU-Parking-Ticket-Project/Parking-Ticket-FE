@@ -36,12 +36,12 @@ export const getRegistration =
         email: '',
         isLight: false,
         phoneNum: '',
-        sector: [],
+        sectors: [],
         studentNum: '',
         name: '',
         selectSectorId: -1,
         affiliation: '',
       });
     }
-    return new RegistrationOptionsResponse(response.data);
+    return new RegistrationOptionsResponse(response);
   };
