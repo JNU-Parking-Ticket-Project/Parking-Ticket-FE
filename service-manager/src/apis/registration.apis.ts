@@ -7,7 +7,7 @@ export const getAllRegistration = async (): Promise<RegistrationResponse[]> => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data.registrations.map(
+  return response.registrations.map(
     (item: any) => new RegistrationResponse(item),
   );
 };
