@@ -13,7 +13,7 @@ export const postLogin = async (data: UserLoginRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new UserToken(response.data);
+  return new UserToken(response);
 };
 
 export interface PasswordFindRequest {
