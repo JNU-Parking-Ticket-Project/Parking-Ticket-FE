@@ -25,7 +25,7 @@ export const getAnnounceById = async (announceId: number) => {
   const response = await https.get(`/v1/announce/${announceId}`);
   if (isErrorResponse(response)) {
     throw new Error('게시글을 조회할 수 없습니다');
-    // TODO: error response에 따른 에러 발생
+    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
     // throw new Error(response.reason);
   }
   return new Announce(response);

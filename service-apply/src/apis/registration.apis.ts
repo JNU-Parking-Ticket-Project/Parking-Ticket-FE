@@ -16,7 +16,7 @@ export const postRegistration = async (
     rest,
   );
   if (isErrorResponse(response)) {
-    // TODO: response 값에 status와 reason이 없기 때문에 토큰 재발행 로직 불가능
+    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
     // if (response.status === 401 || response.status === 403) {
     //   return reissueToken(() => postRegistration(registration));
     // }
@@ -32,9 +32,10 @@ export const getRegistration =
   async (): Promise<RegistrationOptionsResponse> => {
     const response = await https.get('/v1/registration');
     if (isErrorResponse(response)) {
-      if (response.status === 401 || response.status === 403) {
-        return reissueToken(getRegistration);
-      }
+      // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
+      // if (response.status === 401 || response.status === 403) {
+      //   return reissueToken(getRegistration);
+      // }
       return new RegistrationOptionsResponse({
         carNum: '',
         email: '',
