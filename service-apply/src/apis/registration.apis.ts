@@ -12,7 +12,7 @@ export const postRegistration = async (
 ): Promise<RegistrationResponse> => {
   const { isRegistration, ...rest } = registration;
   const response = await https.post(
-    `/v1/registration${registration.isRegistration || '/temporary'}`,
+    `/v1/registration${registration.isRegistration ? '' : '/temporary'}`,
     rest,
   );
   if (isErrorResponse(response)) {
@@ -21,6 +21,8 @@ export const postRegistration = async (
     //   return reissueToken(() => postRegistration(registration));
     // }
     // throw new Error(response.reason);
+    if (registration.isRegistration)
+      throw new Error('주차권 신청에 실패했습니다');
     throw new Error('주차권 임시저장에 실패했습니다');
   }
   return new RegistrationResponse(response);
