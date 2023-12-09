@@ -9,8 +9,6 @@ const NAVBAR_LIST = [
 export const SettingNavbar = () => {
   const { pathname } = useLocation();
 
-  console.log(pathname);
-  1;
   return (
     <nav className="py-6">
       <ul className="flex gap-4">

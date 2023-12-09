@@ -1,5 +1,6 @@
 import { https } from '../functions/https';
 import { isErrorResponse } from './dtos/response.dtos';
+import { Sector } from './dtos/sector.dtos';
 
 interface SectorRequset {
   name: string;
@@ -7,6 +8,14 @@ interface SectorRequset {
   sectorCapacity: number;
   reserve: number;
 }
+
+export const getSectors = async (): Promise<Sector[]> => {
+  const response = await https.get(`/v1/sectors`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return response.map((sector: any) => new Sector(sector));
+};
 
 export const putSectors = async (data: SectorRequset[]) => {
   const response = await https.put(`/v1/sectors`, data);
