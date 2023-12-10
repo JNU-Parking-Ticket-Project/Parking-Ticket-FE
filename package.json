@@ -51,6 +51,7 @@
     "@swc/helpers": "~0.5.2",
     "@tanstack/react-query": "^5.8.4",
     "@tanstack/react-query-devtools": "^5.8.4",
+    "@toast-ui/editor": "^3.2.2",
     "@toast-ui/react-editor": "^3.2.3",
     "clsx": "^2.0.0",
     "jotai": "^2.5.1",
