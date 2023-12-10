@@ -9,7 +9,7 @@ const ToastViewer = lazy(() =>
   })),
 );
 
-const INIT_CONTENT = '## 안내사항 \n - 안내사항을 작성해주세요.';
+export const INIT_CONTENT = '## 안내사항 \n - 안내사항을 작성해주세요.';
 
 interface NoticeFormProps {
   content: string;
