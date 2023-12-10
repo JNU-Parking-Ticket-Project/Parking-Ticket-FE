@@ -1,5 +1,5 @@
 import { Txt } from '@quokka/design-system';
-import { NoticeForm } from 'service-manager/src/components/notice/NoticeForm';
+import { NoticeForm } from '../../components/notice/NoticeForm';
 
 export const NoticeCreatePage = () => {
   return (
