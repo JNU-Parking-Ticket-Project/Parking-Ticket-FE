@@ -14,7 +14,6 @@ const ToastEditor = lazy(() =>
     default: module.Editor,
   })),
 );
-``;
 
 export const NoticeForm = ({ content }: NoticeFormProps) => {
   const initContent = content || INIT_CONTENT;
