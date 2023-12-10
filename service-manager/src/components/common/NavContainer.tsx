@@ -15,7 +15,7 @@ export const NavContainer = () => {
         <Link to="/user" className="mr-12">
           <Txt size="h4">안내 사항</Txt>
         </Link>
-        <Link to="/user" className="mr-12">
+        <Link to="/admin" className="mr-12">
           <Txt size="h4">관리자 설정</Txt>
         </Link>
       </nav>
