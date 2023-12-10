@@ -4,8 +4,8 @@ import {
   useSectorDeleteMutate,
   useSectorUpdateMutate,
   useSectorsQuery,
-} from './react-query/useSetting';
-import { Sector } from '../apis/dtos/sector.dtos';
+} from '../react-query/useSetting';
+import { Sector } from '../../apis/dtos/sector.dtos';
 
 export const useSectionSettingTable = () => {
   const { sectorSettingData } = useSectorsQuery();

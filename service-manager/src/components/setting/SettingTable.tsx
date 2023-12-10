@@ -1,7 +1,7 @@
 import Edit from '../../assets/highlight.svg';
 import Delete from '../../assets/delete.svg';
 import { SettingInput } from './SettingInput';
-import { useSectionSettingTable } from '../../hooks/useSetting';
+import { useSectionSettingTable } from '../../hooks/useSetting/useSectionSetting';
 import { Button } from '@quokka/design-system';
 
 export const SettingTable = () => {
@@ -66,13 +66,13 @@ export const SettingTable = () => {
                 />
               </td>
               <td className="!flex-[1_0_1rem]">
-                <button className="w-8 h-9" onClick={() => toggleEdit(data.id)}>
+                <button className="w-8 h-8" onClick={() => toggleEdit(data.id)}>
                   <img src={Edit} alt="edit" />
                 </button>
               </td>
               <td className="!flex-[1_0_1rem]">
                 <button
-                  className="w-8 h-9"
+                  className="w-8 h-8"
                   onClick={() => deleteSection(`${data.id}`)}
                 >
                   <img src={Delete} alt="delete" />

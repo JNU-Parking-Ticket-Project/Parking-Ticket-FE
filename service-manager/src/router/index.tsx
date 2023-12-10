@@ -13,6 +13,7 @@ import { CommonLayout } from '../pages/CommonLayout.page';
 import { AnnouncementListPage } from '../pages/announcement/AnnouncementList.page';
 import { SettingLayout } from '../pages/setting/SettingLayout.page';
 import { SectionSettingPage } from '../pages/setting/SectionSetting.page';
+import { TimeSettingPage } from '../pages/setting/TimeSetting.page';
 
 export default function Router() {
   return (
@@ -42,7 +43,7 @@ export default function Router() {
         <Route path="notice-view" element={<NoticeView />} />
         <Route path="setting" element={<SettingLayout />}>
           <Route path="section" element={<SectionSettingPage />} />
-          <Route path="time" element={<div>시간 설정</div>} />
+          <Route path="time" element={<TimeSettingPage />} />
         </Route>
       </Route>
     </Routes>
