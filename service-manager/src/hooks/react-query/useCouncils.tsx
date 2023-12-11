@@ -3,7 +3,7 @@ import { getAllCouncils } from '../../apis/user.apis';
 
 export const useCouncils = () => {
   const { data: councils } = useSuspenseQuery({
-    queryKey: ['council'],
+    queryKey: ['councils'],
     queryFn: () => getAllCouncils(),
   });
 
