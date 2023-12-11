@@ -152,7 +152,7 @@ export const useAdminRoleMutate = () => {
   const { mutate: putAdminRoleMutate } = useMutation({
     mutationKey: ['admin-role'],
     mutationFn: putAdminRole,
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ['councils'],
       });
