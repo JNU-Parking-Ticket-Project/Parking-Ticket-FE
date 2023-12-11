@@ -7,7 +7,7 @@ export const getAllAnnounce = async (page: number) => {
   if (isErrorResponse(response)) {
     return new AllAnnounce({ announces: [], lastPage: 0, nextPage: 0 });
   }
-  return new AllAnnounce(response.data);
+  return new AllAnnounce(response);
 };
 
 export const getAnnounceById = async (announceId: number) => {
@@ -15,7 +15,7 @@ export const getAnnounceById = async (announceId: number) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response.data);
+  return new Announce(response);
 };
 
 interface AnnounceRequest {
@@ -28,7 +28,7 @@ export const postAnnounce = async (data: AnnounceRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response.data);
+  return new Announce(response);
 };
 
 export const putAnnounceById = async (
@@ -39,7 +39,7 @@ export const putAnnounceById = async (
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response.data);
+  return new Announce(response);
 };
 
 export const deleteAnnounceById = async (announceId: number) => {
@@ -47,5 +47,5 @@ export const deleteAnnounceById = async (announceId: number) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response.data);
+  return new Announce(response);
 };

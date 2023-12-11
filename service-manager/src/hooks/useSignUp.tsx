@@ -21,7 +21,6 @@ export const useSignUpForm = () => {
   const navigate = useNavigate();
 
   const onSignUp = () => {
-    console.log(isFirstValid, emailValid);
     if (!isFirstValid) {
       alert('중복확인을 해주세요.');
       setErrorMessage('중복확인을 해주세요.');

@@ -11,5 +11,5 @@ export const postCoupon = async (data: CouponRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };

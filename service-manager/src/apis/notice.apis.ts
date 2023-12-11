@@ -7,7 +7,7 @@ export const getNotice = async () => {
   if (isErrorResponse(response)) {
     return new Notice({ noticeContent: '' });
   }
-  return new Notice(response.data);
+  return new Notice(response);
 };
 
 export const putNotice = async (data: { noticeContent: string }) => {
@@ -15,5 +15,5 @@ export const putNotice = async (data: { noticeContent: string }) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Notice(response.data);
+  return new Notice(response);
 };

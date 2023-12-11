@@ -1,5 +1,6 @@
 import { https } from '../functions/https';
 import { isErrorResponse } from './dtos/response.dtos';
+import { Sector } from './dtos/sector.dtos';
 
 interface SectorRequset {
   name: string;
@@ -8,12 +9,20 @@ interface SectorRequset {
   reserve: number;
 }
 
+export const getSectors = async (): Promise<Sector[]> => {
+  const response = await https.get(`/v1/sectors`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return response.map((sector: any) => new Sector(sector));
+};
+
 export const putSectors = async (data: SectorRequset[]) => {
   const response = await https.put(`/v1/sectors`, data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };
 
 export const postSectors = async (data: SectorRequset[]) => {
@@ -21,7 +30,7 @@ export const postSectors = async (data: SectorRequset[]) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };
 
 export const deleteSector = async (sectorNumber: string) => {
@@ -29,5 +38,5 @@ export const deleteSector = async (sectorNumber: string) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };

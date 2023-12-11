@@ -10,7 +10,13 @@ export const ManagerLogin = () => {
       <Txt size="h3" color="primary" className="my-4">
         관리자 로그인
       </Txt>
-      <div className="flex flex-col gap-3 items-end">
+      <form
+        className="flex flex-col gap-3 items-end"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onLogin();
+        }}
+      >
         <InputText
           designType="box"
           type="text"
@@ -35,10 +41,10 @@ export const ManagerLogin = () => {
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>
         </div>
-        <Button className="py-4 px-14 rounded-lg" onClick={onLogin}>
+        <Button className="py-4 px-14 rounded-lg" type="submit">
           로그인
         </Button>
-      </div>
+      </form>
     </div>
   );
 };
