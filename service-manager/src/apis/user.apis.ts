@@ -93,12 +93,12 @@ export const putAdminRole = async (userId: number, role: string) => {
   return response;
 };
 
-export const getAllCouncil = async () => {
+export const getAllCouncils = async () => {
   const response = await https.get(`/v1/admin/councils`);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.users.map((data: any) => new Council(data));
+  return response.users.map((data: any) => new Council(data)) as Council[];
 };
 
 export const postCheckEmail = async (email: string) => {

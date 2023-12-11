@@ -18,8 +18,8 @@ export class UserToken {
 export class Council {
   userId: number;
   name: string;
-  studentNumber: string;
-  phoneNumber: string;
+  studentNum: string;
+  phoneNum: string;
   role: Role;
   constructor({
     userId,
@@ -36,8 +36,8 @@ export class Council {
   }) {
     this.userId = userId;
     this.name = name;
-    this.studentNumber = studentNum;
-    this.phoneNumber = phoneNum;
+    this.studentNum = studentNum;
+    this.phoneNum = phoneNum;
     this.role = role;
   }
 }

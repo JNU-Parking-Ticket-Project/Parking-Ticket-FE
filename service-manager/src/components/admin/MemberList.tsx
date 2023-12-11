@@ -1,22 +1,14 @@
+import { useCouncils } from '../../hooks/react-query/useCouncils';
 import { MemberItem } from './MemberItem';
 
 export const MemberList = () => {
+  const { councils } = useCouncils();
+
   return (
     <>
-      <MemberItem
-        userId={1}
-        name="이윤성"
-        phoneNum="010-1111-1111"
-        studentNum="181818"
-        role="ADMIN"
-      />
-      <MemberItem
-        userId={1}
-        name="이윤성"
-        phoneNum="010-1111-1111"
-        studentNum="181818"
-        role="ADMIN"
-      />
+      {councils.map((council) => (
+        <MemberItem key={council.userId} {...council} />
+      ))}
     </>
   );
 };
