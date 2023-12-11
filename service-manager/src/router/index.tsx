@@ -11,7 +11,6 @@ import { AnnouncementListPage } from '../pages/announcement/AnnouncementList.pag
 import { SettingLayout } from '../pages/setting/SettingLayout.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { NoticeViewPage } from '../pages/notice/NoticeView.page';
-import { NoticeCreatePage } from '../pages/notice/NoticeCreate.page';
 import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
 
 export default function Router() {

@@ -1,7 +1,8 @@
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AnnouncementList } from '../../components/announcement/AnnouncementList';
 import { PageNav } from '../../components/announcement/PageNav';
-import { useAnounceListQuery } from '../../hooks/react-query/useAnnounce';
+import { useAnnounceListQuery } from '../../hooks/react-query/useAnnounce';
+import { Button } from '@quokka/design-system';
 
 export const AnnouncementListPage = () => {
   const [searchParam, setSearchParam] = useSearchParams();
@@ -9,12 +10,15 @@ export const AnnouncementListPage = () => {
 
   const {
     announceListData: { announces, lastPage },
-  } = useAnounceListQuery(+currentPage);
+  } = useAnnounceListQuery(+currentPage);
 
   return (
     <>
       <AnnouncementList data={announces} />
       <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      <Link to="/announcement-create">
+        <Button className="">공지 작성</Button>
+      </Link>
     </>
   );
 };
