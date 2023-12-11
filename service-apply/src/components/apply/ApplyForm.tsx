@@ -4,11 +4,14 @@ import {
   InputTextProps,
   Radio,
   Txt,
+  Modal,
 } from '@quokka/design-system';
 import { useApplyForm } from '../../hooks/useApplyForm';
 import { ApplySelector } from './ApplySelector';
 import { clsx } from 'clsx';
 import { useApplyQuery } from '../../hooks/react-query/useApply';
+import { useState } from 'react';
+import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
   return (
@@ -25,6 +28,7 @@ export const ApplyForm = () => {
     section: selectSectorId ?? 0,
     ...rest,
   });
+  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
 
   const parkingSection = sector.map((item) => ({
     sectionNumber: item.sectorId,
@@ -123,10 +127,20 @@ export const ApplyForm = () => {
         </Button>
         <Button
           color="primary"
-          onClick={() => onSave({ isRegistration: true })}
+          onClick={() => {
+            setIsCaptchaModalOpen(true);
+            // onSave({ isRegistration: true });
+          }}
         >
           신청하기
         </Button>
+        <ApplyCaptchaModal
+          isOpen={isCaptchaModalOpen}
+          onRequestClose={() => {
+            setIsCaptchaModalOpen(false);
+          }}
+          onSave={() => onSave({ isRegistration: true })}
+        />
       </div>
     </div>
   );
