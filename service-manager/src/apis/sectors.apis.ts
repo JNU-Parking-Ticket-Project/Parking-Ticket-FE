@@ -10,7 +10,7 @@ interface SectorRequest {
 }
 
 export const getSectors = async (): Promise<Sector[]> => {
-  const response = await https.get(`/v1/sectors`);
+  const response = await https.get('/v1/sectors');
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -18,7 +18,7 @@ export const getSectors = async (): Promise<Sector[]> => {
 };
 
 export const putSectors = async (data: SectorRequest[]) => {
-  const response = await https.put(`/v1/sectors`, data);
+  const response = await https.put('/v1/sectors', data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -26,7 +26,7 @@ export const putSectors = async (data: SectorRequest[]) => {
 };
 
 export const postSectors = async (data: SectorRequest[]) => {
-  const response = await https.post(`/v1/sectors`, data);
+  const response = await https.post('/v1/sectors', data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
