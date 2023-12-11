@@ -14,7 +14,6 @@ export interface RegistrationRequestProps {
 
 export class RegistrationRequest {
   isRegistration: boolean;
-  // requestDto: RegistrationRequestDto;
   name: string;
   studentNum: string;
   affiliation: string;
@@ -22,7 +21,7 @@ export class RegistrationRequest {
   isLight: boolean;
   phoneNum: string;
   selectSectorId: number;
-  captchaPendingCode?: string;
+  captchaCode?: string;
   captchaAnswer?: string;
 
   constructor({
@@ -46,7 +45,7 @@ export class RegistrationRequest {
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
     this.selectSectorId = selectSectorId;
-    this.captchaPendingCode = captchaPendingCode;
+    this.captchaCode = captchaPendingCode;
     this.captchaAnswer = captchaAnswer;
   }
 }
