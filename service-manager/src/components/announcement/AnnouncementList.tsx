@@ -1,7 +1,7 @@
 import { Txt } from '@quokka/design-system';
 import { AnnouncementListItem } from './AnnouncementListItem';
 import { Announce } from '../../apis/dtos/announce.dtos';
-import { useAnnounceListQuery } from '../../hooks/react-query/useAnnounce';
+
 interface AnnouncementListProps {
   data: Omit<Announce, 'announceContent'>[];
 }

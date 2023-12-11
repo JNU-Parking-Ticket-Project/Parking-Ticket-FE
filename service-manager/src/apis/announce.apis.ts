@@ -1,10 +1,5 @@
 import { https } from '../functions/https';
-import {
-  AllAnnounce,
-  Announce,
-  AnnounceDelete,
-  LastAnnounce,
-} from './dtos/announce.dtos';
+import { AllAnnounce, Announce, AnnounceDelete } from './dtos/announce.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
 
 export const getAllAnnounce = async (page: number) => {
