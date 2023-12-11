@@ -7,6 +7,7 @@ import {
 import { useApplyMutate } from './react-query/useApply';
 import { useNavigate } from 'react-router-dom';
 import { removeToken } from '../functions/jwt';
+import { RegistrationRequest } from '../apis/dtos/registration.dtos';
 
 type AppFormInputAction =
   | {
@@ -62,23 +63,38 @@ const initValue = {
   isCompact: false,
 };
 
+interface registrationInfo {
+  isRegistration: boolean;
+  captchaPendingCode?: string;
+  captchaAnswer?: string;
+}
+
 export const useApplyForm = (init?: ApplyFormInput) => {
   init ||= initValue;
   const [state, dispatch] = useReducer(applyFormReducer, init);
   const { postRegistration } = useApplyMutate();
   const navigate = useNavigate();
 
-  const onSave = ({ isRegistration }: { isRegistration: boolean }) => {
+  const onSave = ({
+    isRegistration,
+    captchaPendingCode,
+    captchaAnswer,
+  }: registrationInfo) => {
+    // TODO: affiliation, email 추가
     postRegistration(
-      {
+      new RegistrationRequest({
         isRegistration: isRegistration,
-        carNum: state.carNumber,
         name: state.studentName,
-        phoneNum: state.phoneNumber,
+        studentNumber: state.studentNumber,
+        affiliation: '공과대학',
+        isLightCar: state.isCompact,
+        carNumber: state.carNumber,
+        phoneNumber: state.phoneNumber,
         selectSectorId: +state.section,
-        studentNum: state.studentNumber,
-        isLight: state.isCompact,
-      },
+        captchaPendingCode: captchaPendingCode,
+        captchaAnswer: captchaAnswer,
+        email: '',
+      }),
       {
         onError: (error) => {
           console.error(error);
