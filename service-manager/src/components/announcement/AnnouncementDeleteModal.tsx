@@ -26,12 +26,21 @@ export const AnnouncementDeleteModal = ({
       <Modal
         isOpen={isOpen}
         onRequestClose={onRequestClose}
-        className="w-[500px] h-[200px] m-auto flex flex-col justify-center items-center"
+        className=""
         overLayCss={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: 1000,
         }}
-        contentCss={{}}
+        contentCss={{
+          width: '500px',
+          height: '200px',
+          margin: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '0.5rem',
+        }}
       >
         <Txt size="h4">해당 글을 삭제 하시겠습니까?</Txt>
         <div className="flex flex-row gap-6 mt-4">
