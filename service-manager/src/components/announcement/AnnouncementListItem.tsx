@@ -1,4 +1,4 @@
-import { Txt } from '@quokka/design-system';
+import { Button, Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import { Announce } from '../../apis/dtos/announce.dtos';
 
