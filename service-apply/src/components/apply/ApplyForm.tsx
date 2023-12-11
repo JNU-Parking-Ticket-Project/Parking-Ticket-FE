@@ -77,6 +77,16 @@ export const ApplyForm = () => {
         value={state.studentNumber}
         required
       />
+      <ApplyInputText
+        label="소속대학"
+        name="affiliation"
+        type="text"
+        onChange={(e) =>
+          dispatch({ type: 'affiliation', payload: e.target.value })
+        }
+        value={state.affiliation}
+        required
+      />
       <ApplySelector
         label="구간"
         type="text"

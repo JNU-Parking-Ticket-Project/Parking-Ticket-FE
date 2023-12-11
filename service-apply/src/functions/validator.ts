@@ -29,6 +29,7 @@ export interface ApplyFormInput {
   studentNumber: string;
   email: string;
   studentName: string;
+  affiliation: string;
   section: number;
   carNumber: string;
   isCompact: boolean;

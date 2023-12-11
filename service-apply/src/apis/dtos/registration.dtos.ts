@@ -12,9 +12,11 @@ export interface RegistrationRequestProps {
   email: string;
 }
 
-export interface RegistrationRequestDto {
+export class RegistrationRequest {
+  isRegistration: boolean;
+  // requestDto: RegistrationRequestDto;
   name: string;
-  studentNumber: string;
+  studentNum: string;
   affiliation: string;
   carNum: string;
   isLight: boolean;
@@ -22,12 +24,7 @@ export interface RegistrationRequestDto {
   selectSectorId: number;
   captchaPendingCode?: string;
   captchaAnswer?: string;
-}
 
-export class RegistrationRequest {
-  isRegistration: boolean;
-  requestDto: RegistrationRequestDto;
-  email: string;
   constructor({
     isRegistration,
     name,
@@ -42,18 +39,15 @@ export class RegistrationRequest {
     email,
   }: RegistrationRequestProps) {
     this.isRegistration = isRegistration;
-    this.requestDto = {
-      name: name,
-      studentNumber: studentNumber,
-      affiliation: affiliation,
-      carNum: carNumber,
-      isLight: isLightCar,
-      phoneNum: phoneNumber,
-      selectSectorId: selectSectorId,
-      captchaPendingCode: captchaPendingCode,
-      captchaAnswer: captchaAnswer,
-    };
-    this.email = email;
+    this.name = name;
+    this.studentNum = studentNumber;
+    this.affiliation = affiliation;
+    this.carNum = carNumber;
+    this.isLight = isLightCar;
+    this.phoneNum = phoneNumber;
+    this.selectSectorId = selectSectorId;
+    this.captchaPendingCode = captchaPendingCode;
+    this.captchaAnswer = captchaAnswer;
   }
 }
 

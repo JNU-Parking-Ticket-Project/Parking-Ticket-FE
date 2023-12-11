@@ -39,6 +39,7 @@ const applyFormReducer = (
         ...state,
         ...initValue,
       };
+    case 'affiliation':
     case 'email':
     case 'studentName':
     case 'section':
@@ -58,6 +59,7 @@ const initValue = {
   studentNumber: '',
   email: '',
   studentName: '',
+  affiliation: '',
   section: 0,
   carNumber: '',
   isCompact: false,
@@ -86,14 +88,14 @@ export const useApplyForm = (init?: ApplyFormInput) => {
         isRegistration: isRegistration,
         name: state.studentName,
         studentNumber: state.studentNumber,
-        affiliation: '공과대학',
+        affiliation: state.affiliation,
         isLightCar: state.isCompact,
         carNumber: state.carNumber,
         phoneNumber: state.phoneNumber,
         selectSectorId: +state.section,
         captchaPendingCode: captchaPendingCode,
         captchaAnswer: captchaAnswer,
-        email: '',
+        email: state.email,
       }),
       {
         onError: (error) => {
