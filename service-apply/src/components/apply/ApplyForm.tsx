@@ -28,7 +28,7 @@ export const ApplyForm = () => {
 
   const parkingSection = sector.map((item) => ({
     sectionNumber: item.sectorId,
-    sectionMajor: `${item.sectorName}-${item.sectorColleges}`,
+    sectionMajor: `${item.sectorNum}-${item.sectorName}`,
   }));
   parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
 

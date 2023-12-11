@@ -52,8 +52,8 @@ interface RegistrationResponseProps {
   phoneNum: string;
   sector: {
     sectorId: number;
+    sectorNum: string;
     sectorName: string;
-    sectorColleges: string;
   }[];
   affiliation: string;
   selectSectorId?: number;
@@ -69,8 +69,8 @@ export class RegistrationOptionsResponse {
   affiliation: string;
   sector: {
     sectorId: number;
+    sectorNum: string;
     sectorName: string;
-    sectorColleges: string;
   }[];
   selectSectorId?: number;
   constructor({

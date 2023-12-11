@@ -1,11 +1,5 @@
-import { ApplyList } from '../components/applyList/ApplyList';
-import { NavContainer } from '../components/common/NavContainer';
+import { ApplyList } from '../components/apply-list/ApplyList';
 
 export const ApplyListPage = () => {
-  return (
-    <>
-      <NavContainer />
-      <ApplyList />
-    </>
-  );
+  return <ApplyList />;
 };

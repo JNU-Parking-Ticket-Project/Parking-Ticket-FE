@@ -1,0 +1,28 @@
+.react-datepicker {
+  border: 0px;
+  box-shadow: 0 4px 8px 0 #00000040;
+  border-radius: 1rem;
+}
+
+.react-datepicker__day--selected {
+  background-color: #0255d5;
+  color: #fff;
+  border-radius: 999999px !important;
+}
+
+.react-datepicker__day-name {
+  width: 2rem;
+  line-height: 2rem;
+  margin: 0.166rem;
+  color: #0255d5 !important;
+}
+
+.react-datepicker__time-list-item--selected {
+  background-color: #0255d5 !important;
+  color: #fff;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: white;
+  color: black;
+}
