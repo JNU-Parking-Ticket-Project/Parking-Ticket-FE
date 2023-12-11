@@ -1,47 +1,24 @@
-import { Button, InputText, Modal, Txt } from '@quokka/design-system';
+import { Modal } from '@quokka/design-system';
 import { PropsWithChildren, Suspense, useState } from 'react';
-import ErrorBoundary from '../common/ErrorBoundray';
-import Delete from '../../assets/delete.svg';
+import { CaptchaForm } from './CaptchaForm';
+import { Spinner } from '../../assets/Spinner';
 
 interface ApplyCaptchaModalProps extends PropsWithChildren {
   isOpen: boolean;
   onRequestClose: () => void;
-  onSave: () => void;
+  handleSave: ({
+    inputCode,
+    answerCode,
+  }: {
+    inputCode: string;
+    answerCode: string;
+  }) => void;
 }
-
-const CaptchaForm = ({ onSubmit }: { onSubmit: () => void }) => {
-  return (
-    <div>
-      <Txt size="h3" className="block text-center pb-4">
-        자동 신청 방지
-      </Txt>
-      <img src="https://www.imperva.com/learn/wp-content/uploads/sites/13/2020/07/textbasierte-captchas.png" />
-      <div className="w-full flex justify-center align-center py-4">
-        <InputText
-          type="text"
-          placeholder="정답"
-          pattern="[0-9]*"
-          className="w-full max-w-lg text-center"
-        />
-      </div>
-      <div className="flex justify-center align-center pt-4">
-        <Button
-          onClick={onSubmit}
-          color="primary"
-          size="small"
-          className="px-8"
-        >
-          확인
-        </Button>
-      </div>
-    </div>
-  );
-};
 
 export const ApplyCaptchaModal = ({
   isOpen,
   onRequestClose,
-  onSave,
+  handleSave,
 }: ApplyCaptchaModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -64,7 +41,26 @@ export const ApplyCaptchaModal = ({
         borderRadius: '1rem',
       }}
     >
-      {isLoading ? <div>loading</div> : <CaptchaForm onSubmit={onSave} />}
+      {isLoading ? (
+        <div className="flex flex-col justify-center align-center">
+          <span className="text-center text-lg">
+            신청 접수 중입니다. 잠시만 기다려주세요.
+          </span>
+          <span className="text-center text-lg">
+            새로고침 시 신청이 취소됩니다.
+          </span>
+          <div className="w-full">
+            <Spinner />
+          </div>
+        </div>
+      ) : (
+        <Suspense>
+          <CaptchaForm
+            handleSave={handleSave}
+            handleSubmitLoading={() => setIsLoading(true)}
+          />
+        </Suspense>
+      )}
     </Modal>
   );
 };
