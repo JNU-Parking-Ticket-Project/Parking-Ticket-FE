@@ -1,9 +1,7 @@
-import { Button, Txt } from '@quokka/design-system';
+import { Button } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useAnnounceForm } from '../../hooks/react-query/useAnnounceForm';
-import { useAnnounceCreateMutate } from '../../hooks/react-query/useAnnounce';
-import { Navigate } from 'react-router-dom';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -18,7 +16,6 @@ export interface AnnouncementFormProps {
 
 export const AnnouncementCreate = () => {
   const editorRef = useRef<Editor>(null);
-  const { postAnnounce } = useAnnounceCreateMutate();
   const { title, setTitle, content, onSubmit } = useAnnounceForm();
 
   const onSubmitAnnounce = (e: React.FormEvent<HTMLFormElement>) => {

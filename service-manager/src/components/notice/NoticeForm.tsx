@@ -24,7 +24,7 @@ export const NoticeForm = ({ content }: NoticeFormProps) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
     const markdown = editorInstance?.getMarkdown();
-    console.log(markdown);
+
     //TODO: API 연결
   };
   return (

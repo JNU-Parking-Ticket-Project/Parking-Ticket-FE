@@ -22,7 +22,7 @@ export const AnnouncementDetail = ({
   return (
     <>
       <div className="flex justify-end gap-6">
-        <Link to="update">
+        <Link to={`/announcement/update/${announcementId}`}>
           <Button color="primary">글 수정</Button>
         </Link>
         <div onClick={onOpenModal}>
