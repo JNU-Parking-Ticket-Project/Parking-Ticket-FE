@@ -10,7 +10,7 @@ export const CommonLayout = () => {
   return (
     <>
       <MainContainer>
-        <nav className="flex flex-row">
+        <nav className="flex flex-row min-w-[60rem]">
           <NavTitle />
           <NavContainer />
         </nav>

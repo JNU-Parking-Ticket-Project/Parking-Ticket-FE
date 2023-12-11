@@ -7,7 +7,10 @@ export const getAllAnnounce = async (page: number) => {
   if (isErrorResponse(response)) {
     return new AllAnnounce({ announces: [], lastPage: 0, nextPage: 0 });
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4cd3a619ccca70e5921de10f9e0d97d76bded088
   return new AllAnnounce(response);
 };
 
