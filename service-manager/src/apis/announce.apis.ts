@@ -31,10 +31,13 @@ export const postAnnounce = async (data: AnnounceRequest) => {
   return new Announce(response);
 };
 
-export const putAnnounceById = async (
-  announceId: number,
-  data: AnnounceRequest,
-) => {
+export const putAnnounceById = async ({
+  announceId,
+  data,
+}: {
+  announceId: number;
+  data: AnnounceRequest;
+}) => {
   const response = await https.put(`/v1/announce/${announceId}`, data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);

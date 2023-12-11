@@ -2,6 +2,7 @@ import { AnnouncementFormProps } from '../../components/announcement/Announcemen
 import {
   useAnnounceCreateMutate,
   useAnnounceDeleteMutate,
+  useAnnounceUpdateMutate,
 } from '../../hooks/react-query/useAnnounce';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -37,6 +38,48 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
     content,
     setTitle,
     onSubmit,
+  };
+};
+
+interface AnnouncementUpdateForm {
+  announceId: number;
+  announceTitle: string;
+  announceContent: string;
+}
+
+export const useAnnounceUpdate = (init: AnnouncementUpdateForm) => {
+  const [title, setTitle] = useState<string>(init.announceTitle || '');
+  const [content, setContent] = useState<string>(init.announceContent || '');
+  const navigate = useNavigate();
+  const { putAnnounceById } = useAnnounceUpdateMutate();
+
+  const onUpdate = ({
+    announceId,
+    announceTitle: title,
+    announceContent: content,
+  }: AnnouncementUpdateForm) => {
+    putAnnounceById(
+      announceId,
+      {
+        announceTitle: title,
+        announceContent: content,
+      },
+      {
+        onError: (error) => {
+          alert(error.message);
+        },
+        onSuccess: (data) => {
+          if (!data) throw new Error('data is undefined');
+          navigate(`/announcement/${announceId}`);
+        },
+      },
+    );
+  };
+  return {
+    title,
+    content,
+    setTitle,
+    onUpdate,
   };
 };
 

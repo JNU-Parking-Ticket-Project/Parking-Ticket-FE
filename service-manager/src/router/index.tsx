@@ -14,6 +14,7 @@ import { TimeSettingPage } from '../pages/setting/TimeSetting.page';
 import { NoticeViewPage } from '../pages/notice/NoticeView.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
+import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate.page';
 
 export default function Router() {
   return (
@@ -31,6 +32,10 @@ export default function Router() {
         <Route path="announcement">
           <Route index element={<AnnouncementListPage />} />
           <Route path=":announcementId" element={<AnnouncementPage />} />
+          <Route
+            path="update/:announcementId"
+            element={<AnnouncementUpdatePage />}
+          />
           <Route path="create" element={<AnnouncementCreatePage />} />
         </Route>
         <Route path="apply-list" element={<ApplyListPage />} />
