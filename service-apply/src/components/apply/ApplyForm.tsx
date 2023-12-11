@@ -10,7 +10,6 @@ import { useApplyForm } from '../../hooks/useApplyForm';
 import { ApplySelector } from './ApplySelector';
 import { clsx } from 'clsx';
 import { useApplyQuery } from '../../hooks/react-query/useApply';
-import { useState } from 'react';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
@@ -24,11 +23,11 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 export const ApplyForm = () => {
   const { registrationData } = useApplyQuery();
   const { sector, selectSectorId, ...rest } = registrationData;
-  const { state, dispatch, onSave } = useApplyForm({
-    section: selectSectorId ?? 0,
-    ...rest,
-  });
-  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
+  const { state, dispatch, onSave, isCaptchaModalOpen, setIsCaptchaModalOpen } =
+    useApplyForm({
+      section: selectSectorId ?? 0,
+      ...rest,
+    });
 
   const parkingSection = sector.map((item) => ({
     sectionNumber: item.sectorId,
@@ -139,18 +138,25 @@ export const ApplyForm = () => {
           color="primary"
           onClick={() => {
             setIsCaptchaModalOpen(true);
-            // onSave({ isRegistration: true });
           }}
         >
           신청하기
         </Button>
-        <ApplyCaptchaModal
-          isOpen={isCaptchaModalOpen}
-          onRequestClose={() => {
-            setIsCaptchaModalOpen(false);
-          }}
-          onSave={() => onSave({ isRegistration: true })}
-        />
+        {isCaptchaModalOpen && (
+          <ApplyCaptchaModal
+            isOpen={isCaptchaModalOpen}
+            onRequestClose={() => {
+              setIsCaptchaModalOpen(false);
+            }}
+            handleSave={({ inputCode, answerCode }) =>
+              onSave({
+                isRegistration: true,
+                captchaPendingCode: answerCode,
+                captchaAnswer: inputCode,
+              })
+            }
+          />
+        )}
       </div>
     </div>
   );

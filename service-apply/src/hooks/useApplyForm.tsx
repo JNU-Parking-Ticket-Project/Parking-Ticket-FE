@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { ApplyFormInput } from '../functions/validator';
 import {
   phoneNumberReplace,
@@ -77,6 +77,8 @@ export const useApplyForm = (init?: ApplyFormInput) => {
   const { postRegistration } = useApplyMutate();
   const navigate = useNavigate();
 
+  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
+
   const onSave = ({
     isRegistration,
     captchaPendingCode,
@@ -98,11 +100,12 @@ export const useApplyForm = (init?: ApplyFormInput) => {
       }),
       {
         onError: (error) => {
-          console.error(error);
+          isCaptchaModalOpen && setIsCaptchaModalOpen(false);
           alert(error.message);
           throw new Error(error.message);
         },
         onSuccess: (data) => {
+          isCaptchaModalOpen && setIsCaptchaModalOpen(false);
           if (!data) throw new Error('data is undefined');
           dispatch({ type: 'reset', payload: null });
           alert(data.message);
@@ -113,5 +116,5 @@ export const useApplyForm = (init?: ApplyFormInput) => {
     );
   };
 
-  return { state, dispatch, onSave };
+  return { state, dispatch, onSave, isCaptchaModalOpen, setIsCaptchaModalOpen };
 };
