@@ -19,7 +19,7 @@ export const AnnouncementListPage = () => {
   return (
     <>
       <AnnouncementList data={announces} />
-      <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      <PageNav lastIdx={+lastPage + 1} currentIdx={+currentPage} />
     </>
   );
 };
