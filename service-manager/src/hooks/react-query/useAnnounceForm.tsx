@@ -1,41 +1,10 @@
 import { AnnouncementFormProps } from '../../components/announcement/AnnouncementCreate';
-import { useAnnounceCreateMutate } from '../../hooks/react-query/useAnnounce';
+import {
+  useAnnounceCreateMutate,
+  useAnnounceDeleteMutate,
+} from '../../hooks/react-query/useAnnounce';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
-type AnnouncementFormInputAction =
-  | {
-      type: keyof AnnouncementFormProps;
-      payload: AnnouncementFormProps[keyof AnnouncementFormProps];
-    }
-  | {
-      type: 'reset';
-      payload: null;
-    };
-
-const announcementFormReducer = (
-  state: AnnouncementFormProps,
-  action: AnnouncementFormInputAction,
-): AnnouncementFormProps => {
-  switch (action.type) {
-    case 'announceTitle':
-      return { ...state, announceTitle: action.payload as string };
-    case 'announceContent':
-      return { ...state, announceContent: action.payload as string };
-    case 'reset':
-      return {
-        announceTitle: '',
-        announceContent: '',
-      };
-    default:
-      return state;
-  }
-};
-
-const initialState: AnnouncementFormProps = {
-  announceTitle: '',
-  announceContent: '',
-};
 
 export const useAnnounceForm = (init?: AnnouncementFormProps) => {
   const [title, setTitle] = useState<string>(init?.announceTitle || '');
@@ -44,8 +13,8 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
   const { postAnnounce } = useAnnounceCreateMutate();
 
   const onSubmit = ({
-    announceTitle,
-    announceContent,
+    announceTitle: title,
+    announceContent: content,
   }: AnnouncementFormProps) => {
     postAnnounce(
       {
@@ -58,7 +27,7 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
         },
         onSuccess: (data) => {
           if (!data) throw new Error('data is undefined');
-          navigate(`/announcement/${data.announceId}`);
+          navigate(-1);
         },
       },
     );
@@ -68,5 +37,26 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
     content,
     setTitle,
     onSubmit,
+  };
+};
+
+export const useAnnounceDelete = () => {
+  const { deleteAnnounceById } = useAnnounceDeleteMutate();
+  const navigate = useNavigate();
+
+  const onDelete = (announceId: number) => {
+    deleteAnnounceById(announceId, {
+      onError: (error) => {
+        alert(error.message);
+      },
+      onSuccess: (data) => {
+        if (!data) throw new Error('data is undefined');
+        alert('삭제되었습니다.');
+        navigate('/announcement');
+      },
+    });
+  };
+  return {
+    onDelete,
   };
 };

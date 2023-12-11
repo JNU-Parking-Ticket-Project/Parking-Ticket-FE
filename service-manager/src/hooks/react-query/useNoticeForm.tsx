@@ -56,7 +56,7 @@ export const useNoticeForm = (init?: NoticeFormProps) => {
           if (!data) throw new Error('data is undefined');
           dispatch({ type: 'reset', payload: null });
           alert('안내사항이 수정되었습니다.');
-          navigate('/');
+          navigate('/notice');
         },
       },
     );

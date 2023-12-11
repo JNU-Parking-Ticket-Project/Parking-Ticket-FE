@@ -2,6 +2,7 @@ import {
   useSuspenseQuery,
   useMutation,
   MutateOptions,
+  useQueryClient,
 } from '@tanstack/react-query';
 import {
   AnnounceRequest,
@@ -9,13 +10,15 @@ import {
   getAllAnnounce,
   getAnnounceById,
   postAnnounce,
-  putAnnounceById,
 } from '../../apis/announce.apis';
-import { Announce } from 'service-manager/src/apis/dtos/announce.dtos';
+import {
+  Announce,
+  AnnounceDelete,
+} from 'service-manager/src/apis/dtos/announce.dtos';
 
 export const useAnnounceListQuery = (page: number) => {
   const { data: announceListData } = useSuspenseQuery({
-    queryKey: ['anounceList', page],
+    queryKey: ['announceList', page],
     queryFn: () => getAllAnnounce(page),
   });
   return { announceListData };
@@ -23,7 +26,7 @@ export const useAnnounceListQuery = (page: number) => {
 
 export const useAnnounceDetailQuery = (announceId: number) => {
   const { data: announceDetailData } = useSuspenseQuery({
-    queryKey: ['anounceDetail', announceId],
+    queryKey: ['announceDetail', announceId],
     queryFn: () => getAnnounceById(announceId),
   });
   return { announceDetailData };
@@ -50,28 +53,32 @@ export const useAnnounceCreateMutate = () => {
   };
 };
 
-export const useAnnounceUpdateMutate = () => {
-  const { mutate } = useMutation({
-    mutationKey: ['announceUpdate'],
-    mutationFn: putAnnounceById,
-  });
-
-  return {
-    putAnnounceById: (
-      content: AnnounceRequest,
-      mutateOption?: Omit<MutateOptions<Announce, Error, unknown>, 'onSettled'>,
-    ) => {
-      mutate(content, {
-        ...mutateOption,
-        onSettled: (data) => {
-          if (!data) throw new Error('data is undefined');
-        },
-      });
-    },
-  };
-};
+// export const useAnnounceUpdateMutate = () => {
+//   const { mutate } = useMutation({
+//     mutationKey: ['announceUpdate'],
+//     mutationFn: putAnnounceById,
+//   });
+//   return {
+//     putAnnounceById: (
+//       announceId: number,
+//       content: AnnounceRequest,
+//       mutateOption?: Omit<MutateOptions<Announce, Error, unknown>, 'onSettled'>,
+//     ) => {
+//       mutate(
+//         { announceId, content },
+//         {
+//           ...mutateOption,
+//           onSettled: (data) => {
+//             if (!data) throw new Error('data is undefined');
+//           },
+//         },
+//       );
+//     },
+//   };
+// };
 
 export const useAnnounceDeleteMutate = () => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ['announceDelete'],
     mutationFn: deleteAnnounceById,
@@ -79,13 +86,19 @@ export const useAnnounceDeleteMutate = () => {
 
   return {
     deleteAnnounceById: (
-      content: AnnounceRequest,
-      mutateOption?: Omit<MutateOptions<Announce, Error, unknown>, 'onSettled'>,
+      announceId: number,
+      mutateOption?: Omit<
+        MutateOptions<AnnounceDelete, Error, unknown>,
+        'onSettled'
+      >,
     ) => {
-      mutate(content, {
+      mutate(announceId, {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
+          queryClient.invalidateQueries({
+            queryKey: ['announceList'],
+          });
         },
       });
     },

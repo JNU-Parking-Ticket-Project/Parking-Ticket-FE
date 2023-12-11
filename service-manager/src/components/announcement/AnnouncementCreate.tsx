@@ -3,6 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useAnnounceForm } from '../../hooks/react-query/useAnnounceForm';
 import { useAnnounceCreateMutate } from '../../hooks/react-query/useAnnounce';
+import { Navigate } from 'react-router-dom';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -24,7 +25,6 @@ export const AnnouncementCreate = () => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
     const markdown = editorInstance?.getMarkdown();
-    console.log(title, markdown);
     onSubmit({
       announceTitle: title,
       announceContent: markdown || '',
@@ -43,7 +43,9 @@ export const AnnouncementCreate = () => {
             type="text"
             name="announceTitle"
             id="announceTitle"
+            placeholder="제목을 입력해주세요."
             value={title}
+            className="p-3 my-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full text-2xl border-gray-300 rounded-lg"
             onChange={(e) => {
               setTitle(e.target.value);
             }}
