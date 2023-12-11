@@ -7,7 +7,7 @@ export const getAllAnnounce = async (page: number) => {
   if (isErrorResponse(response)) {
     return new AllAnnounce({ announces: [], lastPage: 0, nextPage: 0 });
   }
-  return new AllAnnounce(response.data);
+  return new AllAnnounce(response);
 };
 
 export const getAnnounceLast = async () => {
@@ -18,7 +18,7 @@ export const getAnnounceLast = async () => {
       announceTitle: '게시글이 없습니다',
     });
   }
-  return new LastAnnounce(response.data);
+  return new LastAnnounce(response);
 };
 
 export const getAnnounceById = async (announceId: number) => {
@@ -26,5 +26,5 @@ export const getAnnounceById = async (announceId: number) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response.data);
+  return new Announce(response);
 };

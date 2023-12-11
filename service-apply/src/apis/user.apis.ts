@@ -13,7 +13,7 @@ export const postLogin = async (data: UserLoginRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new UserToken(response.data);
+  return new UserToken(response);
 };
 
 export interface PasswordFindRequest {
@@ -25,7 +25,7 @@ export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new PasswordFind(response.data);
+  return new PasswordFind(response);
 };
 
 export interface PasswordResetRequest {
@@ -43,7 +43,7 @@ export const postPasswordReset = async ({
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new PasswordReset(response.data);
+  return new PasswordReset(response);
 };
 
 export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
@@ -58,6 +58,6 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
     throw new Error(response.reason);
   }
 
-  setToken(new UserToken(response.data));
+  setToken(new UserToken(response));
   return retryCallback();
 };

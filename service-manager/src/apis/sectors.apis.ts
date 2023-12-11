@@ -13,7 +13,7 @@ export const putSectors = async (data: SectorRequset[]) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };
 
 export const postSectors = async (data: SectorRequset[]) => {
@@ -21,7 +21,7 @@ export const postSectors = async (data: SectorRequset[]) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };
 
 export const deleteSector = async (sectorNumber: string) => {
@@ -29,5 +29,5 @@ export const deleteSector = async (sectorNumber: string) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };

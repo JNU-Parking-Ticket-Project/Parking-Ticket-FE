@@ -20,7 +20,7 @@ export const postLogin = async (data: UserLoginRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new UserToken(response.data);
+  return new UserToken(response);
 };
 
 export interface PasswordFindRequest {
@@ -32,7 +32,7 @@ export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new PasswordFind(response.data);
+  return new PasswordFind(response);
 };
 
 export interface PasswordResetRequest {
@@ -50,7 +50,7 @@ export const postPasswordReset = async ({
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new PasswordReset(response.data);
+  return new PasswordReset(response);
 };
 
 export interface UserSignUpRequest {
@@ -66,7 +66,7 @@ export const postSignup = async (data: UserSignUpRequest) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new UserSignUpResponse(response.data);
+  return new UserSignUpResponse(response);
 };
 
 export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
@@ -81,7 +81,7 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
     throw new Error(response.reason);
   }
 
-  setToken(new UserToken(response.data));
+  setToken(new UserToken(response));
   return retryCallback();
 };
 
@@ -90,7 +90,7 @@ export const putAdminRole = async (userId: number, role: string) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data;
+  return response;
 };
 
 export const getAllCouncil = async () => {
@@ -98,7 +98,7 @@ export const getAllCouncil = async () => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.data.users.map((data: any) => new Council(data));
+  return response.users.map((data: any) => new Council(data));
 };
 
 export const postCheckEmail = async (email: string) => {
@@ -106,5 +106,5 @@ export const postCheckEmail = async (email: string) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new CheckEmailResponse(response.data);
+  return new CheckEmailResponse(response);
 };

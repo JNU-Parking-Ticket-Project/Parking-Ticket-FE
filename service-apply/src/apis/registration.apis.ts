@@ -21,7 +21,7 @@ export const postRegistration = async (
     }
     throw new Error(response.reason);
   }
-  return new RegistrationResponse(response.data);
+  return new RegistrationResponse(response);
 };
 
 export const getRegistration =
@@ -43,5 +43,5 @@ export const getRegistration =
         affiliation: '',
       });
     }
-    return new RegistrationOptionsResponse(response.data);
+    return new RegistrationOptionsResponse(response);
   };
