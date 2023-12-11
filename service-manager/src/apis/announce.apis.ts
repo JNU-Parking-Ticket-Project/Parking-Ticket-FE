@@ -1,5 +1,10 @@
 import { https } from '../functions/https';
-import { AllAnnounce, Announce, LastAnnounce } from './dtos/announce.dtos';
+import {
+  AllAnnounce,
+  Announce,
+  AnnounceDelete,
+  LastAnnounce,
+} from './dtos/announce.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
 
 export const getAllAnnounce = async (page: number) => {
@@ -7,10 +12,6 @@ export const getAllAnnounce = async (page: number) => {
   if (isErrorResponse(response)) {
     return new AllAnnounce({ announces: [], lastPage: 0, nextPage: 0 });
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> 4cd3a619ccca70e5921de10f9e0d97d76bded088
   return new AllAnnounce(response);
 };
 
@@ -51,5 +52,5 @@ export const deleteAnnounceById = async (announceId: number) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response);
+  return new AnnounceDelete(response);
 };

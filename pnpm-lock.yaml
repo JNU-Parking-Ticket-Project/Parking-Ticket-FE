@@ -1464,13 +1464,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: true
-
-  /@babel/runtime@7.23.5:
-    resolution: {integrity: sha512-NdUTHcPe4C99WxPub+K9l9tK5/lV4UXIoaHSYgzco9BCyjKAAwzdBI+wWtYqHt7LJdbo74ZjRPJgzVweq1sz0w==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.14.0
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -1916,6 +1909,14 @@ packages:
       - nx
     dev: true
 
+  /@nrwl/devkit@17.0.3(nx@17.0.3):
+    resolution: {integrity: sha512-k1o0tvmGcg2/Kw2d56ULixqngCj5zTfp3mn6yS0ytIJrTQnJVkI8GcFCtpnqbzQjD8nKHhvTIcOMsj2BzLos9A==}
+    dependencies:
+      '@nx/devkit': 17.0.3(nx@17.0.3)
+    transitivePeerDependencies:
+      - nx
+    dev: true
+
   /@nrwl/js@17.0.3(@swc-node/register@1.6.8)(@swc/core@1.3.96)(@types/node@18.14.2)(nx@17.0.1)(typescript@5.1.6):
     resolution: {integrity: sha512-jVxCOtjZIrreWGvzT/6jc0JdoSyEKn1XS1NQAb/p9gHXInzOZxT/mu2D2XHo4b/2VsDDnxRRy2T4kI4IuGSrjQ==}
     dependencies:
@@ -2042,7 +2043,7 @@ packages:
     peerDependencies:
       nx: '>= 16 <= 18'
     dependencies:
-      '@nrwl/devkit': 17.0.3(nx@17.0.1)
+      '@nrwl/devkit': 17.0.3(nx@17.0.3)
       ejs: 3.1.9
       enquirer: 2.3.6
       ignore: 5.2.4
@@ -3087,14 +3088,6 @@ packages:
   /@types/prop-types@15.7.10:
     resolution: {integrity: sha512-mxSnDQxPqsZxmeShFH+uwQ4kO4gcJcGahjjMFeLbKE95IAZiiZyiEepGZjtXJ7hN/yfu0bu9xN2ajcU0JcxX6A==}
 
-<<<<<<< HEAD
-=======
-  /@types/quill@1.3.10:
-    resolution: {integrity: sha512-IhW3fPW+bkt9MLNlycw8u8fWb7oO7W5URC9MfZYHBlA24rex9rs23D5DETChu1zvgVdc5ka64ICjJOgQMr6Shw==}
-    dependencies:
-      parchment: 1.1.4
-    dev: false
-
   /@types/react-datepicker@4.19.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-85F9eKWu9fGiD9r4KVVMPYAdkJJswR3Wci9PvqplmB6T+D+VbUqPeKtifg96NZ4nEhufjehW+SX4JLrEWVplWw==}
     dependencies:
@@ -3107,7 +3100,6 @@ packages:
       - react-dom
     dev: true
 
->>>>>>> 4cd3a619ccca70e5921de10f9e0d97d76bded088
   /@types/react-dom@18.2.14:
     resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
     dependencies:
@@ -4254,7 +4246,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
-      '@babel/runtime': 7.23.5
+      '@babel/runtime': 7.23.2
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -7601,8 +7593,6 @@ packages:
       warning: 4.0.3
     dev: false
 
-<<<<<<< HEAD
-=======
   /react-onclickoutside@6.13.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-ty8So6tcUpIb+ZE+1HAhbLROvAIJYyJe/1vRrrcmW+jLsaM+/powDRqxzo6hSh9CuRZGSL1Q8mvcF5WRD93a0A==}
     peerDependencies:
@@ -7626,20 +7616,6 @@ packages:
       react-fast-compare: 3.2.2
       warning: 4.0.3
 
-  /react-quill@2.0.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4qQtv1FtCfLgoD3PXAur5RyxuUbPXQGOHgTlFie3jtxp43mXDtzCKaOgQ3mLyZfi1PUlyjycfivKelFhy13QUg==}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
-    dependencies:
-      '@types/quill': 1.3.10
-      lodash: 4.17.21
-      quill: 1.3.7
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
->>>>>>> 4cd3a619ccca70e5921de10f9e0d97d76bded088
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
@@ -7720,7 +7696,7 @@ packages:
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
-      '@babel/runtime': 7.23.5
+      '@babel/runtime': 7.23.2
     dev: true
 
   /regexp.prototype.flags@1.5.1:
