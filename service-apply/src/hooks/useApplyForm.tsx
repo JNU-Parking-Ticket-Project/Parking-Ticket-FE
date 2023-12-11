@@ -82,7 +82,6 @@ export const useApplyForm = (init?: ApplyFormInput) => {
     captchaPendingCode,
     captchaAnswer,
   }: registrationInfo) => {
-    // TODO: affiliation, email 추가
     postRegistration(
       new RegistrationRequest({
         isRegistration: isRegistration,
