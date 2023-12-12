@@ -2,6 +2,7 @@ import { Button } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useAnnounceForm } from '../../hooks/react-query/useAnnounceForm';
+import ErrorBoundary from '../common/ErrorBoundray';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -48,17 +49,19 @@ export const AnnouncementCreate = () => {
             }}
           />
         </div>
-        <Suspense>
-          <ToastEditor
-            previewStyle="vertical"
-            height="600px"
-            initialValue={content}
-            initialEditType="markdown"
-            placeholder="공지사항을 입력해주세요."
-            ref={editorRef}
-          />
-          <Button type="submit">등록</Button>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense>
+            <ToastEditor
+              previewStyle="vertical"
+              height="600px"
+              initialValue={content}
+              initialEditType="markdown"
+              placeholder="공지사항을 입력해주세요."
+              ref={editorRef}
+            />
+            <Button type="submit">등록</Button>
+          </Suspense>
+        </ErrorBoundary>
       </form>
     </>
   );
