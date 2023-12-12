@@ -3,11 +3,13 @@ import { AnnouncementListItem } from './AnnouncementListItem';
 import { Announce } from '../../apis/dtos/announce.dtos';
 
 interface AnnouncementListProps {
-  data: Omit<Announce, 'announceContent'>[];
+  announcementListData: Omit<Announce, 'announceContent'>[];
 }
 
 export const AnnouncementList = (
-  { data }: AnnouncementListProps = { data: [] },
+  { announcementListData: data }: AnnouncementListProps = {
+    announcementListData: [],
+  },
 ) => {
   return (
     <div className="max-w-[786px] mx-auto mt-12 w-full">
