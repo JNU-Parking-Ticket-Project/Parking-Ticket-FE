@@ -2,8 +2,9 @@ import { Modal } from '@quokka/design-system';
 import { PropsWithChildren, Suspense, useState } from 'react';
 import { CaptchaForm } from './CaptchaForm';
 import { Spinner } from '../../assets/Spinner';
+import ErrorBoundary from '../common/ErrorBoundray';
 
-interface ApplyCaptchaModalProps extends PropsWithChildren {
+interface ApplyCaptchaModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
@@ -47,10 +48,12 @@ export const ApplyCaptchaModal = ({
         </div>
       ) : (
         <Suspense>
-          <CaptchaForm
-            handleSubmitLoading={() => setIsLoading(true)}
-            closeModal={onRequestClose}
-          />
+          <ErrorBoundary>
+            <CaptchaForm
+              handleSubmitLoading={() => setIsLoading(true)}
+              closeModal={onRequestClose}
+            />
+          </ErrorBoundary>
         </Suspense>
       )}
     </Modal>
