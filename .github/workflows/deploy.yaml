@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: dependencies 설치
-        run: pnpm install
+        run: pnpm install --lockfile
 
       - name: env 파일 생성
         run: |
