@@ -11,9 +11,7 @@ export interface UserLoginRequest {
 export const postLogin = async (data: UserLoginRequest) => {
   const response = await https.post(`/v1/auth/login`, data);
   if (isErrorResponse(response)) {
-    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-    // throw new Error(response.reason);
-    throw new Error('로그인을 실패했습니다');
+    throw new Error(response.reason);
   }
   return new UserToken(response);
 };
@@ -25,9 +23,7 @@ export interface PasswordFindRequest {
 export const postPasswordFind = async ({ email }: PasswordFindRequest) => {
   const response = await https.post(`/v1/user/password/find`, { email });
   if (isErrorResponse(response)) {
-    throw new Error('이메일 전송에 실패했습니다');
-    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-    // throw new Error(response.reason);
+    throw new Error(response.reason);
   }
   return new PasswordFind(response);
 };
@@ -45,9 +41,7 @@ export const postPasswordReset = async ({
     password,
   });
   if (isErrorResponse(response)) {
-    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-    // throw new Error(response.reason);
-    throw new Error('비밀번호 초기화를 실패했습니다');
+    throw new Error(response.reason);
   }
   return new PasswordReset(response);
 };
@@ -61,9 +55,7 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   const response = await https.post(`/v1/auth/login`, { refreshtoken: token });
   if (isErrorResponse(response)) {
     removeToken();
-    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-    // throw new Error(response.reason);
-    throw new Error('토큰 재발급에 실패했습니다. 다시 로그인 해주세요.');
+    throw new Error(response.reason);
   }
 
   setToken(new UserToken(response.data));

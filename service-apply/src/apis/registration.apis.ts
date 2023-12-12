@@ -40,10 +40,9 @@ export const getRegistration =
   async (): Promise<RegistrationOptionsResponse> => {
     const response = await https.get('/v1/registration');
     if (isErrorResponse(response)) {
-      // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-      // if (response.status === 401 || response.status === 403) {
-      //   return reissueToken(getRegistration);
-      // }
+      if (response.status === 401 || response.status === 403) {
+        return reissueToken(getRegistration);
+      }
       return new RegistrationOptionsResponse({
         carNum: '',
         email: '',
