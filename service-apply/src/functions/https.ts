@@ -28,10 +28,6 @@ const errorStatusResult = async (response: globalThis.Response) => {
   const errorResponse = await response
     .json()
     .then((data) => new ErrorResponse(data));
-  if (errorResponse.status === 401 || errorResponse.status === 403) {
-    alert('로그인이 필요합니다.');
-    window.location.href = '/';
-  }
   return errorResponse;
 };
 
