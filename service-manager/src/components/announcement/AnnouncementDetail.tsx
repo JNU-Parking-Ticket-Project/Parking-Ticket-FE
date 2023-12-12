@@ -6,6 +6,7 @@ import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 interface AnnouncementDetailProps {
   onOpenModal: () => void;
   announcementId: number;
+  page?: string;
 }
 
 export const AnnouncementDetail = ({
@@ -16,15 +17,18 @@ export const AnnouncementDetail = ({
 
   const navigate = useNavigate();
   const onBack = () => {
-    navigate(-1);
+    navigate('/announcement');
+  };
+  const onNavigateUpdate = () => {
+    navigate(`/announcement/update/${announcementId}`);
   };
 
   return (
     <>
       <div className="flex justify-end gap-6">
-        <Link to={`/announcement/update/${announcementId}`}>
-          <Button color="primary">글 수정</Button>
-        </Link>
+        <Button color="primary" onClick={onNavigateUpdate}>
+          글 수정
+        </Button>
         <div onClick={onOpenModal}>
           <Button color="secondary">글 삭제</Button>
         </div>
