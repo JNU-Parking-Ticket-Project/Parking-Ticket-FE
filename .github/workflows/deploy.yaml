@@ -1,0 +1,42 @@
+name: React App CI/CD
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js ${{ matrix.node-version }} 사용
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: env 파일 생성
+        run: |
+          touch .env
+          echo VITE_PUBLIC_API_URL=${{ secrets.VITE_PUBLIC_API_URL }} >> .env
+          cat .env
+
+      - name: Dependencies 설치
+        run: npm install
+
+      - name: 프로젝트 npm 빌드
+        run: npm run build
+
+      - name: S3 배포
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
+          env:
+            AWS_S3_BUCKET: ${{ secrets.AWS_STAGING_BUCKET_NAME }}
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+            SOURCE_DIR: "build"
