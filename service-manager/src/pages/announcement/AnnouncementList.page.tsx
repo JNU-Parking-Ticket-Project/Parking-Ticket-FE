@@ -18,7 +18,7 @@ export const AnnouncementListPage = () => {
       <Link to="/announcement/create" className="float-right mr-36">
         <Button>공지 작성</Button>
       </Link>
-      <AnnouncementList data={announces} />
+      <AnnouncementList announcementListData={announces} />
       <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
     </div>
   );
