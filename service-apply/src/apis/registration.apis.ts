@@ -4,27 +4,34 @@ import {
   RegistrationOptionsResponse,
   RegistrationRequest,
   RegistrationResponse,
+  TemporarySaveRequest,
 } from './dtos/registration.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
 import { reissueToken } from './user.apis';
 
 export const postRegistration = async (
-  registration: RegistrationRequest,
+  data: RegistrationRequest,
 ): Promise<RegistrationResponse> => {
-  const { isRegistration, ...rest } = registration;
-  const response = await https.post(
-    `/v1/registration${registration.isRegistration ? '' : '/temporary'}`,
-    rest,
-  );
+  const response = await https.post('/v1/registration', data);
   if (isErrorResponse(response)) {
-    // TODO: response dto에 status와 reason을 추가해야 아래 로직 가능
-    // if (response.status === 401 || response.status === 403) {
-    //   return reissueToken(() => postRegistration(registration));
-    // }
-    // throw new Error(response.reason);
-    if (registration.isRegistration)
-      throw new Error('주차권 신청에 실패했습니다');
-    throw new Error('주차권 임시저장에 실패했습니다');
+    if (response.status === 401 || response.status === 403) {
+      return reissueToken(() => postRegistration(data));
+    }
+    console.log(response.reason);
+    throw new Error(response.reason);
+  }
+  return new RegistrationResponse(response);
+};
+
+export const postTemporarySave = async (
+  data: TemporarySaveRequest,
+): Promise<RegistrationResponse> => {
+  const response = await https.post('/v1/registration/temporary', data);
+  if (isErrorResponse(response)) {
+    if (response.status === 401 || response.status === 403) {
+      return reissueToken(() => postTemporarySave(data));
+    }
+    throw new Error(response.reason);
   }
   return new RegistrationResponse(response);
 };

@@ -1,5 +1,4 @@
-export interface RegistrationRequestProps {
-  isRegistration: boolean;
+export interface TemporarySaveRequestProps {
   name: string;
   studentNumber: string;
   affiliation: string;
@@ -7,13 +6,9 @@ export interface RegistrationRequestProps {
   isLightCar: boolean;
   phoneNumber: string;
   selectSectorId: number;
-  captchaPendingCode?: string;
-  captchaAnswer?: string;
-  email: string;
 }
 
-export class RegistrationRequest {
-  isRegistration: boolean;
+export class TemporarySaveRequest {
   name: string;
   studentNum: string;
   affiliation: string;
@@ -21,11 +16,36 @@ export class RegistrationRequest {
   isLight: boolean;
   phoneNum: string;
   selectSectorId: number;
-  captchaCode?: string;
-  captchaAnswer?: string;
 
   constructor({
-    isRegistration,
+    name,
+    studentNumber,
+    affiliation,
+    carNumber,
+    isLightCar,
+    phoneNumber,
+    selectSectorId,
+  }: TemporarySaveRequestProps) {
+    this.name = name;
+    this.studentNum = studentNumber;
+    this.affiliation = affiliation;
+    this.carNum = carNumber;
+    this.isLight = isLightCar;
+    this.phoneNum = phoneNumber;
+    this.selectSectorId = selectSectorId;
+  }
+}
+
+export interface RegistrationRequestProps extends TemporarySaveRequestProps {
+  captchaPendingCode: string;
+  captchaAnswer: string;
+}
+
+export class RegistrationRequest extends TemporarySaveRequest {
+  captchaCode: string;
+  captchaAnswer: string;
+
+  constructor({
     name,
     studentNumber,
     affiliation,
@@ -35,16 +55,17 @@ export class RegistrationRequest {
     selectSectorId,
     captchaPendingCode,
     captchaAnswer,
-    email,
   }: RegistrationRequestProps) {
-    this.isRegistration = isRegistration;
-    this.name = name;
-    this.studentNum = studentNumber;
-    this.affiliation = affiliation;
-    this.carNum = carNumber;
-    this.isLight = isLightCar;
-    this.phoneNum = phoneNumber;
-    this.selectSectorId = selectSectorId;
+    super({
+      name,
+      studentNumber,
+      affiliation,
+      carNumber,
+      isLightCar,
+      phoneNumber,
+      selectSectorId,
+    });
+
     this.captchaCode = captchaPendingCode;
     this.captchaAnswer = captchaAnswer;
   }
