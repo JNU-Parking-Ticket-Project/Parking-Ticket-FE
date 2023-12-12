@@ -2,22 +2,16 @@ import { useCaptchaForm } from '../../hooks/apply/useCaptchaForm';
 import { Txt, InputText, Button } from '@quokka/design-system';
 
 interface CaptchaFormProps {
-  handleSave: ({
-    inputCode,
-    answerCode,
-  }: {
-    inputCode: string;
-    answerCode: string;
-  }) => void;
   handleSubmitLoading: () => void;
+  closeModal: () => void;
 }
 
 export const CaptchaForm = ({
-  handleSave,
   handleSubmitLoading,
+  closeModal,
 }: CaptchaFormProps) => {
   const { input, handleInput, captchaImageUrl, handleSubmit } = useCaptchaForm({
-    postRegistration: handleSave,
+    closeModal,
   });
 
   return (

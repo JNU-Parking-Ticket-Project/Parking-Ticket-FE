@@ -6,19 +6,11 @@ import { Spinner } from '../../assets/Spinner';
 interface ApplyCaptchaModalProps extends PropsWithChildren {
   isOpen: boolean;
   onRequestClose: () => void;
-  handleSave: ({
-    inputCode,
-    answerCode,
-  }: {
-    inputCode: string;
-    answerCode: string;
-  }) => void;
 }
 
 export const ApplyCaptchaModal = ({
   isOpen,
   onRequestClose,
-  handleSave,
 }: ApplyCaptchaModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,8 +48,8 @@ export const ApplyCaptchaModal = ({
       ) : (
         <Suspense>
           <CaptchaForm
-            handleSave={handleSave}
             handleSubmitLoading={() => setIsLoading(true)}
+            closeModal={onRequestClose}
           />
         </Suspense>
       )}
