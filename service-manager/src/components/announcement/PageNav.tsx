@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
 import { Txt } from '@quokka/design-system';
 import { generatePaginationIndexs } from '../../functions/announcement';
+import { PAGE_FIRST } from '../../constants/announcement';
 
 interface PageNavProps {
   lastIdx: number;
@@ -9,10 +10,10 @@ interface PageNavProps {
 }
 
 const PrevNavLinkGroup = ({ currentIdx }: { currentIdx: number }) => {
-  if (currentIdx > 0) {
+  if (currentIdx > PAGE_FIRST) {
     return (
       <>
-        <Link className="p-1" to={`/announcement?page=${0}`}>
+        <Link className="p-1" to={`/announcement?page=${PAGE_FIRST}`}>
           <Icon type="rightDoubleArrow" className="rotate-180" />
         </Link>
         <Link to={`/announcement?page=${currentIdx - 1}`} className="px-1">
