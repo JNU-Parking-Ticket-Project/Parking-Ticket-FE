@@ -11,7 +11,7 @@ export const AnnouncementUpdatePage = () => {
     <>
       <div>
         <Txt size="h3" color="primary">
-          공지사항 작성
+          공지사항 수정
         </Txt>
         <AnnouncementUpdate announceId={+announcementId} />
       </div>
