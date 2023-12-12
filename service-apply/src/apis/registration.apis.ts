@@ -1,5 +1,6 @@
 import { https } from '../functions/https';
 import {
+  CaptchaResponse,
   RegistrationOptionsResponse,
   RegistrationRequest,
   RegistrationResponse,
@@ -50,3 +51,12 @@ export const getRegistration =
     }
     return new RegistrationOptionsResponse(response);
   };
+
+export const getCaptcha = async () => {
+  const response = await https.get('/v1/captcha');
+  if (isErrorResponse(response)) {
+    throw new Error('자동 신청 방지 이미지 조회를 실패했습니다.');
+  }
+
+  return new CaptchaResponse(response);
+};

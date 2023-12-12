@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCaptcha } from '../../apis/captcha.apis';
+import { getCaptcha } from 'service-apply/src/apis/registration.apis';
 
 export const useCaptchaQuery = () => {
   const { data } = useSuspenseQuery({

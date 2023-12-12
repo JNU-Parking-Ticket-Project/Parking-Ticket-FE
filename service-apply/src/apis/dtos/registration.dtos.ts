@@ -109,3 +109,19 @@ export class RegistrationOptionsResponse {
     this.affiliation = affiliation;
   }
 }
+
+export class CaptchaResponse {
+  captchaCode: string;
+  captchaImageUrl: string;
+
+  constructor({
+    captchaCode,
+    captchaImageUrl,
+  }: {
+    captchaCode: string;
+    captchaImageUrl: string;
+  }) {
+    this.captchaCode = captchaCode;
+    this.captchaImageUrl = captchaImageUrl;
+  }
+}
