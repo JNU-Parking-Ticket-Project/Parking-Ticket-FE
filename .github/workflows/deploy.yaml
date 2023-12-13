@@ -19,27 +19,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: pnpm 설치
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2
         with:
           version: 8
-          run_install: false
-
-      - name: pnpm store 경로 설정
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: pnpm cache 설정
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: dependencies 설치
-        run: pnpm install --lockfile
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+            - args: [--global, gulp, prettier, typescript]
 
       - name: env 파일 생성
         run: |

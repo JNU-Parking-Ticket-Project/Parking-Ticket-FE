@@ -14,7 +14,7 @@ export const AnnouncementListItem = ({
 
   return (
     <Link to={`/announcement/${announceId}`}>
-      <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">
+      <div className="border-b flex justify-between hover:bg-gray-100 p-3">
         <Txt>{announceTitle}</Txt>
         <Txt className="w-24 text-center">{`${year}-${month}-${day}`}</Txt>
       </div>

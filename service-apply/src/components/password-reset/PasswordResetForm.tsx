@@ -28,7 +28,7 @@ export const PasswordResetForm = ({ code }: { code: string }) => {
         <InputText
           type="password"
           className="flex-[1_0_7rem]"
-          label="비밀번호 재설정"
+          label="비밀번호 재입력"
           labelClassName="w-28"
           placeholder="새로운 비밀번호 확인"
           name="confirmPassword"

@@ -3,7 +3,7 @@ import { isErrorResponse } from './dtos/response.dtos';
 import { Sector } from './dtos/sector.dtos';
 import { SettingTime } from './dtos/times.dtos';
 
-interface SectorRequset {
+interface SectorRequest {
   name: string;
   sectorNumber: string;
   sectorCapacity: number;
@@ -11,23 +11,23 @@ interface SectorRequset {
 }
 
 export const getSectors = async (): Promise<Sector[]> => {
-  const response = await https.get(`/v1/sectors`);
+  const response = await https.get('/v1/sectors');
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
   return response.map((sector: any) => new Sector(sector));
 };
 
-export const putSectors = async (data: SectorRequset[]) => {
-  const response = await https.put(`/v1/sectors`, data);
+export const putSectors = async (data: SectorRequest[]) => {
+  const response = await https.put('/v1/sectors', data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
   return response;
 };
 
-export const postSectors = async (data: SectorRequset[]) => {
-  const response = await https.post(`/v1/sectors`, data);
+export const postSectors = async (data: SectorRequest[]) => {
+  const response = await https.post('/v1/sectors', data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }

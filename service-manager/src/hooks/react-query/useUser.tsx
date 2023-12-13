@@ -1,4 +1,8 @@
-import { MutateOptions, useMutation } from '@tanstack/react-query';
+import {
+  MutateOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import {
   CheckEmailResponse,
   PasswordFind,
@@ -16,6 +20,7 @@ import {
   postPasswordFind,
   postPasswordReset,
   postSignup,
+  putAdminRole,
 } from '../../apis/user.apis';
 import { setToken } from '../../functions/jwt';
 
@@ -139,4 +144,19 @@ export const useEamilCheckMutate = () => {
       });
     },
   };
+};
+
+export const useAdminRoleMutate = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate: putAdminRoleMutate } = useMutation({
+    mutationKey: ['admin-role'],
+    mutationFn: putAdminRole,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['councils'],
+      });
+    },
+  });
+  return { putAdminRoleMutate };
 };

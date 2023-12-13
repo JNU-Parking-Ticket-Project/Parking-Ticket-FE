@@ -6,10 +6,13 @@ import {
 import {
   RegistrationRequest,
   RegistrationResponse,
+  TemporarySaveRequest,
 } from '../../apis/dtos/registration.dtos';
 import {
+  getCaptcha,
   getRegistration,
   postRegistration,
+  postTemporarySave,
 } from '../../apis/registration.apis';
 
 export const useApplyMutate = () => {
@@ -41,6 +44,35 @@ export const useApplyMutate = () => {
   };
 };
 
+export const useTemporarySaveMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['applyTemporarySave'],
+    mutationFn: postTemporarySave,
+  });
+
+  return {
+    postTemporarySave: (
+      temporarySaveRequest: TemporarySaveRequest,
+      mutateOption?: Omit<
+        MutateOptions<
+          RegistrationResponse,
+          Error,
+          TemporarySaveRequest,
+          unknown
+        >,
+        'onSettled'
+      >,
+    ) => {
+      mutate(temporarySaveRequest, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+        },
+      });
+    },
+  };
+};
+
 export const useApplyQuery = () => {
   const { data } = useSuspenseQuery({
     queryKey: ['apply'],
@@ -52,5 +84,17 @@ export const useApplyQuery = () => {
 
   return {
     registrationData: data,
+  };
+};
+
+export const useCaptchaQuery = () => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['captcha'],
+    queryFn: getCaptcha,
+  });
+
+  return {
+    captchaCode: data.captchaCode,
+    captchaImageUrl: data.captchaImageUrl,
   };
 };

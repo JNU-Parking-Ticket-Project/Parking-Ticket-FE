@@ -29,7 +29,7 @@ export const useRequestPasswordForm = () => {
       { email },
       {
         onSuccess: () => {
-          alert('이메일을 확인해주세요.');
+          alert('본인인증 이메일이 전송되었습니다.');
           navigate('/');
         },
       },

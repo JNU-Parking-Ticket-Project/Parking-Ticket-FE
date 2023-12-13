@@ -1,38 +1,73 @@
-export interface RegistrationRequestProps {
-  email: string;
+export interface TemporarySaveRequestProps {
   name: string;
   studentNumber: string;
+  affiliation: string;
   carNumber: string;
   isLightCar: boolean;
   phoneNumber: string;
   selectSectorId: number;
-  isRegistration: boolean;
 }
 
-export class RegistrationRequest {
+export class TemporarySaveRequest {
   name: string;
   studentNum: string;
+  affiliation: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
   selectSectorId: number;
-  isRegistration: boolean;
+
   constructor({
     name,
     studentNumber,
+    affiliation,
     carNumber,
     isLightCar,
     phoneNumber,
     selectSectorId,
-    isRegistration,
-  }: RegistrationRequestProps) {
+  }: TemporarySaveRequestProps) {
     this.name = name;
     this.studentNum = studentNumber;
+    this.affiliation = affiliation;
     this.carNum = carNumber;
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
     this.selectSectorId = selectSectorId;
-    this.isRegistration = isRegistration;
+  }
+}
+
+export interface RegistrationRequestProps extends TemporarySaveRequestProps {
+  captchaPendingCode: string;
+  captchaAnswer: string;
+}
+
+export class RegistrationRequest extends TemporarySaveRequest {
+  captchaCode: string;
+  captchaAnswer: string;
+
+  constructor({
+    name,
+    studentNumber,
+    affiliation,
+    carNumber,
+    isLightCar,
+    phoneNumber,
+    selectSectorId,
+    captchaPendingCode,
+    captchaAnswer,
+  }: RegistrationRequestProps) {
+    super({
+      name,
+      studentNumber,
+      affiliation,
+      carNumber,
+      isLightCar,
+      phoneNumber,
+      selectSectorId,
+    });
+
+    this.captchaCode = captchaPendingCode;
+    this.captchaAnswer = captchaAnswer;
   }
 }
 
@@ -50,7 +85,7 @@ interface RegistrationResponseProps {
   carNum: string;
   isLight: boolean;
   phoneNum: string;
-  sector: {
+  sectors: {
     sectorId: number;
     sectorNum: string;
     sectorName: string;
@@ -79,7 +114,7 @@ export class RegistrationOptionsResponse {
     isLight,
     name,
     phoneNum,
-    sector,
+    sectors,
     studentNum,
     selectSectorId,
     affiliation,
@@ -89,9 +124,25 @@ export class RegistrationOptionsResponse {
     this.isCompact = isLight;
     this.studentName = name;
     this.phoneNumber = phoneNum;
-    this.sector = sector;
+    this.sector = sectors;
     this.studentNumber = studentNum;
     this.selectSectorId = selectSectorId;
     this.affiliation = affiliation;
+  }
+}
+
+export class CaptchaResponse {
+  captchaCode: string;
+  captchaImageUrl: string;
+
+  constructor({
+    captchaCode,
+    captchaImageUrl,
+  }: {
+    captchaCode: string;
+    captchaImageUrl: string;
+  }) {
+    this.captchaCode = captchaCode;
+    this.captchaImageUrl = captchaImageUrl;
   }
 }
