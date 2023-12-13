@@ -13,6 +13,6 @@ export const generatePaginationIndexs = (
         spliter -
         (lastIdx - currentIdx > spliter ? 0 : spliter - (lastIdx - currentIdx)), // 마지막일때 좌측이 얼마나 있는지 계산하기 위함
     )
-    .filter((idx) => idx > 0 && idx <= lastIdx)
+    .filter((idx) => idx >= 0 && idx <= lastIdx)
     .splice(0, PAGINATION_BOUND);
 };

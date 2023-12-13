@@ -1,8 +1,8 @@
-import { useNoticeMutate } from './react-query/useNotice';
+import { useNoticeMutate } from '../react-query/useNotice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export interface NoticeFormProps {
+interface NoticeFormProps {
   noticeContent: string;
 }
 

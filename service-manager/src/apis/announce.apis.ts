@@ -1,5 +1,5 @@
 import { https } from '../functions/https';
-import { AllAnnounce, Announce, LastAnnounce } from './dtos/announce.dtos';
+import { AllAnnounce, Announce, AnnounceDelete } from './dtos/announce.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
 
 export const getAllAnnounce = async (page: number) => {
@@ -18,7 +18,7 @@ export const getAnnounceById = async (announceId: number) => {
   return new Announce(response);
 };
 
-interface AnnounceRequest {
+export interface AnnounceRequest {
   announceTitle: string;
   announceContent: string;
 }
@@ -31,10 +31,13 @@ export const postAnnounce = async (data: AnnounceRequest) => {
   return new Announce(response);
 };
 
-export const putAnnounceById = async (
-  announceId: number,
-  data: AnnounceRequest,
-) => {
+export const putAnnounceById = async ({
+  announceId,
+  data,
+}: {
+  announceId: number;
+  data: AnnounceRequest;
+}) => {
   const response = await https.put(`/v1/announce/${announceId}`, data);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
@@ -47,5 +50,5 @@ export const deleteAnnounceById = async (announceId: number) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new Announce(response);
+  return new AnnounceDelete(response);
 };
