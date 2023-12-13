@@ -1,5 +1,9 @@
-import { NoticeRead } from '../../components/notice/NoticeRead';
+import { INIT_CONTENT, NoticeView } from '../../components/notice/NoticeView';
 
-export const NoticeView = () => {
-  return <NoticeRead />;
+export const NoticeViewPage = () => {
+  return (
+    <div className="flex flex-col">
+      <NoticeView content={INIT_CONTENT} />
+    </div>
+  );
 };
