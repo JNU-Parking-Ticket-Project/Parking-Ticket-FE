@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
@@ -6,6 +6,7 @@ import { setMinutes, setHours } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
+import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -21,7 +22,7 @@ interface SettingTimeProps {
 
 const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const selectedYear = date.getFullYear();
-  const selectedMonth = date.getMonth().toString().padStart(2, '0');
+  const selectedMonth = (date.getMonth() + 1).toString().padStart(2, '0');
   const selectedDay = date.getDate().toString().padStart(2, '0');
   const selectedHour = date.getHours().toString().padStart(2, '0');
   const selectedMinute = date.getMinutes().toString().padStart(2, '0');
@@ -48,10 +49,15 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 };
 
 export const SettingTime = () => {
-  const [opendate, setOpenDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(
-    setHours(setMinutes(new Date(), 59), 23),
-  );
+  const { timeSettingData, updateSettingTime } = useSectionTimeSetting();
+
+  const [opendate, setOpenDate] = useState(timeSettingData.startAt);
+  const [endDate, setEndDate] = useState(timeSettingData.endAt);
+
+  useEffect(() => {
+    setOpenDate(timeSettingData.startAt);
+    setEndDate(timeSettingData.endAt);
+  }, [timeSettingData]);
 
   return (
     <>
@@ -69,12 +75,28 @@ export const SettingTime = () => {
           date={endDate}
           setDate={(date) => {
             if (!date) return;
+            if (date < opendate) return;
             setEndDate(date);
           }}
           title="Close"
         />
       </div>
-      <Button size="small" className="float-right my-4">
+      <Button
+        size="small"
+        className="float-right my-4"
+        onClick={() => {
+          updateSettingTime({
+            startAt: setMinutes(
+              setHours(opendate, opendate.getHours()),
+              opendate.getMinutes(),
+            ),
+            endAt: setMinutes(
+              setHours(endDate, endDate.getHours()),
+              endDate.getMinutes(),
+            ),
+          });
+        }}
+      >
         저장
       </Button>
     </>
