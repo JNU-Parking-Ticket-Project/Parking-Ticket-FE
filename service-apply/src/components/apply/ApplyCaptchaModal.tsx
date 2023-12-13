@@ -14,10 +14,10 @@ export const ApplyCaptchaModal = ({
   isOpen,
   onRequestClose,
 }: ApplyCaptchaModalProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { input, handleInput, captchaImageUrl, handleSubmit } = useCaptchaForm({
-    closeModal: onRequestClose,
-  });
+  const { isLoading, input, handleInput, captchaImageUrl, handleSubmit } =
+    useCaptchaForm({
+      closeModal: onRequestClose,
+    });
 
   return (
     <Modal
@@ -55,10 +55,7 @@ export const ApplyCaptchaModal = ({
           codeInput={input}
           handleCodeInput={handleInput}
           captchaImageUrl={captchaImageUrl}
-          handleSubmit={() => {
-            setIsLoading(true);
-            handleSubmit();
-          }}
+          handleSubmit={handleSubmit}
         />
       )}
     </Modal>

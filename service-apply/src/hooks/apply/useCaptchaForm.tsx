@@ -13,11 +13,14 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
   const { postRegistration } = useApplyMutate();
   const state = useContext(ApplyFormContext);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleInput: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInput(e.target.value.replace(/[^0-9]/g, ''));
   };
 
   const handleSubmit = () => {
+    setIsLoading(true);
     postRegistration(
       new RegistrationRequest({
         name: state.studentName,
@@ -31,11 +34,9 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
         captchaAnswer: input,
       }),
       {
-        // FIXME: onError, onSuccess 동작 안 함 (쿼리 devtools에서는 error 캐칭 됨)
         onError: (error) => {
-          console.log(error);
           alert(error.message);
-          closeModal();
+          setIsLoading(false);
           throw new Error(error.message);
         },
         onSuccess: (data) => {
@@ -43,11 +44,12 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
           alert(data.message);
           removeToken();
           closeModal();
+          setIsLoading(false);
           navigate('/');
         },
       },
     );
   };
 
-  return { input, handleInput, captchaImageUrl, handleSubmit };
+  return { isLoading, input, handleInput, captchaImageUrl, handleSubmit };
 };
