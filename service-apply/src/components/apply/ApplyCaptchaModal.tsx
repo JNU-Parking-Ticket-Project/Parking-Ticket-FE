@@ -1,4 +1,4 @@
-import { Modal } from '@quokka/design-system';
+import { Modal, Txt } from '@quokka/design-system';
 import { Suspense, useState } from 'react';
 import { CaptchaForm } from './CaptchaForm';
 import { Spinner } from '../../assets/Spinner';
@@ -40,12 +40,12 @@ export const ApplyCaptchaModal = ({
     >
       {isLoading ? (
         <div className="flex flex-col justify-center align-center">
-          <span className="text-center text-lg">
+          <Txt size="h6" className="text-center">
             신청 접수 중입니다. 잠시만 기다려주세요.
-          </span>
-          <span className="text-center text-lg">
+          </Txt>
+          <Txt size="h6" className="text-center">
             새로고침 시 신청이 취소됩니다.
-          </span>
+          </Txt>
           <div className="w-full">
             <Spinner />
           </div>
