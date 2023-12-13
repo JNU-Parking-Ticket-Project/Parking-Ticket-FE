@@ -1,3 +1,5 @@
+import type { Role } from '../../types/admin';
+
 export class UserToken {
   accessToken: string;
   refreshToken: string;
@@ -16,23 +18,27 @@ export class UserToken {
 export class Council {
   userId: number;
   name: string;
-  studentNumber: string;
-  phoneNumber: string;
+  studentNum: string;
+  phoneNum: string;
+  role: Role;
   constructor({
     userId,
     name,
     studentNum,
     phoneNum,
+    role,
   }: {
     userId: number;
     name: string;
     studentNum: string;
     phoneNum: string;
+    role: Role;
   }) {
     this.userId = userId;
     this.name = name;
-    this.studentNumber = studentNum;
-    this.phoneNumber = phoneNum;
+    this.studentNum = studentNum;
+    this.phoneNum = phoneNum;
+    this.role = role;
   }
 }
 
