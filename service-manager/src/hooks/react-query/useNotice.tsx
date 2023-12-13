@@ -1,14 +1,14 @@
 import { getNotice, putNotice } from '../../apis/notice.apis';
 import {
-  useQuery,
   useMutation,
   MutateOptions,
   useQueryClient,
+  useSuspenseQuery,
 } from '@tanstack/react-query';
 import { Notice } from '../../apis/dtos/notice.dtos';
 
 export const useNoticeQuery = () => {
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['notice'],
     queryFn: getNotice,
     gcTime: Infinity,
