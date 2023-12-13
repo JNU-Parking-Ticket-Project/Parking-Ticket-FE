@@ -100,9 +100,9 @@ export const putAdminRole = async ({
   return response;
 };
 
-export const getAllCouncil = async () => {
+export const getAllCouncils = async () => {
   const response = await https.get('/v1/admin/councils');
-  
+
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
