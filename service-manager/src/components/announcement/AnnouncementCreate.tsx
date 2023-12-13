@@ -22,6 +22,7 @@ export const AnnouncementCreate = () => {
   const onSubmitAnnounce = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
+    if (!editorInstance) throw new Error('editorInstance is undefined');
     const markdown = editorInstance?.getMarkdown();
     if (!markdown || !title) {
       alert('공지사항을 입력해주세요');

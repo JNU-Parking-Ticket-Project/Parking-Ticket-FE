@@ -31,6 +31,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const onUpdateAnnounce = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
+    if (!editorInstance) throw new Error('editorInstance is undefined');
     const markdown = editorInstance?.getMarkdown();
     if (!markdown || !title) {
       alert('공지사항을 입력해주세요');
@@ -60,6 +61,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
               previewStyle="vertical"
               height="600px"
               initialEditType="markdown"
+              previewHighlight={false}
               useCommandShortcut={true}
               ref={editorRef}
             />
