@@ -1,12 +1,11 @@
 import { Button, Container, Txt } from '@quokka/design-system';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Icon } from './Icon';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 
 interface AnnouncementDetailProps {
   onOpenModal: () => void;
   announcementId: number;
-  page?: string;
 }
 
 export const AnnouncementDetail = ({
@@ -16,8 +15,9 @@ export const AnnouncementDetail = ({
   const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
 
   const navigate = useNavigate();
+  //해당 게시물이 위치한 페이지로 이동
   const onBack = () => {
-    navigate('/announcement');
+    navigate('/announcement/');
   };
   const onNavigateUpdate = () => {
     navigate(`/announcement/update/${announcementId}`);

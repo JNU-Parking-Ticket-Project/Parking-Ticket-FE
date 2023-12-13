@@ -28,7 +28,8 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
         },
         onSuccess: (data) => {
           if (!data) throw new Error('data is undefined');
-          navigate(-1);
+          alert('등록되었습니다.');
+          navigate('/announcement');
         },
       },
     );
@@ -70,6 +71,7 @@ export const useAnnounceUpdate = (init: AnnouncementUpdateForm) => {
         },
         onSuccess: (data) => {
           if (!data) throw new Error('data is undefined');
+          alert('수정되었습니다.');
           navigate(`/announcement/${announceId}`);
         },
       },

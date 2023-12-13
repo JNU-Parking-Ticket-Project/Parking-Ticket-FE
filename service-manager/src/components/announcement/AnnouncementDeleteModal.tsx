@@ -1,6 +1,7 @@
 import { Button, Modal, Txt } from '@quokka/design-system';
 import { useNavigate } from 'react-router-dom';
 import { useAnnounceDelete } from '../../hooks/react-query/useAnnounceForm';
+import { error } from 'console';
 
 interface AnnouncementDeleteModalProps {
   isOpen: boolean;
@@ -18,7 +19,6 @@ export const AnnouncementDeleteModal = ({
 
   const onDeleteAnnouncement = () => {
     onDelete(announcementId);
-    navigate('/announcement');
   };
 
   return (
