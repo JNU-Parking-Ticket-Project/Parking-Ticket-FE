@@ -13,9 +13,7 @@ export const AnnouncementDetail = ({
   announcementId,
 }: AnnouncementDetailProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
-
   const navigate = useNavigate();
-  //해당 게시물이 위치한 페이지로 이동
   const onBack = () => {
     navigate('/announcement/');
   };
