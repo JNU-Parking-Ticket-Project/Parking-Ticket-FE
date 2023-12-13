@@ -5,7 +5,7 @@ import { useAnnounceListQuery } from '../../hooks/react-query/useAnnounce';
 import { Button, Txt } from '@quokka/design-system';
 
 export const AnnouncementListPage = () => {
-  const [searchParam, _] = useSearchParams();
+  const [searchParam] = useSearchParams();
   const currentPage = searchParam.get('page') ?? '0';
 
   const {
