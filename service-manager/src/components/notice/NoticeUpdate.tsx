@@ -12,6 +12,8 @@ const ToastEditor = lazy(() =>
   })),
 );
 
+export const Default_Notice = '## 안내사항을 작성해주세요.';
+
 export const NoticeUpdate = () => {
   const editorRef = useRef<Editor>(null);
   const { noticeData } = useNoticeQuery();
@@ -39,7 +41,7 @@ export const NoticeUpdate = () => {
       >
         <Suspense fallback={<div>Loading...</div>}>
           <ToastEditor
-            initialValue={content}
+            initialValue={noticeData?.noticeContent || Default_Notice}
             previewStyle="vertical"
             previewHighlight={false}
             toolbarItems={[
