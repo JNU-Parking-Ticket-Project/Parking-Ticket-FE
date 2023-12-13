@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useApplyQuery, useTemporarySaveMutate } from './react-query/useApply';
+import { useApplyQuery, useTemporarySaveMutate } from '../react-query/useApply';
 import { useNavigate } from 'react-router-dom';
-import { removeToken } from '../functions/jwt';
-import { TemporarySaveRequest } from '../apis/dtos/registration.dtos';
-import { useApplyFormContext } from './apply/useApplyFormContext';
+import { removeToken } from '../../functions/jwt';
+import { TemporarySaveRequest } from '../../apis/dtos/registration.dtos';
+import { useApplyFormContext } from './useApplyFormContext';
 
 export const useApplyForm = () => {
   const navigate = useNavigate();

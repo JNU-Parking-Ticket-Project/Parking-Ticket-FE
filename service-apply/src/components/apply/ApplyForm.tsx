@@ -6,7 +6,7 @@ import {
   Radio,
   Txt,
 } from '@quokka/design-system';
-import { useApplyForm } from '../../hooks/useApplyForm';
+import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
