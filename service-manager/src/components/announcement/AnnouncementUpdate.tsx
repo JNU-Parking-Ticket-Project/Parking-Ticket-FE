@@ -32,10 +32,14 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
     const markdown = editorInstance?.getMarkdown();
+    if (!markdown || !title) {
+      alert('공지사항을 입력해주세요');
+      return;
+    }
     onUpdate({
       announceId,
       announceTitle: title,
-      announceContent: markdown || '',
+      announceContent: markdown,
     });
   };
 

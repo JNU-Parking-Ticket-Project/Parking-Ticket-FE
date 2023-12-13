@@ -23,9 +23,13 @@ export const AnnouncementCreate = () => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
     const markdown = editorInstance?.getMarkdown();
+    if (!markdown || !title) {
+      alert('공지사항을 입력해주세요');
+      return;
+    }
     onSubmit({
       announceTitle: title,
-      announceContent: markdown || '',
+      announceContent: markdown,
     });
   };
 
