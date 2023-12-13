@@ -4,6 +4,7 @@ import { Button } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import { useNoticeQuery } from '../../hooks/react-query/useNotice';
 import { Default_Notice } from './NoticeUpdate';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 const ToastViewer = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -14,16 +15,18 @@ const ToastViewer = lazy(() =>
 export const NoticeView = () => {
   const { noticeData } = useNoticeQuery();
   const editorRef = useRef<Viewer>(null);
-  const [content] = useState(noticeData?.noticeContent || Default_Notice);
+  const content = noticeData.noticeContent ?? Default_Notice;
 
   return (
     <>
       <Link to="/notice-update" className="flex justify-end">
         <Button color="secondary">수정하기</Button>
       </Link>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ToastViewer initialValue={content} ref={editorRef} />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ToastViewer initialValue={content} ref={editorRef} />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 };
