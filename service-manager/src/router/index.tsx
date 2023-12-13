@@ -4,8 +4,7 @@ import { SignUpPage } from '../pages/SignUp.page';
 import { AnnouncementPage } from '../pages/announcement/Announcement.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { ApplyListPage } from '../pages/ApplyList.page';
-import { NoticeView } from '../pages/notice/NoticeView.page';
-import { NoticeCreate } from '../pages/notice/NoticeCreate.page';
+import { NoticeViewPage } from '../pages/notice/NoticeView.page';
 import { AdminPage } from '../pages/Admin.page';
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { RequestPasswordResetPage } from '../pages/PasswordReset/RequestPasswordReset.page';
@@ -40,9 +39,7 @@ export default function Router() {
           element={<AnnouncementCreatePage />}
         />
         <Route path="apply-list" element={<ApplyListPage />} />
-        <Route path="notice" element={<NoticeView />} />
-        <Route path="notice-create" element={<NoticeCreate />} />
-        <Route path="notice-view" element={<NoticeView />} />
+        <Route path="notice" element={<NoticeViewPage />} />
         <Route path="setting" element={<SettingLayout />}>
           <Route path="section" element={<SectionSettingPage />} />
           <Route path="time" element={<TimeSettingPage />} />
