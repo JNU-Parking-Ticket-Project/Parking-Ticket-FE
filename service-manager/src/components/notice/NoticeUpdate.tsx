@@ -1,10 +1,7 @@
 import { Button } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
-import { useState, useRef, lazy, Suspense } from 'react';
-import {
-  useNoticeQuery,
-  useNoticeMutate,
-} from '../../hooks/react-query/useNotice';
+import { useRef, lazy, Suspense } from 'react';
+import { useNoticeQuery } from '../../hooks/react-query/useNotice';
 import { useNoticeForm } from '../../hooks/useNoticeForm';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
@@ -18,16 +15,18 @@ const ToastEditor = lazy(() =>
 export const NoticeUpdate = () => {
   const editorRef = useRef<Editor>(null);
   const { noticeData } = useNoticeQuery();
-  const { state, dispatch, onSubmit } = useNoticeForm({
-    content: noticeData?.noticeContent || '# 안내 사항',
-  });
+  const { content, onUpdate } = useNoticeForm();
 
-  const onSubmitNotice = (e: React.FormEvent<HTMLFormElement>) => {
+  const onUpdateNotice = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
-    const markdown = editorInstance?.getMarkdown() ?? '';
-    dispatch({ type: 'content', payload: markdown });
-    onSubmit();
+    if (!editorInstance) throw new Error('editorInstance is undefined');
+    const markdown = editorInstance.getMarkdown();
+    if (!markdown) {
+      alert('내용을 입력해주세요.');
+      return;
+    }
+    onUpdate({ noticeContent: markdown });
   };
 
   return (
@@ -35,12 +34,12 @@ export const NoticeUpdate = () => {
       <form
         id="noticeForm"
         method="post"
-        onSubmit={onSubmitNotice}
+        onSubmit={onUpdateNotice}
         className="my-4"
       >
         <Suspense fallback={<div>Loading...</div>}>
           <ToastEditor
-            initialValue={state.content}
+            initialValue={content}
             previewStyle="vertical"
             previewHighlight={false}
             toolbarItems={[
