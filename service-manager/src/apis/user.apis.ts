@@ -76,7 +76,7 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   if (!token) {
     throw new Error('Refresh token not found');
   }
-  const response = await https.post(`/v1/auth/login`, { refreshtoken: token });
+  const response = await https.post('/v1/auth/login', { refreshtoken: token });
   if (isErrorResponse(response)) {
     removeToken();
     throw new Error(response.reason);
@@ -100,8 +100,9 @@ export const putAdminRole = async ({
   return response;
 };
 
-export const getAllCouncils = async () => {
-  const response = await https.get(`/v1/admin/councils`);
+export const getAllCouncil = async () => {
+  const response = await https.get('/v1/admin/councils');
+  
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -109,7 +110,7 @@ export const getAllCouncils = async () => {
 };
 
 export const postCheckEmail = async (email: string) => {
-  const response = await https.post(`/v1/auth/check/email`, { email });
+  const response = await https.post('/v1/auth/check/email', { email });
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
