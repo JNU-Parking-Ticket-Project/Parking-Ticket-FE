@@ -1,4 +1,3 @@
-import { Txt } from '@quokka/design-system';
 import { INIT_CONTENT, NoticeView } from '../../components/notice/NoticeView';
 
 export const NoticeViewPage = () => {
