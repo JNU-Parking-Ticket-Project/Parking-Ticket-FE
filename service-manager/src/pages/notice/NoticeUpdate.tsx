@@ -1,11 +1,11 @@
 import { Txt } from '@quokka/design-system';
-import { NoticeForm } from '../../components/notice/NoticeForm';
+import { NoticeUpdate } from '../../components/notice/NoticeUpdate';
 
-export const NoticeCreatePage = () => {
+export const NoticeUpdatePage = () => {
   return (
     <div className="flex flex-col">
       <Txt size="h3">안내사항 작성</Txt>
-      <NoticeForm content="" />
+      <NoticeUpdate />
     </div>
   );
 };

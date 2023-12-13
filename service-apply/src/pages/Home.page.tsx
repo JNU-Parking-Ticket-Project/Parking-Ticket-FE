@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { Footer } from '../components/common/Footer';
 import { MainContainer } from '../components/common/MainContainer';
-import { HomeInforamtion } from '../components/home/HomeInformation';
+import { HomeInformation } from '../components/home/HomeInformation';
 import { HomeLogin } from '../components/home/HomeLogin';
 import { HomeAnnounce } from '../components/home/HomeAnnounce';
 import { HomeTitle } from '../components/home/HomeTitle';
@@ -21,7 +21,7 @@ export const HomePage = () => {
           <div className="flex-1 w-1/2">
             <ErrorBoundary>
               <Suspense>
-                <HomeInforamtion />
+                <HomeInformation />
               </Suspense>
               <Suspense>
                 <HomeAnnounce />

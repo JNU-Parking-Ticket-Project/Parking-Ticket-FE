@@ -6,11 +6,14 @@ import {
 import {
   deleteSector,
   getSectors,
+  getSettingTime,
   postSectors,
+  postSettingTime,
   putSectors,
-} from '../../apis/sectors.apis';
+} from '../../apis/settings.apis';
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
+import { SettingTime } from 'service-manager/src/apis/dtos/times.dtos';
 
 export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({
@@ -95,6 +98,42 @@ export const useSectorDeleteMutate = () => {
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
           queryClient.invalidateQueries({ queryKey: ['sectors'] });
+        },
+      }),
+  };
+};
+
+export const useTimeSettingQuery = () => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['timeSetting'],
+    queryFn: getSettingTime,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { timeSettingData: data };
+};
+
+export const useTimeSettingUpdateMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['timeSettingUpdate'],
+    mutationFn: postSettingTime,
+  });
+  const queryClient = useQueryClient();
+
+  return {
+    postSettingTime: (
+      times: SettingTime,
+      mutateOption?: Omit<
+        MutateOptions<{ message: string }, Error, SettingTime, unknown>,
+        'onSettled'
+      >,
+    ) =>
+      mutate(times, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+          queryClient.invalidateQueries({ queryKey: ['timeSetting'] });
         },
       }),
   };

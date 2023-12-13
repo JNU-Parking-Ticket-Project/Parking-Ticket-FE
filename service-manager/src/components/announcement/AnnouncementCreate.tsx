@@ -2,7 +2,7 @@ import { Button } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useAnnounceForm } from '../../hooks/react-query/useAnnounceForm';
-import ErrorBoundary from '../common/ErrorBoundray';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({

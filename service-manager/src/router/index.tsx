@@ -3,6 +3,7 @@ import { MainPage } from '../pages/Main.page';
 import { SignUpPage } from '../pages/SignUp.page';
 import { AnnouncementPage } from '../pages/announcement/Announcement.page';
 import { ApplyListPage } from '../pages/ApplyList.page';
+import { AdminPage } from '../pages/Admin.page';
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { RequestPasswordResetPage } from '../pages/PasswordReset/RequestPasswordReset.page';
 import { PasswordResetPage } from '../pages/PasswordReset/PasswordReset.page';
@@ -20,6 +21,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/admin" element={<AdminPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/password-reset" element={<PasswordResetLayout />}>
         <Route index element={<RequestPasswordResetPage />} />

@@ -1,6 +1,6 @@
 import { Container, Txt } from '@quokka/design-system';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
+import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { Icon } from '../../components/announcement/Icon';
 
 export const AnnouncementPage = () => {
@@ -9,7 +9,7 @@ export const AnnouncementPage = () => {
   if (isNaN(+announcementId)) throw new Error('announcementId must be number');
   const navigate = useNavigate();
 
-  const { announceDetailData } = useAnounceDetailQuery(+announcementId);
+  const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
   const handleGoBack = () => {
     navigate(-1);
   };

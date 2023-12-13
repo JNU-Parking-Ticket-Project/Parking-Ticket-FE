@@ -1,10 +1,10 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
-import { useAnounceQuery } from '../../hooks/react-query/useAnnounce';
+import { useAnnounceQuery } from '../../hooks/react-query/useAnnounce';
 import clsx from 'clsx';
 
 export const HomeAnnounce = () => {
-  const { announceData } = useAnounceQuery();
+  const { announceData } = useAnnounceQuery();
 
   return (
     <div className="my-12 pl-10 border-[#D9D9D9] border rounded-lg flex gap-8 items-center">

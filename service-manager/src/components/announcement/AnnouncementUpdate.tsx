@@ -3,7 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense, FormEvent } from 'react';
 import { useAnnounceUpdate } from '../../hooks/react-query/useAnnounceForm';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
-import ErrorBoundary from '../common/ErrorBoundray';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 interface AnnouncementUpdateProps {
   announceId: number;
