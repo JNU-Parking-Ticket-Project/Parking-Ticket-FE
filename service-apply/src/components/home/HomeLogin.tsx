@@ -33,7 +33,6 @@ export const HomeLogin = () => {
       { email, pwd: password },
       {
         onError: (error) => {
-          console.error(error);
           alert(error.message);
           setIsError(true);
           setErrorMessage(error.message);

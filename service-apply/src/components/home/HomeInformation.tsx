@@ -1,7 +1,7 @@
 import { Txt } from '@quokka/design-system';
 import { useInformationQuery } from '../../hooks/react-query/useInformation';
 
-export const HomeInforamtion = () => {
+export const HomeInformation = () => {
   const { information } = useInformationQuery();
 
   return (
@@ -20,4 +20,4 @@ export const HomeInforamtion = () => {
   );
 };
 
-export default HomeInforamtion;
+export default HomeInformation;

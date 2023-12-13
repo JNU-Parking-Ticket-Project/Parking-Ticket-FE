@@ -7,5 +7,5 @@ export const getNotice = async () => {
   if (isErrorResponse(response)) {
     return new Notice({ noticeContent: '' });
   }
-  return new Notice(response.data);
+  return new Notice(response);
 };
