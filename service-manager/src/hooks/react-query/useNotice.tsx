@@ -34,7 +34,7 @@ export const useNoticeMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({ queryKey: ['notice'] });
+          queryClient.setQueryData(['notice'], data);
         },
       });
     },
