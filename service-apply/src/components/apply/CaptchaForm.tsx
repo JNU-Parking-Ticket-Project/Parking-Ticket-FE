@@ -1,19 +1,19 @@
-import { useCaptchaForm } from '../../hooks/apply/useCaptchaForm';
+import { ChangeEventHandler } from 'react';
 import { Txt, InputText, Button } from '@quokka/design-system';
 
 interface CaptchaFormProps {
-  handleSubmitLoading: () => void;
-  closeModal: () => void;
+  codeInput: string;
+  handleCodeInput: ChangeEventHandler<HTMLInputElement>;
+  captchaImageUrl: string;
+  handleSubmit: () => void;
 }
 
 export const CaptchaForm = ({
-  handleSubmitLoading,
-  closeModal,
+  codeInput,
+  handleCodeInput,
+  captchaImageUrl,
+  handleSubmit,
 }: CaptchaFormProps) => {
-  const { input, handleInput, captchaImageUrl, handleSubmit } = useCaptchaForm({
-    closeModal,
-  });
-
   return (
     <div>
       <Txt size="h3" className="block text-center pb-4">
@@ -25,8 +25,8 @@ export const CaptchaForm = ({
       <div className="w-full flex justify-center align-center py-4">
         <InputText
           type="text"
-          value={input}
-          onChange={handleInput}
+          value={codeInput}
+          onChange={handleCodeInput}
           placeholder="정답"
           pattern="[0-9]*"
           className="w-full max-w-lg text-center"
@@ -34,10 +34,7 @@ export const CaptchaForm = ({
       </div>
       <div className="flex justify-center align-center pt-4">
         <Button
-          onClick={() => {
-            handleSubmitLoading();
-            handleSubmit();
-          }}
+          onClick={handleSubmit}
           color="primary"
           size="small"
           className="px-8"

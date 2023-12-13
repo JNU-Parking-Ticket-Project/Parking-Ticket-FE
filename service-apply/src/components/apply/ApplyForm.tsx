@@ -10,6 +10,8 @@ import { useApplyForm } from '../../hooks/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
+import { Suspense } from 'react';
+import ErrorBoundary from '../common/ErrorBoundray';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
   return (
@@ -147,14 +149,17 @@ export const ApplyForm = () => {
           >
             신청하기
           </Button>
-          {isCaptchaModalOpen && (
-            <ApplyCaptchaModal
-              isOpen={isCaptchaModalOpen}
-              onRequestClose={() => {
-                setIsCaptchaModalOpen(false);
-              }}
-            />
-          )}
+
+          <Suspense>
+            <ErrorBoundary>
+              <ApplyCaptchaModal
+                isOpen={isCaptchaModalOpen}
+                onRequestClose={() => {
+                  setIsCaptchaModalOpen(false);
+                }}
+              />
+            </ErrorBoundary>
+          </Suspense>
         </div>
       </div>
     </ApplyFormContext.Provider>
