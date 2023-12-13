@@ -1,5 +1,6 @@
 import { https } from '../functions/https';
 import { removeToken, setToken } from '../functions/jwt';
+import type { Role } from '../types/admin';
 import { isErrorResponse } from './dtos/response.dtos';
 import {
   UserToken,
@@ -85,7 +86,13 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   return retryCallback();
 };
 
-export const putAdminRole = async (userId: number, role: string) => {
+export const putAdminRole = async ({
+  userId,
+  role,
+}: {
+  userId: number;
+  role: Role;
+}) => {
   const response = await https.put(`/v1/admin/role/${userId}`, { role });
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
@@ -93,12 +100,12 @@ export const putAdminRole = async (userId: number, role: string) => {
   return response;
 };
 
-export const getAllCouncil = async () => {
+export const getAllCouncils = async () => {
   const response = await https.get(`/v1/admin/councils`);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.users.map((data: any) => new Council(data));
+  return response.users.map((data: any) => new Council(data)) as Council[];
 };
 
 export const postCheckEmail = async (email: string) => {
