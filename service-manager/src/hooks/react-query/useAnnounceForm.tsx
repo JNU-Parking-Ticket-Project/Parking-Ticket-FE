@@ -7,9 +7,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+const DEFAULT_CONTENT = `# 공지사항을 입력해주세요.`;
+
 export const useAnnounceForm = (init?: AnnouncementFormProps) => {
-  const [title, setTitle] = useState<string>(init?.announceTitle || '');
-  const [content, setContent] = useState<string>(init?.announceContent || '');
+  const [title, setTitle] = useState(init?.announceTitle || '');
+  const content = init?.announceContent || DEFAULT_CONTENT;
   const navigate = useNavigate();
   const { postAnnounce } = useAnnounceCreateMutate();
 
@@ -49,8 +51,8 @@ interface AnnouncementUpdateForm {
 }
 
 export const useAnnounceUpdate = (init: AnnouncementUpdateForm) => {
-  const [title, setTitle] = useState<string>(init.announceTitle || '');
-  const [content, setContent] = useState<string>(init.announceContent || '');
+  const [title, setTitle] = useState(init.announceTitle || '');
+  const content = init.announceContent || '';
   const navigate = useNavigate();
   const { putAnnounceById } = useAnnounceUpdateMutate();
 
