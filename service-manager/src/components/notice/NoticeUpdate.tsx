@@ -5,6 +5,7 @@ import { useNoticeQuery } from '../../hooks/react-query/useNotice';
 import { useNoticeForm } from '../../hooks/useNoticeForm';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -17,7 +18,7 @@ export const Default_Notice = '## 안내사항을 작성해주세요.';
 export const NoticeUpdate = () => {
   const editorRef = useRef<Editor>(null);
   const { noticeData } = useNoticeQuery();
-  const { content, onUpdate } = useNoticeForm();
+  const { onUpdate } = useNoticeForm();
 
   const onUpdateNotice = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,24 +40,26 @@ export const NoticeUpdate = () => {
         onSubmit={onUpdateNotice}
         className="my-4"
       >
-        <Suspense fallback={<div>Loading...</div>}>
-          <ToastEditor
-            initialValue={noticeData?.noticeContent || Default_Notice}
-            previewStyle="vertical"
-            previewHighlight={false}
-            toolbarItems={[
-              ['heading', 'bold', 'italic', 'strike'],
-              ['hr', 'quote'],
-              ['ul', 'ol', 'task', 'indent', 'outdent'],
-              ['table', 'link'],
-              ['code', 'codeblock'],
-            ]}
-            height="600px"
-            initialEditType="markdown"
-            useCommandShortcut={true}
-            ref={editorRef}
-          />
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ToastEditor
+              initialValue={noticeData?.noticeContent || Default_Notice}
+              previewStyle="vertical"
+              previewHighlight={false}
+              toolbarItems={[
+                ['heading', 'bold', 'italic', 'strike'],
+                ['hr', 'quote'],
+                ['ul', 'ol', 'task', 'indent', 'outdent'],
+                ['table', 'link'],
+                ['code', 'codeblock'],
+              ]}
+              height="600px"
+              initialEditType="markdown"
+              useCommandShortcut={true}
+              ref={editorRef}
+            />
+          </Suspense>
+        </ErrorBoundary>
         <div className="flex justify-end">
           <Button type="submit">저장</Button>
         </div>
