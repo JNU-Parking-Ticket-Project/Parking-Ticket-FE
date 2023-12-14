@@ -1,5 +1,4 @@
-import { Viewer } from '@toast-ui/react-editor';
-import { useRef, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Button } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import { useNoticeQuery } from '../../hooks/react-query/useNotice';
@@ -13,14 +12,12 @@ const ToastViewer = lazy(() =>
 
 export const NoticeView = () => {
   const { noticeData } = useNoticeQuery();
-  const editorRef = useRef<Viewer>(null);
-  const content = noticeData.noticeContent;
 
   return (
     <>
       <ErrorBoundary>
         <Suspense>
-          <ToastViewer initialValue={content} ref={editorRef} />
+          <ToastViewer initialValue={noticeData.noticeContent} />
         </Suspense>
       </ErrorBoundary>
       <Link to="/notice-update" className="float-right">
