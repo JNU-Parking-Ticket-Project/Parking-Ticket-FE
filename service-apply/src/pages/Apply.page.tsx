@@ -11,7 +11,11 @@ export const ApplyPage = () => {
     <>
       <MainContainer>
         <CommonTitle />
-        <ApplyTitle />
+        <ErrorBoundary>
+          <Suspense>
+            <ApplyTitle />
+          </Suspense>
+        </ErrorBoundary>
         <ErrorBoundary>
           <Suspense>
             <ApplyForm />
