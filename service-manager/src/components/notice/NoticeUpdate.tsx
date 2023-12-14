@@ -6,14 +6,13 @@ import { useNoticeForm } from '../../hooks/useNoticeForm';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { EditorIconImage } from '../../constants/announcement';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
     default: module.Editor,
   })),
 );
-
-export const Default_Notice = '## 안내사항을 작성해주세요.';
 
 export const NoticeUpdate = () => {
   const editorRef = useRef<Editor>(null);
@@ -41,27 +40,25 @@ export const NoticeUpdate = () => {
         className="my-4"
       >
         <ErrorBoundary>
-          <Suspense fallback={<div>Loading...</div>}>
-            <ToastEditor
-              initialValue={noticeData?.noticeContent || Default_Notice}
-              previewStyle="vertical"
-              previewHighlight={false}
-              toolbarItems={[
-                ['heading', 'bold', 'italic', 'strike'],
-                ['hr', 'quote'],
-                ['ul', 'ol', 'task', 'indent', 'outdent'],
-                ['table', 'link'],
-                ['code', 'codeblock'],
-              ]}
-              height="600px"
-              initialEditType="markdown"
-              useCommandShortcut={true}
-              ref={editorRef}
-            />
+          <Suspense>
+            <div
+              className={`[&_.toastui-editor-toolbar_button]:[background-image:url(${EditorIconImage})]`}
+            >
+              <ToastEditor
+                initialValue={noticeData?.noticeContent}
+                previewStyle="vertical"
+                height="30rem"
+                minHeight="calc(100vh - 33rem)"
+                initialEditType="markdown"
+                ref={editorRef}
+              />
+            </div>
           </Suspense>
         </ErrorBoundary>
-        <div className="flex justify-end">
-          <Button type="submit">저장</Button>
+        <div className="float-right py-4">
+          <Button size="small" className="px-[4rem]" type="submit">
+            저장
+          </Button>
         </div>
       </form>
     </>
