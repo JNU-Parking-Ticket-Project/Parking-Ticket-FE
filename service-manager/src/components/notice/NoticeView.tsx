@@ -1,5 +1,5 @@
 import { Viewer } from '@toast-ui/react-editor';
-import { useState, useRef, lazy, Suspense } from 'react';
+import { useRef, lazy, Suspense } from 'react';
 import { Button } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import { useNoticeQuery } from '../../hooks/react-query/useNotice';
@@ -23,7 +23,7 @@ export const NoticeView = () => {
         <Button color="secondary">수정하기</Button>
       </Link>
       <ErrorBoundary>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <ToastViewer initialValue={content} ref={editorRef} />
         </Suspense>
       </ErrorBoundary>

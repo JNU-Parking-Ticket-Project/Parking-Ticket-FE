@@ -1,8 +1,9 @@
-import { Button } from '@quokka/design-system';
+import { Button, InputText } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useAnnounceForm } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { EditorIconImage } from '../../constants/announcement';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -22,8 +23,11 @@ export const AnnouncementCreate = () => {
   const onSubmitAnnounce = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const editorInstance = editorRef.current?.getInstance();
-    if (!editorInstance) throw new Error('editorInstance is undefined');
-    const markdown = editorInstance?.getMarkdown();
+    if (!editorInstance) {
+      alert('오류가 있습니다 새로고침하여 시도해주세요.');
+      return;
+    }
+    const markdown = editorInstance.getMarkdown();
     if (!markdown || !title) {
       alert('공지사항을 입력해주세요');
       return;
@@ -36,38 +40,33 @@ export const AnnouncementCreate = () => {
 
   return (
     <>
-      <form id="announceForm" method="post" onSubmit={onSubmitAnnounce}>
-        <div className="">
-          <label
-            htmlFor="announceTitle"
-            className="block text-sm font-medium text-gray-700"
-          ></label>
-          <input
-            type="text"
-            name="announceTitle"
-            id="announceTitle"
-            placeholder="제목을 입력해주세요."
-            value={title}
-            className="p-3 my-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full text-2xl border-gray-300 rounded-lg"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-        </div>
+      <InputText
+        type="text"
+        placeholder="제목을 입력해주세요."
+        value={title}
+        className="p-3 my-4 w-full text-2xl"
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <div
+        className={`[&_.toastui-editor-toolbar_button]:[background-image:url(${EditorIconImage})]`}
+      >
         <ErrorBoundary>
           <Suspense>
             <ToastEditor
               previewStyle="vertical"
-              height="600px"
               initialValue={content}
+              height="30rem"
+              minHeight="calc(100vh - 33rem)"
               initialEditType="markdown"
               placeholder="공지사항을 입력해주세요."
               ref={editorRef}
             />
-            <Button type="submit">등록</Button>
+            <Button className="my-4 float-right px-[4rem]" size="small">
+              등록
+            </Button>
           </Suspense>
         </ErrorBoundary>
-      </form>
+      </div>
     </>
   );
 };

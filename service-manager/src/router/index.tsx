@@ -16,6 +16,7 @@ import { NoticeViewPage } from '../pages/notice/NoticeView.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
 import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate.page';
+import { AnnouncementLayout } from '../pages/announcement/AnnouncementLayout.page';
 
 export default function Router() {
   return (
@@ -31,7 +32,7 @@ export default function Router() {
         />
       </Route>
       <Route path="/" element={<CommonLayout />}>
-        <Route path="announcement">
+        <Route path="announcement" element={<AnnouncementLayout />}>
           <Route index element={<AnnouncementListPage />} />
           <Route path=":announcementId" element={<AnnouncementPage />} />
           <Route
