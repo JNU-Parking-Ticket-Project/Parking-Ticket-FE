@@ -16,6 +16,7 @@ export const useApplyForm = () => {
     ...rest,
   });
 
+  // FIXME: react-query로 마이그레이션, setQueryData와 getQueryData를 통해 client 데이터를 제거하고 server 데이터만 사용
   useEffect(() => {
     dispatch({
       type: 'update',
