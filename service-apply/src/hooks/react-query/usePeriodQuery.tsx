@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getRegistrationPeriod } from '../../apis/registration.apis';
 
-export const usePeriod = () => {
+export const usePeriodQuery = () => {
   const {
     data: { startAt, endAt },
   } = useSuspenseQuery({

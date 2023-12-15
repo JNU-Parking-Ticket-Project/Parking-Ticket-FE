@@ -1,5 +1,5 @@
 import { Txt } from '@quokka/design-system';
-import { usePeriod } from '../../hooks/react-query/usePeriod';
+import { usePeriodQuery } from '../../hooks/react-query/usePeriodQuery';
 import { parseISO8601ToFormatString } from '../../functions/date';
 
 export const getApplyDateString = (startAt: string, endAt: string) => {
@@ -9,7 +9,7 @@ export const getApplyDateString = (startAt: string, endAt: string) => {
 };
 
 export const ApplyTitle = () => {
-  const { startAt, endAt } = usePeriod();
+  const { startAt, endAt } = usePeriodQuery();
   return (
     <h2 className="border-b-4 border-black mt-3 pb-2">
       <Txt size="h3" color="primary" className="mr-5">
