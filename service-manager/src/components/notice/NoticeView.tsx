@@ -20,7 +20,7 @@ export const NoticeView = () => {
           <ToastViewer initialValue={noticeData.noticeContent} />
         </Suspense>
       </ErrorBoundary>
-      <Link to="/notice-update" className="float-right">
+      <Link to="/notice/update" className="float-right">
         <Button size="small" color="secondary">
           수정하기
         </Button>
