@@ -1,4 +1,3 @@
-import { AnnouncementFormProps } from '../../components/announcement/AnnouncementCreate';
 import {
   useAnnounceCreateMutate,
   useAnnounceDeleteMutate,
@@ -7,22 +6,21 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const DEFAULT_CONTENT = `# 공지사항을 입력해주세요.`;
-
-export const useAnnounceForm = (init?: AnnouncementFormProps) => {
-  const [title, setTitle] = useState(init?.announceTitle || '');
-  const content = init?.announceContent || DEFAULT_CONTENT;
+export const useCreateAnnouncement = () => {
   const navigate = useNavigate();
   const { postAnnounce } = useAnnounceCreateMutate();
 
-  const onSubmit = ({
-    announceTitle: title,
-    announceContent: content,
-  }: AnnouncementFormProps) => {
+  const onCreate = ({
+    announceTitle,
+    announceContent,
+  }: {
+    announceTitle: string;
+    announceContent: string;
+  }) => {
     postAnnounce(
       {
-        announceTitle: title,
-        announceContent: content,
+        announceTitle,
+        announceContent,
       },
       {
         onError: (error) => {
@@ -37,10 +35,7 @@ export const useAnnounceForm = (init?: AnnouncementFormProps) => {
     );
   };
   return {
-    title,
-    content,
-    setTitle,
-    onSubmit,
+    onCreate,
   };
 };
 
@@ -50,22 +45,20 @@ interface AnnouncementUpdateForm {
   announceContent: string;
 }
 
-export const useAnnounceUpdate = (init: AnnouncementUpdateForm) => {
-  const [title, setTitle] = useState(init.announceTitle || '');
-  const content = init.announceContent || '';
+export const useAnnounceUpdate = () => {
   const navigate = useNavigate();
   const { putAnnounceById } = useAnnounceUpdateMutate();
 
   const onUpdate = ({
     announceId,
-    announceTitle: title,
-    announceContent: content,
+    announceTitle,
+    announceContent,
   }: AnnouncementUpdateForm) => {
     putAnnounceById(
       announceId,
       {
-        announceTitle: title,
-        announceContent: content,
+        announceTitle,
+        announceContent,
       },
       {
         onError: (error) => {
@@ -80,9 +73,6 @@ export const useAnnounceUpdate = (init: AnnouncementUpdateForm) => {
     );
   };
   return {
-    title,
-    content,
-    setTitle,
     onUpdate,
   };
 };

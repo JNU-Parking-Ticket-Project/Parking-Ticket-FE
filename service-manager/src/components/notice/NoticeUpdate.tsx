@@ -3,10 +3,9 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useNoticeQuery } from '../../hooks/react-query/useNotice';
 import { useNoticeForm } from '../../hooks/useNoticeForm';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import ErrorBoundary from '../common/ErrorBoundary';
-import { EditorIconImage } from '../../constants/announcement';
+import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -41,18 +40,15 @@ export const NoticeUpdate = () => {
       >
         <ErrorBoundary>
           <Suspense>
-            <div
-              className={`[&_.toastui-editor-toolbar_button]:[background-image:url(${EditorIconImage})]`}
-            >
-              <ToastEditor
-                initialValue={noticeData?.noticeContent}
-                previewStyle="vertical"
-                height="30rem"
-                minHeight="calc(100vh - 33rem)"
-                initialEditType="markdown"
-                ref={editorRef}
-              />
-            </div>
+            <ToastEditor
+              initialValue={noticeData?.noticeContent}
+              previewStyle="vertical"
+              height="30rem"
+              minHeight="calc(100vh - 33rem)"
+              initialEditType="markdown"
+              previewHighlight={false}
+              ref={editorRef}
+            />
           </Suspense>
         </ErrorBoundary>
         <div className="float-right py-4">
