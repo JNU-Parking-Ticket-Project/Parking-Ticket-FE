@@ -16,6 +16,10 @@ type AppFormInputAction =
   | {
       type: 'reset';
       payload: null;
+    }
+  | {
+      type: 'update';
+      payload: ApplyFormContextType;
     };
 
 const applyFormReducer = (
@@ -47,6 +51,10 @@ const applyFormReducer = (
       return {
         ...state,
         [action.type]: action.payload,
+      };
+    case 'update':
+      return {
+        ...action.payload,
       };
     default:
       return state;

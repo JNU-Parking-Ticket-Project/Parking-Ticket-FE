@@ -119,15 +119,15 @@ export class RegistrationOptionsResponse {
     selectSectorId,
     affiliation,
   }: RegistrationResponseProps) {
-    this.carNumber = carNum;
-    this.email = email;
+    this.carNumber = carNum || '';
+    this.email = email || '';
     this.isCompact = isLight;
-    this.studentName = name;
-    this.phoneNumber = phoneNum;
+    this.studentName = name || '';
+    this.phoneNumber = phoneNum || '';
     this.sector = sectors;
-    this.studentNumber = studentNum;
+    this.studentNumber = studentNum || '';
     this.selectSectorId = selectSectorId;
-    this.affiliation = affiliation;
+    this.affiliation = affiliation || '';
   }
 }
 
