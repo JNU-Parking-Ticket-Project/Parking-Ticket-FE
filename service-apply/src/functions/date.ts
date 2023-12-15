@@ -1,19 +1,6 @@
-/** 한 글자인 Date 요소에(월, 일) 0을 붙여주는 함수 */
-const parseDateFormat = (dateAmount: number) => {
-  const dateString = dateAmount.toString();
-  return dateString.length === 1 ? '0' + dateString : dateString;
-};
+import { format } from 'date-fns';
 
-/** ISO 8601 표준 Date를 알맞는 포맷으로 변환하는 함수 */
-export const parseISO8601ToFormatString = (isoDate: string) => {
-  const date = new Date(isoDate);
-
-  // Format : YYYY.MM.DD HH:MM:SS
-  return `${date.getFullYear()}.${parseDateFormat(
-    date.getMonth() + 1,
-  )}.${parseDateFormat(date.getDate())} ${parseDateFormat(
-    date.getHours(),
-  )}:${parseDateFormat(date.getMinutes())}:${parseDateFormat(
-    date.getSeconds(),
-  )}`;
+/** ISO 8601 표준 Date를 ApplyTitle에 맞게 포맷으로 변환하는 함수 */
+export const getApplyDateString = (startAt: Date) => {
+  return `시작시간: ${format(startAt, 'yyyy.MM.dd HH:mm:ss')}`;
 };

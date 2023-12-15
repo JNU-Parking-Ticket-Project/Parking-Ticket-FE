@@ -1,8 +1,12 @@
-export class Period {
+interface PeriodResponse {
   startAt: string;
   endAt: string;
-  constructor({ startAt, endAt }: Period) {
-    this.startAt = startAt;
-    this.endAt = endAt;
+}
+export class Period {
+  startAt: Date;
+  endAt: Date;
+  constructor({ startAt, endAt }: PeriodResponse) {
+    this.startAt = new Date(startAt);
+    this.endAt = new Date(endAt);
   }
 }
