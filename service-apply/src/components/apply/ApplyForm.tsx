@@ -10,7 +10,7 @@ import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import ErrorBoundary from '../common/ErrorBoundray';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
@@ -22,6 +22,8 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 };
 
 export const ApplyForm = () => {
+  const [isAgreed, setIsAgreed] = useState(false);
+
   const {
     sector,
     state,
@@ -132,10 +134,32 @@ export const ApplyForm = () => {
             />
           </div>
         </div>
+
+        <div>
+          <div className="flex justify-start items-center ">
+            <input
+              checked={isAgreed}
+              onChange={() => setIsAgreed((prevState) => !prevState)}
+              type="checkbox"
+              name="collection-agreement"
+            />
+            <Txt size="sm" className="text-lg pl-2">
+              개인정보 수집 및 이용 동의
+            </Txt>
+          </div>
+          <a
+            href="https://www.privacy.go.kr/front/main/main.do"
+            className="pl-6 text-sm underline underline-offset-4 text-neutral-700"
+          >
+            자세한 내용은 이곳에서 확인할 수 있습니다
+          </a>
+        </div>
+
         <div className="flex flex-row justify-between my-12">
           <Button
             color="secondary"
             onClick={() => {
+              if (!isAgreed) return alert('약관에 동의해 주세요.');
               onTemporarySave();
             }}
           >
@@ -144,6 +168,7 @@ export const ApplyForm = () => {
           <Button
             color="primary"
             onClick={() => {
+              if (!isAgreed) return alert('약관에 동의해 주세요.');
               setIsCaptchaModalOpen(true);
             }}
           >
