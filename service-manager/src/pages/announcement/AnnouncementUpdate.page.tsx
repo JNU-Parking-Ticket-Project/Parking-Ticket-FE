@@ -1,20 +1,10 @@
-import { Txt } from '@quokka/design-system';
 import { AnnouncementUpdate } from '../../components/announcement/AnnouncementUpdate';
 import { useParams } from 'react-router-dom';
 
 export const AnnouncementUpdatePage = () => {
   const { announcementId } = useParams();
-  if (!announcementId) throw new Error('announcementId is required');
-  if (isNaN(+announcementId)) throw new Error('announcementId must be number');
+  if (!announcementId) throw new Error('잘못된 접근입니다.');
+  if (isNaN(+announcementId)) throw new Error('잘못된 접근입니다.');
 
-  return (
-    <>
-      <div>
-        <Txt size="h3" color="primary">
-          공지사항 수정
-        </Txt>
-        <AnnouncementUpdate announceId={+announcementId} />
-      </div>
-    </>
-  );
+  return <AnnouncementUpdate announceId={+announcementId} />;
 };

@@ -16,6 +16,8 @@ import { NoticeViewPage } from '../pages/notice/NoticeView.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
 import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate.page';
+import { AnnouncementLayout } from '../pages/announcement/AnnouncementLayout.page';
+import { NoticeLayout } from '../pages/notice/NoticeLayout.page';
 
 export default function Router() {
   return (
@@ -31,7 +33,7 @@ export default function Router() {
         />
       </Route>
       <Route path="/" element={<CommonLayout />}>
-        <Route path="announcement">
+        <Route path="announcement" element={<AnnouncementLayout />}>
           <Route index element={<AnnouncementListPage />} />
           <Route path=":announcementId" element={<AnnouncementPage />} />
           <Route
@@ -41,13 +43,14 @@ export default function Router() {
           <Route path="create" element={<AnnouncementCreatePage />} />
         </Route>
         <Route path="apply-list" element={<ApplyListPage />} />
-        <Route path="notice" element={<NoticeViewPage />} />
         <Route path="setting" element={<SettingLayout />}>
           <Route path="section" element={<SectionSettingPage />} />
           <Route path="time" element={<TimeSettingPage />} />
         </Route>
-        <Route path="notice" element={<NoticeViewPage />} />
-        <Route path="notice-update" element={<NoticeUpdatePage />} />
+        <Route path="notice" element={<NoticeLayout />}>
+          <Route index element={<NoticeViewPage />} />
+          <Route path="update" element={<NoticeUpdatePage />} />
+        </Route>
       </Route>
     </Routes>
   );

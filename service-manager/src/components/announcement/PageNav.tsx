@@ -67,25 +67,23 @@ const NextNavLinkGroup = ({
 
 export const PageNav = ({ lastIdx, currentIdx }: PageNavProps) => {
   return (
-    <div className="max-w-[768px] w-full mx-auto my-8">
-      <div className="flex items-center justify-end">
-        <PrevNavLinkGroup currentIdx={currentIdx} />
-        {generatePaginationIndexs(currentIdx, lastIdx).map((page) => (
-          <Link
-            key={page}
-            to={`/announcement?page=${page}`}
-            className="w-6 text-center"
+    <div className="my-8 flex items-center justify-end">
+      <PrevNavLinkGroup currentIdx={currentIdx} />
+      {generatePaginationIndexs(currentIdx, lastIdx).map((page) => (
+        <Link
+          key={page}
+          to={`/announcement?page=${page}`}
+          className="w-6 text-center"
+        >
+          <Txt
+            color={page === currentIdx ? 'black' : 'placeholder'}
+            className="text-xl"
           >
-            <Txt
-              color={page === currentIdx ? 'black' : 'placeholder'}
-              className="text-xl"
-            >
-              {page + 1}
-            </Txt>
-          </Link>
-        ))}
-        <NextNavLinkGroup currentIdx={currentIdx} lastIdx={lastIdx} />
-      </div>
+            {page + 1}
+          </Txt>
+        </Link>
+      ))}
+      <NextNavLinkGroup currentIdx={currentIdx} lastIdx={lastIdx} />
     </div>
   );
 };
