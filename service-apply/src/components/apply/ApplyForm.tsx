@@ -135,7 +135,7 @@ export const ApplyForm = () => {
           </div>
         </div>
 
-        <div>
+        <div className="pt-4">
           <div className="flex justify-start items-center ">
             <input
               checked={isAgreed}
