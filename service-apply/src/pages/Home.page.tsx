@@ -23,6 +23,8 @@ export const HomePage = () => {
               <Suspense>
                 <HomeInformation />
               </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
               <Suspense>
                 <HomeAnnounce />
               </Suspense>

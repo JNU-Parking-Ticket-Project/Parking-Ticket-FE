@@ -1,21 +1,18 @@
 import { Txt } from '@quokka/design-system';
-import { useInformationQuery } from '../../hooks/react-query/useInformation';
+import { HomeInformationContent } from './HomeInformationContent';
+import { Suspense } from 'react';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 
 export const HomeInformation = () => {
-  const { information } = useInformationQuery();
-
   return (
     <article>
       <Txt size="h4" color="primary" className="my-4">
         안내사항
       </Txt>
-      <div className="flex flex-col gap-2">
-        {information.split('\n').map((line, index) => (
-          <Txt size="h6" key={index}>
-            {line}
-          </Txt>
-        ))}
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <HomeInformationContent />
+      </Suspense>
     </article>
   );
 };
