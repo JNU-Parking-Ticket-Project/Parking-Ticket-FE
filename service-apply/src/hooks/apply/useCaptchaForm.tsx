@@ -45,7 +45,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
           removeToken();
           closeModal();
           setIsLoading(false);
-          navigate('/');
+          navigate('/announcement/done');
         },
       },
     );

@@ -48,7 +48,7 @@ export const useApplyForm = () => {
           dispatch({ type: 'reset', payload: null });
           alert(data.message);
           removeToken();
-          navigate('/');
+          navigate('/announcement/done/temp');
         },
       },
     );
