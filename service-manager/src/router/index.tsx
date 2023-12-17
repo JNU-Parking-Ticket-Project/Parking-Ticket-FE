@@ -18,12 +18,14 @@ import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
 import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate.page';
 import { AnnouncementLayout } from '../pages/announcement/AnnouncementLayout.page';
 import { NoticeLayout } from '../pages/notice/NoticeLayout.page';
+import { ErrorPage } from '../pages/Error.page';
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/admin" element={<AdminPage />} />
+      <Route path="/error" element={<ErrorPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/password-reset" element={<PasswordResetLayout />}>
         <Route index element={<RequestPasswordResetPage />} />
