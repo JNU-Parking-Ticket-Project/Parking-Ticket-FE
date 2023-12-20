@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   PasswordResetFormInput,
   passwordResetFormValidator,
-} from 'service-apply/src/functions/validator';
+} from '../../functions/validator';
 
 export const usePasswordResetForm = () => {
   const [passwordResetForm, setPasswordResetForm] =

@@ -11,8 +11,7 @@ import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
-import ErrorBoundary from '../common/ErrorBoundray';
-import { applyFormValidator } from '../../functions/validator';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
   return (
@@ -23,8 +22,6 @@ export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
 };
 
 export const ApplyForm = () => {
-  const [isAgreed, setIsAgreed] = useState(false);
-
   const {
     sector,
     state,
@@ -32,6 +29,9 @@ export const ApplyForm = () => {
     onTemporarySave,
     isCaptchaModalOpen,
     setIsCaptchaModalOpen,
+    onModalOpen,
+    isAgreed,
+    setIsAgreed,
   } = useApplyForm();
 
   const parkingSection = sector.map((item) => ({
@@ -153,40 +153,15 @@ export const ApplyForm = () => {
             className="pl-6 text-sm underline underline-offset-4 text-neutral-700"
           >
             자세한 내용은 이곳에서 확인할 수 있습니다
+            {/* TODO: 모달창으로 변경 */}
           </a>
         </div>
 
         <div className="flex flex-row justify-between my-12">
-          <Button
-            color="secondary"
-            onClick={() => {
-              const { success, message } = applyFormValidator({
-                input: state,
-                sectionNumberArray: parkingSection.map((x) => x.sectionNumber),
-                isAgreed,
-              });
-              if (!success) {
-                return alert(message);
-              }
-              onTemporarySave();
-            }}
-          >
+          <Button color="secondary" onClick={onTemporarySave}>
             임시 저장
           </Button>
-          <Button
-            color="primary"
-            onClick={() => {
-              const { success, message } = applyFormValidator({
-                input: state,
-                sectionNumberArray: parkingSection.map((x) => x.sectionNumber),
-                isAgreed,
-              });
-              if (!success) {
-                return alert(message);
-              }
-              setIsCaptchaModalOpen(true);
-            }}
-          >
+          <Button color="primary" onClick={onModalOpen}>
             신청하기
           </Button>
 
