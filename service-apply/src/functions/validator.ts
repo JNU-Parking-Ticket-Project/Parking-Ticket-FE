@@ -81,7 +81,7 @@ export const applyFormValidator = ({
 };
 
 export const isPassword = (password: string) =>
-  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,20}$/.test(password);
+  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,20}$/.test(password);
 
 export interface PasswordResetFormInput {
   password: string;
