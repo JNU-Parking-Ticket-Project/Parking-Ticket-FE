@@ -12,6 +12,7 @@ import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
 import ErrorBoundary from '../common/ErrorBoundray';
+import { applyFormValidator } from '../../functions/validator';
 
 export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
   return (
@@ -159,7 +160,14 @@ export const ApplyForm = () => {
           <Button
             color="secondary"
             onClick={() => {
-              if (!isAgreed) return alert('약관에 동의해 주세요.');
+              const { success, message } = applyFormValidator({
+                input: state,
+                sectionNumberArray: parkingSection.map((x) => x.sectionNumber),
+                isAgreed,
+              });
+              if (!success) {
+                return alert(message);
+              }
               onTemporarySave();
             }}
           >
@@ -168,7 +176,14 @@ export const ApplyForm = () => {
           <Button
             color="primary"
             onClick={() => {
-              if (!isAgreed) return alert('약관에 동의해 주세요.');
+              const { success, message } = applyFormValidator({
+                input: state,
+                sectionNumberArray: parkingSection.map((x) => x.sectionNumber),
+                isAgreed,
+              });
+              if (!success) {
+                return alert(message);
+              }
               setIsCaptchaModalOpen(true);
             }}
           >
