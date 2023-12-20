@@ -1,6 +1,7 @@
 interface SubmitSuccess<T> {
   success: true;
   value: T;
+  message: string;
 }
 
 interface SubmitFailure {
@@ -10,10 +11,11 @@ interface SubmitFailure {
 
 export type SubmitResult<T> = SubmitSuccess<T> | SubmitFailure;
 
-export const submitSucccess = <T>(value: T): SubmitSuccess<T> => {
+export const submitSuccess = <T>(value: T): SubmitSuccess<T> => {
   return {
     success: true,
     value,
+    message: 'validation 통과',
   };
 };
 
