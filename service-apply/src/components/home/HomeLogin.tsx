@@ -46,7 +46,7 @@ export const HomeLogin = () => {
 
   return (
     <div className="flex justify-end max-sm:mb-4">
-      <form className="flex-1 max-w-lg" onSubmit={formAction}>
+      <form className="flex-1 sm:max-w-lg" onSubmit={formAction}>
         <Txt size="h3" color="primary" className="block my-4 max-sm:text-2xl">
           신청 폼 작성하기
         </Txt>
