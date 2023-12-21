@@ -45,7 +45,7 @@ export function InputText({
   const id = useId();
   return (
     <>
-      <label htmlFor={id}>
+      <label htmlFor={id} className={labelClassName}>
         {label}
         {!props.required ? null : <Txt color="error">*</Txt>}
       </label>
