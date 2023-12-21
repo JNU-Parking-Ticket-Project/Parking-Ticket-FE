@@ -45,9 +45,9 @@ export const HomeLogin = () => {
   };
 
   return (
-    <div className="flex justify-end min-w-[300px]">
+    <div className="flex justify-end max-sm:mb-4">
       <form className="flex-1 max-w-lg" onSubmit={formAction}>
-        <Txt size="h3" color="primary" className="block my-4">
+        <Txt size="h3" color="primary" className="block my-4 max-sm:text-2xl">
           신청 폼 작성하기
         </Txt>
         <div className="flex flex-col gap-3 items-end">
@@ -83,7 +83,10 @@ export const HomeLogin = () => {
           <Link to={'/password-reset'}>
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>
-          <Button type="submit" className="py-4 px-14 rounded-lg">
+          <Button
+            type="submit"
+            className="py-4 px-14 rounded-lg max-sm:py-2 max-sm:px-8"
+          >
             폼으로 이동
           </Button>
         </div>
