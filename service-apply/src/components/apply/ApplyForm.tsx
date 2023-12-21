@@ -32,6 +32,8 @@ export const ApplyForm = () => {
     onModalOpen,
     isAgreed,
     setIsAgreed,
+    isError,
+    errorMessage,
   } = useApplyForm();
 
   const parkingSection = sector.map((item) => ({
@@ -157,7 +159,12 @@ export const ApplyForm = () => {
           </a>
         </div>
 
-        <div className="flex flex-row justify-between my-12">
+        {isError && (
+          <Txt color="error" className="my-2">
+            {errorMessage}
+          </Txt>
+        )}
+        <div className="flex flex-row justify-between mt-2 mb-12">
           <Button color="secondary" onClick={onTemporarySave}>
             임시 저장
           </Button>

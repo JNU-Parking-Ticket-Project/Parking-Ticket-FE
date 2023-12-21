@@ -26,8 +26,11 @@ export const useApplyForm = () => {
   }, [registrationData]);
 
   const { postTemporarySave } = useTemporarySaveMutate();
-  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
-  const [isAgreed, setIsAgreed] = useState(false);
+  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState<boolean>(false);
+  const [isAgreed, setIsAgreed] = useState<boolean>(false);
+
+  const [isError, setIsError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onTemporarySave = () => {
     const { success, message } = applyFormValidator({
@@ -37,8 +40,13 @@ export const useApplyForm = () => {
     });
 
     if (!success) {
+      setIsError(true);
+      setErrorMessage(message);
       return alert(message);
     }
+
+    setIsError(false);
+    setErrorMessage('');
     postTemporarySave(
       new TemporarySaveRequest({
         name: state.studentName,
@@ -73,8 +81,13 @@ export const useApplyForm = () => {
     });
 
     if (!success) {
+      setIsError(true);
+      setErrorMessage(message);
       return alert(message);
     }
+
+    setIsError(false);
+    setErrorMessage('');
     setIsCaptchaModalOpen(true);
   };
 
@@ -88,5 +101,7 @@ export const useApplyForm = () => {
     onModalOpen,
     isAgreed,
     setIsAgreed,
+    isError,
+    errorMessage,
   };
 };
