@@ -89,9 +89,12 @@ export interface PasswordResetFormInput {
 }
 
 export const passwordResetFormValidator = (input: PasswordResetFormInput) => {
+  if (!input.password || !input.confirmPassword) {
+    return submitFailure('비밀번호와 비밀번호 재입력 모두 입력해 주세요.');
+  }
   if (!isPassword(input.password)) {
     return submitFailure(
-      '비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함한 8자리 이상이어야 합니다.',
+      '비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함하는 8~20자리이어야 합니다.',
     );
   }
   if (input.password !== input.confirmPassword) {
