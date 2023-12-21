@@ -1,12 +1,18 @@
-import { InputText, Button } from '@quokka/design-system';
+import { InputText, Button, Txt } from '@quokka/design-system';
 import { FormContainer } from '../common/FormContainer';
 import { InputFlexWrapper } from './InputFlexWrapper';
 import { usePasswordResetForm } from '../../hooks/password-reset/usePasswordResetForm';
 import { useEffect } from 'react';
 
 export const PasswordResetForm = ({ code }: { code: string }) => {
-  const { passwordResetForm, submitChangePassword, handleInput, setCode } =
-    usePasswordResetForm();
+  const {
+    passwordResetForm,
+    submitChangePassword,
+    handleInput,
+    setCode,
+    isError,
+    errorMessage,
+  } = usePasswordResetForm();
 
   useEffect(() => {
     setCode(code);
@@ -36,6 +42,11 @@ export const PasswordResetForm = ({ code }: { code: string }) => {
           onChange={handleInput}
         />
       </InputFlexWrapper>
+      {isError && (
+        <Txt color="error" className="block mt-2">
+          {errorMessage}
+        </Txt>
+      )}
       <Button size="small" className="mt-8 w-full">
         변경하기
       </Button>

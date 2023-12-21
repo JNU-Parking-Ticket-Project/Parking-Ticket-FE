@@ -14,6 +14,9 @@ export const usePasswordResetForm = () => {
     });
   const [code, setCode] = useState<string>('');
 
+  const [isError, setIsError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   const { postPasswordReset } = usePasswordResetMutate();
   const navigate = useNavigate();
 
@@ -28,7 +31,14 @@ export const usePasswordResetForm = () => {
     e.preventDefault();
     const { success, message } = passwordResetFormValidator(passwordResetForm);
 
-    if (!success) return alert(message);
+    if (!success) {
+      setIsError(true);
+      setErrorMessage(message);
+      return alert(message);
+    }
+
+    setIsError(false);
+    setErrorMessage('');
 
     postPasswordReset(
       {
@@ -44,5 +54,12 @@ export const usePasswordResetForm = () => {
     );
   };
 
-  return { passwordResetForm, handleInput, submitChangePassword, setCode };
+  return {
+    passwordResetForm,
+    handleInput,
+    submitChangePassword,
+    setCode,
+    isError,
+    errorMessage,
+  };
 };
