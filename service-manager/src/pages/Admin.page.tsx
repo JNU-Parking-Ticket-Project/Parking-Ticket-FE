@@ -13,7 +13,7 @@ export const AdminPage = () => {
       <main className="mx-32">
         <div className="border-b pb-4">
           <Txt size="h3" color="primary" className="font-semibold ">
-            회원가입
+            권한설정
           </Txt>
         </div>
         <table className="w-full">
