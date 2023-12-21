@@ -6,7 +6,7 @@ interface MainContainerProps extends PropsWithChildren {}
 
 export const MainContainer = ({ children }: MainContainerProps) => {
   return (
-    <main className="min-h-[calc(100dvh-11rem)] m-auto px-12 max-sm:px-4">
+    <main className="min-h-[calc(100dvh-11rem)] max-w-[1280px] m-auto px-12 max-sm:px-4">
       <img
         src={Background}
         className={clsx(
