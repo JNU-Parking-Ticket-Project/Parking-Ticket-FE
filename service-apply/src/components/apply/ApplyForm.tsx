@@ -13,10 +13,23 @@ import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
 import ErrorBoundary from '../common/ErrorBoundray';
 
-export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
+export const ApplyInputText = ({
+  className,
+  disabled,
+  ...props
+}: InputTextProps) => {
   return (
-    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2">
-      <InputText {...props} className={clsx(className, 'col-span-4')} />
+    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2 max-sm:flex max-sm:flex-col">
+      <InputText
+        {...props}
+        disabled={disabled}
+        labelClassName="w-full"
+        className={clsx(
+          className,
+          'col-span-4 w-full',
+          !disabled && 'bg-transparent',
+        )}
+      />
     </div>
   );
 };
@@ -65,6 +78,7 @@ export const ApplyForm = () => {
           label="이름"
           name="studentName"
           type="text"
+          placeholder="홍길동"
           onChange={(e) =>
             dispatch({ type: 'studentName', payload: e.target.value })
           }
@@ -75,6 +89,7 @@ export const ApplyForm = () => {
           label="학번"
           name="studentNumber"
           type="text"
+          placeholder="123456"
           onChange={(e) =>
             dispatch({ type: 'studentNumber', payload: e.target.value })
           }
@@ -158,6 +173,7 @@ export const ApplyForm = () => {
         <div className="flex flex-row justify-between my-12">
           <Button
             color="secondary"
+            className="max-sm:py-4 max-sm:px-8"
             onClick={() => {
               if (!isAgreed) return alert('약관에 동의해 주세요.');
               onTemporarySave();
@@ -167,6 +183,7 @@ export const ApplyForm = () => {
           </Button>
           <Button
             color="primary"
+            className="max-sm:px-8"
             onClick={() => {
               if (!isAgreed) return alert('약관에 동의해 주세요.');
               setIsCaptchaModalOpen(true);
