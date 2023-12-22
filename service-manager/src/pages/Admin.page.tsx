@@ -2,10 +2,11 @@ import { Txt } from '@quokka/design-system';
 import { NavContainer } from '../components/common/NavContainer';
 import { NavTitle } from '../components/common/NavTitle';
 import { MemberList } from '../components/admin/MemberList';
+import { MainContainer } from '../components/common/MainContainer';
 
 export const AdminPage = () => {
   return (
-    <>
+    <MainContainer>
       <nav className="flex flex-row">
         <NavTitle />
         <NavContainer />
@@ -30,6 +31,6 @@ export const AdminPage = () => {
           </tbody>
         </table>
       </main>
-    </>
+    </MainContainer>
   );
 };

@@ -19,12 +19,12 @@ export const MemberRole = ({ role, userId }: MemberRole) => {
     putAdminRoleMutate({ userId, role: changeRole });
   };
   return (
-    <td className="flex justify-between py-4">
+    <td className="flex justify-around py-4">
       <button
         onClick={() => onChangeAdminRole('ADMIN')}
         className={clsx(
           styleBySelectedRole(role, 'ADMIN'),
-          'px-8 py-4 rounded',
+          'px-8 py-4 mx-2 rounded',
         )}
       >
         관리자
@@ -33,14 +33,17 @@ export const MemberRole = ({ role, userId }: MemberRole) => {
         onClick={() => onChangeAdminRole('COUNCIL')}
         className={clsx(
           styleBySelectedRole(role, 'COUNCIL'),
-          'px-8 py-4 rounded',
+          'px-8 py-4 mx-2 rounded',
         )}
       >
         학생회
       </button>
       <button
         onClick={() => onChangeAdminRole('USER')}
-        className={clsx(styleBySelectedRole(role, 'USER'), 'px-8 py-4 rounded')}
+        className={clsx(
+          styleBySelectedRole(role, 'USER'),
+          'px-8 py-4 mx-2 rounded',
+        )}
       >
         사용자
       </button>
