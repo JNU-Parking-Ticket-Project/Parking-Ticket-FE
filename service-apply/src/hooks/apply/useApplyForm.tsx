@@ -26,13 +26,13 @@ export const useApplyForm = () => {
   }, [registrationData]);
 
   const { postTemporarySave } = useTemporarySaveMutate();
-  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState<boolean>(false);
-  const [isAgreed, setIsAgreed] = useState<boolean>(false);
+  const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
 
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const onTemporarySave = () => {
+  const checkValidation = () => {
     const { success, message } = applyFormValidator({
       input: state,
       sectionNumberArray: sector.map((x) => x.sectorId),
@@ -42,11 +42,18 @@ export const useApplyForm = () => {
     if (!success) {
       setIsError(true);
       setErrorMessage(message);
-      return alert(message);
+      alert(message);
+      return false;
     }
 
     setIsError(false);
     setErrorMessage('');
+    return true;
+  };
+
+  const onTemporarySave = () => {
+    if (!checkValidation()) return;
+
     postTemporarySave(
       new TemporarySaveRequest({
         name: state.studentName,
@@ -74,20 +81,7 @@ export const useApplyForm = () => {
   };
 
   const onModalOpen = () => {
-    const { success, message } = applyFormValidator({
-      input: state,
-      sectionNumberArray: sector.map((x) => x.sectorId),
-      isAgreed,
-    });
-
-    if (!success) {
-      setIsError(true);
-      setErrorMessage(message);
-      return alert(message);
-    }
-
-    setIsError(false);
-    setErrorMessage('');
+    if (!checkValidation()) return;
     setIsCaptchaModalOpen(true);
   };
 

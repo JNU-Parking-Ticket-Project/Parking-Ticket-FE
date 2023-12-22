@@ -12,10 +12,10 @@ export const usePasswordResetForm = () => {
       password: '',
       confirmPassword: '',
     });
-  const [code, setCode] = useState<string>('');
+  const [code, setCode] = useState('');
 
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { postPasswordReset } = usePasswordResetMutate();
   const navigate = useNavigate();
@@ -34,7 +34,8 @@ export const usePasswordResetForm = () => {
     if (!success) {
       setIsError(true);
       setErrorMessage(message);
-      return alert(message);
+      alert(message);
+      return;
     }
 
     setIsError(false);
