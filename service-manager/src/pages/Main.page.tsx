@@ -1,4 +1,4 @@
-import { Footer } from '../components/common/FooterContainer';
+import { Footer } from '../components/common/Footer';
 import { MainContainer } from '../components/common/MainContainer';
 import { MainTitle } from '../components/home/MainTitle';
 import { ManagerLogin } from '../components/home/ManagerLogin';
