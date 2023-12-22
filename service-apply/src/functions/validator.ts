@@ -20,18 +20,13 @@ export const isSection = ({
 }: {
   array: number[];
   selected: number;
-}) => {
-  if (array.includes(selected)) return true;
-  return false;
-};
+}) => array.includes(selected);
 
 export const isCarNumber = (carNumber: string) =>
   /\d{2,3}[가-힣]{1}\d{4}/gm.test(carNumber.replace(' ', ''));
 
-export const isAffiliation = (affiliation: string) => {
-  if (!affiliation.replace(' ', '')) return false;
-  return true;
-};
+export const isAffiliation = (affiliation: string) =>
+  !!affiliation.replace(' ', '');
 
 export interface ApplyFormInput {
   phoneNumber: string;
@@ -77,7 +72,7 @@ export const applyFormValidator = ({
   if (!isCarNumber(input.carNumber)) {
     return submitFailure('차량 번호를 양식에 맞게 입력해 주세요.');
   }
-  return submitSuccess(input);
+  return { ...submitSuccess(input), message: '' };
 };
 
 export const isPassword = (password: string) =>
@@ -100,5 +95,5 @@ export const passwordResetFormValidator = (input: PasswordResetFormInput) => {
   if (input.password !== input.confirmPassword) {
     return submitFailure('비밀번호가 일치하지 않습니다');
   }
-  return submitSuccess(input);
+  return { ...submitSuccess(input), message: '' };
 };
