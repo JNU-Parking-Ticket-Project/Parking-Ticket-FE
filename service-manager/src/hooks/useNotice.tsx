@@ -1,14 +1,9 @@
-import { getNotice, putNotice } from '../../apis/notice.apis';
-import {
-  useMutation,
-  MutateOptions,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
-import { Notice } from '../../apis/dtos/notice.dtos';
+import { getNotice, putNotice } from '../apis/notice.apis';
+import { useQuery, useMutation, MutateOptions } from '@tanstack/react-query';
+import { Notice } from '../apis/dtos/notice.dtos';
 
 export const useNoticeQuery = () => {
-  const { data } = useSuspenseQuery({
+  const { data } = useQuery({
     queryKey: ['notice'],
     queryFn: getNotice,
     gcTime: Infinity,
@@ -19,7 +14,6 @@ export const useNoticeQuery = () => {
 };
 
 export const useNoticeMutate = () => {
-  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ['notice'],
     mutationFn: putNotice,
@@ -34,7 +28,6 @@ export const useNoticeMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.setQueryData(['notice'], data);
         },
       });
     },

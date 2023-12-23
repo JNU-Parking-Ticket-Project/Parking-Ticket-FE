@@ -58,6 +58,6 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
     throw new Error(response.reason);
   }
 
-  setToken(new UserToken(response.data));
+  setToken(new UserToken(response));
   return retryCallback();
 };

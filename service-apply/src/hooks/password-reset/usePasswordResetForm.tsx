@@ -1,20 +1,21 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { usePasswordResetMutate } from '../react-query/useUser';
 import { useNavigate } from 'react-router-dom';
-
-interface PasswordResetForm {
-  password: string;
-  confirmPassword: string;
-}
+import {
+  PasswordResetFormInput,
+  passwordResetFormValidator,
+} from '../../functions/validator';
 
 export const usePasswordResetForm = () => {
-  const [passwordResetForm, setPasswordResetForm] = useState<PasswordResetForm>(
-    {
+  const [passwordResetForm, setPasswordResetForm] =
+    useState<PasswordResetFormInput>({
       password: '',
       confirmPassword: '',
-    },
-  );
-  const [code, setCode] = useState<string>('');
+    });
+  const [code, setCode] = useState('');
+
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { postPasswordReset } = usePasswordResetMutate();
   const navigate = useNavigate();
@@ -28,10 +29,18 @@ export const usePasswordResetForm = () => {
 
   const submitChangePassword: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (passwordResetForm.password !== passwordResetForm.confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
+    const { success, message } = passwordResetFormValidator(passwordResetForm);
+
+    if (!success) {
+      setIsError(true);
+      setErrorMessage(message);
+      alert(message);
       return;
     }
+
+    setIsError(false);
+    setErrorMessage('');
+
     postPasswordReset(
       {
         password: passwordResetForm.password,
@@ -46,5 +55,12 @@ export const usePasswordResetForm = () => {
     );
   };
 
-  return { passwordResetForm, handleInput, submitChangePassword, setCode };
+  return {
+    passwordResetForm,
+    handleInput,
+    submitChangePassword,
+    setCode,
+    isError,
+    errorMessage,
+  };
 };

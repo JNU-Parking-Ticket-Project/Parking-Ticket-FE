@@ -1,20 +1,28 @@
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AnnouncementList } from '../../components/announcement/AnnouncementList';
 import { PageNav } from '../../components/announcement/PageNav';
-import { useAnounceListQuery } from '../../hooks/react-query/useAnnounce';
+import { useAnnounceListQuery } from '../../hooks/react-query/useAnnounce';
+import { Button } from '@quokka/design-system';
 
 export const AnnouncementListPage = () => {
-  const [searchParam, setSearchParam] = useSearchParams();
-  const currentPage = searchParam.get('page') ?? '1';
+  const [searchParam] = useSearchParams();
+  const currentPage = searchParam.get('page') ?? '0';
 
   const {
     announceListData: { announces, lastPage },
-  } = useAnounceListQuery(+currentPage);
+  } = useAnnounceListQuery(+currentPage);
 
   return (
     <>
-      <AnnouncementList data={announces} />
-      <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      <AnnouncementList announcementListData={announces} />
+      <div className="flex items-center gap-8 justify-between">
+        <Link to="/announcement/create" className="float-right">
+          <Button size="small" color="secondary">
+            공지 작성
+          </Button>
+        </Link>
+        <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      </div>
     </>
   );
 };

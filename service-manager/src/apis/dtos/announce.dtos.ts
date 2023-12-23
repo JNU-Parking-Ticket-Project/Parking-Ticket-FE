@@ -60,3 +60,10 @@ export class LastAnnounce {
     this.announceTitle = announceTitle;
   }
 }
+
+export class AnnounceDelete {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}

@@ -1,55 +1,66 @@
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { Button } from '@quokka/design-system';
-import { useState } from 'react';
-import { FormEventHandler } from 'react';
+import { Button, InputText } from '@quokka/design-system';
+import { Editor } from '@toast-ui/react-editor';
+import { useRef, lazy, Suspense, useState, useEffect } from 'react';
+import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
+import ErrorBoundary from '../common/ErrorBoundary';
 
-interface AnnouncementFormProps {
-  title: string;
-  content: string;
-  createdAt: string;
-}
+const ToastEditor = lazy(() =>
+  import('@toast-ui/react-editor').then((module) => ({
+    default: module.Editor,
+  })),
+);
 
 export const AnnouncementCreate = () => {
-  const [title, setTitle] = useState<AnnouncementFormProps['title']>('');
-  const [content, setContent] = useState<AnnouncementFormProps['content']>('');
-  const [createdAt, setCreatedAt] =
-    useState<AnnouncementFormProps['createdAt']>('');
+  const [title, setTitle] = useState('');
+  const editorRef = useRef<Editor>(null);
+  const { onCreate } = useCreateAnnouncement();
 
-  const onSubmitAnnouncementForm: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    const currentTime = new Date().toISOString();
-    setCreatedAt(currentTime);
-    console.log(content, createdAt);
-    //TODO: POST
+  const onPostAnnounce = () => {
+    const editorInstance = editorRef.current?.getInstance();
+    if (!editorInstance) {
+      alert('오류가 있습니다 새로고침하여 시도해주세요.');
+      return;
+    }
+    const markdown = editorInstance.getMarkdown();
+    if (!markdown || !title) {
+      alert('공지사항을 입력해주세요');
+      return;
+    }
+    onCreate({
+      announceTitle: title,
+      announceContent: markdown,
+    });
   };
 
   return (
     <>
-      <form id="noticeForm" method="post" onSubmit={onSubmitAnnouncementForm}>
-        <div className="flex flex-col">
-          <label htmlFor="title"></label>
-          <input
-            id="title"
-            type="text"
-            className="border-2 border-gray-200 rounded-lg p-4 bg-gray-1"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="제목을 입력하세요."
-          ></input>
-        </div>
+      <InputText
+        type="text"
+        placeholder="제목을 입력해주세요."
+        value={title}
+        className="p-3 my-4 w-full text-2xl"
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-        <ReactQuill
-          id="noticeForm"
-          className="my-14"
-          style={{ width: '100%', height: '500px' }}
-          value={content}
-          onChange={setContent}
-        />
-      </form>
-      <div className="flex justify-end">
-        <Button type="submit">저장</Button>
-      </div>
+      <ErrorBoundary>
+        <Suspense>
+          <ToastEditor
+            previewStyle="vertical"
+            height="30rem"
+            minHeight="calc(100vh - 33rem)"
+            placeholder="공지사항을 입력해주세요."
+            previewHighlight={false}
+            ref={editorRef}
+          />
+        </Suspense>
+      </ErrorBoundary>
+      <Button
+        className="my-4 float-right px-[4rem]"
+        size="small"
+        onClick={onPostAnnounce}
+      >
+        등록
+      </Button>
     </>
   );
 };

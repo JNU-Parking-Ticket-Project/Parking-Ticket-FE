@@ -1,8 +1,6 @@
 import { Modal, Txt } from '@quokka/design-system';
-import { Suspense, useState } from 'react';
 import { CaptchaForm } from './CaptchaForm';
 import { Spinner } from '../../assets/Spinner';
-import ErrorBoundary from '../common/ErrorBoundray';
 import { useCaptchaForm } from '../../hooks/apply/useCaptchaForm';
 
 interface ApplyCaptchaModalProps {

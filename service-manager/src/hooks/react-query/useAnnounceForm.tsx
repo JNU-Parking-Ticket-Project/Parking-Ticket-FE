@@ -1,0 +1,99 @@
+import {
+  useAnnounceCreateMutate,
+  useAnnounceDeleteMutate,
+  useAnnounceUpdateMutate,
+} from '../../hooks/react-query/useAnnounce';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+export const useCreateAnnouncement = () => {
+  const navigate = useNavigate();
+  const { postAnnounce } = useAnnounceCreateMutate();
+
+  const onCreate = ({
+    announceTitle,
+    announceContent,
+  }: {
+    announceTitle: string;
+    announceContent: string;
+  }) => {
+    postAnnounce(
+      {
+        announceTitle,
+        announceContent,
+      },
+      {
+        onError: (error) => {
+          alert(error.message);
+        },
+        onSuccess: (data) => {
+          if (!data) throw new Error('data is undefined');
+          alert('등록되었습니다.');
+          navigate('/announcement');
+        },
+      },
+    );
+  };
+  return {
+    onCreate,
+  };
+};
+
+interface AnnouncementUpdateForm {
+  announceId: number;
+  announceTitle: string;
+  announceContent: string;
+}
+
+export const useAnnounceUpdate = () => {
+  const navigate = useNavigate();
+  const { putAnnounceById } = useAnnounceUpdateMutate();
+
+  const onUpdate = ({
+    announceId,
+    announceTitle,
+    announceContent,
+  }: AnnouncementUpdateForm) => {
+    putAnnounceById(
+      announceId,
+      {
+        announceTitle,
+        announceContent,
+      },
+      {
+        onError: (error) => {
+          alert(error.message);
+        },
+        onSuccess: (data) => {
+          if (!data) throw new Error('data is undefined');
+          alert('수정되었습니다.');
+          navigate(`/announcement/${announceId}`);
+        },
+      },
+    );
+  };
+  return {
+    onUpdate,
+  };
+};
+
+export const useAnnounceDelete = () => {
+  const { deleteAnnounceById } = useAnnounceDeleteMutate();
+  const navigate = useNavigate();
+
+  const onDelete = (announceId: number) => {
+    deleteAnnounceById(announceId, {
+      onError: (error) => {
+        alert(error.message);
+      },
+      onSuccess: (data) => {
+        if (!data) throw new Error('data is undefined');
+        alert('삭제되었습니다.');
+        navigate('/announcement');
+      },
+    });
+  };
+  return {
+    onDelete,
+  };
+};

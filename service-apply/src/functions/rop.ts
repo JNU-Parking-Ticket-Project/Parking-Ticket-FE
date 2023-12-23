@@ -10,7 +10,7 @@ interface SubmitFailure {
 
 export type SubmitResult<T> = SubmitSuccess<T> | SubmitFailure;
 
-export const submitSucccess = <T>(value: T): SubmitSuccess<T> => {
+export const submitSuccess = <T>(value: T): SubmitSuccess<T> => {
   return {
     success: true,
     value,

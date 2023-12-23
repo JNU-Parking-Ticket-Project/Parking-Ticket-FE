@@ -5,7 +5,6 @@ import {
   useSectorUpdateMutate,
   useSectorsQuery,
 } from '../react-query/useSetting';
-import { Sector } from '../../apis/dtos/sector.dtos';
 
 export const useSectionSettingTable = () => {
   const { sectorSettingData } = useSectorsQuery();
@@ -14,17 +13,22 @@ export const useSectionSettingTable = () => {
   const { putSectors } = useSectorUpdateMutate();
 
   const [data, setData] = useState(sectorSettingData);
-
-  useEffect(() => {
-    setData(sectorSettingData);
-  }, [sectorSettingData]);
-
   const [isEdit, setIsEdit] = useState(
     sectorSettingData.map((data) => ({
       id: data.id,
       isEdit: false,
     })),
   );
+
+  useEffect(() => {
+    setData(sectorSettingData);
+    setIsEdit(
+      sectorSettingData.map((data) => ({
+        id: data.id,
+        isEdit: false,
+      })),
+    );
+  }, [sectorSettingData]);
 
   const onEditValue =
     (id: number, type?: 'numeric') =>
@@ -51,7 +55,7 @@ export const useSectionSettingTable = () => {
 
   const toggleEdit = (id: number) => {
     if (getIsEdit(id)) {
-      putSectors([data.find((data) => data.id === id)!], {
+      putSectors(data, {
         onError: (error) => {
           alert(error.message);
         },
@@ -90,7 +94,10 @@ export const useSectionSettingTable = () => {
     });
   };
 
-  const createSection = (section: Omit<Sector, 'id' | 'issueAmount'>[]) => {
+  const createSection = () => {
+    const section = [
+      { name: '', reserve: 0, sectorCapacity: 0, sectorNumber: '' },
+    ];
     postSectors(section, {
       onError: (error) => {
         alert(error.message);

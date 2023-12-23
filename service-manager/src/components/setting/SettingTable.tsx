@@ -83,15 +83,7 @@ export const SettingTable = () => {
         </tbody>
       </table>
       <div className="text-right">
-        <Button
-          className="my-4"
-          size="small"
-          onClick={() =>
-            createSection([
-              { name: '', reserve: 0, sectorCapacity: 0, sectorNumber: '' },
-            ])
-          }
-        >
+        <Button className="my-4" size="small" onClick={createSection}>
           구간추가
         </Button>
       </div>

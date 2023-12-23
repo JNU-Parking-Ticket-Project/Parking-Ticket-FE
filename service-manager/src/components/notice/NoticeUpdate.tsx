@@ -3,8 +3,9 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense } from 'react';
 import { useNoticeQuery } from '../../hooks/react-query/useNotice';
 import { useNoticeForm } from '../../hooks/useNoticeForm';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import ErrorBoundary from '../common/ErrorBoundary';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -12,15 +13,12 @@ const ToastEditor = lazy(() =>
   })),
 );
 
-export const Default_Notice = '## 안내사항을 작성해주세요.';
-
 export const NoticeUpdate = () => {
   const editorRef = useRef<Editor>(null);
   const { noticeData } = useNoticeQuery();
-  const { content, onUpdate } = useNoticeForm();
+  const { onUpdate } = useNoticeForm();
 
-  const onUpdateNotice = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onUpdateNotice = () => {
     const editorInstance = editorRef.current?.getInstance();
     if (!editorInstance) throw new Error('editorInstance is undefined');
     const markdown = editorInstance.getMarkdown();
@@ -32,35 +30,28 @@ export const NoticeUpdate = () => {
   };
 
   return (
-    <>
-      <form
-        id="noticeForm"
-        method="post"
-        onSubmit={onUpdateNotice}
-        className="my-4"
-      >
-        <Suspense fallback={<div>Loading...</div>}>
+    <div className="py-4">
+      <ErrorBoundary>
+        <Suspense>
           <ToastEditor
-            initialValue={noticeData?.noticeContent || Default_Notice}
+            initialValue={noticeData?.noticeContent}
             previewStyle="vertical"
-            previewHighlight={false}
-            toolbarItems={[
-              ['heading', 'bold', 'italic', 'strike'],
-              ['hr', 'quote'],
-              ['ul', 'ol', 'task', 'indent', 'outdent'],
-              ['table', 'link'],
-              ['code', 'codeblock'],
-            ]}
-            height="600px"
+            height="30rem"
+            minHeight="calc(100vh - 33rem)"
             initialEditType="markdown"
-            useCommandShortcut={true}
+            previewHighlight={false}
             ref={editorRef}
           />
         </Suspense>
-        <div className="flex justify-end">
-          <Button type="submit">저장</Button>
-        </div>
-      </form>
-    </>
+      </ErrorBoundary>
+      <Button
+        size="small"
+        className="float-right my-4 px-[4rem]"
+        type="submit"
+        onClick={onUpdateNotice}
+      >
+        저장
+      </Button>
+    </div>
   );
 };
