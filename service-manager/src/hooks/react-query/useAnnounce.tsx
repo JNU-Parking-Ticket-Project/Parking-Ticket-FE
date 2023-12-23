@@ -16,10 +16,17 @@ import {
   Announce,
   AnnounceDelete,
 } from 'service-manager/src/apis/dtos/announce.dtos';
+import {
+  M_KEY_ANNOUNCE_CREATE,
+  M_KEY_ANNOUNCE_DELETE,
+  M_KEY_ANNOUNCE_UPDATE,
+  Q_KEY_ANNOUNCE_DETAIL,
+  Q_KEY_ANNOUNCE_LIST,
+} from '../../constants/tqkey';
 
 export const useAnnounceListQuery = (page: number) => {
   const { data: announceListData } = useSuspenseQuery({
-    queryKey: ['announceList', page],
+    queryKey: [Q_KEY_ANNOUNCE_LIST, page],
     queryFn: () => getAllAnnounce(page),
   });
   return { announceListData };
@@ -27,7 +34,7 @@ export const useAnnounceListQuery = (page: number) => {
 
 export const useAnnounceDetailQuery = (announceId: number) => {
   const { data: announceDetailData } = useSuspenseQuery({
-    queryKey: ['announceDetail', announceId],
+    queryKey: [Q_KEY_ANNOUNCE_DETAIL, announceId],
     queryFn: () => getAnnounceById(announceId),
   });
   return { announceDetailData };
@@ -35,7 +42,7 @@ export const useAnnounceDetailQuery = (announceId: number) => {
 
 export const useAnnounceCreateMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['announceCreate'],
+    mutationKey: [M_KEY_ANNOUNCE_CREATE],
     mutationFn: postAnnounce,
   });
 
@@ -57,7 +64,7 @@ export const useAnnounceCreateMutate = () => {
 export const useAnnounceUpdateMutate = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationKey: ['announceUpdate'],
+    mutationKey: [M_KEY_ANNOUNCE_UPDATE],
     mutationFn: putAnnounceById,
   });
 
@@ -74,7 +81,7 @@ export const useAnnounceUpdateMutate = () => {
           onSettled: (data) => {
             if (!data) throw new Error('data is undefined');
             queryClient.invalidateQueries({
-              queryKey: ['announceDetail', announceId],
+              queryKey: [Q_KEY_ANNOUNCE_DETAIL, announceId],
             });
           },
         },
@@ -86,7 +93,7 @@ export const useAnnounceUpdateMutate = () => {
 export const useAnnounceDeleteMutate = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationKey: ['announceDelete'],
+    mutationKey: [M_KEY_ANNOUNCE_DELETE],
     mutationFn: deleteAnnounceById,
   });
 
@@ -103,7 +110,7 @@ export const useAnnounceDeleteMutate = () => {
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
           queryClient.invalidateQueries({
-            queryKey: ['announceList'],
+            queryKey: [Q_KEY_ANNOUNCE_LIST],
           });
         },
       });

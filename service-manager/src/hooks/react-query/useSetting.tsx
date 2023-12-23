@@ -14,10 +14,18 @@ import {
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
 import { SettingTime } from 'service-manager/src/apis/dtos/times.dtos';
+import {
+  M_KEY_SECTORS_CREATE,
+  M_KEY_SECTORS_DELETE,
+  M_KEY_SECTORS_UPDATE,
+  M_KEY_TIME_SETTING_UPDATE,
+  Q_KEY_SECTORS,
+  Q_KEY_TIME_SETTING,
+} from '../../constants/tqkey';
 
 export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['sectors'],
+    queryKey: [Q_KEY_SECTORS],
     queryFn: getSectors,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -30,7 +38,7 @@ type SectorRequest = Omit<Sector, 'id' | 'issueAmount'>[];
 
 export const useSectorUpdateMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['sectorsUpdate'],
+    mutationKey: [M_KEY_SECTORS_UPDATE],
     mutationFn: putSectors,
   });
   const queryClient = useQueryClient();
@@ -55,7 +63,7 @@ export const useSectorUpdateMutate = () => {
 
 export const useSectorCreateMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['sectorsCreate'],
+    mutationKey: [M_KEY_SECTORS_CREATE],
     mutationFn: postSectors,
   });
   const queryClient = useQueryClient();
@@ -72,7 +80,7 @@ export const useSectorCreateMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({ queryKey: ['sectors'] });
+          queryClient.invalidateQueries({ queryKey: [Q_KEY_SECTORS] });
         },
       }),
   };
@@ -80,7 +88,7 @@ export const useSectorCreateMutate = () => {
 
 export const useSectorDeleteMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['sectorsDelete'],
+    mutationKey: [M_KEY_SECTORS_DELETE],
     mutationFn: deleteSector,
   });
   const queryClient = useQueryClient();
@@ -97,7 +105,7 @@ export const useSectorDeleteMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({ queryKey: ['sectors'] });
+          queryClient.invalidateQueries({ queryKey: [Q_KEY_SECTORS] });
         },
       }),
   };
@@ -105,7 +113,7 @@ export const useSectorDeleteMutate = () => {
 
 export const useTimeSettingQuery = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['timeSetting'],
+    queryKey: [Q_KEY_TIME_SETTING],
     queryFn: getSettingTime,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -116,7 +124,7 @@ export const useTimeSettingQuery = () => {
 
 export const useTimeSettingUpdateMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['timeSettingUpdate'],
+    mutationKey: [M_KEY_TIME_SETTING_UPDATE],
     mutationFn: postSettingTime,
   });
   const queryClient = useQueryClient();
@@ -133,7 +141,7 @@ export const useTimeSettingUpdateMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({ queryKey: ['timeSetting'] });
+          queryClient.invalidateQueries({ queryKey: [Q_KEY_TIME_SETTING] });
         },
       }),
   };

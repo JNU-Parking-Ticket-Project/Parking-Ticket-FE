@@ -23,10 +23,19 @@ import {
   putAdminRole,
 } from '../../apis/user.apis';
 import { setToken } from '../../functions/jwt';
+import {
+  M_KEY_ADMIN_ROLE,
+  M_KEY_EMAIL_CHECK,
+  M_KEY_LOGIN,
+  M_KEY_PWD_FIND,
+  M_KEY_PWD_RESET,
+  M_KEY_SIGN_UP,
+  Q_KEY_COUNCILS,
+} from '../../constants/tqkey';
 
 export const useLoginMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['login'],
+    mutationKey: [M_KEY_LOGIN],
     mutationFn: postLogin,
   });
 
@@ -52,7 +61,7 @@ export const useLoginMutate = () => {
 
 export const useSignUpMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['signUp'],
+    mutationKey: [M_KEY_SIGN_UP],
     mutationFn: postSignup,
   });
 
@@ -76,7 +85,7 @@ export const useSignUpMutate = () => {
 
 export const usePasswordResetMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['password-reset'],
+    mutationKey: [M_KEY_PWD_RESET],
     mutationFn: postPasswordReset,
   });
 
@@ -100,7 +109,7 @@ export const usePasswordResetMutate = () => {
 
 export const usePasswordFindMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['password-reset-request'],
+    mutationKey: [M_KEY_PWD_FIND],
     mutationFn: postPasswordFind,
   });
 
@@ -124,7 +133,7 @@ export const usePasswordFindMutate = () => {
 
 export const useEamilCheckMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['email-check'],
+    mutationKey: [M_KEY_EMAIL_CHECK],
     mutationFn: postCheckEmail,
   });
 
@@ -150,11 +159,11 @@ export const useAdminRoleMutate = () => {
   const queryClient = useQueryClient();
 
   const { mutate: putAdminRoleMutate } = useMutation({
-    mutationKey: ['admin-role'],
+    mutationKey: [M_KEY_ADMIN_ROLE],
     mutationFn: putAdminRole,
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ['councils'],
+        queryKey: [Q_KEY_COUNCILS],
       });
     },
   });

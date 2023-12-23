@@ -4,7 +4,6 @@ import {
   useAnnounceUpdateMutate,
 } from '../../hooks/react-query/useAnnounce';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 export const useCreateAnnouncement = () => {
   const navigate = useNavigate();

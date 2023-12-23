@@ -6,10 +6,11 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import { Notice } from '../../apis/dtos/notice.dtos';
+import { M_KEY_NOTICE, Q_KEY_NOTICE } from '../../constants/tqkey';
 
 export const useNoticeQuery = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['notice'],
+    queryKey: [Q_KEY_NOTICE],
     queryFn: getNotice,
     gcTime: Infinity,
     refetchOnReconnect: false,
@@ -21,7 +22,7 @@ export const useNoticeQuery = () => {
 export const useNoticeMutate = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationKey: ['notice'],
+    mutationKey: [M_KEY_NOTICE],
     mutationFn: putNotice,
   });
 
@@ -34,7 +35,7 @@ export const useNoticeMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.setQueryData(['notice'], data);
+          queryClient.setQueryData([Q_KEY_NOTICE], data);
         },
       });
     },
