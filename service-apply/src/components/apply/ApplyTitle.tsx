@@ -11,16 +11,16 @@ export const ApplyTitle = () => {
         <Txt size="h3" color="primary" className="mr-5">
           주차권 신청
         </Txt>
-        <Txt color="error">
-          올바른 서식이 아니라면 신청이 되지 않습니다. 신청 시간 전 임시저장을
-          통해 서식이 올바른지 확인하시길 권장드립니다.
-        </Txt>
         <ErrorBoundary>
           <Suspense>
             <ApplyStartTime />
           </Suspense>
         </ErrorBoundary>
       </h2>
+      <Txt color="error">
+        올바른 서식이 아니라면 신청이 되지 않습니다. 신청 시간 전 임시저장을
+        통해 서식이 올바른지 확인하시길 권장드립니다.
+      </Txt>
     </>
   );
 };
