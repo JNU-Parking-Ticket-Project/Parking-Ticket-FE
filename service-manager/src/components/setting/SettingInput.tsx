@@ -13,13 +13,13 @@ export const SettingInput = ({
 }: SettingInputProps) => {
   return isEdit ? (
     <InputText
-      className={clsx('text-center bg-transparent', props.className)}
+      className={clsx('text-center bg-transparent w-full', props.className)}
       value={value}
       {...props}
       type="text"
       designType="underline"
     />
   ) : (
-    value
+    <Txt className="px-4">{value}</Txt>
   );
 };
