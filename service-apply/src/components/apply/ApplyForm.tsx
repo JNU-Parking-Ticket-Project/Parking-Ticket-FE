@@ -13,10 +13,23 @@ import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 
-export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
+export const ApplyInputText = ({
+  className,
+  disabled,
+  ...props
+}: InputTextProps) => {
   return (
-    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2">
-      <InputText {...props} className={clsx(className, 'col-span-4')} />
+    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2 max-sm:flex max-sm:flex-col">
+      <InputText
+        {...props}
+        disabled={disabled}
+        labelClassName="w-full"
+        className={clsx(
+          className,
+          'col-span-4 w-full',
+          !disabled && 'bg-transparent',
+        )}
+      />
     </div>
   );
 };
@@ -68,6 +81,7 @@ export const ApplyForm = () => {
           label="이름"
           name="studentName"
           type="text"
+          placeholder="홍길동"
           onChange={(e) =>
             dispatch({ type: 'studentName', payload: e.target.value })
           }
@@ -78,6 +92,7 @@ export const ApplyForm = () => {
           label="학번"
           name="studentNumber"
           type="text"
+          placeholder="123456"
           onChange={(e) =>
             dispatch({ type: 'studentNumber', payload: e.target.value })
           }
@@ -158,7 +173,6 @@ export const ApplyForm = () => {
             {/* TODO: 모달창으로 변경 */}
           </a>
         </div>
-
         {isError && (
           <Txt color="error" className="my-2">
             {errorMessage}

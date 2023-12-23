@@ -1,4 +1,4 @@
-import { Container } from '@quokka/design-system';
+import { Container, Txt } from '@quokka/design-system';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 
 interface FormContainerProps
@@ -13,9 +13,11 @@ export const FormContainer = ({
   onSubmit,
 }: FormContainerProps) => {
   return (
-    <Container className="max-w-[30rem] min-w-[25rem] my-12" size="large">
+    <Container className="max-w-[30rem] my-12 w-full bg-white" size="large">
       <form onSubmit={onSubmit}>
-        <h2 className="text-[#0255D5] text-2xl font-bold pb-8">{title}</h2>
+        <Txt color="primary" className="text-2xl font-bold pb-8 sm:text-xl">
+          {title}
+        </Txt>
         {children}
       </form>
     </Container>

@@ -17,8 +17,8 @@ export const HomePage = () => {
     <>
       <MainContainer>
         <HomeTitle />
-        <div className="flex gap-4">
-          <div className="flex-1 w-1/2">
+        <div className="flex gap-4 max-sm:flex-col">
+          <div className="flex-1 sm:w-1/2">
             <ErrorBoundary>
               <Suspense>
                 <HomeInformation />
@@ -30,7 +30,7 @@ export const HomePage = () => {
               </Suspense>
             </ErrorBoundary>
           </div>
-          <div className="flex-1 w-1/2">
+          <div className="flex-1 sm:w-1/2">
             <HomeLogin />
           </div>
         </div>
