@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { CommonTitle } from '../../components/common/CommonTitle';
 import { MainContainer } from '../../components/common/MainContainer';
 import { Footer } from '../../components/common/Footer';
-import ErrorBoundary from '../../components/common/ErrorBoundray';
+import ErrorBoundary from '../../components/common/ErrorBoundary';
 import { Suspense, useEffect } from 'react';
 import { removeToken } from '../../functions/jwt';
 

@@ -13,21 +13,10 @@ export const useSectionSettingTable = () => {
   const { putSectors } = useSectorUpdateMutate();
 
   const [data, setData] = useState(sectorSettingData);
-  const [isEdit, setIsEdit] = useState(
-    sectorSettingData.map((data) => ({
-      id: data.id,
-      isEdit: false,
-    })),
-  );
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     setData(sectorSettingData);
-    setIsEdit(
-      sectorSettingData.map((data) => ({
-        id: data.id,
-        isEdit: false,
-      })),
-    );
   }, [sectorSettingData]);
 
   const onEditValue =
@@ -53,8 +42,8 @@ export const useSectionSettingTable = () => {
       });
     };
 
-  const toggleEdit = (id: number) => {
-    if (getIsEdit(id)) {
+  const toggleEdit = () => {
+    if (isEdit) {
       putSectors(data, {
         onError: (error) => {
           alert(error.message);
@@ -65,31 +54,13 @@ export const useSectionSettingTable = () => {
       });
     }
 
-    setIsEdit((prev) => {
-      return prev.map((data) => {
-        if (data.id === id) {
-          return {
-            ...data,
-            isEdit: !data.isEdit,
-          };
-        }
-        return data;
-      });
-    });
-  };
-
-  const getIsEdit = (id: number) => {
-    const result = isEdit.find((data) => data.id === id);
-    return result?.isEdit ?? false;
+    setIsEdit((prev) => !prev);
   };
 
   const deleteSection = (id: string) => {
     deleteSector(id, {
       onError: (error) => {
         alert(error.message);
-      },
-      onSuccess: () => {
-        alert('삭제되었습니다.');
       },
     });
   };
@@ -102,9 +73,6 @@ export const useSectionSettingTable = () => {
       onError: (error) => {
         alert(error.message);
       },
-      onSuccess: () => {
-        alert('추가되었습니다.');
-      },
     });
   };
 
@@ -112,7 +80,7 @@ export const useSectionSettingTable = () => {
     data,
     onEditValue,
     toggleEdit,
-    getIsEdit,
+    isEdit,
     deleteSection,
     createSection,
   };

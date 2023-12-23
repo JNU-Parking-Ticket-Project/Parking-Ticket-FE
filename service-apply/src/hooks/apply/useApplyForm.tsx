@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { removeToken } from '../../functions/jwt';
 import { TemporarySaveRequest } from '../../apis/dtos/registration.dtos';
 import { useApplyFormContext } from './useApplyFormContext';
+import { applyFormValidator } from '../../functions/validator';
 
 export const useApplyForm = () => {
   const navigate = useNavigate();
@@ -26,8 +27,33 @@ export const useApplyForm = () => {
 
   const { postTemporarySave } = useTemporarySaveMutate();
   const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
+
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const checkValidation = () => {
+    const { success, message } = applyFormValidator({
+      input: state,
+      sectionNumberArray: sector.map((x) => x.sectorId),
+      isAgreed,
+    });
+
+    if (!success) {
+      setIsError(true);
+      setErrorMessage(message);
+      alert(message);
+      return false;
+    }
+
+    setIsError(false);
+    setErrorMessage('');
+    return true;
+  };
 
   const onTemporarySave = () => {
+    if (!checkValidation()) return;
+
     postTemporarySave(
       new TemporarySaveRequest({
         name: state.studentName,
@@ -54,6 +80,11 @@ export const useApplyForm = () => {
     );
   };
 
+  const onModalOpen = () => {
+    if (!checkValidation()) return;
+    setIsCaptchaModalOpen(true);
+  };
+
   return {
     sector,
     state,
@@ -61,5 +92,10 @@ export const useApplyForm = () => {
     onTemporarySave,
     isCaptchaModalOpen,
     setIsCaptchaModalOpen,
+    onModalOpen,
+    isAgreed,
+    setIsAgreed,
+    isError,
+    errorMessage,
   };
 };

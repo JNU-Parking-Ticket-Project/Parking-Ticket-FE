@@ -5,7 +5,7 @@ import { HomeInformation } from '../components/home/HomeInformation';
 import { HomeLogin } from '../components/home/HomeLogin';
 import { HomeAnnounce } from '../components/home/HomeAnnounce';
 import { HomeTitle } from '../components/home/HomeTitle';
-import ErrorBoundary from '../components/common/ErrorBoundray';
+import ErrorBoundary from '../components/common/ErrorBoundary';
 import { removeToken } from '../functions/jwt';
 
 export const HomePage = () => {

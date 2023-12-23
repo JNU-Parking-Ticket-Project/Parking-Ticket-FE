@@ -1,4 +1,5 @@
 import { https } from '../functions/https';
+import { Period } from './dtos/period.dtos';
 import {
   CaptchaResponse,
   RegistrationOptionsResponse,
@@ -65,4 +66,12 @@ export const getCaptcha = async () => {
   }
 
   return new CaptchaResponse(response);
+};
+
+export const getRegistrationPeriod = async () => {
+  const response = await https.get('/v1/events/period');
+  if (isErrorResponse(response)) {
+    throw new Error('신청기간 조회에 실패하였습니다.');
+  }
+  return new Period(response);
 };
