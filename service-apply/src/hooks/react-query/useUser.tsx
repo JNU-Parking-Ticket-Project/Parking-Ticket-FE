@@ -13,10 +13,15 @@ import {
   UserToken,
 } from '../../apis/dtos/user.dtos';
 import { setToken } from '../../functions/jwt';
+import {
+  M_KEY_LOGIN,
+  M_KEY_PWD_FIND,
+  M_KEY_PWD_RESET,
+} from '../../constants/tqkey';
 
 export const useLoginMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['login'],
+    mutationKey: [M_KEY_LOGIN],
     mutationFn: postLogin,
   });
 
@@ -42,7 +47,7 @@ export const useLoginMutate = () => {
 
 export const usePasswordResetMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['password-reset'],
+    mutationKey: [M_KEY_PWD_RESET],
     mutationFn: postPasswordReset,
   });
 
@@ -66,7 +71,7 @@ export const usePasswordResetMutate = () => {
 
 export const usePasswordFindMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['password-reset-request'],
+    mutationKey: [M_KEY_PWD_FIND],
     mutationFn: postPasswordFind,
   });
 

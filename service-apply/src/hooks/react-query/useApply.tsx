@@ -14,10 +14,16 @@ import {
   postRegistration,
   postTemporarySave,
 } from '../../apis/registration.apis';
+import {
+  M_KEY_APPLY,
+  M_KEY_TEMPORARY_SAVE,
+  Q_KEY_APPLY,
+  Q_KEY_CAPTCHA,
+} from '../../constants/tqkey';
 
 export const useApplyMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['apply'],
+    mutationKey: [M_KEY_APPLY],
     mutationFn: postRegistration,
   });
 
@@ -46,7 +52,7 @@ export const useApplyMutate = () => {
 
 export const useTemporarySaveMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['applyTemporarySave'],
+    mutationKey: [M_KEY_TEMPORARY_SAVE],
     mutationFn: postTemporarySave,
   });
 
@@ -75,7 +81,7 @@ export const useTemporarySaveMutate = () => {
 
 export const useApplyQuery = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['apply'],
+    queryKey: [Q_KEY_APPLY],
     queryFn: getRegistration,
     gcTime: Infinity,
     refetchOnReconnect: false,
@@ -89,7 +95,7 @@ export const useApplyQuery = () => {
 
 export const useCaptchaQuery = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['captcha'],
+    queryKey: [Q_KEY_CAPTCHA],
     queryFn: getCaptcha,
   });
 
