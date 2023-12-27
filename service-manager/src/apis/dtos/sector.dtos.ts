@@ -28,3 +28,15 @@ export class Sector {
     this.issueAmount = issueAmount;
   }
 }
+
+class MessageResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}
+
+export class PutSectorResponse extends MessageResponse {}
+export class PostSectorResponse extends MessageResponse {}
+export class DeleteSectorResponse extends MessageResponse {}
+export class PostSettingsResponse extends MessageResponse {}
