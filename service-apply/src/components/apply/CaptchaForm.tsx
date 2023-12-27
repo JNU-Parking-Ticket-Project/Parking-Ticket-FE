@@ -19,7 +19,8 @@ export const CaptchaForm = ({
       <Txt size="h3" className="block text-center pb-4">
         자동 신청 방지
       </Txt>
-      <div className="flex justify-center align-center">
+      <div className="flex flex-col justify-center align-center">
+        <Txt size="sm">알맞은 두수의 연산 결과를 입력해주세요.</Txt>
         <img src={`https://${captchaImageUrl}`} />
       </div>
       <div className="w-full flex justify-center align-center py-4">
