@@ -60,7 +60,10 @@ export const useSignUpForm = () => {
         setEmailValid(false);
         setErrorMessage(error.message);
       },
-      onSuccess: () => setEmailValid(true),
+      onSuccess: () => {
+        setEmailValid(true);
+        alert('이메일 중복확인에 성공했습니다.');
+      },
     });
   };
 
