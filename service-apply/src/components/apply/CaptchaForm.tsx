@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from 'react';
 import { Txt, InputText, Button } from '@quokka/design-system';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface CaptchaFormProps {
   codeInput: string;
@@ -14,14 +15,24 @@ export const CaptchaForm = ({
   captchaImageUrl,
   handleSubmit,
 }: CaptchaFormProps) => {
+  const queryClient = useQueryClient();
+  const refetchCaptcha = () => {
+    // TODO: 쿼리키 상수화
+    queryClient.refetchQueries({ queryKey: ['captcha'] });
+  };
   return (
     <div>
       <Txt size="h3" className="block text-center pb-4">
         자동 신청 방지
       </Txt>
-      <div className="flex flex-col justify-center align-center">
-        <Txt size="sm">알맞은 두수의 연산 결과를 입력해주세요.</Txt>
+      <Txt size="sm" className="block text-center">
+        알맞은 두수의 연산 결과를 입력해주세요.
+      </Txt>
+      <div className="flex justify-center align-center">
         <img src={`https://${captchaImageUrl}`} />
+        <Button size="small" color="secondary" onClick={refetchCaptcha}>
+          새로고침
+        </Button>
       </div>
       <div className="w-full flex justify-center align-center py-4">
         <InputText
