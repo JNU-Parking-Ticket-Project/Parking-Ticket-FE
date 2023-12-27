@@ -29,7 +29,6 @@ export const CaptchaForm = ({
           value={codeInput}
           onChange={handleCodeInput}
           placeholder="정답"
-          pattern="[0-9]*"
           className="w-full max-w-lg text-center"
         />
       </div>
