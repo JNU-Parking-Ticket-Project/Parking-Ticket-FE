@@ -25,10 +25,10 @@ export const CaptchaForm = ({
       <Txt size="h3" className="block text-center pb-4">
         자동 신청 방지
       </Txt>
-      <Txt size="sm" className="block text-center">
-        알맞은 두수의 연산 결과를 입력해주세요.
+      <Txt size="sm" className="block text-center pb-4">
+        두 정수의 덧/뺄셈(+,-)결과를 입력해주세요.
       </Txt>
-      <div className="flex justify-center align-center">
+      <div className="flex justify-center align-center gap-4">
         <img src={`https://${captchaImageUrl}`} />
         <Button size="small" color="secondary" onClick={refetchCaptcha}>
           새로고침
