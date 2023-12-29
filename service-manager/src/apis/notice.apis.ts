@@ -1,3 +1,4 @@
+import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { Notice } from './dtos/notice.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
@@ -16,7 +17,7 @@ export const putNotice = async (data: {
 }): Promise<Notice> => {
   const response = await https.put('/v1/notice', data);
   if (isErrorResponse(response)) {
-    if (response.code === 'AUTH_401_1') {
+    if (getErrorContent(response.code).type === 'REISSUE') {
       return reissueToken(() => putNotice(data));
     }
     throw new Error(response.reason);

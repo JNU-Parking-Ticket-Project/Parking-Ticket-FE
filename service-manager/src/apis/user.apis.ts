@@ -1,3 +1,4 @@
+import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { getRefreshToken, removeToken, setToken } from '../functions/jwt';
 import type { Role } from '../types/admin';
@@ -96,7 +97,7 @@ export const putAdminRole = async ({
 }): Promise<AdminRoleResponse> => {
   const response = await https.put(`/v1/admin/role/${userId}`, { role });
   if (isErrorResponse(response)) {
-    if (response.code === 'AUTH_401_1') {
+    if (getErrorContent(response.code).type === 'REISSUE') {
       return reissueToken(() => putAdminRole({ userId, role }));
     }
     throw new Error(response.reason);
