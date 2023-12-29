@@ -166,6 +166,7 @@ export const ApplyForm = () => {
             </Txt>
           </div>
           <a
+            target="_blank"
             href="https://www.privacy.go.kr/front/main/main.do"
             className="pl-6 text-sm underline underline-offset-4 text-neutral-700"
           >
