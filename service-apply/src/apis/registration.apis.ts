@@ -15,7 +15,7 @@ export const postRegistration = async (
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration', data);
   if (isErrorResponse(response)) {
-    if (response.status === 401 || response.status === 403) {
+    if (response.code === 'AUTH_401_1') {
       return reissueToken(() => postRegistration(data));
     }
     console.log(response.reason);
@@ -29,7 +29,7 @@ export const postTemporarySave = async (
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration/temporary', data);
   if (isErrorResponse(response)) {
-    if (response.status === 401 || response.status === 403) {
+    if (response.code === 'AUTH_401_1') {
       return reissueToken(() => postTemporarySave(data));
     }
     throw new Error(response.reason);
@@ -41,7 +41,7 @@ export const getRegistration =
   async (): Promise<RegistrationOptionsResponse> => {
     const response = await https.get('/v1/registration');
     if (isErrorResponse(response)) {
-      if (response.status === 401 || response.status === 403) {
+      if (response.code === 'AUTH_401_1') {
         return reissueToken(getRegistration);
       }
       return new RegistrationOptionsResponse({

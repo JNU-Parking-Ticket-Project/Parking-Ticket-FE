@@ -60,3 +60,12 @@ export class PasswordReset {
 
 export class UserSignUpResponse extends JustMessage {}
 export class CheckEmailResponse extends JustMessage {}
+
+export class AdminRoleResponse {
+  userId: number;
+  role: Role;
+  constructor({ userId, role }: { userId: number; role: Role }) {
+    this.userId = userId;
+    this.role = role;
+  }
+}
