@@ -48,7 +48,6 @@ export const applyFormValidator = ({
   sectionNumberArray: number[];
   isAgreed: boolean;
 }) => {
-  console.log(input, sectionNumberArray, isAgreed);
   if (!isAgreed) {
     return submitFailure('개인정보 수집 및 이용에 동의해 주세요.');
   }
