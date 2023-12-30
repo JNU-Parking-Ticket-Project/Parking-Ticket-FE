@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
-import { setMinutes, setHours } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
@@ -51,7 +50,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 export const SettingTime = () => {
   const { timeSettingData, updateSettingTime } = useSectionTimeSetting();
 
-  const [opendate, setOpenDate] = useState(timeSettingData.startAt);
+  const [openDate, setOpenDate] = useState(timeSettingData.startAt);
   const [endDate, setEndDate] = useState(timeSettingData.endAt);
 
   useEffect(() => {
@@ -63,7 +62,7 @@ export const SettingTime = () => {
     <>
       <div className="flex justify-around gap-8">
         <DateTimePicker
-          date={opendate}
+          date={openDate}
           setDate={(date) => {
             if (!date) return;
             setOpenDate(date);
@@ -75,7 +74,7 @@ export const SettingTime = () => {
           date={endDate}
           setDate={(date) => {
             if (!date) return;
-            if (date < opendate) return;
+            if (date < openDate) return;
             setEndDate(date);
           }}
           title="Close"
@@ -86,14 +85,8 @@ export const SettingTime = () => {
         className="float-right my-4"
         onClick={() => {
           updateSettingTime({
-            startAt: setMinutes(
-              setHours(opendate, opendate.getHours()),
-              opendate.getMinutes(),
-            ),
-            endAt: setMinutes(
-              setHours(endDate, endDate.getHours()),
-              endDate.getMinutes(),
-            ),
+            startAt: openDate,
+            endAt: endDate,
           });
         }}
       >

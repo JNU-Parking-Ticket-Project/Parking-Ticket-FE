@@ -132,7 +132,7 @@ export const useTimeSettingUpdateMutate = () => {
       mutate(times, {
         ...mutateOption,
         onSettled: (data) => {
-          if (!data) throw new Error('data is undefined');
+          if (!data) throw new Error('데이터가 없습니다.');
           queryClient.invalidateQueries({ queryKey: ['timeSetting'] });
         },
       }),
