@@ -1,3 +1,4 @@
+import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { Period } from './dtos/period.dtos';
 import {
@@ -15,10 +16,9 @@ export const postRegistration = async (
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration', data);
   if (isErrorResponse(response)) {
-    if (response.code === 'AUTH_401_1') {
+    if (getErrorContent(response.code).type === 'REISSUE') {
       return reissueToken(() => postRegistration(data));
     }
-    console.log(response.reason);
     throw new Error(response.reason);
   }
   return new RegistrationResponse(response);
@@ -29,7 +29,7 @@ export const postTemporarySave = async (
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration/temporary', data);
   if (isErrorResponse(response)) {
-    if (response.code === 'AUTH_401_1') {
+    if (getErrorContent(response.code).type === 'REISSUE') {
       return reissueToken(() => postTemporarySave(data));
     }
     throw new Error(response.reason);
@@ -41,8 +41,19 @@ export const getRegistration =
   async (): Promise<RegistrationOptionsResponse> => {
     const response = await https.get('/v1/registration');
     if (isErrorResponse(response)) {
-      if (response.code === 'AUTH_401_1') {
-        return reissueToken(getRegistration);
+      const erorrContext = getErrorContent(response.code);
+      switch (erorrContext.type) {
+        case 'ALERT':
+          alert(response.reason);
+          break;
+        case 'ALERT_WITH_REDIRECT':
+          alert(response.reason);
+          window.location.href = erorrContext.redirect;
+          break;
+        case 'REISSUE':
+          return reissueToken(getRegistration);
+        default:
+          break;
       }
       return new RegistrationOptionsResponse({
         carNum: '',
@@ -68,9 +79,23 @@ export const getCaptcha = async () => {
   return new CaptchaResponse(response);
 };
 
-export const getRegistrationPeriod = async () => {
+export const getRegistrationPeriod = async (): Promise<Period> => {
   const response = await https.get('/v1/events/period');
   if (isErrorResponse(response)) {
+    const errorContent = getErrorContent(response.code);
+    switch (errorContent.type) {
+      case 'ALERT':
+        alert(response.reason);
+        break;
+      case 'ALERT_WITH_REDIRECT':
+        alert(response.reason);
+        window.location.href = errorContent.redirect;
+        break;
+      case 'REISSUE':
+        return reissueToken(getRegistrationPeriod);
+      default:
+        break;
+    }
     throw new Error('신청기간 조회에 실패하였습니다.');
   }
   return new Period(response);

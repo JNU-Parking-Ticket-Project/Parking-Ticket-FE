@@ -1,3 +1,5 @@
+import { ERROR_CODE } from 'service-apply/src/functions/error';
+
 export class Response {
   status: number;
   success: string;
@@ -22,7 +24,7 @@ export class Response {
 }
 
 export class ErrorResponse {
-  code: string;
+  code: ERROR_CODE;
   path: string;
   reason: string;
   status: number;
@@ -36,7 +38,7 @@ export class ErrorResponse {
     success,
     timeStamp,
   }: {
-    code: string;
+    code: ERROR_CODE;
     path: string;
     reason: string;
     status: number;

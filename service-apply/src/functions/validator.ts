@@ -20,7 +20,7 @@ export const isSection = ({
 }: {
   array: number[];
   selected: number;
-}) => array.includes(selected);
+}) => array.includes(+selected);
 
 export const isCarNumber = (carNumber: string) =>
   /\d{2,3}[가-힣]{1}\d{4}/gm.test(carNumber.replace(' ', ''));
