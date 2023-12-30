@@ -2,10 +2,11 @@ import { Txt } from '@quokka/design-system';
 import { NavContainer } from '../components/common/NavContainer';
 import { NavTitle } from '../components/common/NavTitle';
 import { MemberList } from '../components/admin/MemberList';
+import { MainContainer } from '../components/common/MainContainer';
 
 export const AdminPage = () => {
   return (
-    <>
+    <MainContainer>
       <nav className="flex flex-row">
         <NavTitle />
         <NavContainer />
@@ -13,7 +14,7 @@ export const AdminPage = () => {
       <main className="mx-32">
         <div className="border-b pb-4">
           <Txt size="h3" color="primary" className="font-semibold ">
-            회원가입
+            권한설정
           </Txt>
         </div>
         <table className="w-full">
@@ -30,6 +31,6 @@ export const AdminPage = () => {
           </tbody>
         </table>
       </main>
-    </>
+    </MainContainer>
   );
 };

@@ -2,8 +2,8 @@ import { Txt } from '@quokka/design-system';
 
 export const Footer = () => {
   return (
-    <footer className="grid grid-cols-12 w-full left-0 border-t border-[#DBDBDB] py-4 h-44">
-      <div className="col-start-10 col-span-3 flex flex-col capitalize">
+    <footer className="grid md:grid-cols-12 w-full left-0 border-t border-[#DBDBDB] py-4 h-44">
+      <div className="px-8 md:px-0 md:col-start-10 md:col-span-3 flex flex-col capitalize">
         <Txt size="h6" className="py-2">
           contact us
         </Txt>

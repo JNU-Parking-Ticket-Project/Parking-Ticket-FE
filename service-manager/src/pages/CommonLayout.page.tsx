@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Footer } from '../components/common/FooterContainer';
+import { Footer } from '../components/common/Footer';
 import { MainContainer } from '../components/common/MainContainer';
 import { NavContainer } from '../components/common/NavContainer';
 import { NavTitle } from '../components/common/NavTitle';
