@@ -9,14 +9,14 @@ import { AnnouncementLayoutPage } from '../pages/Anouncement/AnounceLayout.page'
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { AnnouncementDonePage } from '../pages/Anouncement/AnnouncementDone.page';
 import { AnnouncementDoneTempPage } from '../pages/Anouncement/AnnouncementDoneTemp.page';
-import { ErrorPage } from '../pages/Error.page';
+import { NotFound } from '../pages/Notfound';
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/apply" element={<ApplyPage />} />
-      <Route path="/error" element={<ErrorPage />} />
+
       <Route path="/announcement/done" element={<AnnouncementDonePage />} />
       <Route
         path="/announcement/done/temp"
@@ -33,6 +33,7 @@ export function Router() {
           element={<PasswordResetPage />}
         />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
