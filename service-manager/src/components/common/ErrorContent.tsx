@@ -1,7 +1,7 @@
 import { Txt, Button } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 
-export const ErrorContent = () => {
+export const NotFoundContent = () => {
   return (
     <div className="h-[100dvh] flex  items-center justify-center">
       <div className="flex-col flex text-center">
