@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useApplyQuery, useTemporarySaveMutate } from '../react-query/useApply';
-import { useNavigate } from 'react-router-dom';
-import { removeToken } from '../../functions/jwt';
 import { TemporarySaveRequest } from '../../apis/dtos/registration.dtos';
 import { useApplyFormContext } from './useApplyFormContext';
 import { applyFormValidator } from '../../functions/validator';
+import { QueryClient } from '@tanstack/react-query';
 
 export const useApplyForm = () => {
-  const navigate = useNavigate();
-
   const { registrationData } = useApplyQuery();
   const { sector, selectSectorId, ...rest } = registrationData;
 
@@ -53,15 +50,13 @@ export const useApplyForm = () => {
 
   const onTemporarySave = () => {
     if (!checkValidation()) return;
+    const queryClient = new QueryClient();
 
     postTemporarySave(
       new TemporarySaveRequest({
+        ...state,
         name: state.studentName,
-        studentNumber: state.studentNumber,
-        affiliation: state.affiliation,
         isLightCar: state.isCompact,
-        carNumber: state.carNumber,
-        phoneNumber: state.phoneNumber,
         selectSectorId: +state.section,
       }),
       {
@@ -70,11 +65,9 @@ export const useApplyForm = () => {
           throw new Error(error.message);
         },
         onSuccess: (data) => {
-          if (!data) throw new Error('data is undefined');
-          dispatch({ type: 'reset', payload: null });
+          if (!data) throw new Error('데이터가 없습니다.');
           alert(data.message);
-          removeToken();
-          navigate('/announcement/done/temp');
+          queryClient.invalidateQueries({ queryKey: ['apply'] });
         },
       },
     );
