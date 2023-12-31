@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from 'react';
 import { Txt, InputText, Button } from '@quokka/design-system';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface CaptchaFormProps {
   codeInput: string;
@@ -14,25 +15,33 @@ export const CaptchaForm = ({
   captchaImageUrl,
   handleSubmit,
 }: CaptchaFormProps) => {
+  const queryClient = useQueryClient();
+  const refetchCaptcha = () => {
+    // TODO: 쿼리키 상수화
+    queryClient.refetchQueries({ queryKey: ['captcha'] });
+  };
   return (
     <div>
       <Txt size="h3" className="block text-center pb-4">
         자동 신청 방지
       </Txt>
-      <div className="flex justify-center align-center">
-        <img src={`https://${captchaImageUrl}`} />
-      </div>
+      <Txt size="sm" className="block text-center pb-4">
+        두 정수의 덧/뺄셈(+,-)결과를 입력해주세요.
+      </Txt>
+      <img className="m-auto" src={`https://${captchaImageUrl}`} />
       <div className="w-full flex justify-center align-center py-4">
         <InputText
           type="text"
           value={codeInput}
           onChange={handleCodeInput}
           placeholder="정답"
-          pattern="[0-9]*"
           className="w-full max-w-lg text-center"
         />
       </div>
-      <div className="flex justify-center align-center pt-4">
+      <div className="flex justify-center align-center pt-4 gap-4">
+        <Button size="small" color="secondary" onClick={refetchCaptcha}>
+          새로고침
+        </Button>
         <Button
           onClick={handleSubmit}
           color="primary"
