@@ -2,7 +2,7 @@ import { Button, InputText, Txt } from '@quokka/design-system';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutate } from '../../hooks/react-query/useUser';
-import { isEmail } from '../../functions/validator';
+import { isEmail, isPassword } from '../../functions/validator';
 
 export const HomeLogin = () => {
   const [email, setEmail] = useState('');
@@ -16,17 +16,27 @@ export const HomeLogin = () => {
   const formAction = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) {
-      alert('이메일을 입력해주세요.');
+      alert('이메일을 입력해 주세요.');
       return;
     }
     if (!password) {
-      alert('비밀번호를 입력해주세요.');
+      alert('비밀번호를 입력해 주세요.');
       return;
     }
-    if (isEmail(email) === false) {
-      alert('이메일을 확인해주세요.');
+    if (!isEmail(email)) {
+      alert('올바른 형식의 이메일을 입력해 주세요.');
       setIsError(true);
-      setErrorMessage('이메일을 확인해주세요.');
+      setErrorMessage('올바른 형식의 이메일을 입력해 주세요.');
+      return;
+    }
+    if (!isPassword(password)) {
+      alert(
+        '비밀번호는 최소 8자 이상이며, 최소 하나의 대문자, 소문자, 숫자, 특수 문자를 포함해야 합니다.',
+      );
+      setIsError(true);
+      setErrorMessage(
+        '비밀번호는 최소 8자 이상이며, 최소 하나의 대문자, 소문자, 숫자, 특수 문자를 포함해야 합니다.',
+      );
       return;
     }
     postLogin(

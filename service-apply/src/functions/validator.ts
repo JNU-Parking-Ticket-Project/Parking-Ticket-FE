@@ -52,25 +52,25 @@ export const applyFormValidator = ({
     return submitFailure('개인정보 수집 및 이용에 동의해 주세요.');
   }
   if (!isPhoneNumber(input.phoneNumber)) {
-    return submitFailure('올바른 전화번호가 아닙니다.');
+    return submitFailure('올바른 형식의 전화번호를 입력해 주세요.');
   }
   if (!isEmail(input.email)) {
-    return submitFailure('올바른 이메일이 아닙니다.');
+    return submitFailure('올바른 형식의 이메일을 입력해 주세요.');
   }
   if (!isStudentName(input.studentName)) {
-    return submitFailure('올바른 이름이 아닙니다.');
+    return submitFailure('2~5글자 사이의 이름을 입력해 주세요.');
   }
   if (!isStudentNumber(input.studentNumber)) {
-    return submitFailure('학번은 6자리 숫자입니다.');
+    return submitFailure('올바른 형식의 학번을 입력해 주세요.');
   }
   if (!isAffiliation(input.affiliation)) {
-    return submitFailure('소속대학을 입력해 주세요');
+    return submitFailure('소속대학을 입력해 주세요.');
   }
   if (!isSection({ array: sectionNumberArray, selected: input.section })) {
-    return submitFailure('올바른 구간이 아닙니다.');
+    return submitFailure('올바른 구간을 선택해 주세요.');
   }
   if (!isCarNumber(input.carNumber)) {
-    return submitFailure('차량 번호를 양식에 맞게 입력해 주세요.');
+    return submitFailure('올바른 형식의 차량번호를 입력해 주세요.');
   }
   return { ...submitSuccess(input), message: '' };
 };
@@ -89,11 +89,13 @@ export const passwordResetFormValidator = (input: PasswordResetFormInput) => {
   }
   if (!isPassword(input.password)) {
     return submitFailure(
-      '비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함하는 8~20자리이어야 합니다.',
+      '비밀번호는 최소 8자 이상이며, 최소 하나의 대문자, 소문자, 숫자, 특수 문자를 포함해야 합니다.',
     );
   }
   if (input.password !== input.confirmPassword) {
-    return submitFailure('비밀번호가 일치하지 않습니다');
+    return submitFailure(
+      '비밀번호와 비밀번호 재입력이 서로 일치하지 않습니다.',
+    );
   }
   return { ...submitSuccess(input), message: '' };
 };

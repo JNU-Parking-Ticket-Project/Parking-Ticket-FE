@@ -21,7 +21,7 @@ export const useRequestPasswordForm = () => {
       return;
     }
     if (!isEmail(email)) {
-      alert('이메일을 확인해주세요.');
+      alert('올바른 형식의 이메일을 입력해 주세요.');
       setIsError(true);
       return;
     }
