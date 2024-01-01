@@ -9,25 +9,27 @@ import { AnnouncementLayoutPage } from '../pages/Anouncement/AnounceLayout.page'
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { ApplyDonePage } from '../pages/apply/ApplyDone.page';
 import { ApplyDoneTempPage } from '../pages/apply/ApplyDoneTemp.page';
+import { NotFound } from '../pages/Notfound';
 
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/apply" element={<ApplyPage />} />
-      <Route path="/announcement/done" element={<ApplyDonePage />} />
-      <Route path="/announcement/done/temp" element={<ApplyDoneTempPage />} />
+      <Route path="/" element={<HomePage />}/>
+      <Route path="/apply" element={<ApplyPage />}/>
+      <Route path="/announcement/done" element={<ApplyDonePage />}/>
+      <Route path="/announcement/done/temp" element={<ApplyDoneTempPage />}/>
       <Route path="/announcement" element={<AnnouncementLayoutPage />}>
         <Route index element={<AnnouncementListPage />} />
-        <Route path=":announcementId" element={<AnnouncementPage />} />
+        <Route path=":announcementId" element={<AnnouncementPage />}/>
       </Route>
       <Route path="/password-reset" element={<PasswordResetLayout />}>
-        <Route index element={<RequestPasswordResetPage />} />
+        <Route index element={<RequestPasswordResetPage />}/>
         <Route
           path="/password-reset/:resetId"
           element={<PasswordResetPage />}
         />
       </Route>
+      <Route path='*' element={<NotFound />}/>
     </Routes>
   );
 }

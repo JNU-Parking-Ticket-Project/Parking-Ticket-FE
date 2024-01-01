@@ -18,6 +18,7 @@ import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
 import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate.page';
 import { AnnouncementLayout } from '../pages/announcement/AnnouncementLayout.page';
 import { NoticeLayout } from '../pages/notice/NoticeLayout.page';
+import { NotFound } from '../pages/NotFound';
 
 export default function Router() {
   return (
@@ -52,6 +53,7 @@ export default function Router() {
           <Route path="update" element={<NoticeUpdatePage />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
