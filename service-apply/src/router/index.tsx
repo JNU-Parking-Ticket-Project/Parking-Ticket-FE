@@ -14,22 +14,22 @@ import { NotFound } from '../pages/NotFound';
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/apply" element={<ApplyPage />} />
-      <Route path="/announcement/done" element={<ApplyDonePage />} />
-      <Route path="/announcement/done/temp" element={<ApplyDoneTempPage />} />
+      <Route path="/" element={<HomePage />}/>
+      <Route path="/apply" element={<ApplyPage />}/>
+      <Route path="/announcement/done" element={<ApplyDonePage />}/>
+      <Route path="/announcement/done/temp" element={<ApplyDoneTempPage />}/>
       <Route path="/announcement" element={<AnnouncementLayoutPage />}>
-        <Route index element={<AnnouncementListPage />} />
-        <Route path=":announcementId" element={<AnnouncementPage />} />
+        <Route index element={<AnnouncementListPage />}/>
+        <Route path=":announcementId" element={<AnnouncementPage />}/>
       </Route>
       <Route path="/password-reset" element={<PasswordResetLayout />}>
-        <Route index element={<RequestPasswordResetPage />} />
+        <Route index element={<RequestPasswordResetPage />}/>
         <Route
           path="/password-reset/:resetId"
           element={<PasswordResetPage />}
         />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />}/>
     </Routes>
   );
 }
