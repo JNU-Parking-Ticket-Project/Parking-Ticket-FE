@@ -16,7 +16,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInput: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInput(e.target.value.replace(/[^0-9]/g, ''));
+    setInput(e.target.value.replace(/[^-0-9]/g, ''));
   };
 
   const handleSubmit = () => {

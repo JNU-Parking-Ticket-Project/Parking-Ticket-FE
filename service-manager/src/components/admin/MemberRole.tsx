@@ -19,7 +19,7 @@ export const MemberRole = ({ role, userId }: MemberRole) => {
     putAdminRoleMutate({ userId, role: changeRole });
   };
   return (
-    <td className="flex justify-between py-4">
+    <td className="flex gap-x-2 justify-around py-4">
       <button
         onClick={() => onChangeAdminRole('ADMIN')}
         className={clsx(

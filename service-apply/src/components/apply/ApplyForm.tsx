@@ -11,19 +11,30 @@ import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
-import ErrorBoundary from '../common/ErrorBoundray';
+import ErrorBoundary from '../common/ErrorBoundary';
 
-export const ApplyInputText = ({ className, ...props }: InputTextProps) => {
+export const ApplyInputText = ({
+  className,
+  disabled,
+  ...props
+}: InputTextProps) => {
   return (
-    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2">
-      <InputText {...props} className={clsx(className, 'col-span-4')} />
+    <div className="gap-3 grid grid-cols-5 justify-between items-center mb-2 max-sm:flex max-sm:flex-col">
+      <InputText
+        {...props}
+        disabled={disabled}
+        labelClassName="w-full"
+        className={clsx(
+          className,
+          'col-span-4 w-full',
+          !disabled && 'bg-transparent',
+        )}
+      />
     </div>
   );
 };
 
 export const ApplyForm = () => {
-  const [isAgreed, setIsAgreed] = useState(false);
-
   const {
     sector,
     state,
@@ -31,6 +42,11 @@ export const ApplyForm = () => {
     onTemporarySave,
     isCaptchaModalOpen,
     setIsCaptchaModalOpen,
+    onModalOpen,
+    isAgreed,
+    setIsAgreed,
+    isError,
+    errorMessage,
   } = useApplyForm();
 
   const parkingSection = sector.map((item) => ({
@@ -65,6 +81,7 @@ export const ApplyForm = () => {
           label="이름"
           name="studentName"
           type="text"
+          placeholder="홍길동"
           onChange={(e) =>
             dispatch({ type: 'studentName', payload: e.target.value })
           }
@@ -75,6 +92,7 @@ export const ApplyForm = () => {
           label="학번"
           name="studentNumber"
           type="text"
+          placeholder="123456"
           onChange={(e) =>
             dispatch({ type: 'studentNumber', payload: e.target.value })
           }
@@ -148,30 +166,24 @@ export const ApplyForm = () => {
             </Txt>
           </div>
           <a
+            target="_blank"
             href="https://www.privacy.go.kr/front/main/main.do"
             className="pl-6 text-sm underline underline-offset-4 text-neutral-700"
           >
             자세한 내용은 이곳에서 확인할 수 있습니다
+            {/* TODO: 모달창으로 변경 */}
           </a>
         </div>
-
-        <div className="flex flex-row justify-between my-12">
-          <Button
-            color="secondary"
-            onClick={() => {
-              if (!isAgreed) return alert('약관에 동의해 주세요.');
-              onTemporarySave();
-            }}
-          >
+        {isError && (
+          <Txt color="error" className="my-2">
+            {errorMessage}
+          </Txt>
+        )}
+        <div className="flex flex-row justify-between mt-2 mb-12">
+          <Button color="secondary" onClick={onTemporarySave}>
             임시 저장
           </Button>
-          <Button
-            color="primary"
-            onClick={() => {
-              if (!isAgreed) return alert('약관에 동의해 주세요.');
-              setIsCaptchaModalOpen(true);
-            }}
-          >
+          <Button color="primary" onClick={onModalOpen}>
             신청하기
           </Button>
 

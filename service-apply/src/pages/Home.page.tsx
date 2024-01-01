@@ -5,7 +5,7 @@ import { HomeInformation } from '../components/home/HomeInformation';
 import { HomeLogin } from '../components/home/HomeLogin';
 import { HomeAnnounce } from '../components/home/HomeAnnounce';
 import { HomeTitle } from '../components/home/HomeTitle';
-import ErrorBoundary from '../components/common/ErrorBoundray';
+import ErrorBoundary from '../components/common/ErrorBoundary';
 import { removeToken } from '../functions/jwt';
 
 export const HomePage = () => {
@@ -17,8 +17,8 @@ export const HomePage = () => {
     <>
       <MainContainer>
         <HomeTitle />
-        <div className="flex gap-4">
-          <div className="flex-1 w-1/2">
+        <div className="flex gap-4 max-sm:flex-col">
+          <div className="flex-1 sm:w-1/2">
             <ErrorBoundary>
               <Suspense>
                 <HomeInformation />
@@ -30,7 +30,7 @@ export const HomePage = () => {
               </Suspense>
             </ErrorBoundary>
           </div>
-          <div className="flex-1 w-1/2">
+          <div className="flex-1 sm:w-1/2">
             <HomeLogin />
           </div>
         </div>

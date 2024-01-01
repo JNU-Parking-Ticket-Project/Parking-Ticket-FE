@@ -2,6 +2,14 @@ import { Container, Txt } from '@quokka/design-system';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { Icon } from '../../components/announcement/Icon';
+import { Suspense, lazy } from 'react';
+import ErrorBoundary from '../../components/common/ErrorBoundary';
+
+const ToastViewer = lazy(() =>
+  import('@toast-ui/react-editor').then((module) => ({
+    default: module.Viewer,
+  })),
+);
 
 export const AnnouncementPage = () => {
   const { announcementId } = useParams();
@@ -40,7 +48,14 @@ export const AnnouncementPage = () => {
           )}
         </Txt>
       </div>
-      {announceDetailData.announceContent}
+      <ErrorBoundary>
+        <Suspense>
+          <ToastViewer
+            initialValue={announceDetailData.announceContent}
+            usageStatistics={false}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </Container>
   );
 };

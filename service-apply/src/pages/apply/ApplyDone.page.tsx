@@ -1,7 +1,7 @@
 import { Button, Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 
-export const AnnouncementDonePage = () => {
+export const ApplyDonePage = () => {
   return (
     <div className="h-[100dvh] flex justify-center items-center flex-col gap-8 text-center">
       <Txt size="h2">신청이 완료 되었습니다.</Txt>

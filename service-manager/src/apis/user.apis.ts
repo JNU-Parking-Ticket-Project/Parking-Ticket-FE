@@ -1,5 +1,6 @@
+import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
-import { removeToken, setToken } from '../functions/jwt';
+import { getRefreshToken, removeToken, setToken } from '../functions/jwt';
 import type { Role } from '../types/admin';
 import { isErrorResponse } from './dtos/response.dtos';
 import {
@@ -9,6 +10,7 @@ import {
   UserSignUpResponse,
   Council,
   CheckEmailResponse,
+  AdminRoleResponse,
 } from './dtos/user.dtos';
 
 export interface UserLoginRequest {
@@ -74,12 +76,12 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   const token = localStorage.getItem('refreshToken');
 
   if (!token) {
-    throw new Error('Refresh token not found');
+    throw new Error('로그인을 해주세요.');
   }
   const response = await https.post('/v1/auth/login', { refreshtoken: token });
   if (isErrorResponse(response)) {
     removeToken();
-    throw new Error(response.reason);
+    throw new Error('토큰이 만료되었습니다. 다시 로그인해주세요.');
   }
 
   setToken(new UserToken(response));
@@ -92,12 +94,15 @@ export const putAdminRole = async ({
 }: {
   userId: number;
   role: Role;
-}) => {
+}): Promise<AdminRoleResponse> => {
   const response = await https.put(`/v1/admin/role/${userId}`, { role });
   if (isErrorResponse(response)) {
+    if (getErrorContent(response.code).type === 'REISSUE') {
+      return reissueToken(() => putAdminRole({ userId, role }));
+    }
     throw new Error(response.reason);
   }
-  return response;
+  return new AdminRoleResponse(response);
 };
 
 export const getAllCouncils = async () => {

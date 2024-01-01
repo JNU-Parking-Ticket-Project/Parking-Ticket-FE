@@ -7,8 +7,8 @@ export const HomeAnnounce = () => {
   const { announceData } = useAnnounceQuery();
 
   return (
-    <div className="my-12 pl-10 border-[#D9D9D9] border rounded-lg flex gap-8 items-center">
-      <Txt size="h4" color="primary">
+    <div className="my-12 pl-10 border-[#D9D9D9] border rounded-lg flex gap-8 items-center max-sm:my-4 max-sm:pl-4">
+      <Txt size="h4" color="primary" className="max-sm:text-lg">
         공지
       </Txt>
       <Link
@@ -18,10 +18,14 @@ export const HomeAnnounce = () => {
             announceData.announceId <= 0,
         })}
       >
-        <Txt size="h6">{announceData.announceTitle}</Txt>
+        <Txt size="h6" className="max-lg:text-base">
+          {announceData.announceTitle}
+        </Txt>
       </Link>
-      <Link to="/announcement" className="pr-10 py-8">
-        <Txt size="h6">더보기</Txt>
+      <Link to="/announcement" className="pr-10 py-8 max-sm:py-4 max-sm:pr-4">
+        <Txt size="h6" className="max-lg:text-base">
+          더보기
+        </Txt>
       </Link>
     </div>
   );
