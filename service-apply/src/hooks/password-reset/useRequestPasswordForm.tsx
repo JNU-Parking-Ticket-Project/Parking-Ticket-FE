@@ -32,6 +32,10 @@ export const useRequestPasswordForm = () => {
           alert('본인인증 이메일이 전송되었습니다.');
           navigate('/');
         },
+        onError: (error) => {
+          alert(error.message);
+          setIsError(true);
+        },
       },
     );
   };
