@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { isErrorResponse } from './dtos/response.dtos';
@@ -9,6 +10,7 @@ import {
   Sector,
 } from './dtos/sector.dtos';
 import { SettingTime } from './dtos/times.dtos';
+import { ko } from 'date-fns/locale';
 import { reissueToken } from './user.apis';
 
 interface SectorRequest {
@@ -79,9 +81,10 @@ export const getSettingTime = async () => {
 export const postSettingTime = async (
   date: SettingTime,
 ): Promise<PostSettingsResponse> => {
+  const pattern = 'yyyy-MM-dd HH:mm:ss';
   const datesString = {
-    startAt: date.startAt.toISOString().slice(0, 19),
-    endAt: date.endAt.toISOString().slice(0, 19),
+    startAt: format(date.startAt, pattern, { locale: ko }).replace(' ', 'T'),
+    endAt: format(date.endAt, pattern, { locale: ko }).replace(' ', 'T'),
   };
   const response = await https.post(`/v1/events`, datesString);
   if (isErrorResponse(response)) {
