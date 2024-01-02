@@ -9,7 +9,7 @@ import { AnnouncementLayoutPage } from '../pages/Anouncement/AnounceLayout.page'
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { ApplyDonePage } from '../pages/apply/ApplyDone.page';
 import { ApplyDoneTempPage } from '../pages/apply/ApplyDoneTemp.page';
-import { NotFound } from '../pages/Notfound';
+import { NotFound } from '../pages/NotFound';
 
 export function Router() {
   return (
@@ -19,7 +19,7 @@ export function Router() {
       <Route path="/announcement/done" element={<ApplyDonePage />}/>
       <Route path="/announcement/done/temp" element={<ApplyDoneTempPage />}/>
       <Route path="/announcement" element={<AnnouncementLayoutPage />}>
-        <Route index element={<AnnouncementListPage />} />
+        <Route index element={<AnnouncementListPage />}/>
         <Route path=":announcementId" element={<AnnouncementPage />}/>
       </Route>
       <Route path="/password-reset" element={<PasswordResetLayout />}>
@@ -29,7 +29,7 @@ export function Router() {
           element={<PasswordResetPage />}
         />
       </Route>
-      <Route path='*' element={<NotFound />}/>
+      <Route path="*" element={<NotFound />}/>
     </Routes>
   );
 }
