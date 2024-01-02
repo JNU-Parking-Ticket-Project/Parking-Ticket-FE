@@ -16,8 +16,16 @@ const styleBySelectedRole = (selected: Role, role: Role) => {
 export const MemberRole = ({ role, userId }: MemberRole) => {
   const { putAdminRoleMutate } = useAdminRoleMutate();
   const onChangeAdminRole = (changeRole: Role) => {
-    putAdminRoleMutate({ userId, role: changeRole });
+    putAdminRoleMutate(
+      { userId, role: changeRole },
+      {
+        onError: (error) => {
+          alert(error.message);
+        },
+      },
+    );
   };
+
   return (
     <td className="flex gap-x-2 justify-around py-4">
       <button
