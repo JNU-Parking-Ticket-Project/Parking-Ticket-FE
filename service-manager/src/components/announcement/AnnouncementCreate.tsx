@@ -47,6 +47,12 @@ export const AnnouncementCreate = () => {
           <ToastEditor
             previewStyle="vertical"
             height="30rem"
+            toolbarItems={[
+              ['heading', 'bold', 'italic', 'strike'],
+              ['hr', 'quote'],
+              ['ul', 'ol', 'task', 'indent', 'outdent'],
+              ['table', 'link'],
+            ]}
             minHeight="calc(100vh - 33rem)"
             placeholder="공지사항을 입력해주세요."
             previewHighlight={false}
