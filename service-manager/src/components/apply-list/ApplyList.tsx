@@ -45,6 +45,11 @@ export const ApplyList = () => {
         ))}
       </div>
       <div className="w-full">
+        <div className="text-right p-4">
+          <Button size="small" onClick={exportXLSX}>
+            엑셀다운로드
+          </Button>
+        </div>
         <table className="w-full min-w-[50rem]">
           <thead>
             <tr>
@@ -77,11 +82,6 @@ export const ApplyList = () => {
               })}
           </tbody>
         </table>
-        <div className="text-right p-4">
-          <Button size="small" onClick={exportXLSX}>
-            엑셀다운로드
-          </Button>
-        </div>
       </div>
     </div>
   );
