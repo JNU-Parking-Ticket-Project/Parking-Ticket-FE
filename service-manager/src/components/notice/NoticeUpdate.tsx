@@ -37,6 +37,12 @@ export const NoticeUpdate = () => {
             initialValue={noticeData?.noticeContent}
             previewStyle="vertical"
             height="30rem"
+            toolbarItems={[
+              ['heading', 'bold', 'italic', 'strike'],
+              ['hr', 'quote'],
+              ['ul', 'ol', 'task', 'indent', 'outdent'],
+              ['table', 'link'],
+            ]}
             minHeight="calc(100vh - 33rem)"
             initialEditType="markdown"
             previewHighlight={false}
