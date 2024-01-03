@@ -50,6 +50,14 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
         <Suspense>
           <ToastEditor
             initialValue={announceDetailData.announceContent}
+            toolbarItems={
+                [
+                  ['heading', 'bold', 'italic', 'strike'],
+                  ['hr', 'quote'],
+                  ['ul', 'ol', 'task', 'indent', 'outdent'],
+                  ['table', 'link'],
+                ]
+            }
             previewStyle="vertical"
             height="30rem"
             minHeight="calc(100vh - 33rem)"
