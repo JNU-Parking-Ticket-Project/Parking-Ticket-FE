@@ -14,9 +14,11 @@ import {
   PasswordFindRequest,
   PasswordResetRequest,
   UserLoginRequest,
+  UserLogoutRequest,
   UserSignUpRequest,
   postCheckEmail,
   postLogin,
+  postLogout,
   postPasswordFind,
   postPasswordReset,
   postSignup,
@@ -49,6 +51,30 @@ export const useLoginMutate = () => {
     },
   };
 };
+
+export const useLogoutMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: postLogout,
+  });
+
+  return {
+    postLogout: (
+      logoutRequest: UserLogoutRequest,
+      mutateOption?: Omit<
+        MutateOptions<UserToken, Error, UserLogoutRequest, unknown>,
+        'onSettled'
+      >,
+    ) => {
+      mutate(logoutRequest, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('data is undefined');
+        },
+      });
+    },
+  };
+}
 
 export const useSignUpMutate = () => {
   const { mutate } = useMutation({

@@ -1,6 +1,6 @@
 import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
-import { getRefreshToken, removeToken, setToken } from '../functions/jwt';
+import { removeToken, setToken } from '../functions/jwt';
 import type { Role } from '../types/admin';
 import { isErrorResponse } from './dtos/response.dtos';
 import {
@@ -25,6 +25,18 @@ export const postLogin = async (data: UserLoginRequest) => {
   }
   return new UserToken(response);
 };
+
+export interface UserLogoutRequest {
+  refreshToken: string;
+}
+
+export const postLogout = async (data: UserLogoutRequest) => {
+  const response = await https.post(`/v1/auth/logout`, data);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return response;
+}
 
 export interface PasswordFindRequest {
   email: string;
