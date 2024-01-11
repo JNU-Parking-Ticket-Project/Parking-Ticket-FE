@@ -14,7 +14,7 @@ export const CommonLayout = () => {
         <nav className="flex flex-row min-w-[60rem]">
           <NavTitle />
           <NavContainer />
-          <div className='flex items-center mx-auto'>
+          <div className='flex items-center ml-auto'>
             <LogoutButton />
           </div>
         </nav>
