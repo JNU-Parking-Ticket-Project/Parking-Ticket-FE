@@ -26,16 +26,12 @@ export const postLogin = async (data: UserLoginRequest) => {
   return new UserToken(response);
 };
 
-export interface UserLogoutRequest {
-  refreshToken: string;
-}
-
-export const postLogout = async (data: UserLogoutRequest) => {
-  const response = await https.post(`/v1/auth/logout`, data);
+export const postLogout = async () => {
+  const response = await https.post(`/v1/auth/logout`, {});
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response;
+  removeToken();
 }
 
 export interface PasswordFindRequest {

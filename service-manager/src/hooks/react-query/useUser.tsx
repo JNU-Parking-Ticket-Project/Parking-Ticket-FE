@@ -53,6 +53,7 @@ export const useLoginMutate = () => {
 };
 
 export const useLogoutMutate = () => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ['logout'],
     mutationFn: postLogout,
@@ -62,14 +63,16 @@ export const useLogoutMutate = () => {
     postLogout: (
       logoutRequest: UserLogoutRequest,
       mutateOption?: Omit<
-        MutateOptions<UserToken, Error, UserLogoutRequest, unknown>,
+        MutateOptions<UserToken, Error, UserLogoutRequest>,
         'onSettled'
       >,
     ) => {
       mutate(logoutRequest, {
         ...mutateOption,
-        onSettled: (data) => {
-          if (!data) throw new Error('data is undefined');
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: ['allRegistration'],
+          });
         },
       });
     },
