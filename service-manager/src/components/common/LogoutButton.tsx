@@ -1,4 +1,4 @@
-import { Button, Txt } from '@quokka/design-system';
+import { Button } from '@quokka/design-system';
 import { useLogout } from '../../hooks/useLogout';
 
 export const LogoutButton = () => {
