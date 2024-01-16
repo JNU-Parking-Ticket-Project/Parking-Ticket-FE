@@ -14,9 +14,11 @@ import {
   PasswordFindRequest,
   PasswordResetRequest,
   UserLoginRequest,
+  UserLogoutRequest,
   UserSignUpRequest,
   postCheckEmail,
   postLogin,
+  postLogout,
   postPasswordFind,
   postPasswordReset,
   postSignup,
@@ -49,6 +51,33 @@ export const useLoginMutate = () => {
     },
   };
 };
+
+export const useLogoutMutate = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationKey: ['logout'],
+    mutationFn: postLogout,
+  });
+
+  return {
+    postLogout: (
+      logoutRequest: UserLogoutRequest,
+      mutateOption?: Omit<
+        MutateOptions<UserToken, Error, UserLogoutRequest>,
+        'onSettled'
+      >,
+    ) => {
+      mutate(logoutRequest, {
+        ...mutateOption,
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: ['allRegistration'],
+          });
+        },
+      });
+    },
+  };
+}
 
 export const useSignUpMutate = () => {
   const { mutate } = useMutation({
