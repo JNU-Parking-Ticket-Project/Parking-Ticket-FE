@@ -7,7 +7,9 @@ export const Footer = () => {
         <Txt size="h6" className="py-2">
           contact us
         </Txt>
-        <Txt className="py-2">전남대학교 총학생회: 010-1234-5678</Txt>
+        <Txt className="py-2">
+          전남대학교 총학생회: 010-3836-3482(안전관리국장)
+        </Txt>
         <Txt>JNU-student council</Txt>
       </div>
     </footer>
