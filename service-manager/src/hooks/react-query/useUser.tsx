@@ -14,7 +14,6 @@ import {
   PasswordFindRequest,
   PasswordResetRequest,
   UserLoginRequest,
-  UserLogoutRequest,
   UserSignUpRequest,
   postCheckEmail,
   postLogin,
@@ -58,16 +57,14 @@ export const useLogoutMutate = () => {
     mutationKey: ['logout'],
     mutationFn: postLogout,
   });
-
   return {
     postLogout: (
-      logoutRequest: UserLogoutRequest,
       mutateOption?: Omit<
-        MutateOptions<UserToken, Error, UserLogoutRequest>,
+        MutateOptions<void, Error, void, unknown>,
         'onSettled'
       >,
     ) => {
-      mutate(logoutRequest, {
+      mutate(undefined, {
         ...mutateOption,
         onSettled: () => {
           queryClient.invalidateQueries({
@@ -77,7 +74,7 @@ export const useLogoutMutate = () => {
       });
     },
   };
-}
+};
 
 export const useSignUpMutate = () => {
   const { mutate } = useMutation({

@@ -31,9 +31,8 @@ export const postLogout = async () => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  removeToken();
-}
-
+  return response;
+};
 export interface PasswordFindRequest {
   email: string;
 }
