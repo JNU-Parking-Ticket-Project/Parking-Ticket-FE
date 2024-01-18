@@ -33,6 +33,7 @@ export type ERROR_CODE =
   | 'GLOBAL_401_1'
   | 'AUTH_400_1'
   | 'AUTH_401_1'
+  | 'AUTH_401_2'
   | 'AUTH_403_1'
   | 'AUTH_403_2'
   | 'AUTH_403_3'
@@ -56,6 +57,12 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
     case 'AUTH_401_1':
       return {
         type: 'REISSUE',
+      };
+    case 'AUTH_401_2':
+      return {
+        type: 'ALERT_WITH_REDIRECT',
+        content: '로그인이 필요합니다.',
+        redirect: '/',
       };
     case 'GLOBAL_401_1':
     case 'AUTH_403_6':
