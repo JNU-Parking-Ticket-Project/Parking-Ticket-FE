@@ -58,7 +58,6 @@ export const useSectorCreateMutate = () => {
     mutationKey: ['sectorsCreate'],
     mutationFn: postSectors,
   });
-  const queryClient = useQueryClient();
 
   return {
     postSectors: (
@@ -70,10 +69,6 @@ export const useSectorCreateMutate = () => {
     ) =>
       mutate(sectors, {
         ...mutateOption,
-        onSettled: (data) => {
-          if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({ queryKey: ['sectors'] });
-        },
       }),
   };
 };
