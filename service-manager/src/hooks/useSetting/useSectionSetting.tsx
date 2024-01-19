@@ -6,7 +6,7 @@ import {
   useSectorsQuery,
 } from '../react-query/useSetting';
 import { useQueryClient } from '@tanstack/react-query';
-import { Sector } from 'service-manager/src/apis/dtos/sector.dtos';
+import { Sector } from '../../apis/dtos/sector.dtos';
 
 export const useSectionSettingTable = () => {
   const { sectorSettingData } = useSectorsQuery();

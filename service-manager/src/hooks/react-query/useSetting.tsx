@@ -13,7 +13,7 @@ import {
 } from '../../apis/settings.apis';
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
-import { SettingTime } from 'service-manager/src/apis/dtos/times.dtos';
+import { SettingTime } from '../../apis/dtos/times.dtos';
 
 export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({

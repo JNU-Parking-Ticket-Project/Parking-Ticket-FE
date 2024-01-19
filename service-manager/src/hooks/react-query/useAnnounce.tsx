@@ -12,10 +12,7 @@ import {
   postAnnounce,
   putAnnounceById,
 } from '../../apis/announce.apis';
-import {
-  Announce,
-  AnnounceDelete,
-} from 'service-manager/src/apis/dtos/announce.dtos';
+import { Announce, AnnounceDelete } from '../../apis/dtos/announce.dtos';
 
 export const useAnnounceListQuery = (page: number) => {
   const { data: announceListData } = useSuspenseQuery({

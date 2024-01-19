@@ -1,4 +1,4 @@
-import { ERROR_CODE } from 'service-manager/src/functions/error';
+import { ERROR_CODE } from '../../functions/error';
 
 export class Response {
   status: number;
