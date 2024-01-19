@@ -47,7 +47,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   );
 };
 
-export const SettingTime = () => {
+export const SettingCreateTime = () => {
   const { timeSettingData, updateSettingTime } = useSectionTimeSetting();
 
   const [openDate, setOpenDate] = useState(timeSettingData.startAt);

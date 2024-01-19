@@ -85,6 +85,7 @@ export const postSettingTime = async (
   const datesString = {
     startAt: format(date.startAt, pattern, { locale: ko }).replace(' ', 'T'),
     endAt: format(date.endAt, pattern, { locale: ko }).replace(' ', 'T'),
+    title: date.title,
   };
   const response = await https.post(`/v1/events`, datesString);
   if (isErrorResponse(response)) {

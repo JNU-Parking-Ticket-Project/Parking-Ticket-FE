@@ -16,7 +16,7 @@ const NAV_LIST = [
   },
   {
     name: '관리자 설정',
-    path: '/setting/section',
+    path: '/setting',
   },
 ];
 
