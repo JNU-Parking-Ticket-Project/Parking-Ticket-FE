@@ -47,8 +47,8 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   );
 };
 
-export const SettingTime = () => {
-  const { timeSettingData, updateSettingTime } = useSectionTimeSetting();
+export const SettingTime = ({ eventId }: { eventId?: string }) => {
+  const { timeSettingData, updateSettingTime } = useSectionTimeSetting(eventId);
 
   const [openDate, setOpenDate] = useState(timeSettingData.startAt);
   const [endDate, setEndDate] = useState(timeSettingData.endAt);

@@ -3,7 +3,7 @@ import { SettingInput } from './SettingInput';
 import { useSectionSettingTable } from '../../hooks/useSetting/useSectionSetting';
 import { Button } from '@quokka/design-system';
 
-export const SettingTable = () => {
+export const SettingTable = ({ eventId }: { eventId: string }) => {
   const {
     data,
     isEdit,
@@ -12,7 +12,7 @@ export const SettingTable = () => {
     onEditValue,
     deleteSection,
     createSection,
-  } = useSectionSettingTable();
+  } = useSectionSettingTable(eventId);
 
   return (
     <>

@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import {
   useSectorCreateMutate,
   useSectorDeleteMutate,
+  useSectorQueryById,
   useSectorUpdateMutate,
-  useSectorsQuery,
 } from '../react-query/useSetting';
 import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 
-export const useSectionSettingTable = () => {
-  const { sectorSettingData } = useSectorsQuery();
+export const useSectionSettingTable = (eventId: string) => {
+  const { sectorSettingData } = useSectorQueryById(eventId);
   const queryClient = useQueryClient();
   const { postSectors } = useSectorCreateMutate();
   const { deleteSector } = useSectorDeleteMutate();

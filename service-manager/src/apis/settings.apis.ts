@@ -31,6 +31,17 @@ export const getSectors = async (): Promise<Sector[]> => {
   return response.map((sector: any) => new Sector(sector));
 };
 
+export const getSectorsBy = async (eventId: string): Promise<Sector[]> => {
+  const response = await https.get(`/v1/${eventId}/sectors`);
+  if (isErrorResponse(response)) {
+    if (getErrorContent(response.code).type === 'REISSUE') {
+      return reissueToken(getSectors);
+    }
+    throw new Error(response.reason);
+  }
+  return response.map((sector: any) => new Sector(sector));
+};
+
 export const putSectors = async (
   data: SectorRequest[],
 ): Promise<PutSectorResponse> => {
@@ -70,8 +81,16 @@ export const deleteSector = async (
   return new DeleteSectorResponse(response);
 };
 
-export const getSettingTime = async () => {
+export const getSettingReadyTime = async () => {
   const response = await https.get(`/v1/events/period`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new SettingTime(response);
+};
+
+export const getSettingTimeBy = async (eventId: string) => {
+  const response = await https.get(`/v1/events/${eventId}/period`);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -97,10 +116,10 @@ export const postSettingTime = async (
   return new PostSettingsResponse(response);
 };
 
-export const getSettingEvents = async () => {
-  const response = await https.get(`/v1/events`);
+export const getSettingEvents = async (page: number) => {
+  const response = await https.get(`/v1/events?page=${page}`);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return response.map((event: any) => new CouponEvent(event));
+  return new CouponEvent(response);
 };

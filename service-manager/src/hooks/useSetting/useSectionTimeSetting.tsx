@@ -4,8 +4,8 @@ import {
   useTimeSettingUpdateMutate,
 } from '../react-query/useSetting';
 
-export const useSectionTimeSetting = () => {
-  const { timeSettingData } = useTimeSettingQuery();
+export const useSectionTimeSetting = (eventId?: string) => {
+  const { timeSettingData } = useTimeSettingQuery(eventId);
   const { postSettingTime } = useTimeSettingUpdateMutate();
 
   const updateSettingTime = (time: SettingTime) => {

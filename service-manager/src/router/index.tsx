@@ -10,7 +10,6 @@ import { PasswordResetPage } from '../pages/PasswordReset/PasswordReset.page';
 import { CommonLayout } from '../pages/CommonLayout.page';
 import { AnnouncementListPage } from '../pages/announcement/AnnouncementList.page';
 import { SectionSettingPage } from '../pages/setting/SectionSetting.page';
-import { TimeSettingPage } from '../pages/setting/TimeSetting.page';
 import { NoticeViewPage } from '../pages/notice/NoticeView.page';
 import { AnnouncementCreatePage } from '../pages/announcement/AnnouncementCreate.page';
 import { NoticeUpdatePage } from '../pages/notice/NoticeUpdate.page';
@@ -18,7 +17,7 @@ import { AnnouncementUpdatePage } from '../pages/announcement/AnnouncementUpdate
 import { AnnouncementLayout } from '../pages/announcement/AnnouncementLayout.page';
 import { NoticeLayout } from '../pages/notice/NoticeLayout.page';
 import { NotFound } from '../pages/NotFound';
-import { SettingBoardPage } from '../pages/setting/SettingBoard.page';
+import { SettingBoardPage } from '../pages/setting/SettingList.page';
 import { SectionCreateSettingPage } from '../pages/setting/SectionCreate.page';
 
 export default function Router() {
@@ -47,10 +46,8 @@ export default function Router() {
         <Route path="apply-list" element={<ApplyListPage />} />
         <Route path="setting">
           <Route index element={<SettingBoardPage />} />
-          <Route path=":settingId" element={<SettingBoardPage />} />
+          <Route path=":settingId" element={<SectionSettingPage />} />
           <Route path="create" element={<SectionCreateSettingPage />} />
-          <Route path="section" element={<SectionSettingPage />} />
-          <Route path="time" element={<TimeSettingPage />} />
         </Route>
         <Route path="notice" element={<NoticeLayout />}>
           <Route index element={<NoticeViewPage />} />

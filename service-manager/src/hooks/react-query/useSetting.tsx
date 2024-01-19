@@ -6,8 +6,10 @@ import {
 import {
   deleteSector,
   getSectors,
+  getSectorsBy,
   getSettingEvents,
-  getSettingTime,
+  getSettingReadyTime,
+  getSettingTimeBy,
   postSectors,
   postSettingTime,
   putSectors,
@@ -20,6 +22,17 @@ export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({
     queryKey: ['sectors'],
     queryFn: getSectors,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { sectorSettingData: data };
+};
+
+export const useSectorQueryById = (eventId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['sectors', eventId],
+    queryFn: () => getSectorsBy(eventId),
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -99,10 +112,13 @@ export const useSectorDeleteMutate = () => {
   };
 };
 
-export const useTimeSettingQuery = () => {
+export const useTimeSettingQuery = (eventId?: string) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['timeSetting'],
-    queryFn: getSettingTime,
+    queryKey: ['timeSetting', eventId],
+    queryFn:
+      eventId !== undefined
+        ? () => getSettingTimeBy(eventId)
+        : getSettingReadyTime,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -135,10 +151,10 @@ export const useTimeSettingUpdateMutate = () => {
   };
 };
 
-export const useSettingEventsQuery = () => {
+export const useSettingEventsQuery = (pageIndex: number) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['couponEvents'],
-    queryFn: getSettingEvents,
+    queryKey: ['couponEvents', pageIndex],
+    queryFn: () => getSettingEvents(pageIndex),
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
