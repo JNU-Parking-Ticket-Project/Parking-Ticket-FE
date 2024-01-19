@@ -9,7 +9,7 @@ import {
   PutSectorResponse,
   Sector,
 } from './dtos/sector.dtos';
-import { SettingTime } from './dtos/times.dtos';
+import { CouponEvent, SettingTime } from './dtos/times.dtos';
 import { ko } from 'date-fns/locale';
 import { reissueToken } from './user.apis';
 
@@ -95,4 +95,12 @@ export const postSettingTime = async (
     throw new Error(response.reason);
   }
   return new PostSettingsResponse(response);
+};
+
+export const getSettingEvents = async () => {
+  const response = await https.get(`/v1/events`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return response.map((event: any) => new CouponEvent(event));
 };

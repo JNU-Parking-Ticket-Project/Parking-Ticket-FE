@@ -47,6 +47,7 @@ export default function Router() {
         <Route path="apply-list" element={<ApplyListPage />} />
         <Route path="setting">
           <Route index element={<SettingBoardPage />} />
+          <Route path=":settingId" element={<SettingBoardPage />} />
           <Route path="create" element={<SectionCreateSettingPage />} />
           <Route path="section" element={<SectionSettingPage />} />
           <Route path="time" element={<TimeSettingPage />} />

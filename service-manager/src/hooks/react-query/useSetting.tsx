@@ -6,6 +6,7 @@ import {
 import {
   deleteSector,
   getSectors,
+  getSettingEvents,
   getSettingTime,
   postSectors,
   postSettingTime,
@@ -132,4 +133,15 @@ export const useTimeSettingUpdateMutate = () => {
         },
       }),
   };
+};
+
+export const useSettingEventsQuery = () => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['couponEvents'],
+    queryFn: getSettingEvents,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { coupon: data };
 };

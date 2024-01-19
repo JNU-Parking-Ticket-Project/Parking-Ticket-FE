@@ -1,22 +1,21 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
-import { Setting } from '../../apis/dtos/setting.dtos';
+import { CouponEvent } from 'service-manager/src/apis/dtos/times.dtos';
 
 export const SettingListItem = ({
-  settingId,
-  settingCreatedAt,
-  settingTitle,
-}: Omit<Setting, 'settingContent'>) => {
-  const date = new Date(settingCreatedAt);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
+  endAt,
+  id,
+  startAt,
+  title,
+  status,
+}: CouponEvent) => {
   return (
-    <Link to={`/setting/${settingId}`}>
+    <Link to={`/setting/${id}`}>
       <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">
-        <Txt>{settingTitle}</Txt>
-        <Txt className="w-24 text-center">{`${year}-${month}-${day}`}</Txt>
+        <Txt>{title}</Txt>
+        <Txt className="w-24 text-center">{status}</Txt>
+        <Txt className="w-24 text-center">{startAt}</Txt>
+        <Txt className="w-24 text-center">{endAt}</Txt>
       </div>
     </Link>
   );

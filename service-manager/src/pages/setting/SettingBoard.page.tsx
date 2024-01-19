@@ -1,7 +1,10 @@
 import { Button } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
+import { SettingList } from '../../components/setting/SettingList';
+import { useSectionBoard } from '../../hooks/useSetting/useSectionBoard';
 
 export const SettingBoardPage = () => {
+  const { coupon } = useSectionBoard();
   return (
     <div>
       <Link to={'/setting/create'}>
@@ -9,7 +12,7 @@ export const SettingBoardPage = () => {
           생성하기
         </Button>
       </Link>
-      <h1>SettingBoardPage</h1>
+      <SettingList couponEvnets={coupon} />
     </div>
   );
 };
