@@ -1,3 +1,5 @@
+import { Sector } from './sector.dtos';
+
 export class SettingTime {
   startAt: Date;
   endAt: Date;
@@ -12,7 +14,7 @@ export class SettingTime {
 type couponEvent = {
   eventId: number;
   eventTitle: string;
-  eventStatus: string;
+  eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
   dateTimePeriod: string;
 };
 
@@ -36,16 +38,27 @@ export class CouponEvent {
 }
 
 export class CouponEventDetail {
+  dateTimePeriod: { startAt: Date; endAt: Date };
   eventTitle: string;
-  eventStatus: string;
+  eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
+  sectors: Sector[];
   constructor({
+    dateTimePeriod,
     eventTitle,
     eventStatus,
+    sectors,
   }: {
+    dateTimePeriod: { startAt: string; endAt: string };
     eventTitle: string;
-    eventStatus: string;
+    eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
+    sectors: Sector[];
   }) {
     this.eventTitle = eventTitle;
+    this.dateTimePeriod = {
+      startAt: new Date(dateTimePeriod.startAt),
+      endAt: new Date(dateTimePeriod.endAt),
+    };
     this.eventStatus = eventStatus;
+    this.sectors = sectors;
   }
 }

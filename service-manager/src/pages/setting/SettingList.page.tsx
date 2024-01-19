@@ -2,7 +2,7 @@ import { Button } from '@quokka/design-system';
 import { Link, useSearchParams } from 'react-router-dom';
 import { SettingList } from '../../components/setting/SettingList';
 import { PageNav } from '../../components/announcement/PageNav';
-import { useSettingEventsQuery } from '../../hooks/react-query/useSetting';
+import { useSectionBoard } from '../../hooks/useSetting/useSectionBoard';
 
 export const SettingBoardPage = () => {
   const [searchParam] = useSearchParams();
@@ -10,14 +10,21 @@ export const SettingBoardPage = () => {
 
   const {
     coupon: { couponEvents, lastPage },
-  } = useSettingEventsQuery(+currentPage);
+    canCreate,
+  } = useSectionBoard(+currentPage);
   return (
     <div>
-      <Link to={'/setting/create'}>
-        <Button size="small" className="float-right">
+      {canCreate ? (
+        <Link to={'/setting/create'}>
+          <Button size="small" className="float-right">
+            생성하기
+          </Button>
+        </Link>
+      ) : (
+        <Button size="small" className="float-right" disabled>
           생성하기
         </Button>
-      </Link>
+      )}
       <SettingList couponEvents={couponEvents} />
       <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
     </div>

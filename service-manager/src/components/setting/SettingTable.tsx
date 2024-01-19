@@ -78,7 +78,7 @@ export const SettingTable = ({ eventId }: { eventId: string }) => {
           ))}
         </tbody>
       </table>
-      {event.eventStatus === 'CLOSE' && (
+      {event.eventStatus === 'READY' && (
         <div className="my-4 float-right flex gap-4">
           <Button size="small" onClick={createSection} disabled={isEdit}>
             {isCreate ? '저장하기' : '추가하기'}

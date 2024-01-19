@@ -53,28 +53,26 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 
 export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { updateSettingTime } = useSectionTimeSetting();
-  const { timeSettingData } = useTimeSettingQueryBy(eventId);
   const { event } = useSettingEventQueryBy(eventId);
 
-  const [openDate, setOpenDate] = useState(timeSettingData.startAt);
-  const [endDate, setEndDate] = useState(timeSettingData.endAt);
+  const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
+  const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
   const [title, setTitle] = useState(event.eventTitle);
 
   useEffect(() => {
-    setOpenDate(timeSettingData.startAt);
-    setEndDate(timeSettingData.endAt);
-  }, [timeSettingData]);
-
-  useEffect(() => {
+    setOpenDate(event.dateTimePeriod.startAt);
+    setEndDate(event.dateTimePeriod.endAt);
     setTitle(event.eventTitle);
   }, [event]);
 
   return (
     <>
-      <div className="py-4 w-full flex gap-2 justify-center items-center">
+      <div className="py-4 w-full flex gap-4 justify-center items-center">
         <Txt size="h3">제목</Txt>
-        {event.eventStatus === 'READY' ? (
-          <Txt size="h3">{title}</Txt>
+        {event.eventStatus !== 'READY' ? (
+          <Txt size="h3" className="flex-1 font-normal">
+            {title}
+          </Txt>
         ) : (
           <InputText
             className="flex-1"
@@ -105,22 +103,21 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           title="Close"
         />
       </div>
-      {event.eventStatus === 'READY' ||
-        (event.eventStatus === 'OPEN' && (
-          <Button
-            size="small"
-            className="float-right my-4"
-            onClick={() => {
-              updateSettingTime({
-                startAt: openDate,
-                endAt: endDate,
-                title,
-              });
-            }}
-          >
-            저장
-          </Button>
-        ))}
+      {event.eventStatus === 'READY' && (
+        <Button
+          size="small"
+          className="float-right my-4"
+          onClick={() => {
+            updateSettingTime({
+              startAt: openDate,
+              endAt: endDate,
+              title,
+            });
+          }}
+        >
+          저장
+        </Button>
+      )}
     </>
   );
 };

@@ -83,7 +83,7 @@ export const useSectionSettingTable = (eventId: string) => {
         sectorNumber: '',
         issueAmount: 0,
       };
-      queryClient.setQueryData(['sectors'], (prev: Sector[]) => [
+      queryClient.setQueryData(['sectors', eventId], (prev: Sector[]) => [
         ...prev,
         initSector,
       ]);
@@ -92,11 +92,7 @@ export const useSectionSettingTable = (eventId: string) => {
 
     const sectors = data.filter(
       (sector) =>
-        sector.id === -1 &&
-        sector.name !== '' &&
-        sector.sectorNumber !== '' &&
-        sector.sectorCapacity !== 0 &&
-        sector.reserve !== 0,
+        sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '',
     );
 
     if (sectors.length === 0) {
