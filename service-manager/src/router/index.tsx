@@ -47,9 +47,9 @@ export default function Router() {
         <Route path="apply-list" element={<ApplyListPage />} />
         <Route path="setting">
           <Route index element={<SettingBoardPage />} />
+          <Route path="create" element={<SectionCreateSettingPage />} />
           <Route path="section" element={<SectionSettingPage />} />
           <Route path="time" element={<TimeSettingPage />} />
-          <Route path="create" element={<SectionCreateSettingPage />} />
         </Route>
         <Route path="notice" element={<NoticeLayout />}>
           <Route index element={<NoticeViewPage />} />
