@@ -7,6 +7,7 @@ export const SettingTable = () => {
   const {
     data,
     isEdit,
+    isCreate,
     toggleEdit,
     onEditValue,
     deleteSection,
@@ -28,12 +29,12 @@ export const SettingTable = () => {
         </thead>
         <tbody className="[&>tr]:divide-x divide-y [&>tr>*]:h-16 [&>tr>*]:flex [&>tr>*]:justify-center [&>tr>*]:items-center [&>tr>*]:flex-[2_0_6rem]">
           {data.map((data) => (
-            <tr className="flex w-full  hover:bg-[#F9FAFC]" key={data.id}>
+            <tr className="flex w-full hover:bg-[#F9FAFC]" key={data.id}>
               <td>
                 <SettingInput
                   name="sectorNumber"
                   value={data.sectorNumber}
-                  isEdit={isEdit}
+                  isEdit={(data.id === -1 && isCreate) || isEdit}
                   onChange={onEditValue(data.id)}
                 />
               </td>
@@ -41,7 +42,7 @@ export const SettingTable = () => {
                 <SettingInput
                   name="sectorCapacity"
                   value={`${data.sectorCapacity}`}
-                  isEdit={isEdit}
+                  isEdit={(data.id === -1 && isCreate) || isEdit}
                   onChange={onEditValue(data.id, 'numeric')}
                 />
               </td>
@@ -49,7 +50,7 @@ export const SettingTable = () => {
                 <SettingInput
                   name="reserve"
                   value={`${data.reserve}`}
-                  isEdit={isEdit}
+                  isEdit={(data.id === -1 && isCreate) || isEdit}
                   onChange={onEditValue(data.id, 'numeric')}
                 />
               </td>
@@ -59,7 +60,7 @@ export const SettingTable = () => {
                   className="w-full bg-transparent"
                   name="name"
                   value={data.name}
-                  isEdit={isEdit}
+                  isEdit={(data.id === -1 && isCreate) || isEdit}
                   onChange={onEditValue(data.id)}
                 />
               </td>
@@ -76,12 +77,10 @@ export const SettingTable = () => {
         </tbody>
       </table>
       <div className="my-4 float-right flex gap-4">
-        {isEdit && (
-          <Button size="small" onClick={createSection}>
-            추가하기
-          </Button>
-        )}
-        <Button size="small" onClick={toggleEdit}>
+        <Button size="small" onClick={createSection} disabled={isEdit}>
+          {isCreate ? '저장하기' : '추가하기'}
+        </Button>
+        <Button size="small" onClick={toggleEdit} disabled={isCreate}>
           {isEdit ? '저장하기' : '수정하기'}
         </Button>
       </div>

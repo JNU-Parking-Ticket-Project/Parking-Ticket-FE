@@ -1,4 +1,4 @@
-import { SettingTime } from 'service-manager/src/apis/dtos/times.dtos';
+import { SettingTime } from '../../apis/dtos/times.dtos';
 import {
   useTimeSettingQuery,
   useTimeSettingUpdateMutate,
