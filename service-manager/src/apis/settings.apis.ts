@@ -9,7 +9,7 @@ import {
   PutSectorResponse,
   Sector,
 } from './dtos/sector.dtos';
-import { CouponEvent, SettingTime } from './dtos/times.dtos';
+import { CouponEvent, CouponEventDetail, SettingTime } from './dtos/times.dtos';
 import { ko } from 'date-fns/locale';
 import { reissueToken } from './user.apis';
 
@@ -32,7 +32,7 @@ export const getSectors = async (): Promise<Sector[]> => {
 };
 
 export const getSectorsBy = async (eventId: string): Promise<Sector[]> => {
-  const response = await https.get(`/v1/${eventId}/sectors`);
+  const response = await https.get(`/v1/events/${eventId}/sectors`);
   if (isErrorResponse(response)) {
     if (getErrorContent(response.code).type === 'REISSUE') {
       return reissueToken(getSectors);
@@ -122,4 +122,12 @@ export const getSettingEvents = async (page: number) => {
     throw new Error(response.reason);
   }
   return new CouponEvent(response);
+};
+
+export const getSettingEventBy = async (eventId: string) => {
+  const response = await https.get(`/v1/events/${eventId}`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new CouponEventDetail(response);
 };

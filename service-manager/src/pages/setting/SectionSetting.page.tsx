@@ -7,7 +7,7 @@ export const SectionSettingPage = () => {
 
   return (
     <>
-      <SettingTime eventId={eventId} />
+      <SettingTime eventId={eventId ?? ''} />
       <SettingTable eventId={eventId ?? ''} />
     </>
   );

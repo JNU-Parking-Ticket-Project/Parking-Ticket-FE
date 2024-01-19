@@ -34,3 +34,18 @@ export class CouponEvent {
     this.nextPage = nextPage;
   }
 }
+
+export class CouponEventDetail {
+  eventTitle: string;
+  eventStatus: string;
+  constructor({
+    eventTitle,
+    eventStatus,
+  }: {
+    eventTitle: string;
+    eventStatus: string;
+  }) {
+    this.eventTitle = eventTitle;
+    this.eventStatus = eventStatus;
+  }
+}

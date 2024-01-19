@@ -2,8 +2,9 @@ import { Button } from '@quokka/design-system';
 import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
 import { useState } from 'react';
 
-export const ApplyList = () => {
-  const { registrations } = useAllRegistrationQuery();
+export const ApplyList = ({ eventId }: { eventId: string }) => {
+  const { registrations } = useAllRegistrationQuery(eventId);
+
   const sectors = Array.from(
     new Set(registrations.map((registration) => registration.sectorNum)),
   ).sort();

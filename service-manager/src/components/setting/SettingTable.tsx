@@ -2,6 +2,7 @@ import Delete from '../../assets/delete.svg';
 import { SettingInput } from './SettingInput';
 import { useSectionSettingTable } from '../../hooks/useSetting/useSectionSetting';
 import { Button } from '@quokka/design-system';
+import { useSettingEventQueryBy } from '../../hooks/react-query/useSetting';
 
 export const SettingTable = ({ eventId }: { eventId: string }) => {
   const {
@@ -13,6 +14,7 @@ export const SettingTable = ({ eventId }: { eventId: string }) => {
     deleteSection,
     createSection,
   } = useSectionSettingTable(eventId);
+  const { event } = useSettingEventQueryBy(eventId);
 
   return (
     <>
@@ -76,14 +78,16 @@ export const SettingTable = ({ eventId }: { eventId: string }) => {
           ))}
         </tbody>
       </table>
-      <div className="my-4 float-right flex gap-4">
-        <Button size="small" onClick={createSection} disabled={isEdit}>
-          {isCreate ? '저장하기' : '추가하기'}
-        </Button>
-        <Button size="small" onClick={toggleEdit} disabled={isCreate}>
-          {isEdit ? '저장하기' : '수정하기'}
-        </Button>
-      </div>
+      {event.eventStatus === 'CLOSE' && (
+        <div className="my-4 float-right flex gap-4">
+          <Button size="small" onClick={createSection} disabled={isEdit}>
+            {isCreate ? '저장하기' : '추가하기'}
+          </Button>
+          <Button size="small" onClick={toggleEdit} disabled={isCreate}>
+            {isEdit ? '저장하기' : '수정하기'}
+          </Button>
+        </div>
+      )}
     </>
   );
 };

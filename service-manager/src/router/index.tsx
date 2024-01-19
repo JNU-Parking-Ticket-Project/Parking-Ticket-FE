@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MainPage } from '../pages/Main.page';
 import { SignUpPage } from '../pages/SignUp.page';
 import { AnnouncementPage } from '../pages/announcement/Announcement.page';
-import { ApplyListPage } from '../pages/ApplyList.page';
+import { ApplyListPage } from '../pages/apply/ApplyList.page';
 import { AdminPage } from '../pages/Admin.page';
 import { PasswordResetLayout } from '../pages/PasswordReset/PasswordResetLayout.page';
 import { RequestPasswordResetPage } from '../pages/PasswordReset/RequestPasswordReset.page';
@@ -19,6 +19,7 @@ import { NoticeLayout } from '../pages/notice/NoticeLayout.page';
 import { NotFound } from '../pages/NotFound';
 import { SettingBoardPage } from '../pages/setting/SettingList.page';
 import { SectionCreateSettingPage } from '../pages/setting/SectionCreate.page';
+import { ApplyBoardPage } from '../pages/apply/ApplyBoard.page';
 
 export default function Router() {
   return (
@@ -43,10 +44,13 @@ export default function Router() {
           />
           <Route path="create" element={<AnnouncementCreatePage />} />
         </Route>
-        <Route path="apply-list" element={<ApplyListPage />} />
+        <Route path="apply-list">
+          <Route index element={<ApplyBoardPage />} />
+          <Route path=":eventId" element={<ApplyListPage />} />
+        </Route>
         <Route path="setting">
           <Route index element={<SettingBoardPage />} />
-          <Route path=":settingId" element={<SectionSettingPage />} />
+          <Route path=":eventId" element={<SectionSettingPage />} />
           <Route path="create" element={<SectionCreateSettingPage />} />
         </Route>
         <Route path="notice" element={<NoticeLayout />}>

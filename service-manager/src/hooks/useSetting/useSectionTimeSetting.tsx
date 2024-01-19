@@ -1,11 +1,7 @@
 import { SettingTime } from '../../apis/dtos/times.dtos';
-import {
-  useTimeSettingQuery,
-  useTimeSettingUpdateMutate,
-} from '../react-query/useSetting';
+import { useTimeSettingUpdateMutate } from '../react-query/useSetting';
 
-export const useSectionTimeSetting = (eventId?: string) => {
-  const { timeSettingData } = useTimeSettingQuery(eventId);
+export const useSectionTimeSetting = () => {
   const { postSettingTime } = useTimeSettingUpdateMutate();
 
   const updateSettingTime = (time: SettingTime) => {
@@ -19,5 +15,5 @@ export const useSectionTimeSetting = (eventId?: string) => {
     });
   };
 
-  return { timeSettingData, updateSettingTime };
+  return { updateSettingTime };
 };

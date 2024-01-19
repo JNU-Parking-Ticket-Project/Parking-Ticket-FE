@@ -6,6 +6,10 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
+import {
+  useSettingEventQueryBy,
+  useTimeSettingQueryBy,
+} from '../../hooks/react-query/useSetting';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -47,31 +51,41 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   );
 };
 
-export const SettingTime = ({ eventId }: { eventId?: string }) => {
-  const { timeSettingData, updateSettingTime } = useSectionTimeSetting(eventId);
+export const SettingTime = ({ eventId }: { eventId: string }) => {
+  const { updateSettingTime } = useSectionTimeSetting();
+  const { timeSettingData } = useTimeSettingQueryBy(eventId);
+  const { event } = useSettingEventQueryBy(eventId);
 
   const [openDate, setOpenDate] = useState(timeSettingData.startAt);
   const [endDate, setEndDate] = useState(timeSettingData.endAt);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(event.eventTitle);
 
   useEffect(() => {
     setOpenDate(timeSettingData.startAt);
     setEndDate(timeSettingData.endAt);
   }, [timeSettingData]);
 
+  useEffect(() => {
+    setTitle(event.eventTitle);
+  }, [event]);
+
   return (
     <>
       <div className="py-4 w-full flex gap-2 justify-center items-center">
         <Txt size="h3">제목</Txt>
-        <InputText
-          className="flex-1"
-          type="text"
-          designType="box"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        {event.eventStatus === 'READY' ? (
+          <Txt size="h3">{title}</Txt>
+        ) : (
+          <InputText
+            className="flex-1"
+            type="text"
+            designType="box"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        )}
       </div>
-      <div className="flex justify-around gap-8">
+      <div className="flex justify-around gap-8 mb-6">
         <DateTimePicker
           date={openDate}
           setDate={(date) => {
@@ -91,19 +105,22 @@ export const SettingTime = ({ eventId }: { eventId?: string }) => {
           title="Close"
         />
       </div>
-      <Button
-        size="small"
-        className="float-right my-4"
-        onClick={() => {
-          updateSettingTime({
-            startAt: openDate,
-            endAt: endDate,
-            title,
-          });
-        }}
-      >
-        저장
-      </Button>
+      {event.eventStatus === 'READY' ||
+        (event.eventStatus === 'OPEN' && (
+          <Button
+            size="small"
+            className="float-right my-4"
+            onClick={() => {
+              updateSettingTime({
+                startAt: openDate,
+                endAt: endDate,
+                title,
+              });
+            }}
+          >
+            저장
+          </Button>
+        ))}
     </>
   );
 };

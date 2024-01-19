@@ -7,6 +7,7 @@ import {
   deleteSector,
   getSectors,
   getSectorsBy,
+  getSettingEventBy,
   getSettingEvents,
   getSettingReadyTime,
   getSettingTimeBy,
@@ -112,13 +113,10 @@ export const useSectorDeleteMutate = () => {
   };
 };
 
-export const useTimeSettingQuery = (eventId?: string) => {
+export const useTimeSettingQueryBy = (eventId: string) => {
   const { data } = useSuspenseQuery({
     queryKey: ['timeSetting', eventId],
-    queryFn:
-      eventId !== undefined
-        ? () => getSettingTimeBy(eventId)
-        : getSettingReadyTime,
+    queryFn: () => getSettingTimeBy(eventId),
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -126,6 +124,16 @@ export const useTimeSettingQuery = (eventId?: string) => {
   return { timeSettingData: data };
 };
 
+export const useSettingEventQueryBy = (eventId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['settingEvent', eventId],
+    queryFn: () => getSettingEventBy(eventId),
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { event: data };
+};
 export const useTimeSettingUpdateMutate = () => {
   const { mutate } = useMutation({
     mutationKey: ['timeSettingUpdate'],

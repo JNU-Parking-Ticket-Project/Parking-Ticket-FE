@@ -1,10 +1,10 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getAllRegistration } from '../../apis/registration.apis';
 
-export const useAllRegistrationQuery = () => {
+export const useAllRegistrationQuery = (eventId: string) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['allRegistration'],
-    queryFn: getAllRegistration,
+    queryKey: ['allRegistration', eventId],
+    queryFn: () => getAllRegistration(eventId),
   });
   return { registrations: data.sort((a, b) => a.id - b.id) };
 };
