@@ -6,7 +6,11 @@ import {
 import {
   deleteSector,
   getSectors,
-  getSettingTime,
+  getSectorsBy,
+  getSettingEventBy,
+  getSettingEvents,
+  getSettingReadyTime,
+  getSettingTimeBy,
   postSectors,
   postSettingTime,
   putSectors,
@@ -19,6 +23,17 @@ export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({
     queryKey: ['sectors'],
     queryFn: getSectors,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { sectorSettingData: data };
+};
+
+export const useSectorQueryById = (eventId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['sectors', eventId],
+    queryFn: () => getSectorsBy(eventId),
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -98,10 +113,10 @@ export const useSectorDeleteMutate = () => {
   };
 };
 
-export const useTimeSettingQuery = () => {
+export const useTimeSettingQueryBy = (eventId: string) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['timeSetting'],
-    queryFn: getSettingTime,
+    queryKey: ['timeSetting', eventId],
+    queryFn: () => getSettingTimeBy(eventId),
     gcTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -109,6 +124,16 @@ export const useTimeSettingQuery = () => {
   return { timeSettingData: data };
 };
 
+export const useSettingEventQueryBy = (eventId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['settingEvent', eventId],
+    queryFn: () => getSettingEventBy(eventId),
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { event: data };
+};
 export const useTimeSettingUpdateMutate = () => {
   const { mutate } = useMutation({
     mutationKey: ['timeSettingUpdate'],
@@ -132,4 +157,15 @@ export const useTimeSettingUpdateMutate = () => {
         },
       }),
   };
+};
+
+export const useSettingEventsQuery = (pageIndex: number) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['couponEvents', pageIndex],
+    queryFn: () => getSettingEvents(pageIndex),
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+
+  return { coupon: data };
 };

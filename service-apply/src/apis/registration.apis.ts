@@ -96,7 +96,7 @@ export const getRegistrationPeriod = async (): Promise<Period> => {
       default:
         break;
     }
-    throw new Error('신청기간 조회에 실패하였습니다.');
+    throw new Error('신청기간 기간이 아닙니다.');
   }
   return new Period(response);
 };

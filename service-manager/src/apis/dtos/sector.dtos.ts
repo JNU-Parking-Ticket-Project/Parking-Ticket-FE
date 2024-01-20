@@ -12,14 +12,7 @@ export class Sector {
     reserve,
     sectorCapacity,
     sectorNumber,
-  }: {
-    id: number;
-    name: string;
-    sectorNumber: string;
-    sectorCapacity: number;
-    reserve: number;
-    issueAmount: number;
-  }) {
+  }: Sector) {
     this.id = id;
     this.name = name;
     this.sectorNumber = sectorNumber;
@@ -31,7 +24,7 @@ export class Sector {
 
 class MessageResponse {
   message: string;
-  constructor({ message }: { message: string }) {
+  constructor({ message }: MessageResponse) {
     this.message = message;
   }
 }

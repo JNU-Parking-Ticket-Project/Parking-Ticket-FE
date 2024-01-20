@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import {
   useSectorCreateMutate,
   useSectorDeleteMutate,
+  useSectorQueryById,
   useSectorUpdateMutate,
-  useSectorsQuery,
 } from '../react-query/useSetting';
 import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 
-export const useSectionSettingTable = () => {
-  const { sectorSettingData } = useSectorsQuery();
+export const useSectionSettingTable = (eventId: string) => {
+  const { sectorSettingData } = useSectorQueryById(eventId);
   const queryClient = useQueryClient();
   const { postSectors } = useSectorCreateMutate();
   const { deleteSector } = useSectorDeleteMutate();
@@ -83,7 +83,7 @@ export const useSectionSettingTable = () => {
         sectorNumber: '',
         issueAmount: 0,
       };
-      queryClient.setQueryData(['sectors'], (prev: Sector[]) => [
+      queryClient.setQueryData(['sectors', eventId], (prev: Sector[]) => [
         ...prev,
         initSector,
       ]);
@@ -92,11 +92,7 @@ export const useSectionSettingTable = () => {
 
     const sectors = data.filter(
       (sector) =>
-        sector.id === -1 &&
-        sector.name !== '' &&
-        sector.sectorNumber !== '' &&
-        sector.sectorCapacity !== 0 &&
-        sector.reserve !== 0,
+        sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '',
     );
 
     if (sectors.length === 0) {
