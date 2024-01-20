@@ -1,9 +1,9 @@
 import { Txt } from '@quokka/design-system';
 import { SettingListItem } from './SettingListItem';
-import { CouponEvent } from '../../apis/dtos/times.dtos';
+import { CouponEventData } from '../../apis/dtos/times.dtos';
 
 interface SettingListProps {
-  couponEvents: CouponEvent['couponEvents'];
+  couponEvents: CouponEventData[];
 }
 
 export const SettingList = (

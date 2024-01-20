@@ -1,9 +1,9 @@
 import { Txt } from '@quokka/design-system';
-import { CouponEvent } from '../../apis/dtos/times.dtos';
+import { CouponEventData } from '../../apis/dtos/times.dtos';
 import { ApplyBoardListItem } from './ApplyBoardListItem';
 
 interface ApplyBoardListProps {
-  couponEvents: CouponEvent['couponEvents'];
+  couponEvents: CouponEventData[];
 }
 
 export const ApplyBoardList = (

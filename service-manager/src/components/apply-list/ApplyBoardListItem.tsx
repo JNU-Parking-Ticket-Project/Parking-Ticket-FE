@@ -1,13 +1,13 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
-import { CouponEvent } from 'service-manager/src/apis/dtos/times.dtos';
+import { CouponEventData } from 'service-manager/src/apis/dtos/times.dtos';
 
 export const ApplyBoardListItem = ({
   eventId,
   eventStatus,
   eventTitle,
   dateTimePeriod,
-}: CouponEvent['couponEvents'][0]) => {
+}: CouponEventData) => {
   return (
     <Link to={`/apply-list/${eventId}`}>
       <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">

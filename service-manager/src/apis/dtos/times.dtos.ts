@@ -11,7 +11,7 @@ export class SettingTime {
   }
 }
 
-type couponEvent = {
+export type CouponEventData = {
   eventId: number;
   eventTitle: string;
   eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
@@ -19,7 +19,7 @@ type couponEvent = {
 };
 
 export class CouponEvent {
-  couponEvents: couponEvent[];
+  couponEvents: CouponEventData[];
   lastPage: number;
   nextPage: number;
   constructor({
@@ -27,7 +27,7 @@ export class CouponEvent {
     lastPage,
     nextPage,
   }: {
-    events: couponEvent[];
+    events: CouponEventData[];
     lastPage: number;
     nextPage: number;
   }) {
