@@ -37,6 +37,12 @@ export class CouponEvent {
   }
 }
 
+interface CouponEventDetailInterface
+  extends Omit<CouponEventData, 'eventId' | 'dateTimePeriod'> {
+  sectors: Sector[];
+  dateTimePeriod: { startAt: Date; endAt: Date };
+}
+
 export class CouponEventDetail {
   dateTimePeriod: { startAt: Date; endAt: Date };
   eventTitle: string;
@@ -47,12 +53,7 @@ export class CouponEventDetail {
     eventTitle,
     eventStatus,
     sectors,
-  }: {
-    dateTimePeriod: { startAt: string; endAt: string };
-    eventTitle: string;
-    eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
-    sectors: Sector[];
-  }) {
+  }: CouponEventDetailInterface) {
     this.eventTitle = eventTitle;
     this.dateTimePeriod = {
       startAt: new Date(dateTimePeriod.startAt),
