@@ -8,11 +8,8 @@ export const useSectionBoard = (pageIndex: number) => {
     const { coupon } = useSettingEventsQuery(1);
     checkCoupon = coupon;
   }
-  if (
-    checkCoupon.couponEvents.find(
-      (event) => event.eventStatus === 'OPEN' || event.eventStatus === 'READY',
-    )
-  ) {
+
+  if (coupon.couponEvents.every((event) => event.eventStatus === 'CLOSED')) {
     canCreate = true;
   }
   return { coupon, canCreate };
