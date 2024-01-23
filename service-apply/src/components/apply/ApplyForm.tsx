@@ -8,10 +8,11 @@ import {
 } from '@quokka/design-system';
 import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
-import { ApplySelector } from './ApplySelector';
+import { SectionSelector, AffiliationSelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense, useState } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { AFFILIATION_LIST } from '../../constants/affiliation';
 
 export const ApplyInputText = ({
   className,
@@ -99,17 +100,18 @@ export const ApplyForm = () => {
           value={state.studentNumber}
           required
         />
-        <ApplyInputText
+        <AffiliationSelector
           label="소속대학"
           name="affiliation"
           type="text"
+          options={AFFILIATION_LIST}
           onChange={(e) =>
             dispatch({ type: 'affiliation', payload: e.target.value })
           }
           value={state.affiliation}
           required
         />
-        <ApplySelector
+        <SectionSelector
           label="구간"
           type="text"
           options={parkingSection}
