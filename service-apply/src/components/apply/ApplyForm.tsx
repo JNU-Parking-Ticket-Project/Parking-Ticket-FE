@@ -10,8 +10,9 @@ import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { AFFILIATION_LIST } from '../../constants/affiliation';
 
 export const ApplyInputText = ({
   className,
@@ -54,6 +55,11 @@ export const ApplyForm = () => {
     sectionMajor: `${item.sectorNum}-${item.sectorName}`,
   }));
   parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
+
+  const parkingSectionOptions = parkingSection.map((item) => ({
+    label: item.sectionMajor,
+    value: item.sectionNumber.toString(),
+  }));
 
   return (
     <ApplyFormContext.Provider value={state}>
@@ -99,24 +105,23 @@ export const ApplyForm = () => {
           value={state.studentNumber}
           required
         />
-        <ApplyInputText
+        <ApplySelector
           label="소속대학"
           name="affiliation"
           type="text"
+          options={AFFILIATION_LIST}
           onChange={(e) =>
             dispatch({ type: 'affiliation', payload: e.target.value })
           }
-          value={state.affiliation}
           required
         />
         <ApplySelector
           label="구간"
           type="text"
-          options={parkingSection}
+          options={parkingSectionOptions}
           onChange={(e) =>
             dispatch({ type: 'section', payload: e.target.value })
           }
-          value={state.section}
           required
         />
         <ApplyInputText

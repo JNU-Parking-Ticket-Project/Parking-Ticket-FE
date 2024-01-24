@@ -7,10 +7,10 @@ import { QueryClient } from '@tanstack/react-query';
 
 export const useApplyForm = () => {
   const { registrationData } = useApplyQuery();
-  const { sector, selectSectorId, ...rest } = registrationData;
-
+  const { sector, selectSectorId, affiliation, ...rest } = registrationData;
   const { state, dispatch } = useApplyFormContext({
     section: selectSectorId ?? 0,
+    affiliation: affiliation ?? '',
     ...rest,
   });
 
@@ -18,7 +18,11 @@ export const useApplyForm = () => {
   useEffect(() => {
     dispatch({
       type: 'update',
-      payload: { section: selectSectorId ?? 0, ...rest },
+      payload: {
+        section: selectSectorId ?? 0,
+        affiliation: affiliation ?? '',
+        ...rest,
+      },
     });
   }, [registrationData]);
 

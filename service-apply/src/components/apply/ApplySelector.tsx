@@ -1,15 +1,14 @@
 import { SelectHTMLAttributes, useId } from 'react';
 import { Txt } from '@quokka/design-system';
 
-interface ParkingSection {
-  sectionNumber: number;
-  sectionMajor: string;
-}
-
-interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface ApplySelectorProps
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'value'> {
   label: string;
   type: string;
-  options: ParkingSection[];
+  options: {
+    label: string;
+    value: string;
+  }[];
 }
 
 export const ApplySelector = ({
@@ -17,7 +16,7 @@ export const ApplySelector = ({
   type,
   options,
   ...props
-}: SelectorProps) => {
+}: ApplySelectorProps) => {
   const id = useId();
 
   return (
@@ -32,8 +31,8 @@ export const ApplySelector = ({
         className="p-2 border border-[#D9D9D9] col-span-4 rounded-md"
       >
         {options.map((options) => (
-          <option key={options.sectionNumber} value={options.sectionNumber}>
-            {options.sectionMajor}
+          <option key={options.label} value={options.value}>
+            {options.label}
           </option>
         ))}
       </select>
