@@ -8,9 +8,9 @@ import {
 } from '@quokka/design-system';
 import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
-import { SectionSelector, AffiliationSelector } from './ApplySelector';
+import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
 
@@ -56,6 +56,11 @@ export const ApplyForm = () => {
   }));
   parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
 
+  const parkingSectionOptions = parkingSection.map((item) => ({
+    label: item.sectionMajor,
+    value: item.sectionNumber.toString(),
+  }));
+
   return (
     <ApplyFormContext.Provider value={state}>
       <div className="flex flex-col gap-4 max-w-[520px] m-auto my-12">
@@ -100,7 +105,7 @@ export const ApplyForm = () => {
           value={state.studentNumber}
           required
         />
-        <AffiliationSelector
+        <ApplySelector
           label="소속대학"
           name="affiliation"
           type="text"
@@ -108,17 +113,15 @@ export const ApplyForm = () => {
           onChange={(e) =>
             dispatch({ type: 'affiliation', payload: e.target.value })
           }
-          value={state.affiliation}
           required
         />
-        <SectionSelector
+        <ApplySelector
           label="구간"
           type="text"
-          options={parkingSection}
+          options={parkingSectionOptions}
           onChange={(e) =>
             dispatch({ type: 'section', payload: e.target.value })
           }
-          value={state.section}
           required
         />
         <ApplyInputText
