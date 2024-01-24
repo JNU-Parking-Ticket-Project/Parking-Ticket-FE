@@ -7,7 +7,7 @@ interface ApplySelectorProps
   type: string;
   options: {
     label: string;
-    value: string | null;
+    value: string;
   }[];
 }
 
@@ -31,7 +31,7 @@ export const ApplySelector = ({
         className="p-2 border border-[#D9D9D9] col-span-4 rounded-md"
       >
         {options.map((options) => (
-          <option key={options.label} value={options.value ?? undefined}>
+          <option key={options.label} value={options.value}>
             {options.label}
           </option>
         ))}
