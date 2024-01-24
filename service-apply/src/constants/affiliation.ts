@@ -1,9 +1,5 @@
-export interface AffiliationList {
-  value: string;
-  label: string;
-}
-
-export const AFFILIATION_LIST: AffiliationList[] = [
+export const AFFILIATION_LIST = [
+  { value: null, label: '선택' },
   { value: 'AI융합대학', label: 'AI융합대학' },
   { value: '간호대학(1학년)', label: '간호대학(1학년)' },
   { value: '경영대학', label: '경영대학' },
