@@ -71,7 +71,11 @@ export const ApplyList = ({ eventId }: { eventId: string }) => {
               .map((registration) => {
                 return (
                   <tr key={registration.id}>
-                    <td>{registration.id}</td>
+                    <td>
+                      {registrations.findIndex(
+                        (data) => data.id === registration.id,
+                      ) + 1}
+                    </td>
                     <td>{registration.name}</td>
                     <td>{registration.carNumber}</td>
                     <td>{registration.studentNumber}</td>
