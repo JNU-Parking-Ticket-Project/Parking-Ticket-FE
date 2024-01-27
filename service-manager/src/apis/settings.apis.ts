@@ -81,9 +81,12 @@ export const deleteSector = async (
   return new DeleteSectorResponse(response);
 };
 
-export const getSettingReadyTime = async () => {
+export const getSettingReadyTime = async (): Promise<SettingTime> => {
   const response = await https.get(`/v1/events/period`);
   if (isErrorResponse(response)) {
+    if (getErrorContent(response.code).type === 'REISSUE') {
+      return reissueToken(getSettingReadyTime);
+    }
     throw new Error(response.reason);
   }
   return new SettingTime(response);
@@ -119,17 +122,25 @@ export const postSettingTime = async (
   return new PostSettingsResponse(response);
 };
 
-export const getSettingEvents = async (page: number) => {
+export const getSettingEvents = async (page: number): Promise<CouponEvent> => {
   const response = await https.get(`/v1/events?page=${page}`);
   if (isErrorResponse(response)) {
+    if (getErrorContent(response.code).type === 'REISSUE') {
+      return reissueToken(() => getSettingEvents(page));
+    }
     throw new Error(response.reason);
   }
   return new CouponEvent(response);
 };
 
-export const getSettingEventBy = async (eventId: string) => {
+export const getSettingEventBy = async (
+  eventId: string,
+): Promise<CouponEventDetail> => {
   const response = await https.get(`/v1/events/${eventId}`);
   if (isErrorResponse(response)) {
+    if (getErrorContent(response.code).type === 'REISSUE') {
+      return reissueToken(() => getSettingEventBy(eventId));
+    }
     throw new Error(response.reason);
   }
   return new CouponEventDetail(response);
