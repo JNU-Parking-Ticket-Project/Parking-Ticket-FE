@@ -1,10 +1,17 @@
 import { Button } from '@quokka/design-system';
 import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
 import { useState } from 'react';
-
+import { ApplyCount } from './ApplyCount';
+import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 export const ApplyList = ({ eventId }: { eventId: string }) => {
   const { registrations } = useAllRegistrationQuery(eventId);
-
+  const { sectorSettingData } = useSectorQueryById(eventId);
+  const currentApply = registrations.length;
+  const sectorIssueAmount =
+    sectorSettingData?.reduce(
+      (acc, cur) => acc + +cur.sectorCapacity + +cur.reserve,
+      0,
+    ) ?? 0;
   const sectors = Array.from(
     new Set(registrations.map((registration) => registration.sectorNum)),
   ).sort();
@@ -46,6 +53,13 @@ export const ApplyList = ({ eventId }: { eventId: string }) => {
         ))}
       </div>
       <div className="w-full">
+        <div>
+          <ApplyCount
+            currentApply={currentApply}
+            sector={selectedSector}
+            totalApply={sectorIssueAmount}
+          />
+        </div>
         <div className="text-right p-4">
           <Button size="small" onClick={exportXLSX}>
             엑셀다운로드
@@ -71,7 +85,11 @@ export const ApplyList = ({ eventId }: { eventId: string }) => {
               .map((registration) => {
                 return (
                   <tr key={registration.id}>
-                    <td>{registration.id}</td>
+                    <td>
+                      {registrations.findIndex(
+                        (data) => data.id === registration.id,
+                      ) + 1}
+                    </td>
                     <td>{registration.name}</td>
                     <td>{registration.carNumber}</td>
                     <td>{registration.studentNumber}</td>
