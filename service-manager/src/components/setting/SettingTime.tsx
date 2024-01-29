@@ -84,6 +84,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={openDate}
           setDate={(date) => {
+            if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
             setOpenDate(date);
             if (date > endDate) setEndDate(date);
@@ -93,6 +94,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={endDate}
           setDate={(date) => {
+            if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
             if (date < openDate) return;
             setEndDate(date);
@@ -100,7 +102,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           title="Close"
         />
       </div>
-      {event.eventStatus === 'READY' && (
+      {(event.eventStatus === 'READY' || event.eventStatus === 'OPEN') && (
         <Button
           size="small"
           className="float-right my-4"
