@@ -110,12 +110,18 @@ export const ApplyForm = () => {
           name="affiliation"
           type="text"
           options={AFFILIATION_LIST}
+          value={state.affiliation}
           onChange={(e) =>
             dispatch({ type: 'affiliation', payload: e.target.value })
           }
           required
         />
         <ApplySelector
+          value={
+            parkingSectionOptions.find(
+              (section) => '' + state.section === section.value,
+            )?.value ?? '선택'
+          }
           label="구간"
           type="text"
           options={parkingSectionOptions}
