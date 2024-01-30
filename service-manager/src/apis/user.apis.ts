@@ -83,7 +83,8 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   const token = localStorage.getItem('refreshToken');
 
   if (!token) {
-    throw new Error('로그인을 해주세요.');
+    alert('로그인을 다시 시도해주세요.');
+    location.href = '/';
   }
   const response = await https.post('/v1/auth/login', { refreshtoken: token });
   if (isErrorResponse(response)) {
