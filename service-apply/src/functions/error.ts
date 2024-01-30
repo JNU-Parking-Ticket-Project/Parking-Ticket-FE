@@ -89,9 +89,6 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
         redirect: '/',
       };
     case 'NOTICE_404_1':
-      return {
-        type: 'NONE',
-      };
     case 'EVENT_400_14':
       return {
         type: 'NONE',
