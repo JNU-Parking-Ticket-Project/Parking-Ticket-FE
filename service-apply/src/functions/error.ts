@@ -50,7 +50,8 @@ export type ERROR_CODE =
   | 'ANNOUNCE_404_2'
   | 'DECRYPTION_500_1'
   | 'ENCRYPTION_500_1'
-  | 'NOTICE_404_1';
+  | 'NOTICE_404_1'
+  | 'Event_400_14';
 
 export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
   switch (error) {
@@ -88,6 +89,10 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
         redirect: '/',
       };
     case 'NOTICE_404_1':
+      return {
+        type: 'NONE',
+      };
+    case 'Event_400_14':
       return {
         type: 'NONE',
       };
