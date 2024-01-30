@@ -51,7 +51,7 @@ export type ERROR_CODE =
   | 'DECRYPTION_500_1'
   | 'ENCRYPTION_500_1'
   | 'NOTICE_404_1'
-  | 'Event_400_14';
+  | 'EVENT_400_14';
 
 export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
   switch (error) {
@@ -92,7 +92,7 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
       return {
         type: 'NONE',
       };
-    case 'Event_400_14':
+    case 'EVENT_400_14':
       return {
         type: 'NONE',
       };
