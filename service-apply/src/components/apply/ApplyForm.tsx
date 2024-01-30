@@ -13,6 +13,7 @@ import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
+import { PrivacyCheckModal } from './PrivacyCheckModal';
 
 export const ApplyInputText = ({
   className,
@@ -41,9 +42,11 @@ export const ApplyForm = () => {
     state,
     dispatch,
     onTemporarySave,
+    isPrivacyModalOpen,
+    setIsPrivacyModalOpen,
     isCaptchaModalOpen,
     setIsCaptchaModalOpen,
-    onModalOpen,
+    onCaptchaModalOpen,
     isAgreed,
     setIsAgreed,
     isError,
@@ -166,18 +169,22 @@ export const ApplyForm = () => {
               type="checkbox"
               name="collection-agreement"
             />
-            <Txt size="sm" className="text-lg pl-2">
+            <Txt
+              size="sm"
+              className="text-lg pl-2 cursor-pointer underline"
+              onClick={() => {
+                setIsPrivacyModalOpen(true);
+              }}
+            >
               개인정보 수집 및 이용 동의
             </Txt>
           </div>
-          <a
-            target="_blank"
-            href="https://www.privacy.go.kr/front/main/main.do"
-            className="pl-6 text-sm underline underline-offset-4 text-neutral-700"
-          >
-            자세한 내용은 이곳에서 확인할 수 있습니다
-            {/* TODO: 모달창으로 변경 */}
-          </a>
+          <PrivacyCheckModal
+            isOpen={isPrivacyModalOpen}
+            onRequestClose={() => {
+              setIsPrivacyModalOpen(false);
+            }}
+          />
         </div>
         {isError && (
           <Txt color="error" className="my-2">
@@ -188,7 +195,7 @@ export const ApplyForm = () => {
           <Button color="secondary" onClick={onTemporarySave}>
             임시 저장
           </Button>
-          <Button color="primary" onClick={onModalOpen}>
+          <Button color="primary" onClick={onCaptchaModalOpen}>
             신청하기
           </Button>
 
