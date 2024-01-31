@@ -19,8 +19,11 @@ export const PrivacyCheckModal = ({
         zIndex: 1000,
       }}
       contentCss={{
-        width: '900px',
-        height: '1100px',
+        padding: '2rem',
+        width: '80%',
+        maxWidth: '60rem',
+        height: '80%',
+        maxHeight: '70rem',
         margin: 'auto',
         display: 'flex',
         flexDirection: 'column',
@@ -29,7 +32,7 @@ export const PrivacyCheckModal = ({
         borderRadius: '0.5rem',
       }}
     >
-      <Txt size="h3" className="py-8">
+      <Txt size="h3" className="mt-96 py-6">
         개인정보 수집·이용 동의서
       </Txt>
       <Txt size="h5" className="py-6">
