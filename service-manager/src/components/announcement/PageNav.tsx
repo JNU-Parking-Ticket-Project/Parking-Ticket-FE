@@ -7,16 +7,23 @@ import { PAGE_FIRST } from '../../constants/announcement';
 interface PageNavProps {
   lastIdx: number;
   currentIdx: number;
+  linkPrefix: string;
 }
 
-const PrevNavLinkGroup = ({ currentIdx }: { currentIdx: number }) => {
+const PrevNavLinkGroup = ({
+  linkPrefix,
+  currentIdx,
+}: {
+  linkPrefix: string;
+  currentIdx: number;
+}) => {
   if (currentIdx > PAGE_FIRST) {
     return (
       <>
-        <Link className="p-1" to={`/announcement?page=${PAGE_FIRST}`}>
+        <Link className="p-1" to={`${linkPrefix}?page=${PAGE_FIRST}`}>
           <Icon type="rightDoubleArrow" className="rotate-180" />
         </Link>
-        <Link to={`/announcement?page=${currentIdx - 1}`} className="px-1">
+        <Link to={`${linkPrefix}?page=${currentIdx - 1}`} className="px-1">
           <Icon type="rightArrow" className="rotate-180" />
         </Link>
       </>
@@ -37,17 +44,19 @@ const PrevNavLinkGroup = ({ currentIdx }: { currentIdx: number }) => {
 const NextNavLinkGroup = ({
   currentIdx,
   lastIdx,
+  linkPrefix,
 }: {
   currentIdx: number;
   lastIdx: number;
+  linkPrefix: string;
 }) => {
   if (currentIdx < lastIdx) {
     return (
       <>
-        <Link to={`/announcement?page=${currentIdx + 1}`} className="px-1">
+        <Link to={`${linkPrefix}?page=${currentIdx + 1}`} className="px-1">
           <Icon type="rightArrow" />
         </Link>
-        <Link className="px-1" to={`/announcement?page=${lastIdx}`}>
+        <Link className="px-1" to={`${linkPrefix}?page=${lastIdx}`}>
           <Icon type="rightDoubleArrow" />
         </Link>
       </>
@@ -65,14 +74,14 @@ const NextNavLinkGroup = ({
   );
 };
 
-export const PageNav = ({ lastIdx, currentIdx }: PageNavProps) => {
+export const PageNav = ({ lastIdx, currentIdx, linkPrefix }: PageNavProps) => {
   return (
     <div className="my-8 flex items-center justify-end">
-      <PrevNavLinkGroup currentIdx={currentIdx} />
+      <PrevNavLinkGroup linkPrefix={linkPrefix} currentIdx={currentIdx} />
       {generatePaginationIndexs(currentIdx, lastIdx).map((page) => (
         <Link
           key={page}
-          to={`/announcement?page=${page}`}
+          to={`${linkPrefix}?page=${page}`}
           className="w-6 text-center"
         >
           <Txt
@@ -83,7 +92,11 @@ export const PageNav = ({ lastIdx, currentIdx }: PageNavProps) => {
           </Txt>
         </Link>
       ))}
-      <NextNavLinkGroup currentIdx={currentIdx} lastIdx={lastIdx} />
+      <NextNavLinkGroup
+        linkPrefix={linkPrefix}
+        currentIdx={currentIdx}
+        lastIdx={lastIdx}
+      />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useSettingEventsQuery } from '../react-query/useSetting';
 
 export const useSectionBoard = (pageIndex: number) => {
   const { coupon } = useSettingEventsQuery(pageIndex);
+  // TODO: PLAESE REMOVE THIS CODE 6~10L
   let checkCoupon = coupon;
   if (pageIndex !== 1) {
     const { coupon } = useSettingEventsQuery(1);
