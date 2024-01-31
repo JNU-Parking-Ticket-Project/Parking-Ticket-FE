@@ -28,6 +28,7 @@ export const useApplyForm = () => {
 
   const { postTemporarySave } = useTemporarySaveMutate();
   const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
 
   const [isError, setIsError] = useState(false);
@@ -77,7 +78,7 @@ export const useApplyForm = () => {
     );
   };
 
-  const onModalOpen = () => {
+  const onCaptchaModalOpen = () => {
     if (!checkValidation()) return;
     setIsCaptchaModalOpen(true);
   };
@@ -87,9 +88,11 @@ export const useApplyForm = () => {
     state,
     dispatch,
     onTemporarySave,
+    isPrivacyModalOpen,
+    setIsPrivacyModalOpen,
     isCaptchaModalOpen,
     setIsCaptchaModalOpen,
-    onModalOpen,
+    onCaptchaModalOpen,
     isAgreed,
     setIsAgreed,
     isError,
