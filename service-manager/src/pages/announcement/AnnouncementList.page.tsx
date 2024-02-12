@@ -21,7 +21,11 @@ export const AnnouncementListPage = () => {
             공지 작성
           </Button>
         </Link>
-        <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+        <PageNav
+          linkPrefix="/announcement"
+          lastIdx={+lastPage}
+          currentIdx={+currentPage}
+        />
       </div>
     </>
   );

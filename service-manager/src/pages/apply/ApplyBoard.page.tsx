@@ -13,7 +13,11 @@ export const ApplyBoardPage = () => {
   return (
     <>
       <ApplyBoardList couponEvents={couponEvents} />
-      <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      <PageNav
+        linkPrefix="/apply-list"
+        lastIdx={+lastPage}
+        currentIdx={+currentPage}
+      />
     </>
   );
 };
