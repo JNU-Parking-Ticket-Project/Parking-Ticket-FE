@@ -107,6 +107,10 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           size="small"
           className="float-right my-4"
           onClick={() => {
+            if (!title.length) {
+              alert('제목을 입력해주세요.');
+              return;
+            }
             updateSettingTime({
               startAt: openDate,
               endAt: endDate,
