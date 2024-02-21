@@ -10,9 +10,6 @@ import {
   SettingTime,
 } from './dtos/times.dtos';
 import { ko } from 'date-fns/locale';
-import { getErrorContent } from '../functions/error';
-import { reissueToken } from './user.apis';
-import { getSectors } from './sectorSettings.apis';
 
 export const getSettingReadyTime = async () => {
   const response = await https.get(`/v1/events/period`);
@@ -44,9 +41,6 @@ export const postSettingTime = async (
 
   const response = await https.post(`/v1/events`, datesString);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => postSettingTime(date));
-    }
     throw new Error(response.reason);
   }
   return new PostSettingsResponse(response);
@@ -71,9 +65,6 @@ export const getSettingEventBy = async (eventId: string) => {
 export const getSectorsBy = async (eventId: string): Promise<Sector[]> => {
   const response = await https.get(`/v1/events/${eventId}/sectors`);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(getSectors);
-    }
     throw new Error(response.reason);
   }
   return response.map((sector: any) => new Sector(sector));

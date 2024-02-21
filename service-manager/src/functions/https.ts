@@ -1,4 +1,6 @@
 import { ErrorResponse, Response } from '../apis/dtos/response.dtos';
+import { reissueToken } from '../apis/user.apis';
+import { getErrorContent } from './error';
 import { getAccessToken } from './jwt';
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8080';
@@ -19,7 +21,11 @@ const fetcher = async (url: string, req: RequestInit) => {
     headers,
   });
   if (response.status >= 400) {
-    return await errorStatusResult(response);
+    const errorResponse = await errorStatusResult(response);
+    if (getErrorContent(errorResponse.code).type === 'REISSUE') {
+      reissueToken();
+    }
+    return errorResponse;
   }
   return await response.json();
 };

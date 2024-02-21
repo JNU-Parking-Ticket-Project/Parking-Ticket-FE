@@ -33,6 +33,7 @@ export type ERROR_CODE =
   | 'GLOBAL_401_1'
   | 'AUTH_400_1'
   | 'AUTH_401_1'
+  | 'AUTH_401_2'
   | 'AUTH_403_1'
   | 'AUTH_403_2'
   | 'AUTH_403_3'
@@ -54,6 +55,7 @@ export type ERROR_CODE =
 export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
   switch (error) {
     case 'AUTH_401_1':
+    case 'AUTH_401_2':
       return {
         type: 'REISSUE',
       };
