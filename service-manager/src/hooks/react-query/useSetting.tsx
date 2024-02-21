@@ -6,18 +6,19 @@ import {
 import {
   deleteSector,
   getSectors,
-  getSectorsBy,
-  getSettingEventBy,
-  getSettingEvents,
-  getSettingReadyTime,
-  getSettingTimeBy,
   postSectors,
-  postSettingTime,
   putSectors,
-} from '../../apis/settings.apis';
+} from '../../apis/sectorSettings.apis';
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
 import { SettingTime } from '../../apis/dtos/times.dtos';
+import {
+  getSectorsBy,
+  getSettingEventBy,
+  getSettingEvents,
+  getSettingTimeBy,
+  postSettingTime,
+} from '../../apis/eventSettings.apis';
 
 export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({

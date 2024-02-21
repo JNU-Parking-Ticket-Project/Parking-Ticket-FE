@@ -1,6 +1,6 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
-import { CouponEventData } from 'service-manager/src/apis/dtos/times.dtos';
+import { CouponEventData } from '../../apis/dtos/times.dtos';
 
 export const SettingListItem = ({
   eventId,

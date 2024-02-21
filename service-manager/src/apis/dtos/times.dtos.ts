@@ -63,3 +63,10 @@ export class CouponEventDetail {
     this.sectors = sectors;
   }
 }
+
+export class CouponPublishResponse {
+  publish: string;
+  constructor({ publish }: { publish: string }) {
+    this.publish = publish;
+  }
+}
