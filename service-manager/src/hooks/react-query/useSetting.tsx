@@ -13,10 +13,12 @@ import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
 import { SettingTime } from '../../apis/dtos/times.dtos';
 import {
+  getPublishBy,
   getSectorsBy,
   getSettingEventBy,
   getSettingEvents,
   getSettingTimeBy,
+  postPublishBy,
   postSettingTime,
 } from '../../apis/eventSettings.apis';
 
@@ -169,4 +171,23 @@ export const useSettingEventsQuery = (pageIndex: number) => {
   });
 
   return { coupon: data };
+};
+
+export const useSettingPublishQueryBy = (eventId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: ['publish'],
+    queryFn: () => getPublishBy(eventId),
+    refetchOnWindowFocus: false,
+  });
+
+  return { published: data };
+};
+
+export const useSettingPublishMutateBy = (eventId: string) => {
+  const { mutate } = useMutation({
+    mutationKey: ['publish'],
+    mutationFn: () => postPublishBy(eventId),
+  });
+
+  return { postPublish: mutate };
 };

@@ -17,10 +17,13 @@ export const SettingList = (
         <Txt size="h4" className="flex-[2_0_0]">
           제목
         </Txt>
-        <Txt size="h4" className="w-12 text-center">
-          상태
+        <Txt size="h4" className="flex-1 text-center">
+          공개
         </Txt>
         <Txt size="h4" className="flex-1 text-center">
+          상태
+        </Txt>
+        <Txt size="h4" className="flex-[2_0_0] text-center">
           기간
         </Txt>
       </div>

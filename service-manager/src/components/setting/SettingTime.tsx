@@ -6,7 +6,11 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
-import { useSettingEventQueryBy } from '../../hooks/react-query/useSetting';
+import {
+  useSettingEventQueryBy,
+  useSettingPublishMutateBy,
+  useSettingPublishQueryBy,
+} from '../../hooks/react-query/useSetting';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -51,6 +55,8 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { updateSettingTime } = useSectionTimeSetting();
   const { event } = useSettingEventQueryBy(eventId);
+  const { published } = useSettingPublishQueryBy(eventId);
+  const { postPublish } = useSettingPublishMutateBy(eventId);
 
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
@@ -64,21 +70,32 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
 
   return (
     <>
-      <div className="py-4 w-full flex gap-4 justify-center items-center">
-        <Txt size="h3">제목</Txt>
-        {event.eventStatus !== 'READY' ? (
-          <Txt size="h3" className="flex-1 font-normal">
-            {title}
-          </Txt>
-        ) : (
-          <InputText
-            className="flex-1"
-            type="text"
-            designType="box"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        )}
+      <div className="py-4 w-full flex justify-between items-center">
+        <div className="flex gap-4">
+          <Txt size="h3">제목:</Txt>
+          {event.eventStatus !== 'READY' ? (
+            <Txt size="h3" className="flex-1 font-normal">
+              {title}
+            </Txt>
+          ) : (
+            <InputText
+              className="flex-1"
+              type="text"
+              designType="box"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          )}
+        </div>
+        <div className="flex gap-4">
+          <Txt size="h3">공개여부:</Txt>
+          <Txt size="h3">{published ? '공개' : '비공개'}</Txt>
+          {!published && (
+            <Button onClick={() => postPublish()} color="error" size="small">
+              공개 전환하기
+            </Button>
+          )}
+        </div>
       </div>
       <div className="flex justify-around gap-8 mb-6">
         <DateTimePicker
