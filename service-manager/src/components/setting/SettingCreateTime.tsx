@@ -5,7 +5,7 @@ import { ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
-import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
+import { useSectionTimeSetting } from '../../hooks/react-query/useSectionTimeSetting';
 import { useNavigate } from 'react-router-dom';
 
 registerLocale('ko', ko);
@@ -57,6 +57,10 @@ export const SettingCreateTime = () => {
   const [title, setTitle] = useState('');
 
   const onSave = () => {
+    if (title === '') {
+      alert('제목을 입력해주세요');
+      return;
+    }
     updateSettingTime({
       startAt: openDate,
       endAt: endDate,

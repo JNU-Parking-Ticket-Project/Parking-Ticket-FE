@@ -5,7 +5,7 @@ import { ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
-import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
+import { useSectionTimeSetting } from '../../hooks/react-query/useSectionTimeSetting';
 import {
   useSettingEventQueryBy,
   useSettingEventRemoveMutateBy,
