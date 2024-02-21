@@ -194,9 +194,16 @@ export const useSettingPublishMutateBy = (eventId: string) => {
 };
 
 export const useSettingEventRemoveMutateBy = (eventId: string) => {
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationKey: ['removeEvent'],
     mutationFn: () => deleteEventBy(eventId),
+    onSuccess: () => {
+      alert('이벤트가 삭제되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
+      window.location.href = '/setting';
+    },
   });
 
   return { deleteEvent: mutate };
