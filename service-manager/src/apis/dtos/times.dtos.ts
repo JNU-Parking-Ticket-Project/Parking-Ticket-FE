@@ -70,3 +70,10 @@ export class CouponPublishResponse {
     this.publish = publish;
   }
 }
+
+export class RemoveEventsResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}

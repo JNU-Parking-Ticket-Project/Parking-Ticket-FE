@@ -6,6 +6,7 @@ import {
   CouponEvent,
   CouponEventDetail,
   CouponPublishResponse,
+  RemoveEventsResponse,
   SettingTime,
 } from './dtos/times.dtos';
 import { ko } from 'date-fns/locale';
@@ -92,4 +93,12 @@ export const postPublishBy = async (eventId: string) => {
     throw new Error(response.reason);
   }
   return new CouponPublishResponse(response);
+};
+
+export const deleteEventBy = async (eventId: string) => {
+  const response = await https.delete(`/v1/events/${eventId}`);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new RemoveEventsResponse(response);
 };

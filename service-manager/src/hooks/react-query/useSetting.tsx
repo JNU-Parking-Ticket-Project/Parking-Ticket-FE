@@ -13,6 +13,7 @@ import { Sector } from '../../apis/dtos/sector.dtos';
 import { useQueryClient } from '@tanstack/react-query';
 import { SettingTime } from '../../apis/dtos/times.dtos';
 import {
+  deleteEventBy,
   getPublishBy,
   getSectorsBy,
   getSettingEventBy,
@@ -190,4 +191,13 @@ export const useSettingPublishMutateBy = (eventId: string) => {
   });
 
   return { postPublish: mutate };
+};
+
+export const useSettingEventRemoveMutateBy = (eventId: string) => {
+  const { mutate } = useMutation({
+    mutationKey: ['removeEvent'],
+    mutationFn: () => deleteEventBy(eventId),
+  });
+
+  return { deleteEvent: mutate };
 };

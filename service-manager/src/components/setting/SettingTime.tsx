@@ -8,6 +8,7 @@ import './DateTime.css';
 import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
 import {
   useSettingEventQueryBy,
+  useSettingEventRemoveMutateBy,
   useSettingPublishMutateBy,
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
@@ -57,6 +58,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { event } = useSettingEventQueryBy(eventId);
   const { published } = useSettingPublishQueryBy(eventId);
   const { postPublish } = useSettingPublishMutateBy(eventId);
+  const { deleteEvent } = useSettingEventRemoveMutateBy(eventId);
 
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
@@ -95,6 +97,9 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               공개 전환하기
             </Button>
           )}
+          <Button onClick={() => deleteEvent()} color="error" size="small">
+            이벤트 삭제하기
+          </Button>
         </div>
       </div>
       <div className="flex justify-around gap-8 mb-6">
