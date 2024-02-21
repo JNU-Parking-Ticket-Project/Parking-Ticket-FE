@@ -185,9 +185,16 @@ export const useSettingPublishQueryBy = (eventId: string) => {
 };
 
 export const useSettingPublishMutateBy = (eventId: string) => {
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationKey: ['publish'],
     mutationFn: () => postPublishBy(eventId),
+    onSuccess: () => {
+      alert('이벤트가 공개되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
+      window.location.href = '/setting';
+    },
   });
 
   return { postPublish: mutate };
