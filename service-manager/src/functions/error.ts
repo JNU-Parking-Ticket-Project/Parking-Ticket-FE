@@ -50,11 +50,16 @@ export type ERROR_CODE =
   | 'ANNOUNCE_404_2'
   | 'DECRYPTION_500_1'
   | 'ENCRYPTION_500_1'
-  | 'NOTICE_404_1';
+  | 'NOTICE_404_1'
+  | 'AUTH_401_2';
 
 export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
   switch (error) {
     case 'AUTH_401_1':
+    case 'AUTH_401_2':
+      return {
+        type: 'REISSUE',
+      };
     case 'AUTH_401_2':
       return {
         type: 'REISSUE',

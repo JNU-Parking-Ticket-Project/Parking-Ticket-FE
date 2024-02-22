@@ -26,7 +26,11 @@ export const SettingBoardPage = () => {
         </Button>
       )}
       <SettingList couponEvents={couponEvents} />
-      <PageNav lastIdx={+lastPage} currentIdx={+currentPage} />
+      <PageNav
+        linkPrefix="/setting"
+        lastIdx={+lastPage}
+        currentIdx={+currentPage}
+      />
     </div>
   );
 };

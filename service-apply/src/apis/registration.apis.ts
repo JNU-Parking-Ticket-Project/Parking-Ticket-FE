@@ -78,6 +78,8 @@ export const getRegistrationPeriod = async (): Promise<Period> => {
       case 'ALERT':
         alert(response.reason);
         break;
+      case 'NONE':
+        break;
       case 'ALERT_WITH_REDIRECT':
         alert(response.reason);
         window.location.href = errorContent.redirect;
