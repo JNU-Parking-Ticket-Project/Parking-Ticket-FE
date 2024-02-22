@@ -1,4 +1,3 @@
-import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { isErrorResponse } from './dtos/response.dtos';
 import {
@@ -7,8 +6,6 @@ import {
   PutSectorResponse,
   Sector,
 } from './dtos/sector.dtos';
-
-import { reissueToken } from './user.apis';
 
 interface SectorRequest {
   name: string;

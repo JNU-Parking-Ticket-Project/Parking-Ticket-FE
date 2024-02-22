@@ -14,9 +14,6 @@ import { ko } from 'date-fns/locale';
 export const getSettingReadyTime = async (): Promise<SettingTime> => {
   const response = await https.get(`/v1/events/period`);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(getSettingReadyTime);
-    }
     throw new Error(response.reason);
   }
   return new SettingTime(response);
@@ -52,9 +49,6 @@ export const postSettingTime = async (
 export const getSettingEvents = async (page: number): Promise<CouponEvent> => {
   const response = await https.get(`/v1/events?page=${page}`);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => getSettingEvents(page));
-    }
     throw new Error(response.reason);
   }
   return new CouponEvent(response);
@@ -65,9 +59,6 @@ export const getSettingEventBy = async (
 ): Promise<CouponEventDetail> => {
   const response = await https.get(`/v1/events/${eventId}`);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => getSettingEventBy(eventId));
-    }
     throw new Error(response.reason);
   }
   return new CouponEventDetail(response);
