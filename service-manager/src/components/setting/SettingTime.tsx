@@ -92,9 +92,9 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <div className="flex gap-4">
           <Txt size="h3">공개여부:</Txt>
           <Txt size="h3">{published ? '공개' : '비공개'}</Txt>
-          {!published && (
+          {published && (
             <Button onClick={() => postPublish()} color="error" size="small">
-              공개 전환하기
+              비공개 전환하기
             </Button>
           )}
           <Button onClick={() => deleteEvent()} color="error" size="small">

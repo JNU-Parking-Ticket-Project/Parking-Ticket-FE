@@ -71,7 +71,7 @@ export const getSectorsBy = async (eventId: string): Promise<Sector[]> => {
 };
 
 export const getPublishBy = async (eventId: string) => {
-  const response = await https.get(`/v1/events/${eventId}/publish`);
+  const response = await https.get(`/v1/events/publish/${eventId}`);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -79,7 +79,7 @@ export const getPublishBy = async (eventId: string) => {
 };
 
 export const postPublishBy = async (eventId: string) => {
-  const response = await https.post(`/v1/events/${eventId}/publish`, {});
+  const response = await https.post(`/v1/events/publish/${eventId}`, {});
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }

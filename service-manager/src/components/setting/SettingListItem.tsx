@@ -13,7 +13,6 @@ export const SettingListItem = ({
       <div className="border-b border-black flex justify-between hover:bg-gray-100 p-3">
         <Txt className="flex-[2_0_0]">{eventTitle}</Txt>
         <Txt className="flex-1 text-center">{eventStatus}</Txt>
-        <Txt className="flex-1 text-center">{eventStatus}</Txt>
         <Txt className="flex-[2_0_0] w-44 text-center">{dateTimePeriod}</Txt>
       </div>
     </Link>

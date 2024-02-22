@@ -18,9 +18,6 @@ export const SettingList = (
           제목
         </Txt>
         <Txt size="h4" className="flex-1 text-center">
-          공개
-        </Txt>
-        <Txt size="h4" className="flex-1 text-center">
           상태
         </Txt>
         <Txt size="h4" className="flex-[2_0_0] text-center">
