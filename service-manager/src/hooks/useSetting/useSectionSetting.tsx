@@ -9,8 +9,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 
 export const useSectionSettingTable = (eventId: string) => {
-  const { sectorSettingData } = useSectorQueryById(eventId);
   const queryClient = useQueryClient();
+  const { sectorSettingData } = useSectorQueryById(eventId);
   const { postSectors } = useSectorCreateMutate();
   const { deleteSector } = useSectorDeleteMutate();
   const { putSectors } = useSectorUpdateMutate();
@@ -64,6 +64,11 @@ export const useSectionSettingTable = (eventId: string) => {
   };
 
   const deleteSection = (id: string) => {
+    if (isCreate) {
+      setIsCreate(false);
+      setData((prev) => prev.filter((sector) => sector.id !== -1));
+      return;
+    }
     deleteSector(id, {
       onError: (error) => {
         alert(error.message);
