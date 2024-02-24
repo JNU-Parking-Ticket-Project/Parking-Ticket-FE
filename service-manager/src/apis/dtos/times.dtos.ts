@@ -16,6 +16,7 @@ export type CouponEventData = {
   eventTitle: string;
   eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
   dateTimePeriod: string;
+  publish: boolean;
 };
 
 export class CouponEvent {

@@ -6,7 +6,6 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSetting } from '../../hooks/react-query/useSectionTimeSetting';
-import { useNavigate } from 'react-router-dom';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
