@@ -50,7 +50,6 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 
 export const SettingCreateTime = () => {
   const { updateSettingTime } = useSectionTimeSetting();
-  const navigate = useNavigate();
 
   const [openDate, setOpenDate] = useState(() => new Date());
   const [endDate, setEndDate] = useState(() => new Date());
@@ -66,7 +65,6 @@ export const SettingCreateTime = () => {
       endAt: endDate,
       title,
     });
-    navigate('/setting');
   };
 
   return (

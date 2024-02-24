@@ -22,6 +22,7 @@ import {
   putPublishBy,
   postSettingTime,
 } from '../../apis/eventSettings.apis';
+import { useNavigate } from 'react-router-dom';
 
 export const useSectorsQuery = () => {
   const { data } = useSuspenseQuery({
@@ -138,12 +139,14 @@ export const useSettingEventQueryBy = (eventId: string) => {
 
   return { event: data };
 };
+
 export const useTimeSettingUpdateMutate = () => {
   const { mutate } = useMutation({
     mutationKey: ['timeSettingUpdate'],
     mutationFn: postSettingTime,
   });
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return {
     postSettingTime: (
@@ -157,7 +160,9 @@ export const useTimeSettingUpdateMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('데이터가 없습니다.');
-          queryClient.invalidateQueries({ queryKey: ['timeSetting'] });
+          queryClient.invalidateQueries({ queryKey: ['settingEvent'] });
+          queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
+          navigate('/setting');
         },
       }),
   };
@@ -178,7 +183,7 @@ export const useSettingPublishQueryBy = (eventId: string) => {
   const {
     data: { publish },
   } = useSuspenseQuery({
-    queryKey: ['publish'],
+    queryKey: ['publish', eventId],
     queryFn: () => getPublishBy(eventId),
     refetchOnWindowFocus: false,
   });
@@ -188,14 +193,15 @@ export const useSettingPublishQueryBy = (eventId: string) => {
 
 export const useSettingPublishMutateBy = (eventId: string) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationKey: ['publish'],
+    mutationKey: ['publish', eventId],
     mutationFn: (publish: boolean) => putPublishBy(eventId, publish),
     onSuccess: (response) => {
       alert(response.publish ? '공개되었습니다.' : '비공개되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
-      window.location.href = '/setting';
+      navigate('/setting');
     },
     onError: (error) => {
       alert(error.message);
@@ -208,14 +214,15 @@ export const useSettingPublishMutateBy = (eventId: string) => {
 
 export const useSettingEventRemoveMutateBy = (eventId: string) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationKey: ['removeEvent'],
+    mutationKey: ['removeEvent', eventId],
     mutationFn: () => deleteEventBy(eventId),
     onSuccess: () => {
       alert('이벤트가 삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
-      window.location.href = '/setting';
+      navigate('/setting');
     },
   });
 
