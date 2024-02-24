@@ -80,8 +80,10 @@ export const getPublishBy = async (eventId: string) => {
   return new CouponPublishResponse(response);
 };
 
-export const postPublishBy = async (eventId: string) => {
-  const response = await https.post(`/v1/events/publish/${eventId}`, {});
+export const putPublishBy = async (eventId: string, publish: boolean) => {
+  const response = await https.put(`/v1/events/publish/${eventId}`, {
+    publish,
+  });
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }

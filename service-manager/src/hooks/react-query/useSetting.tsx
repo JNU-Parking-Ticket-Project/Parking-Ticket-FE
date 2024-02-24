@@ -19,7 +19,7 @@ import {
   getSettingEventBy,
   getSettingEvents,
   getSettingTimeBy,
-  postPublishBy,
+  putPublishBy,
   postSettingTime,
 } from '../../apis/eventSettings.apis';
 
@@ -175,13 +175,15 @@ export const useSettingEventsQuery = (pageIndex: number) => {
 };
 
 export const useSettingPublishQueryBy = (eventId: string) => {
-  const { data } = useSuspenseQuery({
+  const {
+    data: { publish },
+  } = useSuspenseQuery({
     queryKey: ['publish'],
     queryFn: () => getPublishBy(eventId),
     refetchOnWindowFocus: false,
   });
 
-  return { published: data };
+  return { published: publish };
 };
 
 export const useSettingPublishMutateBy = (eventId: string) => {
@@ -189,11 +191,15 @@ export const useSettingPublishMutateBy = (eventId: string) => {
 
   const { mutate } = useMutation({
     mutationKey: ['publish'],
-    mutationFn: () => postPublishBy(eventId),
+    mutationFn: (publish: boolean) => putPublishBy(eventId, publish),
     onSuccess: (response) => {
       alert(response.publish ? '공개되었습니다.' : '비공개되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
       window.location.href = '/setting';
+    },
+    onError: (error) => {
+      alert(error.message);
+      console.error(error);
     },
   });
 
