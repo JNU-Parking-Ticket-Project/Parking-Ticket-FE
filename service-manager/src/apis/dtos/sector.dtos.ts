@@ -33,3 +33,4 @@ export class PutSectorResponse extends MessageResponse {}
 export class PostSectorResponse extends MessageResponse {}
 export class DeleteSectorResponse extends MessageResponse {}
 export class PostSettingsResponse extends MessageResponse {}
+export class PutSettingsResponse extends MessageResponse {}

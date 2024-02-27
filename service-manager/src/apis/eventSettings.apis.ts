@@ -1,7 +1,11 @@
 import { format } from 'date-fns';
 import { https } from '../functions/https';
 import { isErrorResponse } from './dtos/response.dtos';
-import { PostSettingsResponse, Sector } from './dtos/sector.dtos';
+import {
+  PostSettingsResponse,
+  PutSettingsResponse,
+  Sector,
+} from './dtos/sector.dtos';
 import {
   CouponEvent,
   CouponEventDetail,
@@ -44,6 +48,23 @@ export const postSettingTime = async (
     throw new Error(response.reason);
   }
   return new PostSettingsResponse(response);
+};
+
+export const putSettingTime = async (eventId: string, date: SettingTime) => {
+  const pattern = 'yyyy-MM-dd HH:mm:ss';
+  const datesString = {
+    dateTimePeriod: {
+      startAt: format(date.startAt, pattern, { locale: ko }).replace(' ', 'T'),
+      endAt: format(date.endAt, pattern, { locale: ko }).replace(' ', 'T'),
+    },
+    title: date.title,
+  };
+
+  const response = await https.put(`/v1/events/${eventId}`, datesString);
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+  return new PutSettingsResponse(response);
 };
 
 export const getSettingEvents = async (page: number): Promise<CouponEvent> => {
