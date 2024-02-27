@@ -75,9 +75,13 @@ export const useSectorUpdateMutate = () => {
 };
 
 export const useSectorCreateMutate = () => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ['sectorsCreate'],
     mutationFn: postSectors,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['sectors'] });
+    },
   });
 
   return {
