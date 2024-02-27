@@ -1,11 +1,31 @@
 import { SettingTime } from '../../apis/dtos/times.dtos';
-import { useTimeSettingUpdateMutate } from './useSetting';
+import {
+  useTimeSettingUpdateMutate,
+  useTimeSettingCreateMutate,
+} from './useSetting';
 
-export const useSectionTimeSetting = () => {
-  const { postSettingTime } = useTimeSettingUpdateMutate();
+export const useSectionTimeSettingCreate = () => {
+  const { postSettingTime } = useTimeSettingCreateMutate();
+
+  const createSettingTime = (time: SettingTime) => {
+    postSettingTime(time, {
+      onSuccess: () => {
+        alert('생성되었습니다.');
+      },
+      onError: (error) => {
+        alert(error.message);
+      },
+    });
+  };
+
+  return { createSettingTime };
+};
+
+export const useSectionTimeSettingUpdate = (eventId: string) => {
+  const { putSettingTime } = useTimeSettingUpdateMutate(eventId);
 
   const updateSettingTime = (time: SettingTime) => {
-    postSettingTime(time, {
+    putSettingTime(time, {
       onSuccess: () => {
         alert('수정되었습니다.');
       },

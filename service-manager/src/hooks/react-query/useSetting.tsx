@@ -21,6 +21,7 @@ import {
   getSettingTimeBy,
   putPublishBy,
   postSettingTime,
+  putSettingTime,
 } from '../../apis/eventSettings.apis';
 import { useNavigate } from 'react-router-dom';
 
@@ -140,9 +141,9 @@ export const useSettingEventQueryBy = (eventId: string) => {
   return { event: data };
 };
 
-export const useTimeSettingUpdateMutate = () => {
+export const useTimeSettingCreateMutate = () => {
   const { mutate } = useMutation({
-    mutationKey: ['timeSettingUpdate'],
+    mutationKey: ['timeSettingCreate'],
     mutationFn: postSettingTime,
   });
   const queryClient = useQueryClient();
@@ -150,6 +151,34 @@ export const useTimeSettingUpdateMutate = () => {
 
   return {
     postSettingTime: (
+      times: SettingTime,
+      mutateOption?: Omit<
+        MutateOptions<{ message: string }, Error, SettingTime, unknown>,
+        'onSettled'
+      >,
+    ) =>
+      mutate(times, {
+        ...mutateOption,
+        onSettled: (data) => {
+          if (!data) throw new Error('데이터가 없습니다.');
+          queryClient.invalidateQueries({ queryKey: ['settingEvent'] });
+          queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
+          navigate('/setting');
+        },
+      }),
+  };
+};
+
+export const useTimeSettingUpdateMutate = (eventId: string) => {
+  const { mutate } = useMutation({
+    mutationKey: ['timeSettingUpdate', eventId],
+    mutationFn: (times: SettingTime) => putSettingTime(eventId, times),
+  });
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  return {
+    putSettingTime: (
       times: SettingTime,
       mutateOption?: Omit<
         MutateOptions<{ message: string }, Error, SettingTime, unknown>,
