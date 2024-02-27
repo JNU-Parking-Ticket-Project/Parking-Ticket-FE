@@ -5,7 +5,7 @@ import { ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
-import { useSectionTimeSetting } from '../../hooks/react-query/useSectionTimeSetting';
+import { useSectionTimeSettingUpdate } from '../../hooks/react-query/useSectionTimeSetting';
 import {
   useSettingEventQueryBy,
   useSettingEventRemoveMutateBy,
@@ -54,7 +54,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 };
 
 export const SettingTime = ({ eventId }: { eventId: string }) => {
-  const { updateSettingTime } = useSectionTimeSetting();
+  const { updateSettingTime } = useSectionTimeSettingUpdate(eventId);
   const { event } = useSettingEventQueryBy(eventId);
   const { published } = useSettingPublishQueryBy(eventId);
   const { postPublish } = useSettingPublishMutateBy(eventId);
@@ -152,7 +152,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
             });
           }}
         >
-          저장
+          수정 완료
         </Button>
       )}
     </>

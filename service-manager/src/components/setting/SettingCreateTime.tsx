@@ -5,7 +5,7 @@ import { ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
-import { useSectionTimeSetting } from '../../hooks/react-query/useSectionTimeSetting';
+import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -48,8 +48,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 };
 
 export const SettingCreateTime = () => {
-  const { updateSettingTime } = useSectionTimeSetting();
-
+  const { createSettingTime } = useSectionTimeSettingCreate();
   const [openDate, setOpenDate] = useState(() => new Date());
   const [endDate, setEndDate] = useState(() => new Date());
   const [title, setTitle] = useState('');
@@ -59,7 +58,7 @@ export const SettingCreateTime = () => {
       alert('제목을 입력해주세요');
       return;
     }
-    updateSettingTime({
+    createSettingTime({
       startAt: openDate,
       endAt: endDate,
       title,
