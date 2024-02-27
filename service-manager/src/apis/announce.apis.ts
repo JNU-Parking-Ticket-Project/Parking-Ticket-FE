@@ -1,8 +1,6 @@
-import { getErrorContent } from '../functions/error';
 import { https } from '../functions/https';
 import { AllAnnounce, Announce, AnnounceDelete } from './dtos/announce.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
-import { reissueToken } from './user.apis';
 
 export const getAllAnnounce = async (page: number) => {
   const response = await https.get(`/v1/announce?page=${page}`);
@@ -30,9 +28,6 @@ export const postAnnounce = async (
 ): Promise<Announce> => {
   const response = await https.post('/v1/announce', data);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => postAnnounce(data));
-    }
     throw new Error(response.reason);
   }
   return new Announce(response);
@@ -47,9 +42,6 @@ export const putAnnounceById = async ({
 }): Promise<Announce> => {
   const response = await https.put(`/v1/announce/${announceId}`, data);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => putAnnounceById({ announceId, data }));
-    }
     throw new Error(response.reason);
   }
   return new Announce(response);
@@ -60,9 +52,6 @@ export const deleteAnnounceById = async (
 ): Promise<AnnounceDelete> => {
   const response = await https.delete(`/v1/announce/${announceId}`);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => deleteAnnounceById(announceId));
-    }
     throw new Error(response.reason);
   }
   return new AnnounceDelete(response);

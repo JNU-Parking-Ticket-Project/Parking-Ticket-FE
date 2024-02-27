@@ -9,16 +9,12 @@ import {
   TemporarySaveRequest,
 } from './dtos/registration.dtos';
 import { isErrorResponse } from './dtos/response.dtos';
-import { reissueToken } from './user.apis';
 
 export const postRegistration = async (
   data: RegistrationRequest,
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration', data);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => postRegistration(data));
-    }
     throw new Error(response.reason);
   }
   return new RegistrationResponse(response);
@@ -29,9 +25,6 @@ export const postTemporarySave = async (
 ): Promise<RegistrationResponse> => {
   const response = await https.post('/v1/registration/temporary', data);
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => postTemporarySave(data));
-    }
     throw new Error(response.reason);
   }
   return new RegistrationResponse(response);
@@ -50,8 +43,6 @@ export const getRegistration =
           alert(response.reason);
           window.location.href = erorrContext.redirect;
           break;
-        case 'REISSUE':
-          return reissueToken(getRegistration);
         default:
           break;
       }
@@ -93,8 +84,6 @@ export const getRegistrationPeriod = async (): Promise<Period> => {
         alert(response.reason);
         window.location.href = errorContent.redirect;
         break;
-      case 'REISSUE':
-        return reissueToken(getRegistrationPeriod);
       default:
         break;
     }

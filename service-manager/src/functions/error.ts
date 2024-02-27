@@ -33,6 +33,7 @@ export type ERROR_CODE =
   | 'GLOBAL_401_1'
   | 'AUTH_400_1'
   | 'AUTH_401_1'
+  | 'AUTH_401_2'
   | 'AUTH_403_1'
   | 'AUTH_403_2'
   | 'AUTH_403_3'
@@ -50,14 +51,14 @@ export type ERROR_CODE =
   | 'DECRYPTION_500_1'
   | 'ENCRYPTION_500_1'
   | 'NOTICE_404_1'
-  | 'AUTH_401_2';
+  | 'EVENT_400_17'
+  | 'EVENT_400_18'
+  | 'EVENT_400_19'
+  | 'EVENT_400_20';
 
 export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
   switch (error) {
     case 'AUTH_401_1':
-      return {
-        type: 'REISSUE',
-      };
     case 'AUTH_401_2':
       return {
         type: 'REISSUE',
@@ -99,6 +100,10 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
     case 'ANNOUNCE_404_2':
     case 'CAPTCHA_400_1':
     case 'AUTH_400_1':
+    case 'EVENT_400_17':
+    case 'EVENT_400_18':
+    case 'EVENT_400_19':
+    case 'EVENT_400_20':
     default:
       return {
         type: 'ALERT',

@@ -16,6 +16,7 @@ export type CouponEventData = {
   eventTitle: string;
   eventStatus: 'READY' | 'OPEN' | 'CALCULATING' | 'CLOSED';
   dateTimePeriod: string;
+  publish: boolean;
 };
 
 export class CouponEvent {
@@ -61,5 +62,19 @@ export class CouponEventDetail {
     };
     this.eventStatus = eventStatus;
     this.sectors = sectors;
+  }
+}
+
+export class CouponPublishResponse {
+  publish: string;
+  constructor({ publish }: { publish: string }) {
+    this.publish = publish;
+  }
+}
+
+export class RemoveEventsResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
   }
 }

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, InputText, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
-import { useSectionTimeSetting } from '../../hooks/useSetting/useSectionTimeSetting';
+import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -48,11 +48,22 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 };
 
 export const SettingCreateTime = () => {
-  const { updateSettingTime } = useSectionTimeSetting();
-
+  const { createSettingTime } = useSectionTimeSettingCreate();
   const [openDate, setOpenDate] = useState(() => new Date());
   const [endDate, setEndDate] = useState(() => new Date());
   const [title, setTitle] = useState('');
+
+  const onSave = () => {
+    if (title === '') {
+      alert('제목을 입력해주세요');
+      return;
+    }
+    createSettingTime({
+      startAt: openDate,
+      endAt: endDate,
+      title,
+    });
+  };
 
   return (
     <>
@@ -86,21 +97,7 @@ export const SettingCreateTime = () => {
           title="Close"
         />
       </div>
-      <Button
-        size="small"
-        className="float-right my-4"
-        onClick={() => {
-          if (!title.length) {
-            alert('제목을 입력해주세요.');
-            return;
-          }
-          updateSettingTime({
-            startAt: openDate,
-            endAt: endDate,
-            title,
-          });
-        }}
-      >
+      <Button size="small" className="float-right my-4" onClick={onSave}>
         저장
       </Button>
     </>

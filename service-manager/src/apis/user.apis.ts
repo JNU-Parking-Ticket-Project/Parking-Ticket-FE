@@ -79,7 +79,7 @@ export const postSignup = async (data: UserSignUpRequest) => {
   return new UserSignUpResponse(response);
 };
 
-export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
+export const reissueToken = async () => {
   const token = localStorage.getItem('refreshToken');
 
   if (!token) {
@@ -93,7 +93,6 @@ export const reissueToken = async <T>(retryCallback: () => T): Promise<T> => {
   }
 
   setToken(new UserToken(response));
-  return retryCallback();
 };
 
 export const putAdminRole = async ({
@@ -105,9 +104,6 @@ export const putAdminRole = async ({
 }): Promise<AdminRoleResponse> => {
   const response = await https.put(`/v1/admin/role/${userId}`, { role });
   if (isErrorResponse(response)) {
-    if (getErrorContent(response.code).type === 'REISSUE') {
-      return reissueToken(() => putAdminRole({ userId, role }));
-    }
     throw new Error(response.reason);
   }
   return new AdminRoleResponse(response);
