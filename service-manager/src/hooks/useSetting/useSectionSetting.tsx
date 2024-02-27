@@ -5,7 +5,7 @@ import {
   useSectorQueryById,
   useSectorUpdateMutate,
 } from '../react-query/useSetting';
-import { queryOptions, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 
 export const useSectionSettingTable = (eventId: string) => {
