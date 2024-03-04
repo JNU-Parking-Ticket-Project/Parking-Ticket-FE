@@ -9,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { SectorRequest } from '../../apis/sectorSettings.apis';
 import { INIT_SECTOR } from '../../constants/sector';
+import { pipe } from '../../functions/util';
 
 const isNotEmptyContentSector = (sector: Sector) => {
   return sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '';
@@ -103,7 +104,10 @@ export const useSectionSettingTable = (eventId: string) => {
       return;
     }
 
-    const sectors = getSectorRequestBody(filterNotEmptyContentSector(data));
+    const sectors = pipe<Sector[], SectorRequest[]>(
+      filterNotEmptyContentSector,
+      getSectorRequestBody,
+    )(data);
 
     if (sectors.length === 0) {
       alert('입력되지 않은 값이 있습니다.');
