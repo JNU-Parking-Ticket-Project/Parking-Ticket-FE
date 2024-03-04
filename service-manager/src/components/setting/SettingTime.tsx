@@ -119,7 +119,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               게시 전환하기
             </Button>
           )}
-          <Button onClick={() => confirmDelete()} color="error" size="small">
+          <Button onClick={confirmDelete} color="error" size="small">
             이벤트 삭제하기
           </Button>
         </div>
