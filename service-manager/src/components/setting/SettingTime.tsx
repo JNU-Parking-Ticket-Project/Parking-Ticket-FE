@@ -61,12 +61,12 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { deleteEvent } = useSettingEventRemoveMutateBy(eventId);
   const confirmDelete = () => {
     if (
-      !confirm('이벤트를 삭제하시겠습니까? 삭제된 이벤트는 복구할 수 없습니다.')
+      confirm('이벤트를 삭제하시겠습니까? 삭제된 이벤트는 복구할 수 없습니다.')
     ) {
-      alert('삭제가 취소되었습니다.');
+      deleteEvent();
       return;
     } else {
-      deleteEvent();
+      alert('삭제가 취소되었습니다.');
     }
   };
 
