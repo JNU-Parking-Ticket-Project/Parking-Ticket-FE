@@ -7,6 +7,19 @@ import {
 } from '../react-query/useSetting';
 import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
+import { SectorRequest } from '../../apis/sectorSettings.apis';
+
+const isNotEmptyContentSector = (sector: Sector) => {
+  return sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '';
+};
+
+const filterNotEmptyContentSector = (sectors: Sector[]) => {
+  return sectors.filter((sector) => isNotEmptyContentSector(sector));
+};
+
+const getSectorRequestBody = (sectors: Sector[]): SectorRequest[] => {
+  return sectors.map(({ id, issueAmount, ...rest }) => rest);
+};
 
 export const useSectionSettingTable = (eventId: string) => {
   const queryClient = useQueryClient();
@@ -50,7 +63,7 @@ export const useSectionSettingTable = (eventId: string) => {
   const toggleEdit = () => {
     if (isCreate) return;
     if (isEdit) {
-      putSectors(data, {
+      putSectors(getSectorRequestBody(data), {
         onError: (error) => {
           alert(error.message);
         },
@@ -97,10 +110,7 @@ export const useSectionSettingTable = (eventId: string) => {
       return;
     }
 
-    const sectors = data.filter(
-      (sector) =>
-        sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '',
-    );
+    const sectors = getSectorRequestBody(filterNotEmptyContentSector(data));
 
     if (sectors.length === 0) {
       alert('입력되지 않은 값이 있습니다.');

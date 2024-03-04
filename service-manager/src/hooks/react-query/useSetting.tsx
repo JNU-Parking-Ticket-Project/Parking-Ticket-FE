@@ -4,6 +4,7 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import {
+  SectorRequest,
   deleteSector,
   getSectors,
   postSectors,
@@ -47,8 +48,6 @@ export const useSectorQueryById = (eventId: string) => {
   return { sectorSettingData: data };
 };
 
-type SectorRequest = Omit<Sector, 'id' | 'issueAmount'>[];
-
 export const useSectorUpdateMutate = () => {
   const { mutate } = useMutation({
     mutationKey: ['sectorsUpdate'],
@@ -58,9 +57,9 @@ export const useSectorUpdateMutate = () => {
 
   return {
     putSectors: (
-      sectors: SectorRequest,
+      sectors: SectorRequest[],
       mutateOption?: Omit<
-        MutateOptions<{ message: string }, Error, SectorRequest, unknown>,
+        MutateOptions<{ message: string }, Error, SectorRequest[], unknown>,
         'onSettled'
       >,
     ) =>
@@ -86,9 +85,9 @@ export const useSectorCreateMutate = () => {
 
   return {
     postSectors: (
-      sectors: SectorRequest,
+      sectors: SectorRequest[],
       mutateOption?: Omit<
-        MutateOptions<{ message: string }, Error, SectorRequest, unknown>,
+        MutateOptions<{ message: string }, Error, SectorRequest[], unknown>,
         'onSettled'
       >,
     ) =>

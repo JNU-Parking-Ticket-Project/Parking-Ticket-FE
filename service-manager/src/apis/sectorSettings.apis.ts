@@ -7,7 +7,7 @@ import {
   Sector,
 } from './dtos/sector.dtos';
 
-interface SectorRequest {
+export interface SectorRequest {
   name: string;
   sectorNumber: string;
   sectorCapacity: number;
