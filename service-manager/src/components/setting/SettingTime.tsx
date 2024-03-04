@@ -59,6 +59,16 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { published } = useSettingPublishQueryBy(eventId);
   const { postPublish } = useSettingPublishMutateBy(eventId);
   const { deleteEvent } = useSettingEventRemoveMutateBy(eventId);
+  const confirmDelete = () => {
+    if (
+      confirm('이벤트를 삭제하시겠습니까? 삭제된 이벤트는 복구할 수 없습니다.')
+    ) {
+      deleteEvent();
+      return;
+    } else {
+      alert('삭제가 취소되었습니다.');
+    }
+  };
 
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
@@ -109,7 +119,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               게시 전환하기
             </Button>
           )}
-          <Button onClick={() => deleteEvent()} color="error" size="small">
+          <Button onClick={confirmDelete} color="error" size="small">
             이벤트 삭제하기
           </Button>
         </div>
