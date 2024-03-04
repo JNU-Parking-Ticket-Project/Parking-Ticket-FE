@@ -40,7 +40,7 @@ export const getRegistration =
           alert(response.reason);
           break;
         case 'ALERT_WITH_REDIRECT':
-          alert(response.reason);
+          alert(erorrContext.content);
           window.location.href = erorrContext.redirect;
           break;
         default:
@@ -81,7 +81,7 @@ export const getRegistrationPeriod = async (): Promise<Period> => {
       case 'NONE':
         break;
       case 'ALERT_WITH_REDIRECT':
-        alert(response.reason);
+        alert(errorContent.content);
         window.location.href = errorContent.redirect;
         break;
       default:
