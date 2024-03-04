@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, InputText, Txt } from '@quokka/design-system';
-import { ko } from 'date-fns/locale';
+import { de, ko } from 'date-fns/locale';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
@@ -59,6 +59,16 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
   const { published } = useSettingPublishQueryBy(eventId);
   const { postPublish } = useSettingPublishMutateBy(eventId);
   const { deleteEvent } = useSettingEventRemoveMutateBy(eventId);
+  const confirmDelete = () => {
+    if (
+      !confirm('이벤트를 삭제하시겠습니까? 삭제된 이벤트는 복구할 수 없습니다.')
+    ) {
+      alert('삭제가 취소되었습니다.');
+      return;
+    } else {
+      deleteEvent();
+    }
+  };
 
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
@@ -109,7 +119,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               게시 전환하기
             </Button>
           )}
-          <Button onClick={() => deleteEvent()} color="error" size="small">
+          <Button onClick={() => confirmDelete()} color="error" size="small">
             이벤트 삭제하기
           </Button>
         </div>
