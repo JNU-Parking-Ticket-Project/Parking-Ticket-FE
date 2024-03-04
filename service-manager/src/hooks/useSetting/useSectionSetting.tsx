@@ -8,6 +8,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import { Sector } from '../../apis/dtos/sector.dtos';
 import { SectorRequest } from '../../apis/sectorSettings.apis';
+import { INIT_SECTOR } from '../../constants/sector';
 
 const isNotEmptyContentSector = (sector: Sector) => {
   return sector.id === -1 && sector.name !== '' && sector.sectorNumber !== '';
@@ -95,17 +96,9 @@ export const useSectionSettingTable = (eventId: string) => {
     if (isEdit) return;
     if (!isCreate) {
       setIsCreate(true);
-      const initSector: Sector = {
-        id: -1,
-        name: '',
-        reserve: 0,
-        sectorCapacity: 0,
-        sectorNumber: '',
-        issueAmount: 0,
-      };
       queryClient.setQueryData(['sectors', eventId], (prev: Sector[]) => [
         ...prev,
-        initSector,
+        INIT_SECTOR,
       ]);
       return;
     }
