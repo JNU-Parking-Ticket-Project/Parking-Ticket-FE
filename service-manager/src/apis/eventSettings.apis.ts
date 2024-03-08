@@ -9,6 +9,7 @@ import {
 import {
   CouponEvent,
   CouponEventDetail,
+  CouponPublishMessageResponse,
   CouponPublishResponse,
   RemoveEventsResponse,
   SettingTime,
@@ -108,7 +109,7 @@ export const putPublishBy = async (eventId: string, publish: boolean) => {
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
-  return new CouponPublishResponse(response);
+  return new CouponPublishMessageResponse(response);
 };
 
 export const deleteEventBy = async (eventId: string) => {

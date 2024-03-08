@@ -72,6 +72,13 @@ export class CouponPublishResponse {
   }
 }
 
+export class CouponPublishMessageResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}
+
 export class RemoveEventsResponse {
   message: string;
   constructor({ message }: { message: string }) {
