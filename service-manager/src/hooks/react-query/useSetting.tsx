@@ -231,7 +231,7 @@ export const useSettingPublishMutateBy = (eventId: string) => {
     mutationKey: ['publish', eventId],
     mutationFn: (publish: boolean) => putPublishBy(eventId, publish),
     onSuccess: (response) => {
-      alert(response.publish ? '게시되었습니다.' : '비게시되었습니다.');
+      alert(response.message);
       queryClient.invalidateQueries({ queryKey: ['couponEvents'] });
       navigate('/setting');
     },
