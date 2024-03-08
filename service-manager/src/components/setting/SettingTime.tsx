@@ -69,7 +69,15 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
       alert('삭제가 취소되었습니다.');
     }
   };
-
+  const changePublishBy = () => {
+    if (
+      confirm(
+        '이벤트를 조회 가능하도록 게시하시겠습니까? 한번 게시된 이벤트는 수정할 수 없습니다.',
+      )
+    ) {
+      postPublish(true);
+    }
+  };
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
   const [title, setTitle] = useState(event.eventTitle);
