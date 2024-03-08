@@ -110,20 +110,8 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <div className="flex gap-4">
           <Txt size="h3">게시여부:</Txt>
           <Txt size="h3">{published ? '게시' : '미게시'}</Txt>
-          {published ? (
-            <Button
-              onClick={() => postPublish(false)}
-              color="error"
-              size="small"
-            >
-              미게시 전환하기
-            </Button>
-          ) : (
-            <Button
-              onClick={() => postPublish(true)}
-              color="primary"
-              size="small"
-            >
+          {!published && (
+            <Button onClick={changePublishBy} color="primary" size="small">
               게시 전환하기
             </Button>
           )}
