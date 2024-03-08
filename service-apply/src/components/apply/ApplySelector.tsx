@@ -9,12 +9,14 @@ interface ApplySelectorProps
     label: string;
     value: string;
   }[];
+  value: string;
 }
 
 export const ApplySelector = ({
   label,
   type,
   options,
+  value,
   ...props
 }: ApplySelectorProps) => {
   const id = useId();
@@ -26,6 +28,7 @@ export const ApplySelector = ({
         {props.required && <Txt color="error">*</Txt>}
       </label>
       <select
+        value={value}
         {...props}
         id={id}
         className="p-2 border border-[#D9D9D9] col-span-4 rounded-md"
