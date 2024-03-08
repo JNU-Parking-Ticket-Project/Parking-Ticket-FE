@@ -69,7 +69,15 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
       alert('삭제가 취소되었습니다.');
     }
   };
-
+  const changePublishBy = () => {
+    if (
+      confirm(
+        '이벤트를 조회 가능하도록 게시하시겠습니까? 한번 게시된 이벤트는 수정할 수 없습니다.',
+      )
+    ) {
+      postPublish(true);
+    }
+  };
   const [openDate, setOpenDate] = useState(event.dateTimePeriod.startAt);
   const [endDate, setEndDate] = useState(event.dateTimePeriod.endAt);
   const [title, setTitle] = useState(event.eventTitle);
@@ -102,20 +110,8 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <div className="flex gap-4">
           <Txt size="h3">게시여부:</Txt>
           <Txt size="h3">{published ? '게시' : '미게시'}</Txt>
-          {published ? (
-            <Button
-              onClick={() => postPublish(false)}
-              color="error"
-              size="small"
-            >
-              미게시 전환하기
-            </Button>
-          ) : (
-            <Button
-              onClick={() => postPublish(true)}
-              color="primary"
-              size="small"
-            >
+          {!published && (
+            <Button onClick={changePublishBy} color="primary" size="small">
               게시 전환하기
             </Button>
           )}
