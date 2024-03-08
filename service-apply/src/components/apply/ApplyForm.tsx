@@ -15,6 +15,24 @@ import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
 import { PrivacyCheckModal } from './PrivacyCheckModal';
 
+const DEFAULT_PARKING_SECTION_OPTIONS = [
+  {
+    label: '선택',
+    value: '0',
+  },
+];
+
+const extractParkingSectionOptionsBySector = (sector: {
+  sectorId: number;
+  sectorNum: string;
+  sectorName: string;
+}) => {
+  return {
+    label: `${sector.sectorNum}-${sector.sectorName}`,
+    value: sector.sectorId.toString(),
+  };
+};
+
 export const ApplyInputText = ({
   className,
   disabled,
@@ -53,18 +71,9 @@ export const ApplyForm = () => {
     errorMessage,
   } = useApplyForm();
 
-  const parkingSection = sector.map((item) => ({
-    sectionNumber: item.sectorId,
-    sectionMajor: `${item.sectorNum}-${item.sectorName}`,
-  }));
-  parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
-
-  const parkingSectionOptions = parkingSection
-    .sort((a, b) => a.sectionMajor.localeCompare(b.sectionMajor))
-    .map((item) => ({
-      label: item.sectionMajor,
-      value: item.sectionNumber.toString(),
-    }));
+  const parkingSectionOptions = DEFAULT_PARKING_SECTION_OPTIONS.concat(
+    sector.map(extractParkingSectionOptionsBySector),
+  ).sort((a, b) => a.value.localeCompare(b.value));
 
   return (
     <ApplyFormContext.Provider value={state}>
