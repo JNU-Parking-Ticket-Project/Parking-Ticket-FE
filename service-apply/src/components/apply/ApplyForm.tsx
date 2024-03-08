@@ -59,10 +59,12 @@ export const ApplyForm = () => {
   }));
   parkingSection.unshift({ sectionMajor: '선택', sectionNumber: 0 });
 
-  const parkingSectionOptions = parkingSection.map((item) => ({
-    label: item.sectionMajor,
-    value: item.sectionNumber.toString(),
-  }));
+  const parkingSectionOptions = parkingSection
+    .sort((a, b) => a.sectionMajor.localeCompare(b.sectionMajor))
+    .map((item) => ({
+      label: item.sectionMajor,
+      value: item.sectionNumber.toString(),
+    }));
 
   return (
     <ApplyFormContext.Provider value={state}>
