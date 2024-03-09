@@ -56,7 +56,6 @@ export const SettingCreateTime = () => {
   const [title, setTitle] = useState('');
 
   const onSave = () => {
-    const currentTime = Date.now();
     if (!title) {
       alert('제목을 입력해주세요');
       return;
@@ -84,6 +83,7 @@ export const SettingCreateTime = () => {
       predicate: (date: Date) => boolean,
       errMsg: string,
       setDate: Dispatch<SetStateAction<Date>>,
+      setDateType: 'open' | 'close',
     ) =>
     (date: Date | null) => {
       if (!date) return;
@@ -92,6 +92,9 @@ export const SettingCreateTime = () => {
         return;
       }
       setDate(date);
+      if (setDateType === 'open' && date > endDate) {
+        setEndDate(date);
+      }
     };
 
   return (
@@ -113,6 +116,7 @@ export const SettingCreateTime = () => {
             isPastTime,
             '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
             setOpenDate,
+            'open',
           )}
           title="Open"
         />
@@ -122,6 +126,7 @@ export const SettingCreateTime = () => {
             isPastTime,
             '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
             setEndDate,
+            'close',
           )}
           title="Close"
         />

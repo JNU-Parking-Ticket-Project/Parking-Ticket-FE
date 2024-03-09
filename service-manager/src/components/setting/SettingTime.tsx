@@ -12,6 +12,7 @@ import {
   useSettingPublishMutateBy,
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
+import { isPastTime } from '../../functions/date';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -124,10 +125,9 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={openDate}
           setDate={(date) => {
-            const currentTime = Date.now();
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
-            if (currentTime > date.getTime()) {
+            if (isPastTime(date)) {
               alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
               return;
             }
@@ -139,11 +139,10 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={endDate}
           setDate={(date) => {
-            const currentTime = Date.now();
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
             if (date < openDate) return;
-            if (currentTime > date.getTime()) {
+            if (isPastTime(date)) {
               alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
               return;
             }
