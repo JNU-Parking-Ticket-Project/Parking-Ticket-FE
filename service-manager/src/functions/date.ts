@@ -17,3 +17,7 @@ export const getFormalDateBy = (time: Date) => {
 
   return returnDate;
 };
+
+export const isPastTime = (date: Date) => {
+  return Date.now() > date.getTime();
+};
