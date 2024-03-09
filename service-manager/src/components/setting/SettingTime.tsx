@@ -124,8 +124,13 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={openDate}
           setDate={(date) => {
+            const currentTime = Date.now();
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
+            if (currentTime > date.getTime()) {
+              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+              return;
+            }
             setOpenDate(date);
             if (date > endDate) setEndDate(date);
           }}
@@ -134,9 +139,14 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={endDate}
           setDate={(date) => {
+            const currentTime = Date.now();
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
             if (date < openDate) return;
+            if (currentTime > date.getTime()) {
+              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+              return;
+            }
             setEndDate(date);
           }}
           title="Close"
