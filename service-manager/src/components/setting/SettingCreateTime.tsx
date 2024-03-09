@@ -47,10 +47,30 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   );
 };
 
+const getFormalDateBy = (time: Date) => {
+  const currentHour = time.getHours();
+  const currentMin = time.getMinutes();
+  const returnDate = new Date(time);
+  returnDate.setMilliseconds(0);
+  returnDate.setSeconds(0);
+
+  if (currentMin > 0 && currentMin < 30) {
+    const gap = 30 - currentMin;
+    returnDate.setTime(returnDate.getTime() + 60000 * gap);
+  }
+
+  if (currentMin > 30 && currentMin < 60) {
+    const gap = 60 - currentMin;
+    returnDate.setTime(returnDate.getTime() * 60000 * gap);
+  }
+
+  return returnDate;
+};
+
 export const SettingCreateTime = () => {
   const { createSettingTime } = useSectionTimeSettingCreate();
-  const [openDate, setOpenDate] = useState(() => new Date());
-  const [endDate, setEndDate] = useState(() => new Date());
+  const [openDate, setOpenDate] = useState(() => getFormalDateBy(new Date()));
+  const [endDate, setEndDate] = useState(() => getFormalDateBy(new Date()));
   const [title, setTitle] = useState('');
 
   const onSave = () => {
