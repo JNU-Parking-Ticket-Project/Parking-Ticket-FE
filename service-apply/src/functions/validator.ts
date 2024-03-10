@@ -76,7 +76,9 @@ export const applyFormValidator = ({
 };
 
 export const isPassword = (password: string) =>
-  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,20}$/.test(password);
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/.test(
+    password,
+  );
 
 export interface PasswordResetFormInput {
   password: string;
@@ -89,7 +91,7 @@ export const passwordResetFormValidator = (input: PasswordResetFormInput) => {
   }
   if (!isPassword(input.password)) {
     return submitFailure(
-      '비밀번호는 최소 8자 이상이며, 최소 하나의 대문자, 소문자, 숫자, 특수 문자를 포함해야 합니다.',
+      '비밀번호는 최소 8자 이상, 16자리 이하이며 최소 하나의 영문자, 숫자, 특수문자(!@#$%^&*)가 포함되어야 합니다.',
     );
   }
   if (input.password !== input.confirmPassword) {

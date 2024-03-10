@@ -7,3 +7,8 @@ export const isEmail = (email: string) =>
   );
 export const isStudentNumber = (studentNumber: string) =>
   /^[0-9]{6}$/.test(studentNumber.toString());
+
+export const isPassword = (password: string) =>
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/.test(
+    password,
+  );
