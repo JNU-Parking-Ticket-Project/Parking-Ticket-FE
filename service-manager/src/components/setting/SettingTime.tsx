@@ -12,6 +12,7 @@ import {
   useSettingPublishMutateBy,
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
+import { isPastTime } from '../../functions/date';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -126,6 +127,10 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           setDate={(date) => {
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
+            if (isPastTime(date)) {
+              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+              return;
+            }
             setOpenDate(date);
             if (date > endDate) setEndDate(date);
           }}
@@ -137,6 +142,10 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
             if (date < openDate) return;
+            if (isPastTime(date)) {
+              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+              return;
+            }
             setEndDate(date);
           }}
           title="Close"

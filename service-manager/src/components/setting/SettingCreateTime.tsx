@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, InputText, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
@@ -6,6 +6,8 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
+import { getFormalDateBy, isPastTime } from '../../functions/date';
+import { SetStateAction } from 'jotai';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -49,21 +51,51 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
 
 export const SettingCreateTime = () => {
   const { createSettingTime } = useSectionTimeSettingCreate();
-  const [openDate, setOpenDate] = useState(() => new Date());
-  const [endDate, setEndDate] = useState(() => new Date());
+  const [openDate, setOpenDate] = useState(() => getFormalDateBy(new Date()));
+  const [endDate, setEndDate] = useState(() => getFormalDateBy(new Date()));
   const [title, setTitle] = useState('');
 
   const onSave = () => {
-    if (title === '') {
+    if (!title) {
       alert('제목을 입력해주세요');
       return;
     }
+
+    if (isPastTime(openDate)) {
+      alert('OPEN 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+      return;
+    }
+
+    if (isPastTime(endDate)) {
+      alert('CLOSE 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.');
+      return;
+    }
+
     createSettingTime({
       startAt: openDate,
       endAt: endDate,
       title,
     });
   };
+
+  const onSetCreateTime =
+    (
+      predicate: (date: Date) => boolean,
+      errMsg: string,
+      setDate: Dispatch<SetStateAction<Date>>,
+      setDateType: 'open' | 'close',
+    ) =>
+    (date: Date | null) => {
+      if (!date) return;
+      if (predicate(date)) {
+        alert(errMsg);
+        return;
+      }
+      setDate(date);
+      if (setDateType === 'open' && date > endDate) {
+        setEndDate(date);
+      }
+    };
 
   return (
     <>
@@ -80,20 +112,22 @@ export const SettingCreateTime = () => {
       <div className="flex justify-around gap-8">
         <DateTimePicker
           date={openDate}
-          setDate={(date) => {
-            if (!date) return;
-            setOpenDate(date);
-            if (date > endDate) setEndDate(date);
-          }}
+          setDate={onSetCreateTime(
+            isPastTime,
+            '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
+            setOpenDate,
+            'open',
+          )}
           title="Open"
         />
         <DateTimePicker
           date={endDate}
-          setDate={(date) => {
-            if (!date) return;
-            if (date < openDate) return;
-            setEndDate(date);
-          }}
+          setDate={onSetCreateTime(
+            isPastTime,
+            '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
+            setEndDate,
+            'close',
+          )}
           title="Close"
         />
       </div>
