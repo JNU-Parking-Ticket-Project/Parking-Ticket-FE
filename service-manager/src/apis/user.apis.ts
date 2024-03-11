@@ -87,7 +87,7 @@ export const reissueToken = async () => {
     location.href = '/';
   }
   const response = await https.post('/v1/auth/reissue', {
-    refreshtoken: token,
+    refreshToken: token,
   });
   if (isErrorResponse(response)) {
     removeToken();
