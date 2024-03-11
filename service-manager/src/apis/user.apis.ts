@@ -86,7 +86,9 @@ export const reissueToken = async () => {
     alert('로그인을 다시 시도해주세요.');
     location.href = '/';
   }
-  const response = await https.post('/v1/auth/login', { refreshtoken: token });
+  const response = await https.post('/v1/auth/reissue', {
+    refreshtoken: token,
+  });
   if (isErrorResponse(response)) {
     removeToken();
     throw new Error('토큰이 만료되었습니다. 다시 로그인해주세요.');
