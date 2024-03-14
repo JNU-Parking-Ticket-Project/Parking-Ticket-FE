@@ -2,12 +2,14 @@ import { Button } from '@quokka/design-system';
 import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
 import { useState } from 'react';
 import { ApplyCount } from './ApplyCount';
+import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 export const ApplyList = ({ eventId }: { eventId: string }) => {
   const { registrations } = useAllRegistrationQuery(eventId);
   const sectors = Array.from(
     new Set(registrations.map((registration) => registration.sectorNum)),
   ).sort();
   const [selectedSector, setSelectedSector] = useState(sectors[0]);
+  const { sectorSettingData } = useSectorQueryById(eventId);
 
   const exportXLSX = async () => {
     const data = sectorSettingData
