@@ -1,20 +1,32 @@
 import { Txt } from '@quokka/design-system';
+import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
+import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 
 interface ApplyCountProps {
+  eventId: string;
   sector: string;
-  currentApply: number;
-  totalApply: number;
 }
 
-export const ApplyCount = ({
-  sector,
-  currentApply,
-  totalApply,
-}: ApplyCountProps) => {
+export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
+  const { sectorSettingData } = useSectorQueryById(eventId);
+  const { registrations } = useAllRegistrationQuery(eventId);
+  const applicantNumber = registrations?.filter(
+    (data) => data.sectorNum === sector,
+  );
+  const limit = sectorSettingData?.find((data) => data.sectorNumber === sector);
+
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <Txt size="h6" color="black">
-        {sector}구간 신청자 수 : {currentApply}명 / {totalApply}명
+        {`구간정원: ${Math.min(
+          applicantNumber.length,
+          limit?.reserve ?? 0,
+        )}명 / ${limit?.reserve}명`}
+      </Txt>
+      <Txt size="h6" color="black">
+        {`예비정원: ${
+          registrations.length - (limit?.reserve ?? 0)
+        }명 / ${limit?.sectorCapacity}명`}
       </Txt>
     </div>
   );
