@@ -10,18 +10,26 @@ export const ApplyList = ({ eventId }: { eventId: string }) => {
   const [selectedSector, setSelectedSector] = useState(sectors[0]);
 
   const exportXLSX = async () => {
-    const data = registrations.map((registration) => {
-      return {
-        구간: registration.sectorNum,
-        순서: registration.id,
-        이름: registration.name,
-        차량번호: registration.carNumber,
-        학생번호: registration.studentNumber,
-        경차여부: registration.isCompact ? '경차' : '경차 아님',
-        휴대폰번호: registration.phoneNumber,
-        이메일: registration.email,
-      };
-    });
+    const data = sectorSettingData
+      .map((sector) =>
+        registrations
+          .filter(
+            (registration) => registration.sectorNum === sector.sectorNumber,
+          )
+          .sort((a, b) => (a.id < b.id ? -1 : 1))
+          .map((registration, index) => ({
+            구간: registration.sectorNum,
+            순서: index + 1,
+            이름: registration.name,
+            차량번호: registration.carNumber,
+            학생번호: registration.studentNumber,
+            경차여부: registration.isCompact ? '경차' : '경차 아님',
+            휴대폰번호: registration.phoneNumber,
+            이메일: registration.email,
+          })),
+      )
+      .flat();
+
     const XLSX = await import('xlsx');
     const workSheet = XLSX.utils.json_to_sheet(data);
     const workBook = XLSX.utils.book_new();
