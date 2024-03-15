@@ -1,5 +1,5 @@
 import { Button, Container, Txt } from '@quokka/design-system';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { lazy } from 'react';
@@ -20,6 +20,7 @@ export const AnnouncementDetail = ({
   announcementId,
 }: AnnouncementDetailProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
+  const announcementContent = announceDetailData.announceContent;
 
   return (
     <Container
@@ -60,7 +61,7 @@ export const AnnouncementDetail = ({
           )}
         </Txt>
       </div>
-      <ToastViewer initialValue={announceDetailData.announceContent} />
+      <ToastViewer initialValue={announcementContent} />
     </Container>
   );
 };
