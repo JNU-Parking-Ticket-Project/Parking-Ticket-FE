@@ -4,7 +4,6 @@ import {
   useAnnounceUpdateMutate,
 } from '../../hooks/react-query/useAnnounce';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 export const useCreateAnnouncement = () => {
   const navigate = useNavigate();
@@ -48,7 +47,10 @@ interface AnnouncementUpdateForm {
 export const useAnnounceUpdate = () => {
   const navigate = useNavigate();
   const { putAnnounceById } = useAnnounceUpdateMutate();
-
+  const redirectPage = ({ path }: { path: string }) => {
+    navigate(path);
+    window.location.reload();
+  };
   const onUpdate = ({
     announceId,
     announceTitle,
@@ -67,7 +69,7 @@ export const useAnnounceUpdate = () => {
         onSuccess: (data) => {
           if (!data) throw new Error('data is undefined');
           alert('수정되었습니다.');
-          navigate(`/announcement/${announceId}`);
+          redirectPage({ path: `/announcement/${announceId}` });
         },
       },
     );
