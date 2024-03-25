@@ -4,9 +4,11 @@ import { TemporarySaveRequest } from '../../apis/dtos/registration.dtos';
 import { useApplyFormContext } from './useApplyFormContext';
 import { applyFormValidator } from '../../functions/validator';
 import { QueryClient } from '@tanstack/react-query';
+import { usePeriodQuery } from '../react-query/usePeriodQuery';
 
 export const useApplyForm = () => {
-  const { registrationData } = useApplyQuery();
+  const { eventId } = usePeriodQuery();
+  const { registrationData } = useApplyQuery({ eventId });
   const { sector, selectSectorId, affiliation, ...rest } = registrationData;
   const { state, dispatch } = useApplyFormContext({
     section: selectSectorId ?? 0,
@@ -63,6 +65,7 @@ export const useApplyForm = () => {
         name: state.studentName,
         isLightCar: state.isCompact,
         selectSectorId: +state.section,
+        eventId,
       }),
       {
         onError: (error) => {
