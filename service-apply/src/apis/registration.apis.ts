@@ -3,6 +3,7 @@ import { https } from '../functions/https';
 import { Period } from './dtos/period.dtos';
 import {
   CaptchaResponse,
+  RegistrationEventIdResponse,
   RegistrationOptionsResponse,
   RegistrationRequest,
   RegistrationResponse,
@@ -13,7 +14,8 @@ import { isErrorResponse } from './dtos/response.dtos';
 export const postRegistration = async (
   data: RegistrationRequest,
 ): Promise<RegistrationResponse> => {
-  const response = await https.post('/v1/registration', data);
+  const { eventId, ...props } = data;
+  const response = await https.post(`/v1/registration/${eventId}`, props);
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
@@ -23,43 +25,48 @@ export const postRegistration = async (
 export const postTemporarySave = async (
   data: TemporarySaveRequest,
 ): Promise<RegistrationResponse> => {
-  const response = await https.post('/v1/registration/temporary', data);
+  const { eventId, ...props } = data;
+  const response = await https.post(
+    `/v1/registration/temporary/${eventId}`,
+    props,
+  );
   if (isErrorResponse(response)) {
     throw new Error(response.reason);
   }
   return new RegistrationResponse(response);
 };
 
-export const getRegistration =
-  async (): Promise<RegistrationOptionsResponse> => {
-    const response = await https.get('/v1/registration');
-    if (isErrorResponse(response)) {
-      const erorrContext = getErrorContent(response.code);
-      switch (erorrContext.type) {
-        case 'ALERT':
-          alert(response.reason);
-          break;
-        case 'ALERT_WITH_REDIRECT':
-          alert(erorrContext.content);
-          window.location.href = erorrContext.redirect;
-          break;
-        default:
-          break;
-      }
-      return new RegistrationOptionsResponse({
-        carNum: '',
-        email: '',
-        isLight: false,
-        phoneNum: '',
-        sectors: [],
-        studentNum: '',
-        name: '',
-        selectSectorId: -1,
-        affiliation: '',
-      });
+export const getRegistration = async ({
+  eventId,
+}: RegistrationEventIdResponse): Promise<RegistrationOptionsResponse> => {
+  const response = await https.get(`/v1/registration/${eventId}`);
+  if (isErrorResponse(response)) {
+    const erorrContext = getErrorContent(response.code);
+    switch (erorrContext.type) {
+      case 'ALERT':
+        alert(response.reason);
+        break;
+      case 'ALERT_WITH_REDIRECT':
+        alert(erorrContext.content);
+        window.location.href = erorrContext.redirect;
+        break;
+      default:
+        break;
     }
-    return new RegistrationOptionsResponse(response);
-  };
+    return new RegistrationOptionsResponse({
+      carNum: '',
+      email: '',
+      isLight: false,
+      phoneNum: '',
+      sectors: [],
+      studentNum: '',
+      name: '',
+      selectSectorId: -1,
+      affiliation: '',
+    });
+  }
+  return new RegistrationOptionsResponse(response);
+};
 
 export const getCaptcha = async () => {
   const response = await https.get('/v1/captcha');

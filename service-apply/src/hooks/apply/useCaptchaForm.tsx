@@ -4,6 +4,7 @@ import { RegistrationRequest } from '../../apis/dtos/registration.dtos';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { removeToken } from '../../functions/jwt';
 import { useNavigate } from 'react-router-dom';
+import { usePeriodQuery } from '../react-query/usePeriodQuery';
 
 export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
 
   const { captchaCode, captchaImageUrl } = useCaptchaQuery();
   const { postRegistration } = useApplyMutate();
+  const { eventId } = usePeriodQuery();
+
   const state = useContext(ApplyFormContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +35,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
         selectSectorId: +state.section,
         captchaPendingCode: captchaCode,
         captchaAnswer: input,
+        eventId,
       }),
       {
         onError: (error) => {

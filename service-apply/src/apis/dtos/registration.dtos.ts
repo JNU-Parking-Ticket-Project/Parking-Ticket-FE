@@ -1,4 +1,8 @@
-export interface TemporarySaveRequestProps {
+export interface RegistrationEventIdResponse {
+  eventId: number;
+}
+
+export interface TemporarySaveRequestProps extends RegistrationEventIdResponse {
   name: string;
   studentNumber: string;
   affiliation: string;
@@ -16,6 +20,7 @@ export class TemporarySaveRequest {
   isLight: boolean;
   phoneNum: string;
   selectSectorId: number;
+  eventId: number;
 
   constructor({
     name,
@@ -25,6 +30,7 @@ export class TemporarySaveRequest {
     isLightCar,
     phoneNumber,
     selectSectorId,
+    eventId,
   }: TemporarySaveRequestProps) {
     this.name = name;
     this.studentNum = studentNumber;
@@ -33,6 +39,7 @@ export class TemporarySaveRequest {
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
     this.selectSectorId = selectSectorId;
+    this.eventId = eventId;
   }
 }
 
@@ -55,6 +62,7 @@ export class RegistrationRequest extends TemporarySaveRequest {
     selectSectorId,
     captchaPendingCode,
     captchaAnswer,
+    eventId,
   }: RegistrationRequestProps) {
     super({
       name,
@@ -64,6 +72,7 @@ export class RegistrationRequest extends TemporarySaveRequest {
       isLightCar,
       phoneNumber,
       selectSectorId,
+      eventId,
     });
 
     this.captchaCode = captchaPendingCode;

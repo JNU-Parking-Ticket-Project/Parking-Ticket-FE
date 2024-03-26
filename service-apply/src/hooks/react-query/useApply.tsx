@@ -4,6 +4,7 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import {
+  RegistrationEventIdResponse,
   RegistrationRequest,
   RegistrationResponse,
   TemporarySaveRequest,
@@ -73,10 +74,10 @@ export const useTemporarySaveMutate = () => {
   };
 };
 
-export const useApplyQuery = () => {
+export const useApplyQuery = ({ eventId }: RegistrationEventIdResponse) => {
   const { data } = useSuspenseQuery({
     queryKey: ['apply'],
-    queryFn: getRegistration,
+    queryFn: () => getRegistration({ eventId }),
     gcTime: Infinity,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
