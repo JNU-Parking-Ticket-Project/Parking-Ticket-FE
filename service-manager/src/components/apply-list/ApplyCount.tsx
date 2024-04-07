@@ -24,9 +24,9 @@ export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
         )}명 / ${limit?.reserve}명`}
       </Txt>
       <Txt size="h6" color="black">
-        {`예비정원: ${
-          registrations.length - (limit?.reserve ?? 0)
-        }명 / ${limit?.sectorCapacity}명`}
+        {`예비정원: ${Math.abs(
+          registrations.length - (limit?.reserve ?? 0),
+        )}명 / ${limit?.sectorCapacity}명`}
       </Txt>
     </div>
   );
