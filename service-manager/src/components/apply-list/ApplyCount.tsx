@@ -22,14 +22,14 @@ export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
       <Txt size="h6" color="black">
         {`구간정원: ${Math.min(
           applicantNumber.length,
-          limit?.reserve ?? 0,
-        )}명 / ${limit?.reserve ?? 0}명`}
+          limit?.sectorCapacity ?? 0,
+        )}명 / ${limit?.sectorCapacity ?? 0}명`}
       </Txt>
       <Txt size="h6" color="black">
         {`예비정원: ${Math.max(
-          applicantNumber.length - (limit?.reserve ?? 0),
+          applicantNumber.length - (limit?.sectorCapacity ?? 0),
           0,
-        )}명 / ${limit?.sectorCapacity ?? 0}명`}
+        )}명 / ${limit?.reserve ?? 0}명`}
       </Txt>
     </div>
   );
