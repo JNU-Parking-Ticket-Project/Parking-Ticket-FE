@@ -3,7 +3,12 @@ import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration
 import { useState } from 'react';
 import { ApplyCount } from './ApplyCount';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
-export const ApplyList = ({ eventId }: { eventId: string }) => {
+
+interface ApplyListProps {
+  eventId: string;
+}
+
+export const ApplyList = ({ eventId }: ApplyListProps) => {
   const { registrations } = useAllRegistrationQuery(eventId);
   const sectors = Array.from(
     new Set(registrations.map((registration) => registration.sectorNum)),
