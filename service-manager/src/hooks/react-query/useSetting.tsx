@@ -34,7 +34,7 @@ export const useSectorsQuery = () => {
     refetchOnWindowFocus: false,
   });
 
-  return { sectorSettingData: data };
+  return { sectors: data };
 };
 
 export const useSectorQueryById = (eventId: string) => {
