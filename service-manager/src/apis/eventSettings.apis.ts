@@ -35,7 +35,7 @@ export const getSettingTimeBy = async (eventId: string) => {
 export const postSettingTime = async (
   date: SettingTime,
 ): Promise<PostSettingsResponse> => {
-  const pattern = 'yyyy-MM-dd HH:mm:ss';
+  const pattern = 'yyyy-MM-dd HH:mm:ss.SSS';
   const datesString = {
     dateTimePeriod: {
       startAt: format(date.startAt, pattern, { locale: ko }).replace(' ', 'T'),
@@ -52,7 +52,7 @@ export const postSettingTime = async (
 };
 
 export const putSettingTime = async (eventId: string, date: SettingTime) => {
-  const pattern = 'yyyy-MM-dd HH:mm:ss';
+  const pattern = 'yyyy-MM-dd HH:mm:ss.SSS';
   const datesString = {
     dateTimePeriod: {
       startAt: format(date.startAt, pattern, { locale: ko }).replace(' ', 'T'),
