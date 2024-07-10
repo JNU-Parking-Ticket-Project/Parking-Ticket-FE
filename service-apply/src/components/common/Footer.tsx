@@ -1,4 +1,7 @@
 import { Txt } from '@quokka/design-system';
+import { Link } from 'react-router-dom';
+
+const HOME_PAGE_LINK = 'https://www.cnuheyday.com';
 
 export const Footer = () => {
   return (
@@ -8,9 +11,18 @@ export const Footer = () => {
           contact us
         </Txt>
         <Txt className="py-2">
-          전남대학교 총학생회: 010-3836-3482(안전관리국장)
+          공식 인스타그램:{' '}
+          <Link to="https://www.instagram.com/cnu_heyday_/">
+            <Txt className="underline lowercase">{'(@cnu_heyday_)'}</Txt>
+          </Link>
         </Txt>
-        <Txt>JNU-student council</Txt>
+        <Txt>카카오톡 공식 채널:{' (전남대학 총학생회 HEYDEY)'}</Txt>
+        <Txt>
+          총학생회 홈페이지:{' '}
+          <Link to={HOME_PAGE_LINK}>
+            <Txt className="underline">홈페이지 바로가기</Txt>
+          </Link>
+        </Txt>
       </div>
     </footer>
   );
