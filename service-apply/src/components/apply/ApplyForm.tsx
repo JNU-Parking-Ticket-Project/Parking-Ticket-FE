@@ -81,7 +81,7 @@ export const ApplyForm = () => {
         <ApplyInputText
           label="전화번호"
           name="phoneNumber"
-          placeholder="010-0000-0000"
+          placeholder="숫자만 입력. 하이픈(-) 자동기입됨(ex: 01012341234)"
           type="text"
           onChange={(e) =>
             dispatch({ type: 'phoneNumber', payload: e.target.value })
