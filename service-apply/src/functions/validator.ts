@@ -12,7 +12,7 @@ export const isStudentNumber = (studentNumber: string) =>
   /^[0-9]{6}$/.test(studentNumber);
 
 export const isStudentName = (studentName: string) =>
-  /^[가-힣]{2,5}$/.test(studentName);
+  /^[가-힣a-zA-Z ]{2,100}$/.test(studentName);
 
 export const isSection = ({
   array,
@@ -58,7 +58,9 @@ export const applyFormValidator = ({
     return submitFailure('올바른 형식의 이메일을 입력해 주세요.');
   }
   if (!isStudentName(input.studentName)) {
-    return submitFailure('2~5글자 사이의 이름을 입력해 주세요.');
+    return submitFailure(
+      '이름은 영어 대,소문자 한글, 공백으로 이루어진 100자로 이루어져야 합니다.',
+    );
   }
   if (!isStudentNumber(input.studentNumber)) {
     return submitFailure('올바른 형식의 학번을 입력해 주세요.');
