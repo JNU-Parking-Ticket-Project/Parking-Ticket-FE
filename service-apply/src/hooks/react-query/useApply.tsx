@@ -15,11 +15,16 @@ import {
   postRegistration,
   postTemporarySave,
 } from '../../apis/registration.apis';
+import { debounce } from 'es-toolkit';
 
 export const useApplyMutate = () => {
+  const debouncedPostRegistration = debounce(
+    (requset: RegistrationRequest) => postRegistration(requset),
+    300,
+  );
   const { mutate } = useMutation({
     mutationKey: ['apply'],
-    mutationFn: postRegistration,
+    mutationFn: debouncedPostRegistration,
   });
 
   return {
