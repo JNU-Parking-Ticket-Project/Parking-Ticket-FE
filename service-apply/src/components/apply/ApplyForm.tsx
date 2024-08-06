@@ -221,7 +221,7 @@ export const ApplyForm = () => {
             신청하기
           </Button>
 
-          <Suspense fallback={<Spinner></Spinner>}>
+          <Suspense fallback={<Spinner />}>
             <ErrorBoundary>
               <ApplyCaptchaModal
                 isOpen={isCaptchaModalOpen}
