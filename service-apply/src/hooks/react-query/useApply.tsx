@@ -17,16 +17,13 @@ import {
 } from '../../apis/registration.apis';
 
 export const useApplyMutate = () => {
-  const debouncedPostRegistration = debounce(
-    (requset: RegistrationRequest) => postRegistration(requset),
-    300,
-  );
-  const { mutate } = useMutation({
+  const { mutate, status } = useMutation({
     mutationKey: ['apply'],
     mutationFn: postRegistration,
   });
 
   return {
+    postRegistrationStatus: status,
     postRegistration: (
       registrationRequest: RegistrationRequest,
       mutateOption?: Omit<
