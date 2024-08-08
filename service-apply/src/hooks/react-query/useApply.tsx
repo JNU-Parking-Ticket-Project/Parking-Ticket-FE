@@ -15,7 +15,6 @@ import {
   postRegistration,
   postTemporarySave,
 } from '../../apis/registration.apis';
-import { debounce } from 'es-toolkit';
 
 export const useApplyMutate = () => {
   const debouncedPostRegistration = debounce(
@@ -24,7 +23,7 @@ export const useApplyMutate = () => {
   );
   const { mutate } = useMutation({
     mutationKey: ['apply'],
-    mutationFn: debouncedPostRegistration,
+    mutationFn: postRegistration,
   });
 
   return {
