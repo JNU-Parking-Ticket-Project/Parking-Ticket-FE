@@ -11,7 +11,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
   const [input, setInput] = useState('');
 
   const { captchaCode, captchaImageUrl } = useCaptchaQuery();
-  const { postRegistration } = useApplyMutate();
+  const { postRegistrationStatus, postRegistration } = useApplyMutate();
   const { eventId } = usePeriodQuery();
 
   const state = useContext(ApplyFormContext);
@@ -24,6 +24,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
 
   const handleSubmit = () => {
     setIsLoading(true);
+    if (postRegistrationStatus == 'pending') return;
     postRegistration(
       new RegistrationRequest({
         name: state.studentName,
