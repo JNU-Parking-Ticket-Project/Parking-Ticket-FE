@@ -14,6 +14,7 @@ import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
 import { PrivacyCheckModal } from './PrivacyCheckModal';
+import { Spinner } from '../../assets/Spinner';
 
 const DEFAULT_PARKING_SECTION_OPTIONS = [
   {
@@ -212,11 +213,15 @@ export const ApplyForm = () => {
           <Button color="secondary" onClick={onTemporarySave}>
             임시 저장
           </Button>
-          <Button color="primary" onClick={onCaptchaModalOpen}>
+          <Button
+            color="primary"
+            onClick={onCaptchaModalOpen}
+            disabled={isCaptchaModalOpen}
+          >
             신청하기
           </Button>
 
-          <Suspense>
+          <Suspense fallback={<Spinner />}>
             <ErrorBoundary>
               <ApplyCaptchaModal
                 isOpen={isCaptchaModalOpen}

@@ -17,12 +17,13 @@ import {
 } from '../../apis/registration.apis';
 
 export const useApplyMutate = () => {
-  const { mutate } = useMutation({
+  const { mutate, status } = useMutation({
     mutationKey: ['apply'],
     mutationFn: postRegistration,
   });
 
   return {
+    postRegistrationStatus: status,
     postRegistration: (
       registrationRequest: RegistrationRequest,
       mutateOption?: Omit<
