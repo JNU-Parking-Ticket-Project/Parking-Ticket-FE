@@ -24,7 +24,7 @@ jobs:
           version: 8
           run_install: |
             - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
+              args: [--frozen-lockfile, --strict-peer-dependencies, --ignore-scripts]
             - args: [--global, gulp, prettier, typescript]
 
       - name: env 파일 생성
