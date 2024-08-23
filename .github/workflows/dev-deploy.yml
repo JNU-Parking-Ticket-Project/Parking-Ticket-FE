@@ -2,7 +2,7 @@ name: Dev Deploy CI/CD
 on:
   push:
     branches:
-      - develop
+      - feat/dev-cicd
 
 jobs:
   build:
