@@ -9,7 +9,7 @@ const useLoginForm = () => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { postLogin, status } = useLoginMutate();
+  const { postLogin, status: loginMutateStatus } = useLoginMutate();
   const navigate = useNavigate();
 
   const formAction = (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,6 +71,7 @@ const useLoginForm = () => {
     onChangePassword,
     isError,
     errorMessage,
+    loginMutateStatus,
   };
 };
 

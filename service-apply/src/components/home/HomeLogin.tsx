@@ -2,6 +2,8 @@ import { Button, InputText, Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 import useLoginForm from '../../hooks/home/useLoginForm';
 import LoginInputBox from './LoginInputBox';
+import Loader from '../common/Loader';
+import LoginLoadText from './LoginLoadText';
 
 export const HomeLogin = () => {
   const {
@@ -12,6 +14,7 @@ export const HomeLogin = () => {
     onChangePassword,
     isError,
     errorMessage,
+    loginMutateStatus,
   } = useLoginForm();
 
   return (
@@ -38,12 +41,19 @@ export const HomeLogin = () => {
           <Link to="/password-reset">
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>
-          <Button
-            type="submit"
-            className="py-4 px-14 rounded-lg max-sm:py-2 max-sm:px-8"
-          >
-            폼으로 이동
-          </Button>
+          {loginMutateStatus === 'pending' ? (
+            <div className="flex items-center gap-4">
+              <LoginLoadText>잠시만 기다려 주세요..</LoginLoadText>
+              <Loader color="#0255D5" />
+            </div>
+          ) : (
+            <Button
+              type="submit"
+              className="py-4 px-14 rounded-lg max-sm:py-2 max-sm:px-8"
+            >
+              폼으로 이동
+            </Button>
+          )}
           {isError && (
             <Txt size="sm" color="error">
               {errorMessage}
