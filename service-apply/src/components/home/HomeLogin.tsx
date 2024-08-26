@@ -89,7 +89,6 @@ export const HomeLogin = () => {
               }}
             />
           </div>
-          {isError && <Txt color="error">{errorMessage}</Txt>}
           <Link to={'/password-reset'}>
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>
@@ -99,6 +98,11 @@ export const HomeLogin = () => {
           >
             폼으로 이동
           </Button>
+          {isError && (
+            <Txt size="sm" color="error">
+              {errorMessage}
+            </Txt>
+          )}
         </div>
       </form>
     </div>
