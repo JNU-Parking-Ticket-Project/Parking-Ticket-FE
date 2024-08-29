@@ -86,6 +86,16 @@ export const useApplyForm = () => {
     setIsCaptchaModalOpen(true);
   };
 
+  const onCaptchaModalClose = () => {
+    setIsCaptchaModalOpen(false);
+  };
+
+  const onCaptchaModalSafeClose = () => {
+    if (window.confirm('창을 닫으면 신청을 취소합니다. 창을 닫으시겠습니까?')) {
+      setIsCaptchaModalOpen(false);
+    }
+  };
+
   return {
     sector,
     state,
@@ -94,8 +104,9 @@ export const useApplyForm = () => {
     isPrivacyModalOpen,
     setIsPrivacyModalOpen,
     isCaptchaModalOpen,
-    setIsCaptchaModalOpen,
     onCaptchaModalOpen,
+    onCaptchaModalClose,
+    onCaptchaModalSafeClose,
     isAgreed,
     setIsAgreed,
     isError,

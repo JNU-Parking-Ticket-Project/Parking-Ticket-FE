@@ -64,8 +64,9 @@ export const ApplyForm = () => {
     isPrivacyModalOpen,
     setIsPrivacyModalOpen,
     isCaptchaModalOpen,
-    setIsCaptchaModalOpen,
     onCaptchaModalOpen,
+    onCaptchaModalClose,
+    onCaptchaModalSafeClose,
     isAgreed,
     setIsAgreed,
     isError,
@@ -225,12 +226,8 @@ export const ApplyForm = () => {
             <ErrorBoundary>
               <ApplyCaptchaModal
                 isOpen={isCaptchaModalOpen}
-                safeClose={() => {
-                  window.confirm(
-                    '창을 닫으면 신청을 취소합니다. 창을 닫으시겠습니까?',
-                  ) && setIsCaptchaModalOpen(false);
-                }}
-                onRequestClose={() => setIsCaptchaModalOpen(false)}
+                safeClose={onCaptchaModalSafeClose}
+                onRequestClose={onCaptchaModalClose}
               />
             </ErrorBoundary>
           </Suspense>
