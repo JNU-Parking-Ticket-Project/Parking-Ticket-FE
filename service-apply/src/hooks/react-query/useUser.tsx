@@ -15,7 +15,7 @@ import {
 import { setToken } from '../../functions/jwt';
 
 export const useLoginMutate = () => {
-  const { mutate } = useMutation({
+  const { mutate, status } = useMutation({
     mutationKey: ['login'],
     mutationFn: postLogin,
   });
@@ -37,6 +37,7 @@ export const useLoginMutate = () => {
         },
       });
     },
+    status,
   };
 };
 

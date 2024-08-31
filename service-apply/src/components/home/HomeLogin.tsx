@@ -1,58 +1,21 @@
 import { Button, InputText, Txt } from '@quokka/design-system';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutate } from '../../hooks/react-query/useUser';
-import { isEmail, isPassword } from '../../functions/validator';
+import { Link } from 'react-router-dom';
+import useLoginForm from '../../hooks/home/useLoginForm';
+import LoginInputBox from './LoginInputBox';
+import Loader from '../common/Loader';
+import LoginLoadText from './LoginLoadText';
 
 export const HomeLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { postLogin } = useLoginMutate();
-  const navigate = useNavigate();
-
-  const formAction = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!email) {
-      alert('이메일을 입력해 주세요.');
-      return;
-    }
-    if (!password) {
-      alert('비밀번호를 입력해 주세요.');
-      return;
-    }
-    if (!isEmail(email)) {
-      alert('올바른 형식의 이메일을 입력해 주세요.');
-      setIsError(true);
-      setErrorMessage('올바른 형식의 이메일을 입력해 주세요.');
-      return;
-    }
-    if (!isPassword(password)) {
-      alert(
-        '비밀번호는 최소 8자 이상, 16자리 이하이며 최소 하나의 영문자, 숫자, 특수문자(!@#$%^&*)가 포함되어야 합니다.',
-      );
-      setIsError(true);
-      setErrorMessage(
-        '비밀번호는 최소 8자 이상, 16자리 이하이며 최소 하나의 영문자, 숫자, 특수문자(!@#$%^&*)가 포함되어야 합니다.',
-      );
-      return;
-    }
-    postLogin(
-      { email, pwd: password },
-      {
-        onError: (error) => {
-          alert(error.message);
-          setIsError(true);
-          setErrorMessage(error.message);
-        },
-        onSuccess: () => {
-          navigate('/apply');
-        },
-      },
-    );
-  };
+  const {
+    formAction,
+    email,
+    onChangeEmail,
+    password,
+    onChangePassword,
+    isError,
+    errorMessage,
+    loginMutateStatus,
+  } = useLoginForm();
 
   return (
     <div className="flex justify-end max-sm:mb-4">
@@ -61,44 +24,41 @@ export const HomeLogin = () => {
           신청 폼 작성하기
         </Txt>
         <div className="flex flex-col gap-3 items-end">
-          <div className="w-full">
-            <InputText
-              designType="box"
-              type="text"
-              placeholder="이메일"
-              name="email"
-              className="w-full p-4"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setIsError(false);
-              }}
-            />
-          </div>
-          <div className="w-full">
-            <InputText
-              designType="box"
-              type="password"
-              placeholder="비밀번호"
-              name="password"
-              className="w-full p-4"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setIsError(false);
-              }}
-            />
-          </div>
-          {isError && <Txt color="error">{errorMessage}</Txt>}
-          <Link to={'/password-reset'}>
+          <LoginInputBox
+            type="text"
+            placeholder="이메일"
+            name="email"
+            value={email}
+            onChange={onChangeEmail}
+          />
+          <LoginInputBox
+            type="password"
+            placeholder="비밀번호"
+            name="password"
+            value={password}
+            onChange={onChangePassword}
+          />
+          <Link to="/password-reset">
             <Txt color="secondary">비밀번호 찾기</Txt>
           </Link>
-          <Button
-            type="submit"
-            className="py-4 px-14 rounded-lg max-sm:py-2 max-sm:px-8"
-          >
-            폼으로 이동
-          </Button>
+          {loginMutateStatus === 'pending' ? (
+            <div className="flex items-center gap-4">
+              <LoginLoadText>잠시만 기다려 주세요..</LoginLoadText>
+              <Loader color="#0255D5" />
+            </div>
+          ) : (
+            <Button
+              type="submit"
+              className="py-4 px-14 rounded-lg max-sm:py-2 max-sm:px-8"
+            >
+              폼으로 이동
+            </Button>
+          )}
+          {isError && (
+            <Txt size="sm" color="error">
+              {errorMessage}
+            </Txt>
+          )}
         </div>
       </form>
     </div>

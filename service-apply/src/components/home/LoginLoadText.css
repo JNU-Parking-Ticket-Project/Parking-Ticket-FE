@@ -1,0 +1,9 @@
+@keyframes fdout {
+  to {
+    opacity: 0;
+  }
+}
+
+.loading-animation {
+  animation: fdout 1s linear infinite alternate;
+}

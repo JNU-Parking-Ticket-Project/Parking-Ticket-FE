@@ -1,16 +1,18 @@
 import { Modal, Txt } from '@quokka/design-system';
 import { CaptchaForm } from './CaptchaForm';
-import { Spinner } from '../../assets/Spinner';
 import { useCaptchaForm } from '../../hooks/apply/useCaptchaForm';
+import Loader from '../common/Loader';
 
 interface ApplyCaptchaModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
+  safeClose: () => void;
 }
 
 export const ApplyCaptchaModal = ({
   isOpen,
   onRequestClose,
+  safeClose,
 }: ApplyCaptchaModalProps) => {
   const { isLoading, input, handleInput, captchaImageUrl, handleSubmit } =
     useCaptchaForm({
@@ -21,7 +23,7 @@ export const ApplyCaptchaModal = ({
     <Modal
       className="captcha-modal"
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={safeClose}
       overLayCss={{
         display: 'flex',
         justifyContent: 'center',
@@ -37,15 +39,15 @@ export const ApplyCaptchaModal = ({
       }}
     >
       {isLoading ? (
-        <div className="flex flex-col justify-center align-center">
-          <Txt size="h6" className="text-center">
+        <div className="flex flex-col justify-center align-center gap-1">
+          <Txt size="h6" className="text-center font-bold">
             신청 접수 중입니다. 잠시만 기다려주세요.
           </Txt>
           <Txt size="h6" className="text-center">
-            새로고침 시 신청이 취소됩니다.
+            새로고침하거나 모달 바깥창을 누르면 신청이 취소됩니다.
           </Txt>
-          <div className="w-full">
-            <Spinner />
+          <div className="w-full flex justify-center mt-4">
+            <Loader color="#0255D5" />
           </div>
         </div>
       ) : (

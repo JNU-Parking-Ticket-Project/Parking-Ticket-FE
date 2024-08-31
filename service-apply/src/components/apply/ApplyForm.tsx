@@ -64,8 +64,9 @@ export const ApplyForm = () => {
     isPrivacyModalOpen,
     setIsPrivacyModalOpen,
     isCaptchaModalOpen,
-    setIsCaptchaModalOpen,
     onCaptchaModalOpen,
+    onCaptchaModalClose,
+    onCaptchaModalSafeClose,
     isAgreed,
     setIsAgreed,
     isError,
@@ -225,9 +226,8 @@ export const ApplyForm = () => {
             <ErrorBoundary>
               <ApplyCaptchaModal
                 isOpen={isCaptchaModalOpen}
-                onRequestClose={() => {
-                  setIsCaptchaModalOpen(false);
-                }}
+                safeClose={onCaptchaModalSafeClose}
+                onRequestClose={onCaptchaModalClose}
               />
             </ErrorBoundary>
           </Suspense>
