@@ -7,17 +7,30 @@ const fetcher = async (url: string, req: RequestInit) => {
   const token = getAccessToken();
   const headers: HeadersInit = token
     ? {
-        'Content-Type': 'application/json;charset=UTF-8',
-        Authorization: `Bearer ${token}`,
-      }
+      'Content-Type': 'application/json;charset=UTF-8',
+      Authorization: `Bearer ${token}`,
+    }
     : {
-        'Content-Type': 'application/json;charset=UTF-8',
-      };
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
 
   const response = await fetch(BASE_URL + '/api' + url, {
     ...req,
     headers,
+  }).catch(() => {
+    return new ErrorResponse({
+      code: 'NETWORK_ERROR',
+      path: url,
+      reason: '네트워크 오류가 발생했습니다.',
+      status: 500,
+      success: false,
+      timeStamp: new Date().toISOString(),
+    });
   });
+
+  if (response instanceof ErrorResponse) {
+    return response;
+  }
   if (response.status >= 400) {
     return await errorStatusResult(response);
   }
