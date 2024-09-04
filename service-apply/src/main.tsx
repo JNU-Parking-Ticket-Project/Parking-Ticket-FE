@@ -5,8 +5,6 @@ import './main.css';
 import ReactModal from 'react-modal';
 import ReactGA from 'react-ga4';
 
-console.log(import.meta.env.VITE_REACT_APP_GA_KEY);
-
 if (import.meta.env.VITE_REACT_APP_GA_KEY) {
   ReactGA.initialize(import.meta.env.VITE_REACT_APP_GA_KEY);
 }
