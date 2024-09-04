@@ -20,45 +20,49 @@ import { NotFound } from '../pages/NotFound';
 import { SettingBoardPage } from '../pages/setting/SettingList.page';
 import { SectionCreateSettingPage } from '../pages/setting/SectionCreate.page';
 import { ApplyBoardPage } from '../pages/apply/ApplyBoard.page';
+import RouteChangeTracker from './RouterChangeTracker';
 
 export default function Router() {
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/password-reset" element={<PasswordResetLayout />}>
-        <Route index element={<RequestPasswordResetPage />} />
-        <Route
-          path="/password-reset/:resetId"
-          element={<PasswordResetPage />}
-        />
-      </Route>
-      <Route path="/" element={<CommonLayout />}>
-        <Route path="announcement" element={<AnnouncementLayout />}>
-          <Route index element={<AnnouncementListPage />} />
-          <Route path=":announcementId" element={<AnnouncementPage />} />
+    <>
+      <RouteChangeTracker />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/password-reset" element={<PasswordResetLayout />}>
+          <Route index element={<RequestPasswordResetPage />} />
           <Route
-            path="update/:announcementId"
-            element={<AnnouncementUpdatePage />}
+            path="/password-reset/:resetId"
+            element={<PasswordResetPage />}
           />
-          <Route path="create" element={<AnnouncementCreatePage />} />
         </Route>
-        <Route path="apply-list">
-          <Route index element={<ApplyBoardPage />} />
-          <Route path=":eventId" element={<ApplyListPage />} />
+        <Route path="/" element={<CommonLayout />}>
+          <Route path="announcement" element={<AnnouncementLayout />}>
+            <Route index element={<AnnouncementListPage />} />
+            <Route path=":announcementId" element={<AnnouncementPage />} />
+            <Route
+              path="update/:announcementId"
+              element={<AnnouncementUpdatePage />}
+            />
+            <Route path="create" element={<AnnouncementCreatePage />} />
+          </Route>
+          <Route path="apply-list">
+            <Route index element={<ApplyBoardPage />} />
+            <Route path=":eventId" element={<ApplyListPage />} />
+          </Route>
+          <Route path="setting">
+            <Route index element={<SettingBoardPage />} />
+            <Route path=":eventId" element={<SectionSettingPage />} />
+            <Route path="create" element={<SectionCreateSettingPage />} />
+          </Route>
+          <Route path="notice" element={<NoticeLayout />}>
+            <Route index element={<NoticeViewPage />} />
+            <Route path="update" element={<NoticeUpdatePage />} />
+          </Route>
         </Route>
-        <Route path="setting">
-          <Route index element={<SettingBoardPage />} />
-          <Route path=":eventId" element={<SectionSettingPage />} />
-          <Route path="create" element={<SectionCreateSettingPage />} />
-        </Route>
-        <Route path="notice" element={<NoticeLayout />}>
-          <Route index element={<NoticeViewPage />} />
-          <Route path="update" element={<NoticeUpdatePage />} />
-        </Route>
-      </Route>
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
