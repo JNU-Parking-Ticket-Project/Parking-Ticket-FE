@@ -30,6 +30,7 @@ type ERROR_TYPE =
   | NoneErrorContent;
 
 export type ERROR_CODE =
+  | 'NETWORK_ERROR'
   | 'GLOBAL_401_1'
   | 'AUTH_400_1'
   | 'AUTH_401_1'

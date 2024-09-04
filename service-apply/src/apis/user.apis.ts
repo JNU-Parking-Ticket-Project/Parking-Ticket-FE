@@ -11,7 +11,9 @@ export interface UserLoginRequest {
 export const postLogin = async (data: UserLoginRequest) => {
   const response = await https.post(`/v1/auth/login`, data);
   if (isErrorResponse(response)) {
-    throw new Error(response.reason);
+    throw new Error("준비중입니다. 잠시후 다시 시도해주세요.");
+    // TODO: Error에 대한 처리가 필요합니다.
+    // throw new Error(response.reason);
   }
   return new UserToken(response);
 };
