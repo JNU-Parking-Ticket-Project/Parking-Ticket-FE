@@ -1,0 +1,204 @@
+name: 🧑‍💻 개발 환경 React App CI/CD
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  ENVIRONMENT: dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+####################################################################################################
+# APPLY MODULE
+####################################################################################################          
+      - name: Apply 모듈 배포 스크립트 실행
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USERNAME }}
+          password: ${{ secrets.DEV_SSH_PASSWORD }}
+          port: ${{ secrets.DEV_SSH_PORT }}
+          script: |
+            cd ~/jnu-parking/Parking-Ticket-FE
+            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
+            pnpm build:apply
+
+      - name: Apply 모듈 Slack 성공 알림
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: author, workflowRun, pullRequest
+          custom_payload: |
+            {
+              attachments: [{
+                color: '#50CAF1',
+                title: '서버 배포 알림',
+                text: `🏃‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 완료!`,
+                fields: [
+                  {
+                    title: '배포 환경',
+                    value: `${process.env.ENVIRONMENT}`,
+                    short: true,
+                  },
+                  {
+                    title: '배포자',
+                    value: `${process.env.AS_AUTHOR}`,
+                    short: true,
+                  },
+                  {
+                    title: '워크플로 링크',
+                    value: `${process.env.AS_WORKFLOW_RUN}`,
+                    short: true,
+                  },
+                  {
+                    title: 'PR 링크',
+                    value: `${process.env.AS_PULL_REQUEST}`,
+                    short: true,
+                  }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
+
+      - name: Apply 모듈 Slack 실패 알림
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: author, workflowRun, pullRequest
+          custom_payload: |
+            {
+              attachments: [{
+                color: '#CA0025',
+                title: '서버 배포 알림',
+                text: `🧎‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 실패!`,
+                fields: [
+                  {
+                    title: '배포 환경',
+                    value: `${process.env.ENVIRONMENT}`,
+                    short: true,
+                  },
+                  {
+                    title: '배포자',
+                    value: `${process.env.AS_AUTHOR}`,
+                    short: true,
+                  },
+                  {
+                    title: '워크플로 링크',
+                    value: `${process.env.AS_WORKFLOW_RUN}`,
+                    short: true,
+                  },
+                  {
+                    title: 'PR 링크',
+                    value: `${process.env.AS_PULL_REQUEST}`,
+                    short: true,
+                  }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
+
+####################################################################################################
+# MANAGER MODULE
+####################################################################################################
+      - name: Manager 모듈 배포 스크립트 실행
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USERNAME }}
+          password: ${{ secrets.DEV_SSH_PASSWORD }}
+          port: ${{ secrets.DEV_SSH_PORT }}
+          script: |
+            cd ~/jnu-parking/Parking-Ticket-FE
+            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
+            pnpm build:manager
+
+      - name: Manager 모듈 Slack 성공 알림
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: author, workflowRun, pullRequest
+          custom_payload: |
+            {
+              attachments: [{
+                color: '#50CAF1',
+                title: '서버 배포 알림',
+                text: `🏃‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 완료!`,
+                fields: [
+                  {
+                    title: '배포 환경',
+                    value: `${process.env.ENVIRONMENT}`,
+                    short: true,
+                  },
+                  {
+                    title: '배포자',
+                    value: `${process.env.AS_AUTHOR}`,
+                    short: true,
+                  },
+                  {
+                    title: '워크플로 링크',
+                    value: `${process.env.AS_WORKFLOW_RUN}`,
+                    short: true,
+                  },
+                  {
+                    title: 'PR 링크',
+                    value: `${process.env.AS_PULL_REQUEST}`,
+                    short: true,
+                  }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
+
+      - name: Manager 모듈 Slack 실패 알림
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: author, workflowRun, pullRequest
+          custom_payload: |
+            {
+              attachments: [{
+                color: '#CA0025',
+                title: '서버 배포 알림',
+                text: `🧎‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 실패!`,
+                fields: [
+                  {
+                    title: '배포 환경',
+                    value: `${process.env.ENVIRONMENT}`,
+                    short: true,
+                  },
+                  {
+                    title: '배포자',
+                    value: `${process.env.AS_AUTHOR}`,
+                    short: true,
+                  },
+                  {
+                    title: '워크플로 링크',
+                    value: `${process.env.AS_WORKFLOW_RUN}`,
+                    short: true,
+                  },
+                  {
+                    title: 'PR 링크',
+                    value: `${process.env.AS_PULL_REQUEST}`,
+                    short: true,
+                  }
+                ]
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
