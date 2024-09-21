@@ -1,32 +1,53 @@
-name: 🧑‍💻 개발 환경 React App CI/CD
+name: 🚨 프로덕션 환경 React App CI/CD
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
-  ENVIRONMENT: dev
-
+  ENVIRONMENT: prod
+      
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
+      - name: Node.js ${{ matrix.node-version }} 사용
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies, --ignore-scripts]
+            - args: [--global, gulp, prettier, typescript]
+
+      - name: env 파일 생성
+        run: |
+          touch .env
+          echo VITE_REACT_APP_GA_KEY=${{ secrets.VITE_REACT_APP_GA_KEY }} >> .env
+          echo VITE_PUBLIC_API_URL=${{ secrets.VITE_PUBLIC_API_URL }} >> .env
+          cat .env
+
+
 ####################################################################################################
 # APPLY MODULE
 ####################################################################################################          
-      - name: Apply 모듈 배포 스크립트 실행
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_SSH_HOST }}
-          username: ${{ secrets.DEV_SSH_USERNAME }}
-          password: ${{ secrets.DEV_SSH_PASSWORD }}
-          port: ${{ secrets.DEV_SSH_PORT }}
-          script: |
-            cd ~/jnu-parking/Parking-Ticket-FE
-            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
-            pnpm build:apply
+      - name: Apply 모듈 pnpm 빌드
+        run: |
+          pnpm build:apply
+
+      - name: service-apply 모듈 배포
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        run: |
+          aws s3 sync dist/service-apply s3://${{ secrets.AWS_APPLY_WS_BUCKET_NAME }}
 
       - name: Apply 모듈 Slack 성공 알림
         if: success()
@@ -39,7 +60,7 @@ jobs:
               attachments: [{
                 color: '#50CAF1',
                 title: '서버 배포 알림',
-                text: `🏃‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 완료!`,
+                text: `🏃‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 완료!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -78,7 +99,7 @@ jobs:
               attachments: [{
                 color: '#CA0025',
                 title: '서버 배포 알림',
-                text: `🧎‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 실패!`,
+                text: `🧎‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 실패!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -109,17 +130,18 @@ jobs:
 ####################################################################################################
 # MANAGER MODULE
 ####################################################################################################
-      - name: Manager 모듈 배포 스크립트 실행
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_SSH_HOST }}
-          username: ${{ secrets.DEV_SSH_USERNAME }}
-          password: ${{ secrets.DEV_SSH_PASSWORD }}
-          port: ${{ secrets.DEV_SSH_PORT }}
-          script: |
-            cd ~/jnu-parking/Parking-Ticket-FE
-            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
-            pnpm build:manager
+      - name: Manager 모듈 pnpm 빌드
+        run: |
+          pnpm build:manager
+
+      - name: service-manager 모듈 배포
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          SOURCE_DIR: 'dist/service-manager'
+        run: |
+          aws s3 sync dist/service-manager s3://${{ secrets.AWS_MANAGER_WS_BUCKET_NAME }}
 
       - name: Manager 모듈 Slack 성공 알림
         if: success()
@@ -132,7 +154,7 @@ jobs:
               attachments: [{
                 color: '#50CAF1',
                 title: '서버 배포 알림',
-                text: `🏃‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 완료!`,
+                text: `🏃‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 완료!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -171,7 +193,7 @@ jobs:
               attachments: [{
                 color: '#CA0025',
                 title: '서버 배포 알림',
-                text: `🧎‍♂️‍➡️ 개발 환경 Apply 모듈 CICD 진행 실패!`,
+                text: `🧎‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 실패!`,
                 fields: [
                   {
                     title: '배포 환경',
