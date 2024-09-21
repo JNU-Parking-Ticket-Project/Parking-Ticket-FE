@@ -59,8 +59,7 @@ jobs:
             {
               attachments: [{
                 color: '#50CAF1',
-                title: '서버 배포 알림',
-                text: `🏃‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 완료!`,
+                title: `🏃‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 완료!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -98,8 +97,7 @@ jobs:
             {
               attachments: [{
                 color: '#CA0025',
-                title: '서버 배포 알림',
-                text: `🧎‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 실패!`,
+                title: `🧎‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 실패!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -153,7 +151,7 @@ jobs:
             {
               attachments: [{
                 color: '#50CAF1',
-                title: `🏃‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 완료!`,
+                title: `🏃‍♂️‍➡️ 프로덕션 환경 Manager 모듈 CICD 진행 완료!`,
                 fields: [
                   {
                     title: '배포 환경',
@@ -191,7 +189,7 @@ jobs:
             {
               attachments: [{
                 color: '#CA0025',
-                title: `🧎‍♂️‍➡️ 프로덕션 환경 Apply 모듈 CICD 진행 실패!`,
+                title: `🧎‍♂️‍➡️ 프로덕션 환경 Manager 모듈 CICD 진행 실패!`,
                 fields: [
                   {
                     title: '배포 환경',
