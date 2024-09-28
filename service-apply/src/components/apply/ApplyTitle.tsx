@@ -26,7 +26,7 @@ export const ApplyTitle = () => {
 };
 
 const ApplyStartTime = () => {
-  const { startAt } = usePeriodQuery();
+  const { startAt } = usePeriodQuery({ retryNumber: 0 });
 
   return <Txt>{getApplyDateString(startAt)}</Txt>;
 };
