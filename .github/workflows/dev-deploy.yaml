@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-####################################################################################################
-# APPLY MODULE
-####################################################################################################          
+      ####################################################################################################
+      # APPLY MODULE
+      ####################################################################################################
       - name: Apply 모듈 배포 스크립트 실행
         uses: appleboy/ssh-action@master
         with:
@@ -26,7 +26,7 @@ jobs:
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
             git pull origin dev
-            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
+            pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:apply
 
       - name: Apply 모듈 Slack 성공 알림
@@ -105,9 +105,9 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
 
-####################################################################################################
-# MANAGER MODULE
-####################################################################################################
+      ####################################################################################################
+      # MANAGER MODULE
+      ####################################################################################################
       - name: Manager 모듈 배포 스크립트 실행
         uses: appleboy/ssh-action@master
         with:
@@ -118,7 +118,7 @@ jobs:
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
             git pull origin dev
-            pnpm install --frozen-lockfile --strict-peerp-dependencies --ignore-scripts
+            pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:manager
 
       - name: Manager 모듈 Slack 성공 알림
