@@ -52,6 +52,7 @@ export type ERROR_CODE =
   | 'DECRYPTION_500_1'
   | 'ENCRYPTION_500_1'
   | 'NOTICE_404_1'
+  | 'Event_400_10'
   | 'EVENT_400_14'
   | 'EVENT_400_23';
 
@@ -96,6 +97,12 @@ export const getErrorContent = (error: ERROR_CODE): ERROR_TYPE => {
       return {
         type: 'ALERT_WITH_REDIRECT',
         content: '현재는 주차권 신청기간이 아닙니다.',
+        redirect: '/',
+      };
+    case 'Event_400_10':
+      return {
+        type: 'ALERT_WITH_REDIRECT',
+        content: '주차권 신청기간이 아닙니다.',
         redirect: '/',
       };
     case 'ENCRYPTION_500_1':
