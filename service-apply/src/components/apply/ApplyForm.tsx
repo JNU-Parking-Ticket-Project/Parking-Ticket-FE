@@ -162,7 +162,7 @@ export const ApplyForm = () => {
           label="차량 번호"
           name="carNumber"
           type="text"
-          placeholder="빈칸은 입력 할 수 없습니다."
+          placeholder="빈칸없이 차량번호만 입력 ex) 12가1234"
           onChange={handleCarNumberChange}
           value={state.carNumber}
           required
