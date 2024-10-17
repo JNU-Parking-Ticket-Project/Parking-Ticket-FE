@@ -37,6 +37,11 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
     });
   };
 
+  const onAddImageBlobHook = (blob: Blob, callback: (url: string) => void) => {
+    alert('이미지를 올릴 수 없습니다.');
+    return;
+  };
+
   return (
     <>
       <input
@@ -50,19 +55,20 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
         <Suspense>
           <ToastEditor
             initialValue={announceDetailData.announceContent}
-            toolbarItems={
-                [
-                  ['heading', 'bold', 'italic', 'strike'],
-                  ['hr', 'quote'],
-                  ['ul', 'ol', 'task', 'indent', 'outdent'],
-                  ['table', 'link'],
-                ]
-            }
+            toolbarItems={[
+              ['heading', 'bold', 'italic', 'strike'],
+              ['hr', 'quote'],
+              ['ul', 'ol', 'task', 'indent', 'outdent'],
+              ['table', 'link'],
+            ]}
             previewStyle="vertical"
             height="30rem"
             minHeight="calc(100vh - 33rem)"
             previewHighlight={false}
             ref={editorRef}
+            hooks={{
+              addImageBlobHook: onAddImageBlobHook,
+            }}
           />
         </Suspense>
       </ErrorBoundary>

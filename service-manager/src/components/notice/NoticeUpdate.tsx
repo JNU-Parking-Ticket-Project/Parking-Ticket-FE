@@ -29,6 +29,11 @@ export const NoticeUpdate = () => {
     onUpdate({ noticeContent: markdown });
   };
 
+  const onAddImageBlobHook = (blob: Blob, callback: (url: string) => void) => {
+    alert('이미지를 올릴 수 없습니다.');
+    return;
+  };
+
   return (
     <div className="py-4">
       <ErrorBoundary>
@@ -47,6 +52,9 @@ export const NoticeUpdate = () => {
             initialEditType="markdown"
             previewHighlight={false}
             ref={editorRef}
+            hooks={{
+              addImageBlobHook: onAddImageBlobHook,
+            }}
           />
         </Suspense>
       </ErrorBoundary>
