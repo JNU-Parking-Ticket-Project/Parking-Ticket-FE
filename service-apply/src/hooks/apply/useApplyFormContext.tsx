@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 import {
+  carNumberReplace,
   phoneNumberReplace,
   studentNumberReplace,
 } from '../../functions/replacer';
@@ -46,11 +47,15 @@ const applyFormReducer = (
     case 'email':
     case 'studentName':
     case 'section':
-    case 'carNumber':
     case 'isCompact':
       return {
         ...state,
         [action.type]: action.payload,
+      };
+    case 'carNumber':
+      return {
+        ...state,
+        [action.type]: carNumberReplace(`${action.payload}`, state.carNumber),
       };
     case 'update':
       return {

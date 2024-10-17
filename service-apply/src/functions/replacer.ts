@@ -12,3 +12,11 @@ export const studentNumberReplace = (studentNumber: string) =>
     .toString()
     .replace(/[^0-9]/g, '')
     .slice(0, STUDENT_NUMBER_LENGTH);
+
+export const carNumberReplace = (carNumber: string, prevCarNumber: string) => {
+  if (carNumber.includes(' ')) {
+    return prevCarNumber;
+  }
+
+  return carNumber;
+};
