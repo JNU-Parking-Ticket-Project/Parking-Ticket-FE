@@ -55,10 +55,7 @@ const applyFormReducer = (
     case 'carNumber':
       return {
         ...state,
-        [action.type]: carNumberReplace(
-          action.payload as string,
-          state.carNumber,
-        ),
+        [action.type]: carNumberReplace(`${action.payload}`, state.carNumber),
       };
     case 'update':
       return {
