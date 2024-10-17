@@ -77,6 +77,18 @@ export const ApplyForm = () => {
     sector.map(extractParkingSectionOptionsBySector),
   ).sort((a, b) => a.value.localeCompare(b.value));
 
+  const handleCarNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = event.target.value;
+
+    if (value.includes(' ')) {
+      return;
+    }
+
+    dispatch({ type: 'carNumber', payload: event.target.value });
+  };
+
   return (
     <ApplyFormContext.Provider value={state}>
       <div className="flex flex-col gap-4 max-w-[520px] m-auto my-12">
@@ -150,9 +162,7 @@ export const ApplyForm = () => {
           label="차량 번호"
           name="carNumber"
           type="text"
-          onChange={(e) =>
-            dispatch({ type: 'carNumber', payload: e.target.value })
-          }
+          onChange={handleCarNumberChange}
           value={state.carNumber}
           required
         />
