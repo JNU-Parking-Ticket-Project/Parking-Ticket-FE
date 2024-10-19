@@ -31,6 +31,8 @@ jobs:
           touch .env
           echo VITE_REACT_APP_GA_KEY=${{ secrets.VITE_REACT_APP_GA_KEY }} >> .env
           echo VITE_PUBLIC_API_URL=${{ secrets.VITE_PUBLIC_API_URL }} >> .env
+          echo VITE_IMAGE_UPLOAD_LAMBDA_URL=${{ secrets.VITE_IMAGE_UPLOAD_LAMBDA_URL }} >> .env
+          echo VITE_IMAGE_BASE_URL=${{ secrets.VITE_IMAGE_BASE_URL }} >> .env
           cat .env
 
 
