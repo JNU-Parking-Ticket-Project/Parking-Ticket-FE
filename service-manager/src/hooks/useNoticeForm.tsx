@@ -7,7 +7,6 @@ export interface NoticeFormProps {
 }
 
 export const useNoticeForm = () => {
-  const [content] = useState<string>('');
   const { putNotice } = useNoticeMutate();
   const navigate = useNavigate();
 
@@ -26,5 +25,5 @@ export const useNoticeForm = () => {
       },
     );
   };
-  return { content, onUpdate };
+  return { onUpdate };
 };
