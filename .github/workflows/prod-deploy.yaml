@@ -6,7 +6,7 @@ on:
 
 env:
   ENVIRONMENT: prod
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,14 +31,13 @@ jobs:
           touch .env
           echo VITE_REACT_APP_GA_KEY=${{ secrets.VITE_REACT_APP_GA_KEY }} >> .env
           echo VITE_PUBLIC_API_URL=${{ secrets.VITE_PUBLIC_API_URL }} >> .env
-          echo VITE_IMAGE_UPLOAD_LAMBDA_URL=${{ secrets.VITE_IMAGE_UPLOAD_LAMBDA_URL }} >> .env
-          echo VITE_IMAGE_BASE_URL=${{ secrets.VITE_IMAGE_BASE_URL }} >> .env
+          echo VITE_IMAGE_UPLOAD_LAMBDA_URL=${{secrets.VITE_IMAGE_UPLOAD_LAMBDA_URL}} >> .env
+          echo VITE_IMAGE_BASE_URL=${{secrets.VITE_IMAGE_BASE_URL}} >> .env
           cat .env
 
-
-####################################################################################################
-# APPLY MODULE
-####################################################################################################          
+      ####################################################################################################
+      # APPLY MODULE
+      ####################################################################################################
       - name: Apply 모듈 pnpm 빌드
         run: |
           pnpm build:apply
@@ -127,9 +126,9 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_WEBHOOK_URL }}
 
-####################################################################################################
-# MANAGER MODULE
-####################################################################################################
+      ####################################################################################################
+      # MANAGER MODULE
+      ####################################################################################################
       - name: Manager 모듈 pnpm 빌드
         run: |
           pnpm build:manager
