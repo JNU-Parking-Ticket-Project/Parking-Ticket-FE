@@ -46,8 +46,18 @@ export function AnnouncementImgList({
 }
 
 export function AnnouncementImg({ image, setImages }: AnnouncementImgProps) {
+  const handleDelete = () => {
+    setImages((prevImages) => prevImages.filter((img) => img !== image));
+  };
+
   return (
     <button className="relative">
+      <img
+        src={Close}
+        alt="삭제"
+        className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
+        onClick={handleDelete}
+      />
       <img alt="공지사항" src={image} className="w-full h-full aspect-square" />
     </button>
   );
