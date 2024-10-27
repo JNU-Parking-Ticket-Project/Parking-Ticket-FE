@@ -3,7 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense, useState } from 'react';
 import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
-import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
+import AnnouncementImgContainer from './AnnouncementImgContainer';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -15,6 +15,7 @@ export const AnnouncementCreate = () => {
   const [title, setTitle] = useState('');
   const editorRef = useRef<Editor>(null);
   const { onCreate } = useCreateAnnouncement();
+  const [images, setImages] = useState<string[]>([]);
 
   const onPostAnnounce = () => {
     const editorInstance = editorRef.current?.getInstance();
@@ -33,30 +34,8 @@ export const AnnouncementCreate = () => {
     });
   };
 
-  const onAddImageBlobHook = (blob: Blob, callback: (url: string) => void) => {
-    const extension = blob.name.split('.')[1];
-
-    getPresignedUrl(extension)
-      .then((res) => {
-        putImageToS3(res.presignedUrl, new File([blob], blob.name), extension)
-          .then(() => {
-            const url = new URL(res.presignedUrl);
-            const fileName = url.pathname.slice(1);
-            callback(
-              new URL(fileName, import.meta.env.VITE_IMAGE_BASE_URL).toString(),
-            );
-          })
-          .catch(() => {
-            alert('이미지 업로드에 실패했습니다.');
-          });
-      })
-      .catch(() => {
-        alert(
-          '이미지 업로드를 위한 URL 발급에 실패했습니다. 파일은 <파일명.확장자> 형식으로 업로드 되어야 합니다.',
-        );
-      });
-
-    return;
+  const onAddImageBlobHook = (blob: Blob) => {
+    alert('하단에서 이미지를 등록해주세요.');
   };
 
   return (
@@ -90,6 +69,7 @@ export const AnnouncementCreate = () => {
           />
         </Suspense>
       </ErrorBoundary>
+      <AnnouncementImgContainer images={images} setImages={setImages} />
       <Button
         className="my-4 float-right px-[4rem]"
         size="small"
