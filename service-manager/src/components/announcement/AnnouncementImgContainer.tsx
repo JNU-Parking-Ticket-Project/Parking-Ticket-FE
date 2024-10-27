@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Add from '../../assets/add.svg';
 import Close from '../../assets/close.png';
-
 import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
+import { Modal } from '@quokka/design-system';
 
 interface AnnouncementImgContainerProps {
   images: string[];
@@ -14,6 +14,11 @@ interface AnnouncementImgListProps extends AnnouncementImgContainerProps {
 interface AnnouncementImgProps {
   image: string;
   setImages: Dispatch<SetStateAction<string[]>>;
+}
+interface AnnouncementImgModalProps {
+  image: string;
+  isOpen: boolean;
+  setIsOpen: () => void;
 }
 interface AnnouncementAddImgProps
   extends Pick<AnnouncementImgContainerProps, 'setImages'> {}
@@ -46,20 +51,63 @@ export function AnnouncementImgList({
 }
 
 export function AnnouncementImg({ image, setImages }: AnnouncementImgProps) {
-  const handleDelete = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDelete = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setImages((prevImages) => prevImages.filter((img) => img !== image));
   };
 
   return (
-    <button className="relative">
-      <img
-        src={Close}
-        alt="삭제"
-        className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
-        onClick={handleDelete}
-      />
-      <img alt="공지사항" src={image} className="w-full h-full aspect-square" />
-    </button>
+    <>
+      <button className="relative" onClick={() => setIsOpen(true)}>
+        <img
+          src={Close}
+          alt="삭제"
+          className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
+          onClick={handleDelete}
+        />
+        <img
+          alt="공지사항"
+          src={image}
+          className="w-full h-full aspect-square"
+        />
+      </button>
+      {isOpen && (
+        <AnnouncementImgModal
+          isOpen={isOpen}
+          image={image}
+          setIsOpen={() => setIsOpen(false)}
+        />
+      )}
+    </>
+  );
+}
+
+export function AnnouncementImgModal({
+  image,
+  isOpen,
+  setIsOpen,
+}: AnnouncementImgModalProps) {
+  return (
+    <Modal
+      className="announcementImg-modal"
+      isOpen={isOpen}
+      onRequestClose={setIsOpen}
+      overLayCss={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 20,
+        width: '100%',
+      }}
+      contentCss={{
+        borderRadius: '1rem',
+        width: '800px',
+      }}
+    >
+      <img alt="공지사항" src={image} className="w-full h-auto" />
+    </Modal>
   );
 }
 
