@@ -67,10 +67,14 @@ export function AnnouncementImg({ image, setImages }: AnnouncementImgProps) {
           className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
           onClick={handleDelete}
         />
-        <img
-          alt="공지사항"
-          src={image}
-          className="w-full h-full aspect-square"
+        <div
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+          role="img"
+          className="w-full h-full"
         />
       </button>
       {isOpen && (
