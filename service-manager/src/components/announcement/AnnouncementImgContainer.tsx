@@ -110,7 +110,7 @@ export function AnnouncementImgModal({
         width: '800px',
       }}
     >
-      <img alt="공지사항" src={image} className="w-full h-auto" />
+      <img alt="공지사항" src={image} className="mx-auto w-fit max-h-screen" />
     </Modal>
   );
 }
