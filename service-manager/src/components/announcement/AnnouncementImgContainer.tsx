@@ -4,16 +4,14 @@ import Close from '../../assets/close.png';
 import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import { Modal } from '@quokka/design-system';
 
-interface AnnouncementImgContainerProps {
+interface AnnouncementImgListProps {
   images: string[];
   setImages: Dispatch<SetStateAction<string[]>>;
+  isEditPage?: boolean;
 }
-interface AnnouncementImgListProps extends AnnouncementImgContainerProps {
-  addImages: boolean;
-}
-interface AnnouncementImgProps {
+interface AnnouncementImgProps
+  extends Pick<AnnouncementImgListProps, 'setImages' | 'isEditPage'> {
   image: string;
-  setImages: Dispatch<SetStateAction<string[]>>;
 }
 interface AnnouncementImgModalProps {
   image: string;
@@ -21,36 +19,33 @@ interface AnnouncementImgModalProps {
   setClose: () => void;
 }
 interface AnnouncementAddImgProps
-  extends Pick<AnnouncementImgContainerProps, 'setImages'> {}
-
-export default function AnnouncementImgContainer({
-  images,
-  setImages,
-}: AnnouncementImgContainerProps) {
-  return (
-    <div className="mt-8 flex flex-col gap-3">
-      <p>이미지 등록</p>
-      <AnnouncementImgList addImages setImages={setImages} images={images} />
-    </div>
-  );
-}
+  extends Pick<AnnouncementImgListProps, 'setImages'> {}
 
 export function AnnouncementImgList({
   images,
   setImages,
-  addImages,
+  isEditPage,
 }: AnnouncementImgListProps) {
   return (
     <div className="grid grid-cols-4 gap-5">
       {images.map((image) => (
-        <AnnouncementImg setImages={setImages} image={image} key={image} />
+        <AnnouncementImg
+          isEditPage={isEditPage}
+          setImages={setImages}
+          image={image}
+          key={image}
+        />
       ))}
-      {addImages && <AnnouncementAddImg setImages={setImages} />}
+      {isEditPage && <AnnouncementAddImg setImages={setImages} />}
     </div>
   );
 }
 
-export function AnnouncementImg({ image, setImages }: AnnouncementImgProps) {
+export function AnnouncementImg({
+  isEditPage,
+  image,
+  setImages,
+}: AnnouncementImgProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (event: React.MouseEvent) => {
@@ -61,12 +56,15 @@ export function AnnouncementImg({ image, setImages }: AnnouncementImgProps) {
   return (
     <>
       <button className="relative" onClick={() => setIsOpen(true)}>
-        <img
-          src={Close}
-          alt="삭제"
-          className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
-          onClick={handleDelete}
-        />
+        {isEditPage && (
+          <img
+            src={Close}
+            alt="삭제"
+            className="absolute top-2 right-2 z-10 bg-white w-6 h-6 rounded-full"
+            onClick={handleDelete}
+          />
+        )}
+
         <div
           style={{
             backgroundImage: `url(${image})`,

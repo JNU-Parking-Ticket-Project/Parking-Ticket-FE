@@ -1,9 +1,9 @@
-import { Button, InputText } from '@quokka/design-system';
+import { Button, InputText, Txt } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense, useState } from 'react';
 import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
-import AnnouncementImgContainer from './AnnouncementImgContainer';
+import { AnnouncementImgList } from './AnnouncementImgContainer';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -69,7 +69,10 @@ export const AnnouncementCreate = () => {
           />
         </Suspense>
       </ErrorBoundary>
-      <AnnouncementImgContainer images={images} setImages={setImages} />
+      <div className="mt-8 flex flex-col gap-3">
+        <Txt size="h4">이미지 등록</Txt>
+        <AnnouncementImgList isEditPage setImages={setImages} images={images} />
+      </div>
       <Button
         className="my-4 float-right px-[4rem]"
         size="small"
