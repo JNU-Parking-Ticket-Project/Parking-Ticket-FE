@@ -31,6 +31,7 @@ export const AnnouncementCreate = () => {
     onCreate({
       announceTitle: title,
       announceContent: markdown,
+      imageUrl: images,
     });
   };
 

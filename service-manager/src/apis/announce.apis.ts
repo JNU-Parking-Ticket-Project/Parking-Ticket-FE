@@ -21,6 +21,7 @@ export const getAnnounceById = async (announceId: number) => {
 export interface AnnounceRequest {
   announceTitle: string;
   announceContent: string;
+  imageUrl: string[];
 }
 
 export const postAnnounce = async (
