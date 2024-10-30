@@ -6,7 +6,7 @@ export const AnnouncementListItem = ({
   announceId,
   announceCreatedAt,
   announceTitle,
-}: Omit<Announce, 'announceContent'>) => {
+}: Omit<Announce, 'announceContent' | 'imageUrl'>) => {
   const date = new Date(announceCreatedAt);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
