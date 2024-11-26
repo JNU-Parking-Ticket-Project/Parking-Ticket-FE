@@ -6,7 +6,7 @@ import { Modal } from '@quokka/design-system';
 
 interface AnnouncementImgListProps {
   images: string[];
-  setImages: Dispatch<SetStateAction<string[]>>;
+  setImages?: Dispatch<SetStateAction<string[]>>;
   isEditPage?: boolean;
 }
 interface AnnouncementImgProps
@@ -50,7 +50,9 @@ export function AnnouncementImg({
 
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setImages((prevImages) => prevImages.filter((img) => img !== image));
+    if (setImages) {
+      setImages((prevImages) => prevImages.filter((img) => img !== image));
+    }
   };
 
   return (
@@ -136,13 +138,15 @@ function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
               const url = new URL(res.presignedUrl);
               const fileName = url.pathname.slice(1);
 
-              setImages((prev) => [
-                ...prev,
-                new URL(
-                  fileName,
-                  import.meta.env.VITE_IMAGE_BASE_URL,
-                ).toString(),
-              ]);
+              if (setImages) {
+                setImages((prev) => [
+                  ...prev,
+                  new URL(
+                    fileName,
+                    import.meta.env.VITE_IMAGE_BASE_URL,
+                  ).toString(),
+                ]);
+              }
             })
             .catch(() => {
               alert('이미지 업로드에 실패했습니다.');

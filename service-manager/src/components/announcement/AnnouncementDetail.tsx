@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { lazy } from 'react';
+import { AnnouncementImgList } from './AnnouncementImgContainer';
 
 const ToastViewer = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -21,6 +22,7 @@ export const AnnouncementDetail = ({
 }: AnnouncementDetailProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
   const announcementContent = announceDetailData.announceContent;
+  const imageUrl = announceDetailData.imageUrl;
 
   return (
     <Container
@@ -62,6 +64,10 @@ export const AnnouncementDetail = ({
         </Txt>
       </div>
       <ToastViewer initialValue={announcementContent} />
+      <div className="mt-8 flex flex-col gap-3">
+        <Txt size="h4">이미지</Txt>
+        <AnnouncementImgList images={imageUrl} />
+      </div>
     </Container>
   );
 };
