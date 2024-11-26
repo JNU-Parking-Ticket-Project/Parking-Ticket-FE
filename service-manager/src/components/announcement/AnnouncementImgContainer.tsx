@@ -74,7 +74,7 @@ export function AnnouncementImg({
             backgroundPosition: 'center',
           }}
           role="img"
-          className="w-full h-full"
+          className="w-full h-full aspect-square"
         />
       </button>
       {isOpen && (
