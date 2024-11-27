@@ -4,7 +4,7 @@ import { useRef, lazy, Suspense, useState } from 'react';
 import { useAnnounceUpdate } from '../../hooks/react-query/useAnnounceForm';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import ErrorBoundary from '../common/ErrorBoundary';
-import { AnnouncementImgList } from './AnnouncementImgContainer';
+import { AnnouncementImgList } from './AnnouncementImg';
 
 interface AnnouncementUpdateProps {
   announceId: number;

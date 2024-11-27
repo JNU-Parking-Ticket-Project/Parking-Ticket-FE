@@ -3,7 +3,7 @@ import { Editor } from '@toast-ui/react-editor';
 import { useRef, lazy, Suspense, useState } from 'react';
 import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
-import { AnnouncementImgList } from './AnnouncementImgContainer';
+import { AnnouncementImgList } from './AnnouncementImg';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({

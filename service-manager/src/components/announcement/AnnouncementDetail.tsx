@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { lazy } from 'react';
-import { AnnouncementImgList } from './AnnouncementImgContainer';
+import { AnnouncementImgList } from './AnnouncementImg';
 
 const ToastViewer = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
