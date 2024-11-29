@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import Add from '../../assets/add.svg';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import Close from '../../assets/close.png';
-import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import { Modal } from '@quokka/design-system';
 
 interface AnnouncementImgListProps {
   images: string[];
   setImages?: Dispatch<SetStateAction<string[]>>;
   isEditPage?: boolean;
+  children?: ReactNode;
 }
 interface AnnouncementImgProps
   extends Pick<AnnouncementImgListProps, 'setImages' | 'isEditPage'> {
@@ -18,13 +17,12 @@ interface AnnouncementImgModalProps {
   isOpen: boolean;
   setClose: () => void;
 }
-interface AnnouncementAddImgProps
-  extends Pick<AnnouncementImgListProps, 'setImages'> {}
 
 export function AnnouncementImgList({
   images,
   setImages,
   isEditPage,
+  children,
 }: AnnouncementImgListProps) {
   return (
     <div className="grid grid-cols-4 gap-5">
@@ -36,7 +34,7 @@ export function AnnouncementImgList({
           key={image}
         />
       ))}
-      {isEditPage && <AnnouncementAddImg setImages={setImages} />}
+      {children}
     </div>
   );
 }
@@ -119,61 +117,5 @@ export function AnnouncementImgModal({
       </button>
       <img alt="공지사항" src={image} className="mx-auto w-fit max-h-screen" />
     </Modal>
-  );
-}
-
-function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const extension = files[0].name.split('.')[1];
-      getPresignedUrl(extension)
-        .then((res) => {
-          putImageToS3(
-            res.presignedUrl,
-            new File([files[0]], files[0].name),
-            extension,
-          )
-            .then(() => {
-              const url = new URL(res.presignedUrl);
-              const fileName = url.pathname.slice(1);
-
-              if (setImages) {
-                setImages((prev) => [
-                  ...prev,
-                  new URL(
-                    fileName,
-                    import.meta.env.VITE_IMAGE_BASE_URL,
-                  ).toString(),
-                ]);
-              }
-            })
-            .catch(() => {
-              alert('이미지 업로드에 실패했습니다.');
-            });
-        })
-        .catch(() => {
-          alert(
-            '이미지 업로드를 위한 URL 발급에 실패했습니다. 파일은 <파일명.확장자> 형식으로 업로드 되어야 합니다.',
-          );
-        });
-    }
-  };
-
-  return (
-    <>
-      <label
-        htmlFor="announcementFile"
-        className="cursor-pointer w-full h-full aspect-square bg-slate-100	 flex justify-center items-center"
-      >
-        <img className="w-20 h-20" src={Add} alt="파일 추가 버튼" />
-      </label>
-      <input
-        id="announcementFile"
-        type="file"
-        className="hidden"
-        onChange={handleFileChange}
-      />
-    </>
   );
 }

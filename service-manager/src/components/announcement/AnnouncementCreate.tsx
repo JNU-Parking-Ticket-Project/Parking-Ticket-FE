@@ -4,6 +4,7 @@ import { useRef, lazy, Suspense, useState } from 'react';
 import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AnnouncementImgList } from './AnnouncementImg';
+import { AnnouncementAddImg } from './AnnouncementAddImg';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -72,7 +73,9 @@ export const AnnouncementCreate = () => {
       </ErrorBoundary>
       <div className="mt-8 flex flex-col gap-3">
         <Txt size="h4">이미지 등록</Txt>
-        <AnnouncementImgList isEditPage setImages={setImages} images={images} />
+        <AnnouncementImgList isEditPage setImages={setImages} images={images}>
+          <AnnouncementAddImg setImages={setImages} />
+        </AnnouncementImgList>
       </div>
       <Button
         className="my-4 float-right px-[4rem]"
