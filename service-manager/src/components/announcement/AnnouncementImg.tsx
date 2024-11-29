@@ -8,10 +8,6 @@ interface AnnouncementImgListProps {
   isEditPage?: boolean;
   children?: ReactNode;
 }
-interface AnnouncementImgProps
-  extends Pick<AnnouncementImgListProps, 'setImages' | 'isEditPage'> {
-  image: string;
-}
 
 export function AnnouncementImgList({
   images,
@@ -32,6 +28,11 @@ export function AnnouncementImgList({
       {children}
     </div>
   );
+}
+
+interface AnnouncementImgProps
+  extends Pick<AnnouncementImgListProps, 'setImages' | 'isEditPage'> {
+  image: string;
 }
 
 export function AnnouncementImg({
