@@ -22,7 +22,7 @@ export const AnnouncementDetail = ({
 }: AnnouncementDetailProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(+announcementId);
   const announcementContent = announceDetailData.announceContent;
-  const imageUrl = announceDetailData.imageUrl;
+  const imageUrls = announceDetailData.imageUrls;
 
   return (
     <Container
@@ -64,10 +64,12 @@ export const AnnouncementDetail = ({
         </Txt>
       </div>
       <ToastViewer initialValue={announcementContent} />
-      <div className="mt-8 flex flex-col gap-3">
-        <Txt size="h4">이미지</Txt>
-        <AnnouncementImgList images={imageUrl} />
-      </div>
+      {imageUrls && (
+        <div className="mt-8 flex flex-col gap-3">
+          <Txt size="h4">이미지</Txt>
+          <AnnouncementImgList images={imageUrls} />
+        </div>
+      )}
     </Container>
   );
 };

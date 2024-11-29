@@ -19,7 +19,7 @@ const ToastEditor = lazy(() =>
 export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(announceId);
   const [title, setTitle] = useState(announceDetailData.announceTitle);
-  const [images, setImages] = useState<string[]>(announceDetailData.imageUrl);
+  const [images, setImages] = useState<string[]>(announceDetailData.imageUrls);
 
   const { onUpdate } = useAnnounceUpdate();
 
@@ -37,7 +37,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
       announceId,
       announceTitle: title,
       announceContent: markdown,
-      imageUrl: images,
+      imageUrls: images,
     });
   };
 
@@ -75,10 +75,17 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           />
         </Suspense>
       </ErrorBoundary>
-      <div className="mt-8 flex flex-col gap-3">
-        <Txt size="h4">이미지 수정</Txt>
-        <AnnouncementImgList isEditPage setImages={setImages} images={images} />
-      </div>
+      {images && (
+        <div className="mt-8 flex flex-col gap-3">
+          <Txt size="h4">이미지 수정</Txt>
+          <AnnouncementImgList
+            isEditPage
+            setImages={setImages}
+            images={images}
+          />
+        </div>
+      )}
+
       <Button
         size="small"
         className="float-right my-4 px-[4rem]"

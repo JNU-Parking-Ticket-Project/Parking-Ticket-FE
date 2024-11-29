@@ -29,25 +29,25 @@ export class Announce {
   announceTitle: string;
   announceContent: string;
   announceCreatedAt: string;
-  imageUrl: string[];
+  imageUrls: string[];
   constructor({
     announceId,
     announceTitle,
     announceContent,
     announceCreatedAt,
-    imageUrl,
+    imageUrls,
   }: {
     announceId: number;
     announceTitle: string;
     announceContent: string;
     announceCreatedAt: string;
-    imageUrl: string[];
+    imageUrls: string[];
   }) {
     this.announceId = announceId;
     this.announceTitle = announceTitle;
     this.announceContent = announceContent;
     this.announceCreatedAt = announceCreatedAt;
-    this.imageUrl = imageUrl;
+    this.imageUrls = imageUrls;
   }
 }
 
