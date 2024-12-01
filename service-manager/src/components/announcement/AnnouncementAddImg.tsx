@@ -7,7 +7,7 @@ interface AnnouncementAddImgProps {
 }
 
 export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       const extension = files[0].name.split('.')[1];
@@ -57,7 +57,7 @@ export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
         type="file"
         className="hidden"
         accept=".png, .jpg, .jpeg"
-        onChange={handleFileChange}
+        onChange={onFileChange}
       />
     </>
   );
