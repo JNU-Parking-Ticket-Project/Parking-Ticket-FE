@@ -24,15 +24,11 @@ export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
               const url = new URL(res.presignedUrl);
               const fileName = url.pathname.slice(1);
 
-              if (setImages) {
-                setImages((prev) => [
-                  ...prev,
-                  new URL(
-                    fileName,
-                    import.meta.env.VITE_IMAGE_BASE_URL,
-                  ).toString(),
-                ]);
-              }
+              const newFileImageUrl = new URL(
+                fileName,
+                import.meta.env.VITE_IMAGE_BASE_URL,
+              );
+              setImages?.((prev) => [...prev, newFileImageUrl.toString()]);
             })
             .catch(() => {
               alert('이미지 업로드에 실패했습니다.');
