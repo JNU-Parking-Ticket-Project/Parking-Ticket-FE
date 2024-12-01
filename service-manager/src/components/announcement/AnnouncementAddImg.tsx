@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import Add from '../../assets/add.svg';
 
@@ -7,7 +7,7 @@ interface AnnouncementAddImgProps {
 }
 
 export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       const extension = files[0].name.split('.')[1];
