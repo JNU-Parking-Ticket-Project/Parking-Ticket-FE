@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
-import Close from '../../assets/close.png';
+import Close from '../../assets/close.svg';
 import { AnnouncementImgModal } from './AnnouncementImgModal';
 
 interface AnnouncementImgListProps {
