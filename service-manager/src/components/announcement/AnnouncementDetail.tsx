@@ -67,7 +67,7 @@ export const AnnouncementDetail = ({
       {imageUrls && (
         <div className="mt-8 flex flex-col gap-3">
           <Txt size="h4">이미지</Txt>
-          <AnnouncementImgList images={imageUrls} />
+          <AnnouncementImgList imageUrls={imageUrls} />
         </div>
       )}
     </Container>

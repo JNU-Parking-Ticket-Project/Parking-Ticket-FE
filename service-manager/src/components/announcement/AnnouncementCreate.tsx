@@ -16,7 +16,7 @@ export const AnnouncementCreate = () => {
   const [title, setTitle] = useState('');
   const editorRef = useRef<Editor>(null);
   const { onCreate } = useCreateAnnouncement();
-  const [images, setImages] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const onPostAnnounce = () => {
     const editorInstance = editorRef.current?.getInstance();
@@ -32,7 +32,7 @@ export const AnnouncementCreate = () => {
     onCreate({
       announceTitle: title,
       announceContent: markdown,
-      imageUrls: images,
+      imageUrls: imageUrls,
     });
   };
 
@@ -73,8 +73,12 @@ export const AnnouncementCreate = () => {
       </ErrorBoundary>
       <div className="mt-8 flex flex-col gap-3">
         <Txt size="h4">이미지 등록</Txt>
-        <AnnouncementImgList isEditPage setImages={setImages} images={images}>
-          <AnnouncementAddImg setImages={setImages} />
+        <AnnouncementImgList
+          isEditPage
+          setImageUrls={setImageUrls}
+          imageUrls={imageUrls}
+        >
+          <AnnouncementAddImg setImages={setImageUrls} />
         </AnnouncementImgList>
       </div>
       <Button

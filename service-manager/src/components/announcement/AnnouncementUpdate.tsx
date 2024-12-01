@@ -20,7 +20,9 @@ const ToastEditor = lazy(() =>
 export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(announceId);
   const [title, setTitle] = useState(announceDetailData.announceTitle);
-  const [images, setImages] = useState<string[]>(announceDetailData.imageUrls);
+  const [imageUrls, setImageUrls] = useState<string[]>(
+    announceDetailData.imageUrls,
+  );
 
   const { onUpdate } = useAnnounceUpdate();
 
@@ -38,7 +40,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
       announceId,
       announceTitle: title,
       announceContent: markdown,
-      imageUrls: images,
+      imageUrls: imageUrls,
     });
   };
 
@@ -76,11 +78,15 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           />
         </Suspense>
       </ErrorBoundary>
-      {images && (
+      {imageUrls && (
         <div className="mt-8 flex flex-col gap-3">
           <Txt size="h4">이미지 수정</Txt>
-          <AnnouncementImgList isEditPage setImages={setImages} images={images}>
-            <AnnouncementAddImg setImages={setImages} />
+          <AnnouncementImgList
+            isEditPage
+            setImageUrls={setImageUrls}
+            imageUrls={imageUrls}
+          >
+            <AnnouncementAddImg setImages={setImageUrls} />
           </AnnouncementImgList>
         </div>
       )}

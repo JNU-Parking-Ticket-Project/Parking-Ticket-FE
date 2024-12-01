@@ -3,24 +3,24 @@ import Close from '../../assets/close.svg';
 import { AnnouncementImgModal } from './AnnouncementImgModal';
 
 interface AnnouncementImgListProps {
-  images: string[];
-  setImages?: Dispatch<SetStateAction<string[]>>;
+  imageUrls: string[];
+  setImageUrls?: Dispatch<SetStateAction<string[]>>;
   isEditPage?: boolean;
   children?: ReactNode;
 }
 
 export function AnnouncementImgList({
-  images,
-  setImages,
+  imageUrls,
+  setImageUrls,
   isEditPage,
   children,
 }: AnnouncementImgListProps) {
   return (
     <div className="grid grid-cols-4 gap-5">
-      {images.map((image) => (
+      {imageUrls.map((image) => (
         <AnnouncementImg
           isEditPage={isEditPage}
-          setImages={setImages}
+          setImageUrls={setImageUrls}
           image={image}
           key={image}
         />
@@ -31,21 +31,21 @@ export function AnnouncementImgList({
 }
 
 interface AnnouncementImgProps
-  extends Pick<AnnouncementImgListProps, 'setImages' | 'isEditPage'> {
+  extends Pick<AnnouncementImgListProps, 'setImageUrls' | 'isEditPage'> {
   image: string;
 }
 
 export function AnnouncementImg({
   isEditPage,
   image,
-  setImages,
+  setImageUrls,
 }: AnnouncementImgProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
-    if (setImages) {
-      setImages((prevImages) => prevImages.filter((img) => img !== image));
+    if (setImageUrls) {
+      setImageUrls((prevImages) => prevImages.filter((img) => img !== image));
     }
   };
 
