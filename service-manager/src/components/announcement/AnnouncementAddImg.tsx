@@ -7,38 +7,32 @@ interface AnnouncementAddImgProps {
 }
 
 export const AnnouncementAddImg = ({ setImages }: AnnouncementAddImgProps) => {
-  const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       const fileName = files[0].name;
       const extension = fileName.split('.')[fileName.split('.').length - 1];
 
-      getPresignedUrl(extension)
-        .then((res) => {
-          putImageToS3(
-            res.presignedUrl,
-            new File([files[0]], files[0].name),
-            extension,
-          )
-            .then(() => {
-              const url = new URL(res.presignedUrl);
-              const fileName = url.pathname.slice(1);
+      try {
+        const res = await getPresignedUrl(extension);
+        await putImageToS3(
+          res.presignedUrl,
+          new File([files[0]], files[0].name),
+          extension,
+        );
+        const url = new URL(res.presignedUrl);
+        const fileName = url.pathname.slice(1);
 
-              const newFileImageUrl = new URL(
-                fileName,
-                import.meta.env.VITE_IMAGE_BASE_URL,
-              );
-              setImages?.((prev) => [...prev, newFileImageUrl.toString()]);
-            })
-            .catch(() => {
-              alert('이미지 업로드에 실패했습니다.');
-            });
-        })
-        .catch(() => {
-          alert(
-            '이미지 업로드를 위한 URL 발급에 실패했습니다. 파일은 <파일명.확장자> 형식으로 업로드 되어야 합니다.',
-          );
-        });
+        const newFileImageUrl = new URL(
+          fileName,
+          import.meta.env.VITE_IMAGE_BASE_URL,
+        );
+        setImages?.((prev) => [...prev, newFileImageUrl.toString()]);
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message);
+        }
+      }
     }
   };
 
