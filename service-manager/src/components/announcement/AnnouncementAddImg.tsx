@@ -56,6 +56,7 @@ export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
         id="announcementFile"
         type="file"
         className="hidden"
+        accept=".png, .jpg, .jpeg"
         onChange={handleFileChange}
       />
     </>
