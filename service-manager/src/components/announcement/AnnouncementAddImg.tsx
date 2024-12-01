@@ -10,7 +10,9 @@ export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const extension = files[0].name.split('.')[1];
+      const fileName = files[0].name;
+      const extension = fileName.split('.')[fileName.split('.').length - 1];
+
       getPresignedUrl(extension)
         .then((res) => {
           putImageToS3(
