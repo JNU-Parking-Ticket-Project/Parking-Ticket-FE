@@ -2,7 +2,7 @@ export interface announce {
   announceId: number;
   announceTitle: string;
   announceCreatedAt: string;
-  imageUrl: string[];
+  imageUrls: string[];
 }
 
 export class AllAnnounce {
