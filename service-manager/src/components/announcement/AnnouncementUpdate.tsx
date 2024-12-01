@@ -78,7 +78,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           />
         </Suspense>
       </ErrorBoundary>
-      {imageUrls && (
+      {imageUrls.length !== 0 && (
         <div className="mt-8 flex flex-col gap-3">
           <Txt size="h4">이미지 수정</Txt>
           <AnnouncementImgList
@@ -90,7 +90,6 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           </AnnouncementImgList>
         </div>
       )}
-
       <Button
         size="small"
         className="float-right my-4 px-[4rem]"

@@ -64,7 +64,7 @@ export const AnnouncementDetail = ({
         </Txt>
       </div>
       <ToastViewer initialValue={announcementContent} />
-      {imageUrls && (
+      {imageUrls.length !== 0 && (
         <div className="mt-8 flex flex-col gap-3">
           <Txt size="h4">이미지</Txt>
           <AnnouncementImgList imageUrls={imageUrls} />
