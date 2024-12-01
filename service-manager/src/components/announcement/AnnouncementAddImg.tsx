@@ -10,15 +10,14 @@ export const AnnouncementAddImg = ({ setImages }: AnnouncementAddImgProps) => {
   const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const fileName = files[0].name;
-      const extension = fileName.split('.')[fileName.split('.').length - 1];
+      const extension = files[0].name.split('.').at(-1);
 
       try {
-        const res = await getPresignedUrl(extension);
+        const res = await getPresignedUrl(`${extension}`);
         await putImageToS3(
           res.presignedUrl,
           new File([files[0]], files[0].name),
-          extension,
+          `${extension}`,
         );
         const url = new URL(res.presignedUrl);
         const fileName = url.pathname.slice(1);
