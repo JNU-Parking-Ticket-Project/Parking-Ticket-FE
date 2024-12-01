@@ -6,7 +6,7 @@ interface AnnouncementAddImgProps {
   setImages?: Dispatch<SetStateAction<string[]>>;
 }
 
-export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
+export const AnnouncementAddImg = ({ setImages }: AnnouncementAddImgProps) => {
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -59,4 +59,4 @@ export function AnnouncementAddImg({ setImages }: AnnouncementAddImgProps) {
       />
     </>
   );
-}
+};

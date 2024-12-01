@@ -6,11 +6,11 @@ interface AnnouncementImgModalProps {
   setClose: () => void;
 }
 
-export function AnnouncementImgModal({
+export const AnnouncementImgModal = ({
   image,
   isOpen,
   setClose,
-}: AnnouncementImgModalProps) {
+}: AnnouncementImgModalProps) => {
   return (
     <Modal
       className="announcementImg-modal"
@@ -38,4 +38,4 @@ export function AnnouncementImgModal({
       <img alt="공지사항" src={image} className="mx-auto w-fit max-h-screen" />
     </Modal>
   );
-}
+};

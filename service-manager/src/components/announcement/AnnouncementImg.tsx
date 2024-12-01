@@ -9,12 +9,12 @@ interface AnnouncementImgListProps {
   children?: ReactNode;
 }
 
-export function AnnouncementImgList({
+export const AnnouncementImgList = ({
   imageUrls,
   setImageUrls,
   isEditPage,
   children,
-}: AnnouncementImgListProps) {
+}: AnnouncementImgListProps) => {
   return (
     <div className="grid grid-cols-4 gap-5">
       {imageUrls.map((image) => (
@@ -28,18 +28,18 @@ export function AnnouncementImgList({
       {children}
     </div>
   );
-}
+};
 
 interface AnnouncementImgProps
   extends Pick<AnnouncementImgListProps, 'setImageUrls' | 'isEditPage'> {
   image: string;
 }
 
-export function AnnouncementImg({
+export const AnnouncementImg = ({
   isEditPage,
   image,
   setImageUrls,
-}: AnnouncementImgProps) {
+}: AnnouncementImgProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (event: React.MouseEvent) => {
@@ -80,4 +80,4 @@ export function AnnouncementImg({
       )}
     </>
   );
-}
+};
