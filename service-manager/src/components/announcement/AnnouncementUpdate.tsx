@@ -86,7 +86,7 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
             setImageUrls={setImageUrls}
             imageUrls={imageUrls}
           >
-            <AnnouncementAddImg setImages={setImageUrls} />
+            <AnnouncementAddImg setImageUrls={setImageUrls} />
           </AnnouncementImgList>
         </div>
       )}

@@ -3,10 +3,12 @@ import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import Add from '../../assets/add.svg';
 
 interface AnnouncementAddImgProps {
-  setImages?: Dispatch<SetStateAction<string[]>>;
+  setImageUrls?: Dispatch<SetStateAction<string[]>>;
 }
 
-export const AnnouncementAddImg = ({ setImages }: AnnouncementAddImgProps) => {
+export const AnnouncementAddImg = ({
+  setImageUrls,
+}: AnnouncementAddImgProps) => {
   const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -26,7 +28,7 @@ export const AnnouncementAddImg = ({ setImages }: AnnouncementAddImgProps) => {
           fileName,
           import.meta.env.VITE_IMAGE_BASE_URL,
         );
-        setImages?.((prev) => [...prev, newFileImageUrl.toString()]);
+        setImageUrls?.((prev) => [...prev, newFileImageUrl.toString()]);
       } catch (error) {
         if (error instanceof Error) {
           alert(error.message);

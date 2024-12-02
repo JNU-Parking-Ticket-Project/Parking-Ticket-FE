@@ -78,7 +78,7 @@ export const AnnouncementCreate = () => {
           setImageUrls={setImageUrls}
           imageUrls={imageUrls}
         >
-          <AnnouncementAddImg setImages={setImageUrls} />
+          <AnnouncementAddImg setImageUrls={setImageUrls} />
         </AnnouncementImgList>
       </div>
       <Button
