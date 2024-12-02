@@ -29,6 +29,7 @@ export const AnnouncementAddImg = ({
           alert(error.message);
         }
       }
+      event.target.value = '';
     }
   };
 
