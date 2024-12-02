@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { PAGINATION_BOUND } from '../constants/announcement';
 
 export const generatePaginationIndexs = (
@@ -16,18 +15,4 @@ export const generatePaginationIndexs = (
     )
     .filter((idx) => idx >= 0 && idx <= lastIdx)
     .splice(0, PAGINATION_BOUND);
-};
-
-export const setNewImage = (
-  res: { presignedUrl: string },
-  setImageUrls: Dispatch<SetStateAction<string[]>>,
-) => {
-  const url = new URL(res.presignedUrl);
-  const fileName = url.pathname.slice(1);
-
-  const newFileImageUrl = new URL(
-    fileName,
-    import.meta.env.VITE_IMAGE_BASE_URL,
-  );
-  setImageUrls((prev) => [...prev, newFileImageUrl.toString()]);
 };

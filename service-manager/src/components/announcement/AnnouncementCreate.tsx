@@ -5,6 +5,7 @@ import { useCreateAnnouncement } from '../../hooks/react-query/useAnnounceForm';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AnnouncementImgList } from './AnnouncementImg';
 import { AnnouncementAddImg } from './AnnouncementAddImg';
+import { useImageUrls } from '../../hooks/useImageUrls';
 
 const ToastEditor = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -16,7 +17,7 @@ export const AnnouncementCreate = () => {
   const [title, setTitle] = useState('');
   const editorRef = useRef<Editor>(null);
   const { onCreate } = useCreateAnnouncement();
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const { imageUrls, setImageUrls } = useImageUrls();
 
   const onPostAnnounce = () => {
     const editorInstance = editorRef.current?.getInstance();

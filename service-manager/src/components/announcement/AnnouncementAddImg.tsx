@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import Add from '../../assets/add.svg';
-import { setNewImage } from '../../functions/announcement';
+import { useImageUrls } from '../../hooks/useImageUrls';
 
 interface AnnouncementAddImgProps {
   setImageUrls: Dispatch<SetStateAction<string[]>>;
@@ -10,6 +10,7 @@ interface AnnouncementAddImgProps {
 export const AnnouncementAddImg = ({
   setImageUrls,
 }: AnnouncementAddImgProps) => {
+  const { setNewImageUrls } = useImageUrls();
   const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -22,7 +23,7 @@ export const AnnouncementAddImg = ({
           new File([files[0]], files[0].name),
           `${extension}`,
         );
-        setNewImage(res, setImageUrls);
+        setNewImageUrls(res, setImageUrls);
       } catch (error) {
         if (error instanceof Error) {
           alert(error.message);

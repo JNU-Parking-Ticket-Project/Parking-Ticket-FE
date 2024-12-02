@@ -1,11 +1,12 @@
 import { Button, Txt } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
-import { useRef, lazy, Suspense, useState } from 'react';
+import { useRef, lazy, Suspense, useState, useEffect } from 'react';
 import { useAnnounceUpdate } from '../../hooks/react-query/useAnnounceForm';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AnnouncementImgList } from './AnnouncementImg';
 import { AnnouncementAddImg } from './AnnouncementAddImg';
+import { useImageUrls } from '../../hooks/useImageUrls';
 
 interface AnnouncementUpdateProps {
   announceId: number;
@@ -20,9 +21,7 @@ const ToastEditor = lazy(() =>
 export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(announceId);
   const [title, setTitle] = useState(announceDetailData.announceTitle);
-  const [imageUrls, setImageUrls] = useState<string[]>(
-    announceDetailData.imageUrls,
-  );
+  const { imageUrls, setImageUrls } = useImageUrls();
 
   const { onUpdate } = useAnnounceUpdate();
 
@@ -47,6 +46,10 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const onAddImageBlobHook = () => {
     alert('하단에서 이미지를 등록해주세요.');
   };
+
+  useEffect(() => {
+    setImageUrls(announceDetailData.imageUrls);
+  }, []);
 
   return (
     <>
