@@ -2,6 +2,7 @@ export interface announce {
   announceId: number;
   announceTitle: string;
   announceCreatedAt: string;
+  imageUrls: string[];
 }
 
 export class AllAnnounce {
@@ -28,21 +29,25 @@ export class Announce {
   announceTitle: string;
   announceContent: string;
   announceCreatedAt: string;
+  imageUrls: string[];
   constructor({
     announceId,
     announceTitle,
     announceContent,
     announceCreatedAt,
+    imageUrls,
   }: {
     announceId: number;
     announceTitle: string;
     announceContent: string;
     announceCreatedAt: string;
+    imageUrls: string[];
   }) {
     this.announceId = announceId;
     this.announceTitle = announceTitle;
     this.announceContent = announceContent;
     this.announceCreatedAt = announceCreatedAt;
+    this.imageUrls = imageUrls;
   }
 }
 
