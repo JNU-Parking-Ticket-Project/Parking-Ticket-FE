@@ -1,9 +1,10 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
 import Add from '../../assets/add.svg';
+import { setNewImage } from '../../functions/announcement';
 
 interface AnnouncementAddImgProps {
-  setImageUrls?: Dispatch<SetStateAction<string[]>>;
+  setImageUrls: Dispatch<SetStateAction<string[]>>;
 }
 
 export const AnnouncementAddImg = ({
@@ -21,14 +22,7 @@ export const AnnouncementAddImg = ({
           new File([files[0]], files[0].name),
           `${extension}`,
         );
-        const url = new URL(res.presignedUrl);
-        const fileName = url.pathname.slice(1);
-
-        const newFileImageUrl = new URL(
-          fileName,
-          import.meta.env.VITE_IMAGE_BASE_URL,
-        );
-        setImageUrls?.((prev) => [...prev, newFileImageUrl.toString()]);
+        setNewImage(res, setImageUrls);
       } catch (error) {
         if (error instanceof Error) {
           alert(error.message);
