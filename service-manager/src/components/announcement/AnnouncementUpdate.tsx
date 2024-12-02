@@ -78,18 +78,16 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           />
         </Suspense>
       </ErrorBoundary>
-      {imageUrls.length !== 0 && (
-        <div className="mt-8 flex flex-col gap-3">
-          <Txt size="h4">이미지 수정</Txt>
-          <AnnouncementImgList
-            isEditPage
-            setImageUrls={setImageUrls}
-            imageUrls={imageUrls}
-          >
-            <AnnouncementAddImg setImageUrls={setImageUrls} />
-          </AnnouncementImgList>
-        </div>
-      )}
+      <div className="mt-8 flex flex-col gap-3">
+        <Txt size="h4">이미지 수정</Txt>
+        <AnnouncementImgList
+          isEditPage
+          setImageUrls={setImageUrls}
+          imageUrls={imageUrls}
+        >
+          <AnnouncementAddImg setImageUrls={setImageUrls} />
+        </AnnouncementImgList>
+      </div>
       <Button
         size="small"
         className="float-right my-4 px-[4rem]"
