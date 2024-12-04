@@ -12,14 +12,17 @@ export const useCreateAnnouncement = () => {
   const onCreate = ({
     announceTitle,
     announceContent,
+    imageUrls,
   }: {
     announceTitle: string;
     announceContent: string;
+    imageUrls: string[];
   }) => {
     postAnnounce(
       {
         announceTitle,
         announceContent,
+        imageUrls,
       },
       {
         onError: (error) => {
@@ -42,6 +45,7 @@ interface AnnouncementUpdateForm {
   announceId: number;
   announceTitle: string;
   announceContent: string;
+  imageUrls: string[];
 }
 
 export const useAnnounceUpdate = () => {
@@ -55,12 +59,14 @@ export const useAnnounceUpdate = () => {
     announceId,
     announceTitle,
     announceContent,
+    imageUrls,
   }: AnnouncementUpdateForm) => {
     putAnnounceById(
       announceId,
       {
         announceTitle,
         announceContent,
+        imageUrls,
       },
       {
         onError: (error) => {

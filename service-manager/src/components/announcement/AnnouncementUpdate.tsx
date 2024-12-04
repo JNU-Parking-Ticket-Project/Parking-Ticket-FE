@@ -1,10 +1,12 @@
-import { Button } from '@quokka/design-system';
+import { Button, Txt } from '@quokka/design-system';
 import { Editor } from '@toast-ui/react-editor';
-import { useRef, lazy, Suspense, useState } from 'react';
+import { useRef, lazy, Suspense, useState, useEffect } from 'react';
 import { useAnnounceUpdate } from '../../hooks/react-query/useAnnounceForm';
 import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import ErrorBoundary from '../common/ErrorBoundary';
-import { getPresignedUrl, putImageToS3 } from '../../apis/image.apis';
+import { AnnouncementImgList } from './AnnouncementImg';
+import { AnnouncementAddImg } from './AnnouncementAddImg';
+import { useImageUrls } from '../../hooks/useImageUrls';
 
 interface AnnouncementUpdateProps {
   announceId: number;
@@ -19,6 +21,8 @@ const ToastEditor = lazy(() =>
 export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
   const { announceDetailData } = useAnnounceDetailQuery(announceId);
   const [title, setTitle] = useState(announceDetailData.announceTitle);
+  const { imageUrls, setImageUrls } = useImageUrls();
+
   const { onUpdate } = useAnnounceUpdate();
 
   const editorRef = useRef<Editor>(null);
@@ -35,34 +39,17 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
       announceId,
       announceTitle: title,
       announceContent: markdown,
+      imageUrls: imageUrls,
     });
   };
 
-  const onAddImageBlobHook = (blob: Blob, callback: (url: string) => void) => {
-    const extension = blob.name.split('.')[1];
-
-    getPresignedUrl(extension)
-      .then((res) => {
-        putImageToS3(res.presignedUrl, new File([blob], blob.name), extension)
-          .then(() => {
-            const url = new URL(res.presignedUrl);
-            const fileName = url.pathname.slice(1);
-            callback(
-              new URL(fileName, import.meta.env.VITE_IMAGE_BASE_URL).toString(),
-            );
-          })
-          .catch(() => {
-            alert('이미지 업로드에 실패했습니다.');
-          });
-      })
-      .catch(() => {
-        alert(
-          '이미지 업로드를 위한 URL 발급에 실패했습니다. 파일은 <파일명.확장자> 형식으로 업로드 되어야 합니다.',
-        );
-      });
-
-    return;
+  const onAddImageBlobHook = () => {
+    alert('하단에서 이미지를 등록해주세요.');
   };
+
+  useEffect(() => {
+    setImageUrls(announceDetailData.imageUrls);
+  }, []);
 
   return (
     <>
@@ -94,6 +81,16 @@ export const AnnouncementUpdate = ({ announceId }: AnnouncementUpdateProps) => {
           />
         </Suspense>
       </ErrorBoundary>
+      <div className="mt-8 flex flex-col gap-3">
+        <Txt size="h4">이미지 수정</Txt>
+        <AnnouncementImgList
+          isEditPage
+          setImageUrls={setImageUrls}
+          imageUrls={imageUrls}
+        >
+          <AnnouncementAddImg setImageUrls={setImageUrls} />
+        </AnnouncementImgList>
+      </div>
       <Button
         size="small"
         className="float-right my-4 px-[4rem]"
