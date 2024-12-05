@@ -1,13 +1,13 @@
 import { Modal } from '@quokka/design-system';
 
 interface AnnouncementImgModalProps {
-  image: string;
+  imageUrl: string;
   isOpen: boolean;
   setClose: () => void;
 }
 
 export const AnnouncementImgModal = ({
-  image,
+  imageUrl,
   isOpen,
   setClose,
 }: AnnouncementImgModalProps) => {
@@ -35,7 +35,11 @@ export const AnnouncementImgModal = ({
       >
         X
       </button>
-      <img alt="공지사항" src={image} className="mx-auto w-fit max-h-screen" />
+      <img
+        alt="공지사항"
+        src={imageUrl}
+        className="mx-auto w-fit max-h-screen"
+      />
     </Modal>
   );
 };
