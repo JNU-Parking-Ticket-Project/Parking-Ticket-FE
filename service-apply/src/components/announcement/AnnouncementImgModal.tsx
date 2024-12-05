@@ -13,7 +13,7 @@ export const AnnouncementImgModal = ({
 }: AnnouncementImgModalProps) => {
   return (
     <Modal
-      className="announcementImg-modal"
+      className="announcement-img-modal"
       isOpen={isOpen}
       onRequestClose={setClose}
       overLayCss={{
