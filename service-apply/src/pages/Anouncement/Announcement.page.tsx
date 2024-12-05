@@ -4,6 +4,7 @@ import { useAnnounceDetailQuery } from '../../hooks/react-query/useAnnounce';
 import { Icon } from '../../components/announcement/Icon';
 import { Suspense, lazy } from 'react';
 import ErrorBoundary from '../../components/common/ErrorBoundary';
+import { AnnouncementImgList } from '../../components/announcement/AnnouncementImg';
 
 const ToastViewer = lazy(() =>
   import('@toast-ui/react-editor').then((module) => ({
@@ -56,6 +57,12 @@ export const AnnouncementPage = () => {
           />
         </Suspense>
       </ErrorBoundary>
+      {announceDetailData.imageUrls.length !== 0 && (
+        <div className="mt-8 flex flex-col gap-3">
+          <Txt size="h4">이미지</Txt>
+          <AnnouncementImgList imageUrls={announceDetailData.imageUrls} />
+        </div>
+      )}
     </Container>
   );
 };
