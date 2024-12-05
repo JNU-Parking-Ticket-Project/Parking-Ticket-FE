@@ -3,7 +3,7 @@ import { AnnouncementListItem } from './AnnouncementListItem';
 import { Announce } from 'service-apply/src/apis/dtos/announce.dtos';
 
 interface AnnouncementListProps {
-  data: Omit<Announce, 'announceContent'>[];
+  data: Omit<Announce, 'announceContent' | 'imageUrls'>[];
 }
 
 export const AnnouncementList = ({ data }: AnnouncementListProps) => {
