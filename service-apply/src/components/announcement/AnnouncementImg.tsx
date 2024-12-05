@@ -10,7 +10,7 @@ export const AnnouncementImgList = ({
 }: AnnouncementImgListProps) => {
   return (
     <div className="grid grid-cols-4 gap-5">
-      {imageUrls.map((imageUrl, idx) => (
+      {imageUrls.map((imageUrl) => (
         <AnnouncementImg imageUrl={imageUrl} key={imageUrl} />
       ))}
     </div>
