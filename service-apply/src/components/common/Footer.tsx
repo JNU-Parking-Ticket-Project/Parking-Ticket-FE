@@ -1,8 +1,6 @@
 import { Txt } from '@quokka/design-system';
 import { Link } from 'react-router-dom';
 
-const HOME_PAGE_LINK = 'https://www.cnuheyday.com';
-
 export const Footer = () => {
   return (
     <footer className="grid md:grid-cols-12 w-full left-0 border-t border-[#DBDBDB] py-4 h-44">
@@ -11,16 +9,9 @@ export const Footer = () => {
           contact us
         </Txt>
         <Txt className="py-2">
-          공식 인스타그램:{' '}
-          <Link to="https://www.instagram.com/cnu_heyday_/">
-            <Txt className="underline lowercase">{'(@cnu_heyday_)'}</Txt>
-          </Link>
-        </Txt>
-        <Txt>카카오톡 공식 채널:{' (전남대학 총학생회 HEYDEY)'}</Txt>
-        <Txt>
-          총학생회 홈페이지:{' '}
-          <Link to={HOME_PAGE_LINK}>
-            <Txt className="underline">홈페이지 바로가기</Txt>
+          공식 인스타그램
+          <Link to="https://www.instagram.com/jnu_remember__/">
+            <Txt className="underline lowercase">{'(@jnu_remember__)'}</Txt>
           </Link>
         </Txt>
       </div>
