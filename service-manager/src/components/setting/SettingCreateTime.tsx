@@ -140,18 +140,9 @@ export const SettingCreateTime = () => {
   };
 
   const onSetCreateTime =
-    (
-      predicate: (date: Date) => boolean,
-      errMsg: string,
-      setDate: Dispatch<SetStateAction<Date>>,
-      setDateType: 'open' | 'close',
-    ) =>
+    (setDate: Dispatch<SetStateAction<Date>>, setDateType: 'open' | 'close') =>
     (date: Date | null) => {
       if (!date) return;
-      if (predicate(date)) {
-        alert(errMsg);
-        return;
-      }
       setDate(date);
       if (setDateType === 'open' && date > endDate) {
         setEndDate(date);
@@ -173,22 +164,12 @@ export const SettingCreateTime = () => {
       <div className="flex justify-around gap-8">
         <DateTimePicker
           date={openDate}
-          setDate={onSetCreateTime(
-            isPastTime,
-            '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
-            setOpenDate,
-            'open',
-          )}
+          setDate={onSetCreateTime(setOpenDate, 'open')}
           title="Open"
         />
         <DateTimePicker
           date={endDate}
-          setDate={onSetCreateTime(
-            isPastTime,
-            '현재 시간보다 이전 시간으로 설정할 수 없습니다.',
-            setEndDate,
-            'close',
-          )}
+          setDate={onSetCreateTime(setEndDate, 'close')}
           title="Close"
         />
       </div>

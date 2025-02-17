@@ -188,10 +188,6 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           setDate={(date) => {
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
-            if (isPastTime(date)) {
-              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
-              return;
-            }
             setOpenDate(date);
             if (date > endDate) setEndDate(date);
           }}
@@ -202,11 +198,8 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           setDate={(date) => {
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
-            if (date < openDate) return;
-            if (isPastTime(date)) {
-              alert('현재 시간보다 이전 시간으로 설정할 수 없습니다.');
-              return;
-            }
+            if (date < openDate)
+              return alert('Open 시간 이전 시간으로 설정할 수 없습니다.');
             setEndDate(date);
           }}
           title="Close"
@@ -221,6 +214,21 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               alert('제목을 입력해주세요.');
               return;
             }
+
+            if (isPastTime(openDate)) {
+              alert(
+                'OPEN 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.',
+              );
+              return;
+            }
+
+            if (isPastTime(endDate)) {
+              alert(
+                'CLOSE 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.',
+              );
+              return;
+            }
+
             updateSettingTime({
               startAt: openDate,
               endAt: endDate,
