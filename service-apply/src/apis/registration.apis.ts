@@ -36,6 +36,14 @@ export const postTemporarySave = async (
   return new RegistrationResponse(response);
 };
 
+// export const postEmailTransmit = async () => {
+//   const response = await https.post('url');
+//   if (isErrorResponse(response)) {
+//     throw new Error(response.reason);
+//   }
+//   return response;
+// };
+
 export const getRegistration = async ({
   eventId,
 }: RegistrationEventIdResponse): Promise<RegistrationOptionsResponse> => {

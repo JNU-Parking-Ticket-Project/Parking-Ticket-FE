@@ -12,6 +12,7 @@ import {
 import {
   getCaptcha,
   getRegistration,
+  // postEmailTransmit,
   postRegistration,
   postTemporarySave,
 } from '../../apis/registration.apis';
@@ -74,6 +75,15 @@ export const useTemporarySaveMutate = () => {
     },
   };
 };
+
+// export const useEmailTransmitMutate = () => {
+//   const { mutate } = useMutation({
+//     mutationKey: ['emailTransmit'],
+//     mutationFn: postEmailTransmit,
+//   });
+
+//   return {};
+// };
 
 export const useApplyQuery = ({ eventId }: RegistrationEventIdResponse) => {
   const { data } = useSuspenseQuery({

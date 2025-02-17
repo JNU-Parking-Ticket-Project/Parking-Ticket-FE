@@ -62,7 +62,10 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
       <div className="w-full">
         <div className="flex justify-between align-bottom">
           <ApplyCount eventId={eventId} sector={selectedSector} />
-          <div className="text-right p-4">
+          <div className="text-right my-5">
+            <Button size="small" color="secondary" className="mr-5">
+              이메일 전송
+            </Button>
             <Button size="small" onClick={exportXLSX}>
               엑셀다운로드
             </Button>
