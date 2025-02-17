@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, InputText, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
@@ -33,14 +33,75 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const selectedHour = date.getHours().toString().padStart(2, '0');
   const selectedMinute = date.getMinutes().toString().padStart(2, '0');
 
+  const onHourChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newHour = e.target.value;
+
+    if (!/^\d*$/.test(newHour)) {
+      return alert('숫자만 입력 가능합니다.');
+    }
+
+    if (Number(newHour) > 23) {
+      return alert('유효한 시간이 아닙니다.');
+    }
+
+    if (newHour !== selectedHour) {
+      setDate(
+        new Date(
+          selectedYear,
+          Number(selectedMonth) - 1,
+          Number(selectedDay),
+          Number(newHour),
+          Number(selectedMinute),
+        ),
+      );
+    }
+  };
+
+  const onMinuteChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newMinute = e.target.value;
+
+    if (!/^\d*$/.test(newMinute)) {
+      return alert('숫자만 입력 가능합니다.');
+    }
+
+    if (Number(newMinute) > 59) {
+      return alert('유효한 시간이 아닙니다.');
+    }
+
+    if (newMinute !== selectedMinute) {
+      setDate(
+        new Date(
+          selectedYear,
+          Number(selectedMonth) - 1,
+          Number(selectedDay),
+          Number(selectedHour),
+          Number(newMinute),
+        ),
+      );
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 flex-1 min-w-[25rem]">
       <Txt size="h3">{title}</Txt>
-      <Txt
-        size="h4"
-        color="white"
-        className="text-center p-4 bg-[linear-gradient(91deg,#0255D5_12.84%,#9CBBFF_104.56%)] rounded-md"
-      >{`${selectedYear} : ${selectedMonth} : ${selectedDay} / ${selectedHour} : ${selectedMinute}`}</Txt>
+      <div className="text-center p-4 bg-[linear-gradient(91deg,#0255D5_12.84%,#9CBBFF_104.56%)] rounded-md">
+        <Txt size="h4" color="white">
+          {`${selectedYear} : ${selectedMonth} : ${selectedDay} / `}
+        </Txt>
+        <input
+          className="text-2xl font-semibold w-7 text-white bg-transparent"
+          value={selectedHour}
+          onChange={onHourChange}
+        />
+        <Txt size="h4" color="white">
+          {`${' : '}`}
+        </Txt>
+        <input
+          className="text-2xl font-semibold w-7 text-white bg-transparent"
+          value={selectedMinute}
+          onChange={onMinuteChange}
+        />
+      </div>
       <div className="flex justify-center">
         <DatePicker
           selected={date}
