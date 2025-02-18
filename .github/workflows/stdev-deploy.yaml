@@ -1,0 +1,46 @@
+name: 🧑‍💻stdev 개발 환경 React App CI/CD
+on:
+  push:
+    branches:
+      - stdev
+
+env:
+  ENVIRONMENT: dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      ####################################################################################################
+      # APPLY MODULE
+      ####################################################################################################
+      - name: Apply 모듈 배포 스크립트 실행
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USERNAME }}
+          password: ${{ secrets.DEV_SSH_PASSWORD }}
+          port: ${{ secrets.DEV_SSH_PORT }}
+          script: |
+            cd ~/jnu-parking/Parking-Ticket-FE
+            git pull origin stdev
+            pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
+            pnpm build:apply
+
+      ####################################################################################################
+      # MANAGER MODULE
+      ####################################################################################################
+      - name: Manager 모듈 배포 스크립트 실행
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USERNAME }}
+          password: ${{ secrets.DEV_SSH_PASSWORD }}
+          port: ${{ secrets.DEV_SSH_PORT }}
+          script: |
+            cd ~/jnu-parking/Parking-Ticket-FE
+            git pull origin stdev
+            pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
+            pnpm build:manager
