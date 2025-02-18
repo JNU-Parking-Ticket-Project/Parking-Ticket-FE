@@ -25,9 +25,11 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
+            git checkout stdev
             git pull origin stdev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:apply
+            pm2 restart apply
 
       ####################################################################################################
       # MANAGER MODULE
@@ -41,6 +43,8 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
+            git checkout stdev
             git pull origin stdev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:manager
+            pm2 restart manager
