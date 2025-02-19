@@ -61,7 +61,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const onMinuteChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newMinute = e.target.value;
 
-    if (!/^\d*$/.test(newMinute)) {
+    if (!isNumber(newMinute)) {
       return alert('숫자만 입력 가능합니다.');
     }
 
