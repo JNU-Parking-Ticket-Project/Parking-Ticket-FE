@@ -12,3 +12,5 @@ export const isPassword = (password: string) =>
   /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/.test(
     password,
   );
+
+export const isNumber = (time: string) => /^\d*$/.test(time);

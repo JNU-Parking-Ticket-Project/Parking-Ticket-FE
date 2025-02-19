@@ -13,6 +13,7 @@ import {
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
 import { isPastTime } from '../../functions/date';
+import { isNumber } from '../../functions/validator';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -36,7 +37,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const onHourChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newHour = e.target.value;
 
-    if (!/^\d*$/.test(newHour)) {
+    if (!isNumber(newHour)) {
       return alert('숫자만 입력 가능합니다.');
     }
 
