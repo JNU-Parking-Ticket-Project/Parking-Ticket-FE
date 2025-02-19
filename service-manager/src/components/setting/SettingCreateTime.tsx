@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, useState } from 'react';
+import { ChangeEvent, Dispatch, useState, type SetStateAction } from 'react';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import { Button, InputText, Txt } from '@quokka/design-system';
 import { ko } from 'date-fns/locale';
@@ -7,7 +7,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
 import { getFormalDateBy, isPastTime } from '../../functions/date';
-import { SetStateAction } from 'jotai';
 import { isNumber } from '../../functions/validator';
 
 registerLocale('ko', ko);
