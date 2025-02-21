@@ -6,5 +6,5 @@ export const useAllRegistrationQuery = (eventId: string) => {
     queryKey: ['allRegistration', eventId],
     queryFn: () => getAllRegistration(eventId),
   });
-  return { registrations: data.sort((a, b) => a.id - b.id) };
+  return { registrations: data };
 };

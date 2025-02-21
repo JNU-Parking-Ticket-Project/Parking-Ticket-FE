@@ -23,7 +23,6 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
           .filter(
             (registration) => registration.sectorNum === sector.sectorNumber,
           )
-          .sort((a, b) => (a.id < b.id ? -1 : 1))
           .map((registration, index) => ({
             구간: registration.sectorNum,
             순서: index + 1,
