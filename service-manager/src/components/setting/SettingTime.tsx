@@ -94,8 +94,8 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
           value={selectedHour}
           onChange={onHourChange}
         />
-        <Txt size="h4" color="white">
-          {`${' : '}`}
+        <Txt size="h4" color="white" className="pl-2 pr-2">
+          :
         </Txt>
         <input
           className="text-2xl font-semibold w-7 text-white bg-transparent"
