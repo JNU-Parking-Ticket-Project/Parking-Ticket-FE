@@ -40,6 +40,8 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
       }),
       {
         onError: (error) => {
+          setInput('');
+
           alert(error.message);
           setIsLoading(false);
           throw new Error(error.message);
