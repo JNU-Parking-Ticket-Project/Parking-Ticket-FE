@@ -40,3 +40,7 @@ export const isValidateTime = (openDate: Date, endDate: Date) => {
 
   return true;
 };
+
+export const isValidTime = (time: string) => {
+  return !isNaN(Number(time));
+};

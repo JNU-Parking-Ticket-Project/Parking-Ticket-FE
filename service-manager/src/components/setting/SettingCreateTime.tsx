@@ -6,8 +6,11 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
-import { getFormalDateBy, isValidateTime } from '../../functions/date';
-import { isNumber } from '../../functions/validator';
+import {
+  getFormalDateBy,
+  isValidateTime,
+  isValidTime,
+} from '../../functions/date';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -31,7 +34,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const onHourChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newHour = e.target.value;
 
-    if (!isNumber(newHour)) {
+    if (!isValidTime(newHour)) {
       return alert('숫자만 입력 가능합니다.');
     }
 
@@ -55,7 +58,7 @@ const DateTimePicker = ({ date, setDate, title }: SettingTimeProps) => {
   const onMinuteChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newMinute = e.target.value;
 
-    if (!isNumber(newMinute)) {
+    if (!isValidTime(newMinute)) {
       return alert('숫자만 입력 가능합니다.');
     }
 
