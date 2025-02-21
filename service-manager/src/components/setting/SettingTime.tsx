@@ -12,7 +12,7 @@ import {
   useSettingPublishMutateBy,
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
-import { isValidateTime, isValidTime } from '../../functions/date';
+import { isValidDate, isValidTime } from '../../functions/date';
 
 registerLocale('ko', ko);
 setDefaultLocale('ko');
@@ -215,7 +215,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               return;
             }
 
-            if (!isValidateTime(openDate, endDate)) return;
+            if (!isValidDate(openDate, endDate)) return;
 
             updateSettingTime({
               startAt: openDate,

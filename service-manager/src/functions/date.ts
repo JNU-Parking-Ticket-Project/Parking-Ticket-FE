@@ -22,7 +22,7 @@ export const isPastTime = (date: Date) => {
   return Date.now() > date.getTime();
 };
 
-export const isValidateTime = (openDate: Date, endDate: Date) => {
+export const isValidDate = (openDate: Date, endDate: Date) => {
   if (isPastTime(openDate)) {
     alert('OPEN 시간을 현재 시간보다 이후로 설정해야 합니다.');
     return false;

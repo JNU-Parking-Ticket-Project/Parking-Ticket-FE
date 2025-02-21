@@ -8,7 +8,7 @@ import './DateTime.css';
 import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
 import {
   getFormalDateBy,
-  isValidateTime,
+  isValidDate,
   isValidTime,
 } from '../../functions/date';
 
@@ -125,7 +125,7 @@ export const SettingCreateTime = () => {
       return;
     }
 
-    if (!isValidateTime(openDate, endDate)) return;
+    if (!isValidDate(openDate, endDate)) return;
 
     createSettingTime({
       startAt: openDate,
