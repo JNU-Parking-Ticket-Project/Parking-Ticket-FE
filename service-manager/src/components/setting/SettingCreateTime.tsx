@@ -6,7 +6,7 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateTime.css';
 import { useSectionTimeSettingCreate } from '../../hooks/react-query/useSectionTimeSetting';
-import { getFormalDateBy, isPastTime } from '../../functions/date';
+import { getFormalDateBy, isValidateTime } from '../../functions/date';
 import { isNumber } from '../../functions/validator';
 
 registerLocale('ko', ko);
@@ -122,15 +122,7 @@ export const SettingCreateTime = () => {
       return;
     }
 
-    if (isPastTime(openDate)) {
-      alert('OPEN 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.');
-      return;
-    }
-
-    if (isPastTime(endDate)) {
-      alert('CLOSE 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.');
-      return;
-    }
+    if (!isValidateTime(openDate, endDate)) return;
 
     createSettingTime({
       startAt: openDate,

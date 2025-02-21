@@ -12,7 +12,7 @@ import {
   useSettingPublishMutateBy,
   useSettingPublishQueryBy,
 } from '../../hooks/react-query/useSetting';
-import { isPastTime } from '../../functions/date';
+import { isValidateTime } from '../../functions/date';
 import { isNumber } from '../../functions/validator';
 
 registerLocale('ko', ko);
@@ -216,19 +216,7 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
               return;
             }
 
-            if (isPastTime(openDate)) {
-              alert(
-                'OPEN 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.',
-              );
-              return;
-            }
-
-            if (isPastTime(endDate)) {
-              alert(
-                'CLOSE 시간을 현재 시간보다 이전 시간으로 설정할 수 없습니다.',
-              );
-              return;
-            }
+            if (!isValidateTime(openDate, endDate)) return;
 
             updateSettingTime({
               startAt: openDate,
