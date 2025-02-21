@@ -187,7 +187,8 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={openDate}
           setDate={(date) => {
-            if (event.eventStatus === 'CLOSED') return;
+            if (event.eventStatus === 'CLOSED')
+              return alert('종료된 이벤트는 수정할 수 없습니다.');
             if (!date) return;
             setOpenDate(date);
             if (date > endDate) setEndDate(date);
@@ -197,7 +198,8 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
         <DateTimePicker
           date={endDate}
           setDate={(date) => {
-            if (event.eventStatus === 'CLOSED') return;
+            if (event.eventStatus === 'CLOSED')
+              return alert('종료된 이벤트는 수정할 수 없습니다.');
             if (!date) return;
             setEndDate(date);
           }}
