@@ -199,8 +199,6 @@ export const SettingTime = ({ eventId }: { eventId: string }) => {
           setDate={(date) => {
             if (event.eventStatus === 'CLOSED') return;
             if (!date) return;
-            if (date < openDate)
-              return alert('Open 시간 이전 시간으로 설정할 수 없습니다.');
             setEndDate(date);
           }}
           title="Close"
