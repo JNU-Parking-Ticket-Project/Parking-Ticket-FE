@@ -33,3 +33,10 @@ export class RegistrationResponse {
     this.sectorNum = data.sectorNum;
   }
 }
+
+export class EmailResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}
