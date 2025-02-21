@@ -18,7 +18,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
   ).sort();
   const [selectedSector, setSelectedSector] = useState(sectors[0]);
   const { sectorSettingData } = useSectorQueryById(eventId);
-  const { onEmailTransmit } = useTransmitEmail();
+  const { onEmailTransmit } = useTransmitEmail(eventId);
 
   const exportXLSX = async () => {
     const data = sectorSettingData
@@ -70,7 +70,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
               size="small"
               color="secondary"
               className="mr-5"
-              onClick={() => onEmailTransmit(eventId)}
+              onClick={onEmailTransmit}
             >
               이메일 전송
             </Button>

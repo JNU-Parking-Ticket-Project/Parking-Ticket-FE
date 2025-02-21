@@ -13,10 +13,10 @@ export const useAllRegistrationQuery = (eventId: string) => {
   return { registrations: data };
 };
 
-export const useTransmitEmail = () => {
+export const useTransmitEmail = (eventId: string) => {
   const { postEmail } = useEmailTransmitMutate();
 
-  const onEmailTransmit = (eventId: string) => {
+  const onEmailTransmit = () => {
     postEmail(eventId, {
       onError: (error) => {
         alert(error.message);
