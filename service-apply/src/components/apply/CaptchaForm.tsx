@@ -37,25 +37,30 @@ export const CaptchaForm = ({
         두 정수의 덧/뺄셈(+,-)결과를 입력해주세요.
       </Txt>
       <img className="m-auto" src={`https://${captchaImageUrl}`} />
-      <div className="w-full flex justify-center align-center py-4">
-        <InputText
-          type="text"
-          value={codeInput}
-          onChange={handleCodeInput}
-          placeholder="정답"
-          className="w-full max-w-lg text-center"
-        />
-      </div>
-      <div className="flex justify-center align-center pt-4 gap-4">
-        <Button size="small" color="secondary" onClick={refetchCaptcha}>
-          새로고침
-        </Button>
-        <form onSubmit={handleSubmit}>
-          <Button color="primary" size="small" className="px-8">
+      <form onSubmit={handleSubmit}>
+        <div className="w-full flex justify-center align-center py-4">
+          <InputText
+            type="text"
+            value={codeInput}
+            onChange={handleCodeInput}
+            placeholder="정답"
+            className="w-full max-w-lg text-center"
+          />
+        </div>
+        <div className="flex justify-center align-center pt-4 gap-4">
+          <Button
+            size="small"
+            color="secondary"
+            type="button"
+            onClick={refetchCaptcha}
+          >
+            새로고침
+          </Button>
+          <Button color="primary" size="small" className="px-8" type="submit">
             확인
           </Button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
