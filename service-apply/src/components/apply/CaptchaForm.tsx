@@ -1,9 +1,11 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, Dispatch, SetStateAction, useEffect } from 'react';
 import { Txt, InputText, Button } from '@quokka/design-system';
 import { useQueryClient } from '@tanstack/react-query';
+import { useCaptchaForm } from 'service-apply/src/hooks/apply/useCaptchaForm';
 
 interface CaptchaFormProps {
   codeInput: string;
+  setInput: Dispatch<SetStateAction<string>>;
   handleCodeInput: ChangeEventHandler<HTMLInputElement>;
   captchaImageUrl: string;
   handleSubmit: () => void;
@@ -11,6 +13,7 @@ interface CaptchaFormProps {
 
 export const CaptchaForm = ({
   codeInput,
+  setInput,
   handleCodeInput,
   captchaImageUrl,
   handleSubmit,
@@ -20,6 +23,11 @@ export const CaptchaForm = ({
     // TODO: 쿼리키 상수화
     queryClient.refetchQueries({ queryKey: ['captcha'] });
   };
+
+  useEffect(() => {
+    return setInput('');
+  }, []);
+
   return (
     <div>
       <Txt size="h3" className="block text-center pb-4">
@@ -42,14 +50,11 @@ export const CaptchaForm = ({
         <Button size="small" color="secondary" onClick={refetchCaptcha}>
           새로고침
         </Button>
-        <Button
-          onClick={handleSubmit}
-          color="primary"
-          size="small"
-          className="px-8"
-        >
-          확인
-        </Button>
+        <form onSubmit={handleSubmit}>
+          <Button color="primary" size="small" className="px-8">
+            확인
+          </Button>
+        </form>
       </div>
     </div>
   );

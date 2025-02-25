@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useContext, useState } from 'react';
+import { ChangeEventHandler, useContext, useEffect, useState } from 'react';
 import { useApplyMutate, useCaptchaQuery } from '../react-query/useApply';
 import { RegistrationRequest } from '../../apis/dtos/registration.dtos';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
@@ -58,5 +58,12 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
     );
   };
 
-  return { isLoading, input, handleInput, captchaImageUrl, handleSubmit };
+  return {
+    isLoading,
+    setInput,
+    input,
+    handleInput,
+    captchaImageUrl,
+    handleSubmit,
+  };
 };
