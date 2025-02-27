@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useContext, useEffect, useState } from 'react';
+import { ChangeEventHandler, useContext, useState } from 'react';
 import { useApplyMutate, useCaptchaQuery } from '../react-query/useApply';
 import { RegistrationRequest } from '../../apis/dtos/registration.dtos';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
