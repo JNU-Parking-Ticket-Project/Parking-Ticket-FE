@@ -100,6 +100,7 @@ interface RegistrationResponseProps {
     sectorName: string;
   }[];
   affiliation: string;
+  department: string;
   selectSectorId?: number;
 }
 
@@ -111,6 +112,7 @@ export class RegistrationOptionsResponse {
   phoneNumber: string;
   studentNumber: string;
   affiliation: string;
+  department: string;
   sector: {
     sectorId: number;
     sectorNum: string;
@@ -127,6 +129,7 @@ export class RegistrationOptionsResponse {
     studentNum,
     selectSectorId,
     affiliation,
+    department,
   }: RegistrationResponseProps) {
     this.carNumber = carNum || '';
     this.email = email || '';
@@ -137,6 +140,7 @@ export class RegistrationOptionsResponse {
     this.studentNumber = studentNum || '';
     this.selectSectorId = selectSectorId;
     this.affiliation = affiliation || '';
+    this.department = department || '';
   }
 }
 

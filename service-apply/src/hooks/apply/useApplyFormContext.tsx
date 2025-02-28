@@ -44,6 +44,7 @@ const applyFormReducer = (
         ...initApplyFormValue,
       };
     case 'affiliation':
+    case 'department':
     case 'email':
     case 'studentName':
     case 'section':

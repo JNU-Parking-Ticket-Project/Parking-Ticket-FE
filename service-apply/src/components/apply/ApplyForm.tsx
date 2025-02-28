@@ -13,6 +13,7 @@ import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
+import { DEPARTMENT_LIST } from '../../constants/departent';
 import { PrivacyCheckModal } from './PrivacyCheckModal';
 import { Spinner } from '../../assets/Spinner';
 
@@ -129,6 +130,17 @@ export const ApplyForm = () => {
           value={state.affiliation}
           onChange={(e) =>
             dispatch({ type: 'affiliation', payload: e.target.value })
+          }
+          required
+        />
+        <ApplySelector
+          label="소속학과"
+          name="department"
+          type="text"
+          options={DEPARTMENT_LIST}
+          value={state.department}
+          onChange={(e) =>
+            dispatch({ type: 'department', payload: e.target.value })
           }
           required
         />

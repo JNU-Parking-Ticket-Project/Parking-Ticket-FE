@@ -6,6 +6,7 @@ export interface ApplyFormContextType {
   email: string;
   studentName: string;
   affiliation: string;
+  department: string;
   section: number;
   carNumber: string;
   isCompact: boolean;
@@ -17,6 +18,7 @@ export const initApplyFormValue = {
   email: '',
   studentName: '',
   affiliation: '',
+  department: '',
   section: 0,
   carNumber: '',
   isCompact: false,
