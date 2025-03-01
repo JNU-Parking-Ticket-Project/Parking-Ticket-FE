@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DEV_SSH_PASSWORD }}
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
-            cd jnu-parking/fe
+            cd ~/jnu-parking/Parking-Ticket-FE
             git checkout dev
             git pull origin dev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
@@ -118,7 +118,7 @@ jobs:
           password: ${{ secrets.DEV_SSH_PASSWORD }}
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
-            cd jnu-parking/fe
+            cd ~/jnu-parking/Parking-Ticket-FE
             git checkout dev
             git pull origin dev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
