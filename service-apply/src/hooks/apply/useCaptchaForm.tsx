@@ -30,6 +30,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
         name: state.studentName,
         studentNumber: state.studentNumber,
         affiliation: state.affiliation,
+        department: state.department,
         isLightCar: state.isCompact,
         carNumber: state.carNumber,
         phoneNumber: state.phoneNumber,
