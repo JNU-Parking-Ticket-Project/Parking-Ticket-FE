@@ -16,7 +16,7 @@ export const ApplyCaptchaModal = ({
 }: ApplyCaptchaModalProps) => {
   const {
     isLoading,
-    setInput,
+    onClearInput,
     input,
     handleInput,
     captchaImageUrl,
@@ -59,7 +59,7 @@ export const ApplyCaptchaModal = ({
       ) : (
         <CaptchaForm
           codeInput={input}
-          setInput={setInput}
+          onClearInput={onClearInput}
           handleCodeInput={handleInput}
           captchaImageUrl={captchaImageUrl}
           handleSubmit={handleSubmit}

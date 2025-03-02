@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 interface CaptchaFormProps {
   codeInput: string;
-  setInput: Dispatch<SetStateAction<string>>;
+  onClearInput: () => void;
   handleCodeInput: ChangeEventHandler<HTMLInputElement>;
   captchaImageUrl: string;
   handleSubmit: () => void;
@@ -12,7 +12,7 @@ interface CaptchaFormProps {
 
 export const CaptchaForm = ({
   codeInput,
-  setInput,
+  onClearInput,
   handleCodeInput,
   captchaImageUrl,
   handleSubmit,
@@ -24,7 +24,7 @@ export const CaptchaForm = ({
   };
 
   useEffect(() => {
-    return setInput('');
+    return onClearInput();
   }, []);
 
   return (

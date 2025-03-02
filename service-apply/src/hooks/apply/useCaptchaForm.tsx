@@ -22,6 +22,10 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
     setInput(e.target.value.replace(/[^-0-9]/g, ''));
   };
 
+  const onClearInput = () => {
+    setInput('');
+  };
+
   const handleSubmit = () => {
     setIsLoading(true);
     if (postRegistrationStatus == 'pending') return;
@@ -60,7 +64,7 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
 
   return {
     isLoading,
-    setInput,
+    onClearInput,
     input,
     handleInput,
     captchaImageUrl,
