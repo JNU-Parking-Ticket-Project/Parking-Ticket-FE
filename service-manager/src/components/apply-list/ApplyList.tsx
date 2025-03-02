@@ -31,6 +31,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
             구간: registration.sectorNum,
             순서: index + 1,
             이름: registration.name,
+            학과: registration.department,
             차량번호: registration.carNumber,
             학생번호: registration.studentNumber,
             경차여부: registration.isCompact ? '경차' : '경차 아님',
@@ -84,6 +85,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
             <tr>
               <th>순서</th>
               <th>이름</th>
+              <th>학과</th>
               <th>차량 번호</th>
               <th>학생번호</th>
               <th>경차여부</th>
@@ -105,6 +107,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
                       ) + 1}
                     </td>
                     <td>{registration.name}</td>
+                    <td> {registration.department} </td>
                     <td>{registration.carNumber}</td>
                     <td>{registration.studentNumber}</td>
                     <td>{registration.isCompact ? '경차' : '경차 아님'}</td>

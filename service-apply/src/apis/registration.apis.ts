@@ -79,11 +79,7 @@ export const getCaptcha = async () => {
 };
 
 export const getRegistrationPeriod = async (): Promise<Period> => {
-  // const response = await https.get('/v1/events/period');
-  const response = {
-    eventId: 47,
-    dateTimePeriod: { startAt: '12', endAt: '13' },
-  };
+  const response = await https.get('/v1/events/period');
 
   if (isErrorResponse(response)) {
     const errorContent = getErrorContent(response.code);
