@@ -25,9 +25,12 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
+            git stash
+            git checkout dev
             git pull origin dev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:apply
+            pm2 restart apply
 
       - name: Apply 모듈 Slack 성공 알림
         if: success()
@@ -117,9 +120,12 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             cd ~/jnu-parking/Parking-Ticket-FE
+            git stash
+            git checkout dev
             git pull origin dev
             pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
             pnpm build:manager
+            pm2 restart manager
 
       - name: Manager 모듈 Slack 성공 알림
         if: success()

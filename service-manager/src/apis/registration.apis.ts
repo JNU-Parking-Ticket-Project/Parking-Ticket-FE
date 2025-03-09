@@ -1,5 +1,5 @@
 import { https } from '../functions/https';
-import { RegistrationResponse } from './dtos/registration.dto';
+import { EmailResponse, RegistrationResponse } from './dtos/registration.dto';
 import { isErrorResponse } from './dtos/response.dtos';
 
 export const getAllRegistration = async (
@@ -12,4 +12,16 @@ export const getAllRegistration = async (
   return response.registrations.map(
     (item: any) => new RegistrationResponse(item),
   );
+};
+
+export const postEmail = async (
+  eventId: string,
+): Promise<{ message: string }> => {
+  const response = await https.post(`/v1/council/emails/${eventId}`, {});
+
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+
+  return new EmailResponse(response);
 };

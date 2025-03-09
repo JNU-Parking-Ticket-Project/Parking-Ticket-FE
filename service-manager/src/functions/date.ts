@@ -21,3 +21,26 @@ export const getFormalDateBy = (time: Date) => {
 export const isPastTime = (date: Date) => {
   return Date.now() > date.getTime();
 };
+
+export const isValidDate = (openDate: Date, endDate: Date) => {
+  if (isPastTime(openDate)) {
+    alert('OPEN 시간을 현재 시간보다 이후로 설정해야 합니다.');
+    return false;
+  }
+
+  if (isPastTime(endDate)) {
+    alert('CLOSE 시간을 현재 시간보다 이후로 설정해야 합니다.');
+    return false;
+  }
+
+  if (openDate >= endDate) {
+    alert('CLOSE 시간을 OPEN 시간보다 이후로 설정해야 합니다.');
+    return false;
+  }
+
+  return true;
+};
+
+export const isValidTime = (time: string) => {
+  return !isNaN(Number(time));
+};

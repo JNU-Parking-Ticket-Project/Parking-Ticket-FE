@@ -1,5 +1,8 @@
 import { Button } from '@quokka/design-system';
-import { useAllRegistrationQuery } from '../../hooks/react-query/useRegistration';
+import {
+  useAllRegistrationQuery,
+  useTransmitEmail,
+} from '../../hooks/react-query/useRegistration';
 import { useState } from 'react';
 import { ApplyCount } from './ApplyCount';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
@@ -15,6 +18,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
   ).sort();
   const [selectedSector, setSelectedSector] = useState(sectors[0]);
   const { sectorSettingData } = useSectorQueryById(eventId);
+  const { onEmailTransmit } = useTransmitEmail(eventId);
 
   const exportXLSX = async () => {
     const data = sectorSettingData
@@ -61,7 +65,15 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
       <div className="w-full">
         <div className="flex justify-between align-bottom">
           <ApplyCount eventId={eventId} sector={selectedSector} />
-          <div className="text-right p-4">
+          <div className="text-right my-5">
+            <Button
+              size="small"
+              color="secondary"
+              className="mr-5"
+              onClick={onEmailTransmit}
+            >
+              이메일 전송
+            </Button>
             <Button size="small" onClick={exportXLSX}>
               엑셀다운로드
             </Button>
