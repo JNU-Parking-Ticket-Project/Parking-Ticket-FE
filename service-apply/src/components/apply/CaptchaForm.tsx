@@ -7,7 +7,7 @@ interface CaptchaFormProps {
   onClearInput: () => void;
   handleCodeInput: ChangeEventHandler<HTMLInputElement>;
   captchaImageUrl: string;
-  handleSubmit: () => void;
+  onSubmit: () => void;
 }
 
 export const CaptchaForm = ({
@@ -15,7 +15,7 @@ export const CaptchaForm = ({
   onClearInput,
   handleCodeInput,
   captchaImageUrl,
-  handleSubmit,
+  onSubmit,
 }: CaptchaFormProps) => {
   const queryClient = useQueryClient();
   const refetchCaptcha = () => {
@@ -36,7 +36,7 @@ export const CaptchaForm = ({
         두 정수의 덧/뺄셈(+,-)결과를 입력해주세요.
       </Txt>
       <img className="m-auto" src={`https://${captchaImageUrl}`} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="w-full flex justify-center align-center py-4">
           <InputText
             type="text"

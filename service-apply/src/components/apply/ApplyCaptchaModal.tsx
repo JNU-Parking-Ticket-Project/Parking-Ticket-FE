@@ -62,7 +62,7 @@ export const ApplyCaptchaModal = ({
           onClearInput={onClearInput}
           handleCodeInput={handleInput}
           captchaImageUrl={captchaImageUrl}
-          handleSubmit={handleSubmit}
+          onSubmit={handleSubmit}
         />
       )}
     </Modal>
