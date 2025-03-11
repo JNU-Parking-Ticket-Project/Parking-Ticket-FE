@@ -22,6 +22,10 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
     setInput(e.target.value.replace(/[^-0-9]/g, ''));
   };
 
+  const onClearInput = () => {
+    setInput('');
+  };
+
   const handleSubmit = () => {
     setIsLoading(true);
     if (postRegistrationStatus == 'pending') return;
@@ -40,6 +44,8 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
       }),
       {
         onError: (error) => {
+          setInput('');
+
           alert(error.message);
           setIsLoading(false);
           throw new Error(error.message);
@@ -56,5 +62,12 @@ export const useCaptchaForm = ({ closeModal }: { closeModal: () => void }) => {
     );
   };
 
-  return { isLoading, input, handleInput, captchaImageUrl, handleSubmit };
+  return {
+    isLoading,
+    onClearInput,
+    input,
+    handleInput,
+    captchaImageUrl,
+    handleSubmit,
+  };
 };
