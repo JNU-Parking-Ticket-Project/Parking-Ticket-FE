@@ -1,4 +1,4 @@
-import { ChangeEventHandler, Dispatch, SetStateAction, useEffect } from 'react';
+import { ChangeEventHandler, useEffect } from 'react';
 import { Txt, InputText, Button } from '@quokka/design-system';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -24,7 +24,9 @@ export const CaptchaForm = ({
   };
 
   useEffect(() => {
-    return onClearInput();
+    return () => {
+      onClearInput();
+    };
   }, []);
 
   return (
