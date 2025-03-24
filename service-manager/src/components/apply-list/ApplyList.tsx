@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { Button } from '@quokka/design-system';
+
 import {
   useAllRegistrationQuery,
   useTransmitEmail,
 } from '../../hooks/react-query/useRegistration';
-import { useState } from 'react';
-import { ApplyCount } from './ApplyCount';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
+import { ApplyCount } from './ApplyCount';
+import { registration } from '../../constants/registrations';
 
 interface ApplyListProps {
   eventId: string;
@@ -13,6 +15,7 @@ interface ApplyListProps {
 
 export const ApplyList = ({ eventId }: ApplyListProps) => {
   const { registrations } = useAllRegistrationQuery(eventId);
+
   const sectors = Array.from(
     new Set(registrations.map((registration) => registration.sectorNum)),
   ).sort();
@@ -83,14 +86,9 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
         <table className="w-full min-w-[50rem]">
           <thead>
             <tr>
-              <th>순서</th>
-              <th>이름</th>
-              <th>학과</th>
-              <th>차량 번호</th>
-              <th>학생번호</th>
-              <th>경차여부</th>
-              <th>휴대폰 번호</th>
-              <th>이메일</th>
+              {registration.map((registration) => (
+                <td className="text-center">{registration}</td>
+              ))}
             </tr>
           </thead>
           <tbody className="text-center">
@@ -107,6 +105,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
                       ) + 1}
                     </td>
                     <td>{registration.name}</td>
+                    <td>{registration.affiliation}</td>
                     <td> {registration.department} </td>
                     <td>{registration.carNumber}</td>
                     <td>{registration.studentNumber}</td>
