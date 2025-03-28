@@ -125,7 +125,6 @@ export const ApplyForm = () => {
         <ApplySelector
           label="소속대학"
           name="affiliation"
-          type="text"
           options={AFFILIATION_LIST}
           value={state.affiliation}
           onChange={(e) =>
@@ -136,7 +135,6 @@ export const ApplyForm = () => {
         <ApplySelector
           label="소속학과"
           name="department"
-          type="text"
           options={DEPARTMENT_LIST}
           value={state.department}
           onChange={(e) =>
@@ -151,7 +149,6 @@ export const ApplyForm = () => {
             )?.value ?? '선택'
           }
           label="구간"
-          type="text"
           options={parkingSectionOptions}
           onChange={(e) =>
             dispatch({ type: 'section', payload: e.target.value })

@@ -4,7 +4,6 @@ import { Txt } from '@quokka/design-system';
 interface ApplySelectorProps
   extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'value'> {
   label: string;
-  type: string;
   options: {
     label: string;
     value: string;
@@ -14,7 +13,6 @@ interface ApplySelectorProps
 
 export const ApplySelector = ({
   label,
-  type,
   options,
   value,
   ...props
