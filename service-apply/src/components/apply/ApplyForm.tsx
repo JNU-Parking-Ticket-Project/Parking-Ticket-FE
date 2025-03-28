@@ -13,7 +13,7 @@ import { ApplyCaptchaModal } from './ApplyCaptchaModal';
 import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
-import { DEPARTMENT_LIST } from '../../constants/departent';
+import { DEPARTMENT_LIST } from '../../constants/department';
 import { PrivacyCheckModal } from './PrivacyCheckModal';
 import { Spinner } from '../../assets/Spinner';
 
