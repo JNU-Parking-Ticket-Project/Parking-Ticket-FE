@@ -25,8 +25,7 @@ export const isSection = ({
 export const isCarNumber = (carNumber: string) =>
   /\d{2,3}[가-힣]{1}\d{4}/gm.test(carNumber.replace(' ', ''));
 
-export const isApplyDropDown = (dropDownValue: string) =>
-  !!dropDownValue.replace(' ', '');
+export const isApplyDropDown = (dropDownValue: string) => !!dropDownValue;
 
 export interface ApplyFormInput {
   phoneNumber: string;
