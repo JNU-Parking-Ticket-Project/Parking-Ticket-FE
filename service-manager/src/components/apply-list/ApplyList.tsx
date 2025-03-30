@@ -87,7 +87,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
           <thead>
             <tr>
               {registration.map((registration) => (
-                <td className="text-center">{registration}</td>
+                <th key={registration.key}>{registration.value}</th>
               ))}
             </tr>
           </thead>
