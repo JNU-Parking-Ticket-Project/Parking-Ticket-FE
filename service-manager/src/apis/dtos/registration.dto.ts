@@ -1,5 +1,6 @@
 interface Registration {
   affiliation: string;
+  department: string;
   sectorNum: string;
   carNum: string;
   email: string;
@@ -19,6 +20,7 @@ export class RegistrationResponse {
   isCompact: boolean;
   carNumber: string;
   affiliation: string;
+  department: string;
   sectorNum: string;
 
   constructor(data: Registration) {
@@ -30,6 +32,7 @@ export class RegistrationResponse {
     this.isCompact = data.isLight;
     this.carNumber = data.carNum;
     this.affiliation = data.affiliation;
+    this.department = data.department;
     this.sectorNum = data.sectorNum;
   }
 }

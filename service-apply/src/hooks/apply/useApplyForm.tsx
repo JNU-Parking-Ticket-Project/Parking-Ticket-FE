@@ -9,10 +9,12 @@ import { usePeriodQuery } from '../react-query/usePeriodQuery';
 export const useApplyForm = () => {
   const { eventId } = usePeriodQuery();
   const { registrationData } = useApplyQuery({ eventId });
-  const { sector, selectSectorId, affiliation, ...rest } = registrationData;
+  const { sector, selectSectorId, affiliation, department, ...rest } =
+    registrationData;
   const { state, dispatch } = useApplyFormContext({
     section: selectSectorId ?? 0,
     affiliation: affiliation ?? '',
+    department: department ?? '',
     ...rest,
   });
 
@@ -23,6 +25,7 @@ export const useApplyForm = () => {
       payload: {
         section: selectSectorId ?? 0,
         affiliation: affiliation ?? '',
+        department: department ?? '',
         ...rest,
       },
     });
