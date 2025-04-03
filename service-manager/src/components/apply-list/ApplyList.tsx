@@ -7,7 +7,6 @@ import {
 } from '../../hooks/react-query/useRegistration';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
-import { registration } from '../../constants/registrations';
 
 interface ApplyListProps {
   eventId: string;
@@ -86,9 +85,15 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
         <table className="w-full min-w-[50rem]">
           <thead>
             <tr>
-              {registration.map((registration) => (
-                <th key={registration.key}>{registration.value}</th>
-              ))}
+              <th>순서</th>
+              <th>이름</th>
+              <th>단과 대학</th>
+              <th>학과</th>
+              <th>차량 번호</th>
+              <th>학생 번호</th>
+              <th>경차 여부</th>
+              <th>휴대폰 번호</th>
+              <th>이메일</th>
             </tr>
           </thead>
           <tbody className="text-center">
