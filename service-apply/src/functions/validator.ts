@@ -25,8 +25,7 @@ export const isSection = ({
 export const isCarNumber = (carNumber: string) =>
   /\d{2,3}[가-힣]{1}\d{4}/gm.test(carNumber.replace(' ', ''));
 
-export const isAffiliation = (affiliation: string) =>
-  !!affiliation.replace(' ', '');
+export const isApplyDropDown = (dropDownValue: string) => !!dropDownValue;
 
 export interface ApplyFormInput {
   phoneNumber: string;
@@ -34,6 +33,7 @@ export interface ApplyFormInput {
   email: string;
   studentName: string;
   affiliation: string;
+  department: string;
   section: number;
   carNumber: string;
   isCompact: boolean;
@@ -65,8 +65,11 @@ export const applyFormValidator = ({
   if (!isStudentNumber(input.studentNumber)) {
     return submitFailure('올바른 형식의 학번을 입력해 주세요.');
   }
-  if (!isAffiliation(input.affiliation)) {
+  if (!isApplyDropDown(input.affiliation)) {
     return submitFailure('소속대학을 입력해 주세요.');
+  }
+  if (!isApplyDropDown(input.department)) {
+    return submitFailure('소속학과를 입력해 주세요.');
   }
   if (!isSection({ array: sectionNumberArray, selected: input.section })) {
     return submitFailure('올바른 구간을 선택해 주세요.');

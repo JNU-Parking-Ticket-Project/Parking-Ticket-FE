@@ -6,6 +6,7 @@ export interface TemporarySaveRequestProps extends RegistrationEventIdResponse {
   name: string;
   studentNumber: string;
   affiliation: string;
+  department: string;
   carNumber: string;
   isLightCar: boolean;
   phoneNumber: string;
@@ -16,6 +17,7 @@ export class TemporarySaveRequest {
   name: string;
   studentNum: string;
   affiliation: string;
+  department: string;
   carNum: string;
   isLight: boolean;
   phoneNum: string;
@@ -26,6 +28,7 @@ export class TemporarySaveRequest {
     name,
     studentNumber,
     affiliation,
+    department,
     carNumber,
     isLightCar,
     phoneNumber,
@@ -35,6 +38,7 @@ export class TemporarySaveRequest {
     this.name = name;
     this.studentNum = studentNumber;
     this.affiliation = affiliation;
+    this.department = department;
     this.carNum = carNumber;
     this.isLight = isLightCar;
     this.phoneNum = phoneNumber;
@@ -56,6 +60,7 @@ export class RegistrationRequest extends TemporarySaveRequest {
     name,
     studentNumber,
     affiliation,
+    department,
     carNumber,
     isLightCar,
     phoneNumber,
@@ -68,6 +73,7 @@ export class RegistrationRequest extends TemporarySaveRequest {
       name,
       studentNumber,
       affiliation,
+      department,
       carNumber,
       isLightCar,
       phoneNumber,
@@ -100,6 +106,7 @@ interface RegistrationResponseProps {
     sectorName: string;
   }[];
   affiliation: string;
+  department: string;
   selectSectorId?: number;
 }
 
@@ -111,6 +118,7 @@ export class RegistrationOptionsResponse {
   phoneNumber: string;
   studentNumber: string;
   affiliation: string;
+  department: string;
   sector: {
     sectorId: number;
     sectorNum: string;
@@ -127,6 +135,7 @@ export class RegistrationOptionsResponse {
     studentNum,
     selectSectorId,
     affiliation,
+    department,
   }: RegistrationResponseProps) {
     this.carNumber = carNum || '';
     this.email = email || '';
@@ -137,6 +146,7 @@ export class RegistrationOptionsResponse {
     this.studentNumber = studentNum || '';
     this.selectSectorId = selectSectorId;
     this.affiliation = affiliation || '';
+    this.department = department || '';
   }
 }
 

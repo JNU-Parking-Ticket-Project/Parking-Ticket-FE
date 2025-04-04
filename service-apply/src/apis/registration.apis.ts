@@ -63,6 +63,7 @@ export const getRegistration = async ({
       name: '',
       selectSectorId: -1,
       affiliation: '',
+      department: '',
     });
   }
   return new RegistrationOptionsResponse(response);
@@ -79,6 +80,7 @@ export const getCaptcha = async () => {
 
 export const getRegistrationPeriod = async (): Promise<Period> => {
   const response = await https.get('/v1/events/period');
+
   if (isErrorResponse(response)) {
     const errorContent = getErrorContent(response.code);
     switch (errorContent.type) {
