@@ -31,16 +31,15 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
           .filter(
             (registration) => registration.sectorNum === sector.sectorNumber,
           )
-          .map((registration) => {
-            let excelData = {};
-            EXCEL_HEADERS.forEach((header) => {
-              excelData = {
-                ...excelData,
+          .map((registration) =>
+            EXCEL_HEADERS.reduce(
+              (acc, header) => ({
+                ...acc,
                 ...getExcelCellValue(header, registration, registrations),
-              };
-            });
-            return excelData;
-          }),
+              }),
+              {},
+            ),
+          ),
       )
       .flat();
 
