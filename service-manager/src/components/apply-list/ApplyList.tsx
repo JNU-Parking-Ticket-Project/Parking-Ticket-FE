@@ -8,7 +8,7 @@ import {
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
 import { TABLE_HEADERS } from '../../constants/apply';
-import { getCellValue } from '../../functions/apply';
+import { getTableCellValue } from '../../functions/apply';
 
 interface ApplyListProps {
   eventId: string;
@@ -102,7 +102,11 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
                   <tr key={registration.id}>
                     {TABLE_HEADERS.map((header) => (
                       <td key={header.key}>
-                        {getCellValue(header.key, registration, registrations)}
+                        {getTableCellValue(
+                          header.key,
+                          registration,
+                          registrations,
+                        )}
                       </td>
                     ))}
                   </tr>

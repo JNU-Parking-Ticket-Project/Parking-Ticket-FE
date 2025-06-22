@@ -1,7 +1,7 @@
 import { RegistrationResponse } from '../apis/dtos/registration.dto';
 import { TABLE_HEADERS } from '../constants/apply';
 
-export const getCellValue = (
+export const getTableCellValue = (
   headerKey: (typeof TABLE_HEADERS)[number]['key'],
   userInfo: RegistrationResponse,
   registrations: RegistrationResponse[],
