@@ -9,3 +9,8 @@ export const TABLE_HEADERS = [
   { key: 'phoneNumber', label: '휴대폰 번호' },
   { key: 'email', label: '이메일' },
 ] as const;
+
+export const EXCEL_HEADERS = [
+  { key: 'sector', label: '구간' },
+  ...TABLE_HEADERS,
+] as const;

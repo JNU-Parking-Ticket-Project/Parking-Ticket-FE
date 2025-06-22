@@ -7,8 +7,8 @@ import {
 } from '../../hooks/react-query/useRegistration';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
-import { TABLE_HEADERS } from '../../constants/apply';
-import { getTableCellValue } from '../../functions/apply';
+import { EXCEL_HEADERS, TABLE_HEADERS } from '../../constants/apply';
+import { getExcelCellValue, getTableCellValue } from '../../functions/apply';
 
 interface ApplyListProps {
   eventId: string;
@@ -31,17 +31,16 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
           .filter(
             (registration) => registration.sectorNum === sector.sectorNumber,
           )
-          .map((registration, index) => ({
-            구간: registration.sectorNum,
-            순서: index + 1,
-            이름: registration.name,
-            학과: registration.department,
-            차량번호: registration.carNumber,
-            학생번호: registration.studentNumber,
-            경차여부: registration.isCompact ? '경차' : '경차 아님',
-            휴대폰번호: registration.phoneNumber,
-            이메일: registration.email,
-          })),
+          .map((registration) => {
+            let excelData = {};
+            EXCEL_HEADERS.forEach((header) => {
+              excelData = {
+                ...excelData,
+                ...getExcelCellValue(header, registration, registrations),
+              };
+            });
+            return excelData;
+          }),
       )
       .flat();
 
