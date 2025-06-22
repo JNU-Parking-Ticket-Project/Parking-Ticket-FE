@@ -81,7 +81,6 @@ export const useAnnounceUpdateMutate = () => {
 };
 
 export const useAnnounceDeleteMutate = () => {
-  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationKey: ['announceDelete'],
     mutationFn: deleteAnnounceById,
@@ -99,9 +98,6 @@ export const useAnnounceDeleteMutate = () => {
         ...mutateOption,
         onSettled: (data) => {
           if (!data) throw new Error('data is undefined');
-          queryClient.invalidateQueries({
-            queryKey: ['announceList'],
-          });
         },
       });
     },

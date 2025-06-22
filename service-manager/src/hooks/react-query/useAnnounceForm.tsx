@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import {
   useAnnounceCreateMutate,
   useAnnounceDeleteMutate,
@@ -88,6 +89,7 @@ export const useAnnounceUpdate = () => {
 export const useAnnounceDelete = () => {
   const { deleteAnnounceById } = useAnnounceDeleteMutate();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const onDelete = (announceId: number) => {
     deleteAnnounceById(announceId, {
@@ -96,6 +98,9 @@ export const useAnnounceDelete = () => {
       },
       onSuccess: (data) => {
         if (!data) throw new Error('data is undefined');
+        queryClient.invalidateQueries({
+          queryKey: ['announceList'],
+        });
         alert('삭제되었습니다.');
         navigate('/announcement');
       },
