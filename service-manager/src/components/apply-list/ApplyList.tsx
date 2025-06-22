@@ -7,6 +7,8 @@ import {
 } from '../../hooks/react-query/useRegistration';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
+import { TABLE_HEADERS } from '../../constants/apply';
+import { getCellValue } from '../../functions/apply';
 
 interface ApplyListProps {
   eventId: string;
@@ -85,15 +87,9 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
         <table className="w-full min-w-[50rem]">
           <thead>
             <tr>
-              <th>순서</th>
-              <th>이름</th>
-              <th>단과 대학</th>
-              <th>학과</th>
-              <th>차량 번호</th>
-              <th>학생 번호</th>
-              <th>경차 여부</th>
-              <th>휴대폰 번호</th>
-              <th>이메일</th>
+              {TABLE_HEADERS.map((header) => (
+                <th key={header.key}>{header.label}</th>
+              ))}
             </tr>
           </thead>
           <tbody className="text-center">
@@ -104,19 +100,11 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
               .map((registration) => {
                 return (
                   <tr key={registration.id}>
-                    <td>
-                      {registrations.findIndex(
-                        (data) => data.id === registration.id,
-                      ) + 1}
-                    </td>
-                    <td>{registration.name}</td>
-                    <td>{registration.affiliation}</td>
-                    <td> {registration.department} </td>
-                    <td>{registration.carNumber}</td>
-                    <td>{registration.studentNumber}</td>
-                    <td>{registration.isCompact ? '경차' : '경차 아님'}</td>
-                    <td>{registration.phoneNumber}</td>
-                    <td>{registration.email}</td>
+                    {TABLE_HEADERS.map((header) => (
+                      <td key={header.key}>
+                        {getCellValue(header.key, registration, registrations)}
+                      </td>
+                    ))}
                   </tr>
                 );
               })}
