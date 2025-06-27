@@ -1,43 +1,30 @@
 import { RegistrationResponse } from '../apis/dtos/registration.dto';
-import { EXCEL_HEADERS, TABLE_HEADERS } from '../constants/apply';
+import {
+  EXCEL_HEADERS,
+  FIELD_MAPPERS,
+  TABLE_HEADERS,
+} from '../constants/apply';
+
+const getCellValue = (
+  headerKey: string,
+  userInfo: RegistrationResponse,
+  registrations: RegistrationResponse[],
+) => {
+  const mapper = FIELD_MAPPERS[headerKey as keyof typeof FIELD_MAPPERS];
+
+  if (headerKey === 'order') {
+    return (mapper as typeof FIELD_MAPPERS.order)(userInfo, registrations);
+  }
+
+  return (mapper as (userInfo: RegistrationResponse) => any)(userInfo);
+};
 
 export const getTableCellValue = (
   headerKey: (typeof TABLE_HEADERS)[number]['key'],
   userInfo: RegistrationResponse,
   registrations: RegistrationResponse[],
 ) => {
-  const {
-    id,
-    name,
-    affiliation,
-    department,
-    carNumber,
-    studentNumber,
-    isCompact,
-    phoneNumber,
-    email,
-  } = userInfo;
-
-  switch (headerKey) {
-    case 'order':
-      return registrations.findIndex((data) => data.id === id) + 1;
-    case 'name':
-      return name;
-    case 'affiliation':
-      return affiliation;
-    case 'department':
-      return department;
-    case 'carNumber':
-      return carNumber;
-    case 'studentNumber':
-      return studentNumber;
-    case 'isCompact':
-      return isCompact ? '경차' : '경차 아님';
-    case 'phoneNumber':
-      return phoneNumber;
-    case 'email':
-      return email;
-  }
+  return getCellValue(headerKey, userInfo, registrations);
 };
 
 export const getExcelCellValue = (
@@ -45,60 +32,8 @@ export const getExcelCellValue = (
   userInfo: RegistrationResponse,
   registrations: RegistrationResponse[],
 ) => {
-  const {
-    id,
-    name,
-    affiliation,
-    department,
-    carNumber,
-    studentNumber,
-    isCompact,
-    phoneNumber,
-    email,
-    sectorNum,
-  } = userInfo;
-
-  switch (headerKey.key) {
-    case 'sector':
-      return {
-        [headerKey.label]: sectorNum,
-      };
-    case 'order':
-      return {
-        [headerKey.label]:
-          registrations.findIndex((data) => data.id === id) + 1,
-      };
-    case 'name':
-      return {
-        [headerKey.label]: name,
-      };
-    case 'affiliation':
-      return {
-        [headerKey.label]: affiliation,
-      };
-    case 'department':
-      return {
-        [headerKey.label]: department,
-      };
-    case 'carNumber':
-      return {
-        [headerKey.label]: carNumber,
-      };
-    case 'studentNumber':
-      return {
-        [headerKey.label]: studentNumber,
-      };
-    case 'isCompact':
-      return {
-        [headerKey.label]: isCompact ? '경차' : '경차 아님',
-      };
-    case 'phoneNumber':
-      return {
-        [headerKey.label]: phoneNumber,
-      };
-    case 'email':
-      return {
-        [headerKey.label]: email,
-      };
-  }
+  const value = getCellValue(headerKey.key, userInfo, registrations);
+  return {
+    [headerKey.label]: value,
+  };
 };

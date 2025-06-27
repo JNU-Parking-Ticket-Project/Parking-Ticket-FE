@@ -1,3 +1,5 @@
+import { RegistrationResponse } from '../apis/dtos/registration.dto';
+
 export const TABLE_HEADERS = [
   { key: 'order', label: '순서' },
   { key: 'name', label: '이름' },
@@ -14,3 +16,20 @@ export const EXCEL_HEADERS = [
   { key: 'sector', label: '구간' },
   ...TABLE_HEADERS,
 ] as const;
+
+export const FIELD_MAPPERS = {
+  sector: (userInfo: RegistrationResponse) => userInfo.sectorNum,
+  order: (
+    userInfo: RegistrationResponse,
+    registrations: RegistrationResponse[],
+  ) => registrations.findIndex((data) => data.id === userInfo.id) + 1,
+  name: (userInfo: RegistrationResponse) => userInfo.name,
+  affiliation: (userInfo: RegistrationResponse) => userInfo.affiliation,
+  department: (userInfo: RegistrationResponse) => userInfo.department,
+  carNumber: (userInfo: RegistrationResponse) => userInfo.carNumber,
+  studentNumber: (userInfo: RegistrationResponse) => userInfo.studentNumber,
+  isCompact: (userInfo: RegistrationResponse) =>
+    userInfo.isCompact ? '경차' : '경차 아님',
+  phoneNumber: (userInfo: RegistrationResponse) => userInfo.phoneNumber,
+  email: (userInfo: RegistrationResponse) => userInfo.email,
+} as const;
