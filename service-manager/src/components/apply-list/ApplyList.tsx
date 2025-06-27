@@ -82,6 +82,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
             </Button>
           </div>
         </div>
+        <div className="mb-4" />
         <table className="w-full min-w-[50rem]">
           <thead>
             <tr>
