@@ -27,6 +27,11 @@ const getCellValue = (
       return userInfo.phoneNumber;
     case 'email':
       return userInfo.email;
+    default:
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`${headerKey}는 정의되지 않은 헤더입니다.`);
+      }
+      return '';
   }
 };
 
