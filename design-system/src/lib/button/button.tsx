@@ -31,6 +31,7 @@ export function Button({
   return (
     <button
       {...props}
+      disabled={disabled}
       className={clsx(
         'rounded-lg transition-all duration-150 ease-in-out',
         disabled
