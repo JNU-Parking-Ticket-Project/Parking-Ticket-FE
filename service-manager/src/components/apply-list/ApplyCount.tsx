@@ -17,9 +17,7 @@ export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
     (data) => data.sectorNum === sector,
   );
   const limit = sectorSettingData.find((data) => data.sectorNumber === sector);
-  const noCompactNumber = registrations.filter(
-    (data) => !data.isCompact,
-  ).length;
+  const noCompactCount = registrations.filter((data) => !data.isCompact).length;
 
   return (
     <div className="flex flex-col gap-2">
@@ -36,7 +34,7 @@ export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
         )}명 / ${limit?.reserve ?? 0}명`}
       </Txt>
       <Txt size="h6" color="black">
-        {`경차 아닌 학생 정원: ${noCompactNumber}명 / ${registrations.length}명`}
+        {`경차 아닌 학생 정원: ${noCompactCount}명 / ${registrations.length}명`}
       </Txt>
     </div>
   );
