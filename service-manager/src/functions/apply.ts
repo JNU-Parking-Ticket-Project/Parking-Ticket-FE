@@ -1,22 +1,33 @@
 import { RegistrationResponse } from '../apis/dtos/registration.dto';
-import {
-  EXCEL_HEADERS,
-  FIELD_MAPPERS,
-  TABLE_HEADERS,
-} from '../constants/apply';
+import { EXCEL_HEADERS, TABLE_HEADERS } from '../constants/apply';
 
 const getCellValue = (
-  headerKey: string,
+  headerKey: (typeof EXCEL_HEADERS)[number]['key'],
   userInfo: RegistrationResponse,
   registrations: RegistrationResponse[],
 ) => {
-  const mapper = FIELD_MAPPERS[headerKey as keyof typeof FIELD_MAPPERS];
-
-  if (headerKey === 'order') {
-    return (mapper as typeof FIELD_MAPPERS.order)(userInfo, registrations);
+  switch (headerKey) {
+    case 'sector':
+      return userInfo.sectorNum;
+    case 'order':
+      return registrations.findIndex((data) => data.id === userInfo.id) + 1;
+    case 'name':
+      return userInfo.name;
+    case 'affiliation':
+      return userInfo.affiliation;
+    case 'department':
+      return userInfo.department;
+    case 'carNumber':
+      return userInfo.carNumber;
+    case 'studentNumber':
+      return userInfo.studentNumber;
+    case 'isCompact':
+      return userInfo.isCompact ? '경차' : '경차 아님';
+    case 'phoneNumber':
+      return userInfo.phoneNumber;
+    case 'email':
+      return userInfo.email;
   }
-
-  return (mapper as (userInfo: RegistrationResponse) => any)(userInfo);
 };
 
 export const getTableCellValue = (
