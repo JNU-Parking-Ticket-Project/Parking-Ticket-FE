@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Button } from '@quokka/design-system';
 
 import {
@@ -7,6 +7,7 @@ import {
 } from '../../hooks/react-query/useRegistration';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 interface ApplyListProps {
   eventId: string;
@@ -67,7 +68,11 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
       </div>
       <div className="w-full">
         <div className="flex justify-between align-bottom">
-          <ApplyCount eventId={eventId} sector={selectedSector} />
+          <ErrorBoundary>
+            <Suspense>
+              <ApplyCount eventId={eventId} sector={selectedSector} />
+            </Suspense>
+          </ErrorBoundary>
           <div className="text-right my-5">
             <Button
               size="small"
