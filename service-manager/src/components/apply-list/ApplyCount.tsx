@@ -13,11 +13,12 @@ interface ApplyCountProps {
 export const ApplyCount = ({ eventId, sector }: ApplyCountProps) => {
   const { sectorSettingData } = useSectorQueryById(eventId);
   const { registrations } = useAllRegistrationQuery(eventId);
-  const applicantNumber = registrations.filter(
-    (data) => data.sectorNum === sector,
-  );
-  const limit = sectorSettingData.find((data) => data.sectorNumber === sector);
-  const noCompactCount = registrations.filter((data) => !data.isCompact).length;
+
+  const applicantNumber =
+    registrations?.filter((data) => data.sectorNum === sector) ?? [];
+  const limit = sectorSettingData?.find((data) => data.sectorNumber === sector);
+  const noCompactCount = registrations?.filter((data) => !data.isCompact)
+    .length;
 
   return (
     <div className="flex flex-col gap-2">
