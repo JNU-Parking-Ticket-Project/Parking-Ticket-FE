@@ -72,6 +72,7 @@ export const ApplyForm = () => {
     setIsAgreed,
     isError,
     errorMessage,
+    temporarySaveStatus,
   } = useApplyForm();
 
   const parkingSectionOptions = DEFAULT_PARKING_SECTION_OPTIONS.concat(
@@ -221,7 +222,11 @@ export const ApplyForm = () => {
           </Txt>
         )}
         <div className="flex flex-row justify-between mt-2 mb-12">
-          <Button color="secondary" onClick={onTemporarySave}>
+          <Button
+            color="secondary"
+            onClick={onTemporarySave}
+            disabled={temporarySaveStatus}
+          >
             임시 저장
           </Button>
           <Button

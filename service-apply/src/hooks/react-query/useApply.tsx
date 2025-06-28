@@ -47,7 +47,7 @@ export const useApplyMutate = () => {
 };
 
 export const useTemporarySaveMutate = () => {
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ['applyTemporarySave'],
     mutationFn: postTemporarySave,
   });
@@ -72,6 +72,7 @@ export const useTemporarySaveMutate = () => {
         },
       });
     },
+    temporarySaveStatus: isPending,
   };
 };
 
