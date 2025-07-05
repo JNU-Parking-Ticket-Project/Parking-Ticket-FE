@@ -228,7 +228,11 @@ export const ApplyForm = () => {
             onClick={onTemporarySave}
             disabled={temporarySaveStatus}
           >
-            임시 저장
+            {temporarySaveStatus ? (
+              <Loader color="#000" size="sm" />
+            ) : (
+              '임시 저장'
+            )}
           </Button>
           <Button
             color="primary"
@@ -249,23 +253,6 @@ export const ApplyForm = () => {
           </Suspense>
         </div>
       </div>
-      {temporarySaveStatus && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div
-            className="bg-white p-8 w-4/5 max-w-3xl rounded-2xl"
-            style={{ boxShadow: '0px 0px 4px 4px rgba(17, 12, 34, 0.10)' }}
-          >
-            <div className="flex flex-col justify-center items-center gap-1">
-              <Txt size="h6" className="text-center font-bold">
-                임시 저장중입니다. 잠시만 기다려주세요.
-              </Txt>
-              <div className="w-full flex justify-center mt-4">
-                <Loader color="#0255D5" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </ApplyFormContext.Provider>
   );
 };
