@@ -16,6 +16,7 @@ import { AFFILIATION_LIST } from '../../constants/affiliation';
 import { DEPARTMENT_LIST } from '../../constants/department';
 import { PrivacyCheckModal } from './PrivacyCheckModal';
 import { Spinner } from '../../assets/Spinner';
+import Loader from '../common/Loader';
 
 const DEFAULT_PARKING_SECTION_OPTIONS = [
   {
@@ -72,6 +73,7 @@ export const ApplyForm = () => {
     setIsAgreed,
     isError,
     errorMessage,
+    temporarySaveStatus,
   } = useApplyForm();
 
   const parkingSectionOptions = DEFAULT_PARKING_SECTION_OPTIONS.concat(
@@ -221,8 +223,16 @@ export const ApplyForm = () => {
           </Txt>
         )}
         <div className="flex flex-row justify-between mt-2 mb-12">
-          <Button color="secondary" onClick={onTemporarySave}>
-            임시 저장
+          <Button
+            color="secondary"
+            onClick={onTemporarySave}
+            disabled={temporarySaveStatus}
+          >
+            {temporarySaveStatus ? (
+              <Loader color="#000" size="sm" />
+            ) : (
+              '임시 저장'
+            )}
           </Button>
           <Button
             color="primary"
