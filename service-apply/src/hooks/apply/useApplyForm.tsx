@@ -31,7 +31,7 @@ export const useApplyForm = () => {
     });
   }, [registrationData]);
 
-  const { postTemporarySave } = useTemporarySaveMutate();
+  const { postTemporarySave, temporarySaveStatus } = useTemporarySaveMutate();
   const [isCaptchaModalOpen, setIsCaptchaModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
@@ -114,5 +114,6 @@ export const useApplyForm = () => {
     setIsAgreed,
     isError,
     errorMessage,
+    temporarySaveStatus,
   };
 };
