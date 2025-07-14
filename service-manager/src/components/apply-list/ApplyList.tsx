@@ -25,23 +25,30 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
   const { sectorSettingData } = useSectorQueryById(eventId);
   const { onEmailTransmit } = useTransmitEmail(eventId);
 
+  const sectorFilteredRegistrations = registrations.filter(
+    (registration) => registration.sectorNum === selectedSector,
+  );
+
   const exportXLSX = async () => {
     const data = sectorSettingData
-      .map((sector) =>
-        registrations
-          .filter(
-            (registration) => registration.sectorNum === sector.sectorNumber,
-          )
-          .map((registration) =>
-            EXCEL_HEADERS.reduce(
-              (acc, header) => ({
-                ...acc,
-                ...getExcelCellValue(header, registration, registrations),
-              }),
-              {},
-            ),
+      .map((sector) => {
+        const currentSectorRegistrations = registrations.filter(
+          (registration) => registration.sectorNum === sector.sectorNumber,
+        );
+        return currentSectorRegistrations.map((registration) =>
+          EXCEL_HEADERS.reduce(
+            (acc, header) => ({
+              ...acc,
+              ...getExcelCellValue(
+                header,
+                registration,
+                currentSectorRegistrations,
+              ),
+            }),
+            {},
           ),
-      )
+        );
+      })
       .flat();
 
     const XLSX = await import('xlsx');
@@ -97,25 +104,21 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {registrations
-              .filter(
-                (registration) => registration.sectorNum === selectedSector,
-              )
-              .map((registration) => {
-                return (
-                  <tr key={registration.id}>
-                    {TABLE_HEADERS.map((header) => (
-                      <td key={header.key}>
-                        {getTableCellValue(
-                          header.key,
-                          registration,
-                          registrations,
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
+            {sectorFilteredRegistrations.map((registration) => {
+              return (
+                <tr key={registration.id}>
+                  {TABLE_HEADERS.map((header) => (
+                    <td key={header.key}>
+                      {getTableCellValue(
+                        header.key,
+                        registration,
+                        sectorFilteredRegistrations,
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
