@@ -4,13 +4,17 @@ import { EXCEL_HEADERS, TABLE_HEADERS } from '../constants/apply';
 const getCellValue = (
   headerKey: (typeof EXCEL_HEADERS)[number]['key'],
   userInfo: RegistrationResponse,
-  registrations: RegistrationResponse[],
+  sectorFilteredRegistrations: RegistrationResponse[],
 ) => {
   switch (headerKey) {
     case 'sector':
       return userInfo.sectorNum;
     case 'order':
-      return registrations.findIndex((data) => data.id === userInfo.id) + 1;
+      return (
+        sectorFilteredRegistrations.findIndex(
+          (data) => data.id === userInfo.id,
+        ) + 1
+      );
     case 'name':
       return userInfo.name;
     case 'affiliation':
@@ -38,17 +42,21 @@ const getCellValue = (
 export const getTableCellValue = (
   headerKey: (typeof TABLE_HEADERS)[number]['key'],
   userInfo: RegistrationResponse,
-  registrations: RegistrationResponse[],
+  sectorFilteredRegistrations: RegistrationResponse[],
 ) => {
-  return getCellValue(headerKey, userInfo, registrations);
+  return getCellValue(headerKey, userInfo, sectorFilteredRegistrations);
 };
 
 export const getExcelCellValue = (
   headerKey: (typeof EXCEL_HEADERS)[number],
   userInfo: RegistrationResponse,
-  registrations: RegistrationResponse[],
+  sectorFilteredRegistrations: RegistrationResponse[],
 ) => {
-  const value = getCellValue(headerKey.key, userInfo, registrations);
+  const value = getCellValue(
+    headerKey.key,
+    userInfo,
+    sectorFilteredRegistrations,
+  );
   return {
     [headerKey.label]: value,
   };
