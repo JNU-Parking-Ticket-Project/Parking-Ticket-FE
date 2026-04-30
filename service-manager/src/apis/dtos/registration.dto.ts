@@ -1,4 +1,5 @@
 interface Registration {
+  savedAt: string;
   affiliation: string;
   department: string;
   sectorNum: string;
@@ -22,6 +23,7 @@ export class RegistrationResponse {
   affiliation: string;
   department: string;
   sectorNum: string;
+  savedAt: string;
 
   constructor(data: Registration) {
     this.id = data.registrationId;
@@ -34,6 +36,7 @@ export class RegistrationResponse {
     this.affiliation = data.affiliation;
     this.department = data.department;
     this.sectorNum = data.sectorNum;
+    this.savedAt = data.savedAt;
   }
 }
 
