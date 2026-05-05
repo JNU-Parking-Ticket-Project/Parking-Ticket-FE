@@ -15,4 +15,5 @@ export const TABLE_HEADERS = [
 export const EXCEL_HEADERS = [
   { key: 'sector', label: '구간' },
   ...TABLE_HEADERS,
+  { key: 'savedAt', label: '신청 시간' },
 ] as const;
