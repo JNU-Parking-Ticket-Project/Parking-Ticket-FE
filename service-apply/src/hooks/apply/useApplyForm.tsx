@@ -7,7 +7,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { usePeriodQuery } from '../react-query/usePeriodQuery';
 
 export const useApplyForm = () => {
-  const { eventId } = usePeriodQuery();
+  const { eventId, startAt } = usePeriodQuery();
   const { registrationData } = useApplyQuery({ eventId });
   const { sector, selectSectorId, affiliation, department, ...rest } =
     registrationData;
@@ -115,5 +115,6 @@ export const useApplyForm = () => {
     isError,
     errorMessage,
     temporarySaveStatus,
+    startAt,
   };
 };
