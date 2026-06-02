@@ -46,3 +46,10 @@ export class EmailResponse {
     this.message = message;
   }
 }
+
+export class TransmitResultResponse {
+  message: string;
+  constructor({ message }: { message: string }) {
+    this.message = message;
+  }
+}

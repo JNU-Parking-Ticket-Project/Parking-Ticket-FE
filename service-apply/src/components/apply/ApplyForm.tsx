@@ -10,7 +10,7 @@ import { useApplyForm } from '../../hooks/apply/useApplyForm';
 import { ApplyFormContext } from '../../store/ApplyFormContext';
 import { ApplySelector } from './ApplySelector';
 import { ApplyCaptchaModal } from './ApplyCaptchaModal';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { AFFILIATION_LIST } from '../../constants/affiliation';
 import { DEPARTMENT_LIST } from '../../constants/department';
@@ -74,36 +74,11 @@ export const ApplyForm = () => {
     isError,
     errorMessage,
     temporarySaveStatus,
-    startAt,
   } = useApplyForm();
 
   const parkingSectionOptions = DEFAULT_PARKING_SECTION_OPTIONS.concat(
     sector.map(extractParkingSectionOptionsBySector),
   ).sort((a, b) => a.value.localeCompare(b.value));
-
-  const [currentTime, setCurrentTime] = useState(() => Date.now());
-
-  useEffect(() => {
-    const timerId = window.setInterval(() => {
-      setCurrentTime(Date.now());
-    }, 100);
-
-    return () => {
-      window.clearInterval(timerId);
-    };
-  }, []);
-
-  const applyStartTimestamp = new Date(startAt).getTime();
-  const hasValidStartTime = Number.isFinite(applyStartTimestamp);
-  const isBeforeApplyStart =
-    hasValidStartTime && applyStartTimestamp > currentTime;
-  const remainingSeconds = hasValidStartTime
-    ? Math.max(0, Math.floor((applyStartTimestamp - currentTime) / 1000))
-    : 0;
-
-  const remainingHours = Math.floor(remainingSeconds / 3600);
-  const remainingMinutes = Math.floor((remainingSeconds % 3600) / 60);
-  const remainingOnlySeconds = remainingSeconds % 60;
 
   return (
     <ApplyFormContext.Provider value={state}>
@@ -262,11 +237,9 @@ export const ApplyForm = () => {
           <Button
             color="primary"
             onClick={onCaptchaModalOpen}
-            disabled={isCaptchaModalOpen || isBeforeApplyStart}
+            disabled={isCaptchaModalOpen}
           >
-            {isBeforeApplyStart
-              ? `${remainingHours}시간 ${remainingMinutes}분 ${remainingOnlySeconds}초`
-              : '신청하기'}
+            신청하기
           </Button>
 
           <Suspense fallback={<Spinner />}>

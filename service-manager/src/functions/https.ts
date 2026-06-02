@@ -9,12 +9,12 @@ const fetcher = async (url: string, req: RequestInit) => {
   const token = getAccessToken();
   const headers: HeadersInit = token
     ? {
-      'Content-Type': 'application/json;charset=UTF-8',
-      Authorization: `Bearer ${token}`,
-    }
+        'Content-Type': 'application/json;charset=UTF-8',
+        Authorization: `Bearer ${token}`,
+      }
     : {
-      'Content-Type': 'application/json;charset=UTF-8',
-    };
+        'Content-Type': 'application/json;charset=UTF-8',
+      };
 
   const response = await fetch(BASE_URL + '/api' + url, {
     ...req,
@@ -52,6 +52,7 @@ const fetcher = async (url: string, req: RequestInit) => {
     }
     return errorResponse;
   }
+
   return await response.json();
 };
 
