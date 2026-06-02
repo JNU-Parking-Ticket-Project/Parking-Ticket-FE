@@ -4,6 +4,7 @@ import { Button } from '@quokka/design-system';
 import {
   useAllRegistrationQuery,
   useTransmitEmail,
+  useTransmitResult,
 } from '../../hooks/react-query/useRegistration';
 import { useSectorQueryById } from '../../hooks/react-query/useSetting';
 import { ApplyCount } from './ApplyCount';
@@ -24,6 +25,7 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
   const [selectedSector, setSelectedSector] = useState(sectors[0]);
   const { sectorSettingData } = useSectorQueryById(eventId);
   const { onEmailTransmit } = useTransmitEmail(eventId);
+  const { onTransmitResult } = useTransmitResult(eventId);
 
   const sectorFilteredRegistrations = registrations.filter(
     (registration) => registration.sectorNum === selectedSector,
@@ -81,6 +83,9 @@ export const ApplyList = ({ eventId }: ApplyListProps) => {
             </Suspense>
           </ErrorBoundary>
           <div className="text-right my-5">
+            <Button size="small" className="mr-5" onClick={onTransmitResult}>
+              신청 결과 집계
+            </Button>
             <Button
               size="small"
               color="secondary"

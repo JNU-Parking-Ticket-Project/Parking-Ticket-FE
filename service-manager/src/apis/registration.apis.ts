@@ -25,3 +25,18 @@ export const postEmail = async (
 
   return new EmailResponse(response);
 };
+
+export const postTransmitResult = async (
+  eventId: string,
+): Promise<Response> => {
+  const response = await https.patch(
+    `/v1/registrations/assign/result/${eventId}`,
+    {},
+  );
+
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+
+  return response;
+};

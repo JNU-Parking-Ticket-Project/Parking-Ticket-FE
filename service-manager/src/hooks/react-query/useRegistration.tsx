@@ -3,7 +3,11 @@ import {
   useMutation,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { getAllRegistration, postEmail } from '../../apis/registration.apis';
+import {
+  getAllRegistration,
+  postEmail,
+  postTransmitResult,
+} from '../../apis/registration.apis';
 
 export const useAllRegistrationQuery = (eventId: string) => {
   const { data } = useSuspenseQuery({
@@ -44,6 +48,42 @@ export const useEmailTransmitMutate = () => {
         MutateOptions<{ message: string }, Error, unknown>,
         'onSettled'
       >,
+    ) => {
+      mutate(eventId, {
+        ...mutateOption,
+      });
+    },
+  };
+};
+
+export const useTransmitResult = (eventId: string) => {
+  const { postTransmitResult } = useTransmitResultMutate();
+
+  const onTransmitResult = () => {
+    postTransmitResult(eventId, {
+      onError: () => {
+        alert('신청 결과 집계 실패');
+      },
+      onSuccess: () => {
+        alert('신청 결과 집계 완료');
+      },
+    });
+  };
+  return {
+    onTransmitResult,
+  };
+};
+
+export const useTransmitResultMutate = () => {
+  const { mutate } = useMutation({
+    mutationKey: ['transmitResult'],
+    mutationFn: postTransmitResult,
+  });
+
+  return {
+    postTransmitResult: (
+      eventId: string,
+      mutateOption?: Omit<MutateOptions<Response, Error, unknown>, 'onSettled'>,
     ) => {
       mutate(eventId, {
         ...mutateOption,
