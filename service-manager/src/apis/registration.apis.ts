@@ -1,5 +1,9 @@
 import { https } from '../functions/https';
-import { EmailResponse, RegistrationResponse } from './dtos/registration.dto';
+import {
+  EmailResponse,
+  RegistrationResponse,
+  TransmitResultResponse,
+} from './dtos/registration.dto';
 import { isErrorResponse } from './dtos/response.dtos';
 
 export const getAllRegistration = async (
@@ -24,4 +28,19 @@ export const postEmail = async (
   }
 
   return new EmailResponse(response);
+};
+
+export const postTransmitResult = async (
+  eventId: string,
+): Promise<{ message: string }> => {
+  const response = await https.post(
+    `/v1/registrations/assign/result/${eventId}`,
+    {},
+  );
+
+  if (isErrorResponse(response)) {
+    throw new Error(response.reason);
+  }
+
+  return new TransmitResultResponse(response);
 };
