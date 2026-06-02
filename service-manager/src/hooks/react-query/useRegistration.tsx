@@ -83,7 +83,10 @@ export const useTransmitResultMutate = () => {
   return {
     postTransmitResult: (
       eventId: string,
-      mutateOption?: Omit<MutateOptions<Response, Error, unknown>, 'onSettled'>,
+      mutateOption?: Omit<
+        MutateOptions<{ message: string }, Error, unknown>,
+        'onSettled'
+      >,
     ) => {
       mutate(eventId, {
         ...mutateOption,

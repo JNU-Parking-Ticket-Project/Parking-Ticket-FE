@@ -52,6 +52,7 @@ const fetcher = async (url: string, req: RequestInit) => {
     }
     return errorResponse;
   }
+
   return await response.json();
 };
 
@@ -80,10 +81,5 @@ export const https = {
   delete: (url: string) =>
     fetcher(url, {
       method: 'DELETE',
-    }),
-  patch: (url: string, data: any) =>
-    fetcher(url, {
-      method: 'PATCH',
-      body: JSON.stringify(data),
     }),
 };
